@@ -227,12 +227,20 @@
 $font-weight-normal: 400;
 $font-weight-bold: 700;
 
-$heading-font-stack: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+$seitz-font: Eina01-Regular;
+$seitz-font--italic: Eina01-Italic;
+$seitz-font--semi-bold: Eina01-SemiBold;
+$seitz-font--bold: Eina01-Bold;
+$seitz-font--light: Eina01-Light;
+$seitz-font--bold--italic: Eina01-BoldItalic;
+$seitz-font--semi--bold--italic: Eina01-SemiBoldItalic;
+
+$heading-font-stack: $seitz-font;
 $heading-font-weight: {{ heading_font.weight }};
 $heading-font-style: {{ heading_font.style }};
 $heading-text-transform: {{ settings.heading_text_transform }};
 
-$main-font-stack: {{ main_font.family }}, {{ main_font.fallback_families }};
+$main-font-stack: $seitz-font;
 $main-font-weight: {{ main_font.weight }};
 
 $accent-font-stack: {{ accent_font.family }}, {{ accent_font.fallback_families }};
