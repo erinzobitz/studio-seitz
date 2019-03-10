@@ -1,0 +1,128 @@
+<!-- /snippets/related-products.liquid -->
+<!-- Solution brought to you by Caroline Schnapp -->
+<!-- See this: https://docs.shopify.com/support/your-store/products/can-i-recommend-related-products#finding-a-relevant-collecitons -->
+
+{% comment %}
+  Number of related items per row,
+  and number of rows.
+{% endcomment %}
+
+{% assign number_of_related_products_per_row = 3 %}
+{% assign number_of_rows = 1 %}
+
+{% comment %}
+  Heading.
+  Leave blank if you don't need one.
+{% endcomment %}
+
+{% comment %}
+  Set either or both to true, if you want
+  to limit yourself to items with same vendor, and/or type.
+{% endcomment %}
+
+{% assign same_vendor = false %}
+{% assign same_type = false %}
+
+{% comment %}
+  Collections to ignore.
+  Never pick related items from those.
+{% endcomment %}
+
+{% assign exclusions = 'frontpage,all' | split: ',' %}
+
+{% comment %}
+  Looking for a relevant collection.
+{% endcomment %}
+
+{% if product.metafields.c_f['Related Products'] %}
+  {% assign collection = collections[product.metafields.c_f['Related Products']] %}
+{% endif %}
+
+{% assign found_a_collection = false %}
+{% if collection and collection.all_products_count > 1 %}
+  {% unless exclusions contains collection.handle %}
+    {% assign found_a_collection = true %}
+  {% endunless %}
+{% endif %}
+{% unless found_a_collection %}
+  {% for c in product.collections %}
+    {% unless exclusions contains c.handle or c.all_products_count < 2 %}
+      {% assign found_a_collection = true %}
+      {% assign collection = c %}
+      {% break %}
+    {% endunless %}
+  {% endfor %}
+{% endunless %}
+
+
+{% comment %}
+  If we have a relevant collection.
+{% endcomment %}
+
+{% if found_a_collection %}
+
+  {% assign counter = 0 %}
+  {% assign break_at = number_of_rows | times: number_of_related_products_per_row %}
+  {% assign current_product = product %}
+
+  {% case number_of_related_products_per_row %}
+    {% when 3 %}
+      {% assign grid_item_width = 'lg--up--one-third' %}
+    {% when 4 %}
+      {% assign grid_item_width = 'lg--up--one-quarter' %}
+    {% when 6 %}
+      {% assign grid_item_width = 'lg--up--one-third' %}
+    {% when 8 %}
+      {% assign grid_item_width = 'lg--up--one-quarter' %}
+    {% else %}
+      {% assign grid_item_width = 'lg--up--one-third' %}
+  {% endcase %}
+
+  {% capture related_items %}
+    {% for product in collection.products %}
+      {% unless product.handle == current_product.handle %}
+         {% unless same_vendor and current_product.vendor != product.vendor %}
+           {% unless same_type and current_product.type != product.type %}
+             <div class="product-grid-item nine-twelfths md--six-twelfths lg--up--grid__item {{ grid_item_width }} lg--up--mt3">
+               <div class="px2 lg--up--px0">{% include 'product-grid-item' %}</div>
+             </div>
+             {% assign counter = counter | plus: 1 %}
+             {% if counter == break_at %}
+               {% break %}
+             {% endif %}
+           {% endunless %}
+        {% endunless %}
+      {% endunless %}
+    {% endfor %}
+  {% endcapture %}
+
+  {% assign related_items = related_items | trim %}
+  {% unless related_items == blank %}
+  <div class="featured-collection {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="flickity-only" data-section-id="{{ section.id }}-related-products">
+    <div class="max-site-width lg--up--px3">
+      {%- assign collection = collections[section.settings.collection] -%}
+      <div class="lg--up--grid">
+        <div class="lg--up--grid__item lg--up--one-quarter">
+          <div class="featured-collection__info pb3 pl2 pr4 lg--up--px0">
+            <h2 class="{{ global__heading_font_size }}">{{ 'products.general.related_products_title' | t }}</h2>
+          </div>
+        </div>
+        <div class="lg--up--grid__item lg--up--three-quarters">
+          <div class="mobile-flickity relative">
+            <div class="mobile-flickity__slides pb3 lg--up--grid grid--uniform lg--up--mtn3">
+              {{ related_items }}
+            </div>
+            <div class="lg--up--hide">
+              <div class="spacer pt1"></div>
+              <div class='mobile-flickity__button-container absolute bottom--0 right--0 pt1 pr2'>
+                <button class="btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm">{% include 'icon-next' %}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endunless %}
+{% endif %}

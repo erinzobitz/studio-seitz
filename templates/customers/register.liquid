@@ -1,0 +1,82 @@
+{% include 'global-variables' %}
+{% assign section_color = 'primary' %}
+
+
+<section class="page {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
+  <div class="max-site-width px2 lg--up--px3">
+
+    <div class="max-width--2 lg--up--max-width--4 mx--auto">
+
+      <div class="grid">
+        <div class="grid__item lg--up--one-half">
+
+          <h1 class="{{ global__heading_font_size }}">{{ 'customer.register.title' | t }}</h1>
+
+          <div class="{{ global__basic_font_size }}">
+            <a href="{{ shop.url }}">{{ 'customer.register.cancel' | t }}</a>
+          </div>
+
+        </div>
+        <div class="grid__item lg--up--one-half mt3 lg--up--mt0">
+
+          {% form 'create_customer' %}
+            {{ form.errors | default_errors }}
+
+            <label class="block" for="FirstName" class="label-hidden">
+              {{ 'customer.register.first_name' | t }}
+            </label>
+            <input type="text"
+              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="customer[first_name]"
+              id="FirstName"
+              placeholder="{{ 'customer.register.first_name' | t }}"
+              autofocus
+              {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+
+            <label class="mt2 block" for="LastName" class="label-hidden">
+              {{ 'customer.register.last_name' | t }}
+            </label>
+            <input type="text"
+              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="customer[last_name]"
+              id="LastName"
+              placeholder="{{ 'customer.register.last_name' | t }}"
+              {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+
+            <label class="mt2 block" for="Email" class="label-hidden">
+              {{ 'customer.register.email' | t }}
+            </label>
+            <input type="email"
+              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="customer[email]"
+              id="Email"
+              class="{% if form.errors contains 'email' %}input-error{% endif %}"
+              placeholder="{{ 'customer.register.email' | t }}"
+              value="{% if form.email %}{{ form.email }}{% endif %}"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off">
+
+            <label class="mt2 block"  for="CreatePassword" class="label-hidden">
+              {{ 'customer.register.password' | t }}
+            </label>
+            <input type="password"
+              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="customer[password]"
+              id="CreatePassword"
+              class="{% if form.errors contains 'password' %}input-error{% endif %}"
+              placeholder="{{ 'customer.register.password' | t }}">
+
+            <p>
+              <input type="submit" value="{{ 'customer.register.submit' | t }}" class="block full--w btn mt3 px2 py1 bg--{{ section_color }}-text color--{{ section_color }}-text--overlay lg--up--two-thirds">
+            </p>
+
+          {% endform %}
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,147 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+
+<div class="product" data-section-id="{{ section.id }}" data-product-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+
+  <section class="color--{{ section_color }}-text bg--{{ section_color }}-background {{ global__section_with_padding_class }}">
+
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+    {%- assign hide_drop_down_labels = section.settings.hide_drop_down_labels -%}
+    {%- assign show_quantity = section.settings.show_quantity -%}
+    {%- assign enable_payment_button = section.settings.enable_payment_button -%}
+    {%- assign show_share_links = section.settings.show_share_buttons -%}
+
+    <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+    <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+    <meta itemprop="brand" content="{{ product.vendor }}">
+    <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+    <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+    <div class="max-site-width md--up--px2 lg--up--px3">
+      {% assign feature_product = false %}
+      {% assign section_id = section.id %}
+      {% include 'product__top-section' %}
+    </div>
+
+    {% unless product == empty %}
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script>
+    {% endunless %}
+
+  </section>
+
+  {% if product.description != empty or product.description != '' %}
+    {% assign section_color = section.settings.description_color_scheme %}
+    {% include 'global-variables' %}
+    <div class="product__description {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
+      <div class="max-site-width px2 lg--up--px3">
+        <div class="rte mx--auto {{ global__basic_font_size }} {% unless section.settings.enable_split_description %}max-width--3{% endunless %}" id="productDescription" {% if section.settings.enable_split_description %}data-split="true"{% endif %} data-fade-in="{{ fade_in }}" data-product-description>
+          {{ product.description }}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if section.settings.show_related_products %}
+    {% assign section_color = section.settings.related_products_color_scheme %}
+    {% include 'global-variables' %}
+    <div id="shopify-section-{{ section.id }}-related-products" class="shopify-section" data-related-products>
+      {% include 'related-products' %}
+    </div>
+  {% endif %}
+
+</div>
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+         "type": "select",
+         "id": "color_scheme",
+         "label": "Color scheme",
+         "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary ", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"},
+            { "value": "quarternary", "label": "Quarternary"}
+         ]
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_payment_button",
+        "label": "Show dynamic checkout button",
+        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_quantity",
+        "label": "Show quantity option"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_drop_down_labels",
+        "label": "Hide label on selects"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show social media sharing buttons",
+        "default": true
+      },
+      {
+       "type":      "header",
+       "content":   "Product description"
+      },
+      {
+         "type":      "paragraph",
+         "content":   "Automatically split your product description into separate blocks based on images."
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_split_description",
+        "label": "Enable split product description",
+        "default": true
+      },
+      {
+         "type":      "paragraph",
+         "content":   "[Learn more about this feature](https://support.switchthemes.co/article/91-product-page-descriptions)."
+      },
+      {
+         "type": "select",
+         "id": "description_color_scheme",
+         "label": "Color scheme",
+         "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary ", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"},
+            { "value": "quarternary", "label": "Quarternary"}
+         ]
+      },
+      {
+         "type":      "header",
+         "content":   "Related products"
+       },
+       {
+         "type": "checkbox",
+         "id": "show_related_products",
+         "label": "Show related products"
+       },
+       {
+          "type": "select",
+          "id": "related_products_color_scheme",
+          "label": "Color scheme",
+          "options": [
+             { "value": "primary", "label": "Primary"},
+             { "value": "secondary ", "label": "Secondary"},
+             { "value": "tertiary", "label": "Tertiary"},
+             { "value": "quarternary", "label": "Quarternary"}
+          ]
+       }
+    ]
+  }
+{% endschema %}

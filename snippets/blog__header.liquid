@@ -1,0 +1,17 @@
+<header role="banner">
+  <div class="lg--up--flex">
+    <div class="lg--up--one-half lg--up--self--end">
+      <h1 class="f--heading  font-size--xxl line-height-6 wd--font-size--xxxl m0 pb1">
+        <span class="">{{ blog.title }}</span>
+        {% if section.settings.show_subscribe_link %}
+        <a href="{{ shop.url }}{{ blogs[blog.handle].url }}.atom" title="{{ 'general.sharing.rss_subscribe' | t }}" >
+           <span class="color--{{ section_color }}-text  hv--color--main font-size--xxxxs align--middle ml1">{% include 'svg' | icon: 'icon-rss' %}</span>
+        </a>
+        {% endif %}
+      </h1>
+    </div>
+    <div class="mt3 lg--up--mt0 lg--up--one-half lg--up--flex lg--up--text-align--right">
+      {% include 'blog-sorting' %}
+    </div>
+  </div>
+</header>

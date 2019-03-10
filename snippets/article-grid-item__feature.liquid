@@ -1,0 +1,121 @@
+<!-- /snippets/product-grid-item.liquid -->
+{% comment %}
+
+  This snippet is used to showcase each product during the loop,
+  'for product in collection.products' in collection.liquid.
+
+  A liquid variable (grid_item_width) is set just before the this
+  snippet is included to change the size of the container.
+  Once the variable is set on a page, all future instances of this
+  snippet will use that width. Overwrite the variable to adjust this.
+
+  Example
+    - assign grid_item_width = 'large--one-quarter medium--one-half'
+
+{% endcomment %}
+
+{% comment %}
+  Set the default grid_item_width if no variable is set
+{% endcomment %}
+{%- include 'global-variables' -%}
+
+{%- unless grid_item_width -%}
+  {%- assign grid_item_width = 'md-dn--one-half lg---up--one-third wd--one-third' -%}
+{%- endunless -%}
+
+{%- unless section_color -%}
+  {%- assign section_color = 'primary' -%}
+{%- endunless -%}
+
+{% unless article.image == blank %}
+  <a href="{{ article.url  }}" class="color--{{ section_color }}-text ">
+    {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
+    {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
+    {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+      <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+        <img id="{{ img_id }}"
+             class="resp-img lazyload"
+             data-src="{{ img_url }}"
+             data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+             data-aspectratio="{{ article.image.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ article.image.alt | escape }}">
+         <img id="{{ img_id }}"
+              class="resp-img-placeholder"
+              src="{{ article.image| img_url: '1x1' }}"
+              width="{{ article.image.width }}"
+              height="{{ article.image.height }}"
+              alt="{{ article.image.alt | escape }}">
+      </div>
+    </div>
+    <noscript>
+      <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
+    </noscript>
+  </a>
+{% endunless %}
+
+<div class="seven-eighths pm--three-quarters pt2 {% if settings.list_and_grid_align %}mx--auto{% else %}pl1 lg--up--pl2 {% endif %} t--list-and-grid">
+  {% if blog_page %}
+
+    <p class="f--heading m0 mt2 font-size--xl line-height--5 lg--up--font-size--xxl lg--up--line-height--8">
+      <a href="{{ article.url }}" class="block hv--{{ section_color }}-accent  color--{{ section_color }}-text">{{ article.title }}</a>
+    </p>
+
+    {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+
+    {% if show_author or show_date %}
+    <p class="color--meta m0 mt1  {{ global__basic_font_size }}">{% if show_author %}{{ 'blogs.article.by_author' | t: author: article.author }}{% if show_date %}<br/>{% endif %}{% endif %}{% if show_date %}{{  date }}{% endif %}</p>
+    {% endif %}
+
+    {% if show_excerpt %}
+    <div class="rte  {{ global__basic_font_size }} mt2 line-height--3">
+      {% if article.excerpt.size > 0 %}
+        {{ article.excerpt }}
+      {% else %}
+        <p>
+          {{ article.content | strip_html | truncatewords: 20 }}
+        </p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% if blog.comments_enabled?  %}
+      <ul class=" list--reset {{ global__basic_font_size }}">
+        {% if blog.comments_enabled? %}
+          <li>
+            <a class="color--{{ section_color }}-text hv--border-bottom--{{ section_color }}-text" href="{{ article.url }}#comments">
+              {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+            </a>
+          </li>
+        {% endif %}
+
+      </ul>
+    {% endif %}
+
+    {% if show_tags %}
+    {% if article.tags.size > 0 %}
+      <ul class=" list--reset  {{ global__basic_font_size }}">
+        {% if article.tags.size > 0 %}
+          {% for tag in article.tags %}
+            <li class="inline-block">
+              <a class="color--{{ section_color }}-text hv--border-bottom--{{ section_color }}-text" href="{{ blog.url }}/tagged/{{ tag | handle }}">#{{ tag }}</a>
+              {% unless forloop.last %}&nbsp;{% endunless %}
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    {% endif %}
+    {% endif %}
+
+    {% if show_link %}
+    <p class=" {{ global__basic_font_size }}">
+      <a href="{{ article.url }}" class="inline-block color--{{ section_color }}-text border-bottom--{{ section_color }}-text {{ global__hover_underline }}"><span class="align--middle">{{ 'blogs.article.read_more' | t }}</span> <span class="font-size--xxxs align--middle inline-block">{% include 'svg' | icon: 'icon-next' %}</span></a>
+    </p>
+    {% endif %}
+
+  {% else %}
+    <p class="color--{{ section_color }}-text m0 mt2 {{ global__basic_font_size }} }">{{ article.title }}</p>
+  {% endif %}
+  
+</div>

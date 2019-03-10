@@ -1,0 +1,218 @@
+<!-- /snippets/ajax-cart-template.liquid -->
+{% comment %}
+
+  This snippet provides the default handlebars.js templates for
+  the ajax cart plugin. Use the raw liquid tags to keep the
+  handlebar.js template tags as available hooks.
+
+{% endcomment %}
+  <script id="CartTemplate" type="text/template">
+  {% raw %}
+    <form action="/cart" method="post" novalidate class="cart ajaxcart">
+      <div class="max-width--4 lg--up--px3 mx--auto color--active-text relative">
+
+        <div class="absolute top--0 left--0 full z1 cart__spinner hide" data-ajax-cart-spinner>
+          <div class="spinner color--active-text"></div>
+        </div>
+
+        <h2 class="f--heading md--up--hide">{% endraw %}{{ 'cart.general.title' | t }}{% raw %}</h2>
+
+        <div class="cart">
+          <div class="cart__row sm--hide">
+            <div class="grid">
+              <div class="grid__item lg--up--three-fifths">
+                <h2 class="f--heading">{% endraw %}{{ 'cart.general.title' | t }}{% raw %}</h2>
+              </div>
+              <div class="grid__item lg--up--two-fifths">
+                <div class="table full--w">
+                  <div class="table-cell one-third">
+                    <div class="js-qty-wrapper color--main">
+                      {% endraw %}{{ 'cart.label.quantity' | t }}{% raw %}
+                    </div>
+                  </div>
+                  <div class="table-cell two-thirds text-align--right font-size--m">
+                    {% endraw %}{{ 'cart.label.total' | t }}{% raw %}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="hr bg--main mt2"/>
+          </div>
+
+          {{#items}}
+          <div class="cart__row font-size--sm mt3">
+            <div class="grid">
+              <div class="grid__item lg--up--three-fifths">
+                <div class="grid grid--full ">
+                  <div class="grid__item one-quarter">
+                      <a href="{{url}}" {{#ifFirst @index}}data-desktop-active-first-item{{/ifFirst}}>
+                        <img src="{{img}}">
+                      </a>
+                  </div>
+                  <div class="grid__item three-quarters">
+                    <div class="pl2">
+
+                      <div class="table full--w">
+                        <div class="table-cell two-thirds">
+                          <a class="f--heading font-size--m md--up--font-size--l color--active-text" href="{{url}}">{{name}}</a>
+                        </div>
+                        <div class="table-cell text-align--right font-size--m one-third md--up--hide">
+                          {{#if discountsApplied}}
+                            <small class="ajaxcart__price--strikethrough">{{{linePrice}}}</small>
+                            <span class="ajaxcart__price">
+                             {{{discountedPrice}}}
+                            </span>
+                          {{else}}
+                            <span class="ajaxcart__price">
+                             {{{linePrice}}}
+                            </span>
+                          {{/if}}
+                        </div>
+                      </div>
+
+                      {{#if variation}}
+                        <p class="ajaxcart__product-meta m0">{{variation}}</p>
+                      {{/if}}
+
+                      {% endraw %}{% if settings.cart_vendor_enable %}{% raw %}
+                        <p class="ajaxcart__product-meta m0">{{ vendor }}</p>
+                      {% endraw %}{% endif %}{% raw %}
+
+                      {{#properties}}
+                        {{#each this}}
+                          {{#if this}}
+                            <span class="ajaxcart__product-meta">{{@key}}: {{this}}</span>
+                          {{/if}}
+                        {{/each}}
+                      {{/properties}}
+
+                      <div class="ajax-qty-wrapper color--main three-fifths pm--one-half md--up--hide">
+                        <div class="ajax-qty mxn1">
+                          <div class="flex font-size--s">
+                            <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus bg--transparent border--transparent font-size--xs color--active-text" data-id="{{key}}" data-qty="{{itemMinus}}" data-line="{{line}}">
+                              {% endraw %}{% include 'svg' | icon: 'icon-minus' %}{% raw %}
+                            </button>
+                            <input type="text" name="updates[]" class="ajaxcart__qty-num border--transparent bg--transparent text-align--center full--w font-size--m color--active-text" value="{{itemQty}}" min="1" data-id="{{key}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}">
+                            <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus  bg--transparent border--transparent  font-size--xs color--active-text" data-id="{{key}}" data-qty="{{itemAdd}}" data-line="{{line}}">
+                              {% endraw %}{% include 'svg' | icon: 'icon-plus' %}{% raw %}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <a class="inline-block mt1 color--active-text ajaxcart__qty-adjust ajaxcart__qty--remove pointer hv--active-accent" data-line="{{line}}">
+                        <small>{% endraw %}{{ 'cart.general.remove' | t }}{% raw %}</small>
+                      </a>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="grid__item sm--hide lg--up--two-fifths">
+                <div class="table table--fixed full--w">
+                  <div class="table-cell one-third">
+                    <div class="ajax-qty-wrapper color--main">
+                      <div class="ajax-qty">
+                        <div class="flex font-size--s ">
+                          <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus bg--transparent border--transparent font-size--xs color--active-text" data-id="{{key}}" data-qty="{{itemMinus}}" data-line="{{line}}">
+                            {% endraw %}{% include 'svg' | icon: 'icon-minus' %}{% raw %}
+                          </button>
+                          <input type="text" name="updates[]" class="ajaxcart__qty-num border--transparent bg--transparent text-align--center full--w font-size--m color--active-text" value="{{itemQty}}" min="1" data-id="{{key}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}">
+                          <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus  bg--transparent border--transparent  font-size--xs color--active-text" data-id="{{key}}" data-qty="{{itemAdd}}" data-line="{{line}}">
+                            {% endraw %}{% include 'svg' | icon: 'icon-plus' %}{% raw %}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="table-cell two-thirds text-align--right font-size--m">
+                    {{#if discountsApplied}}
+                      <small class="ajaxcart__price--strikethrough">{{{linePrice}}}</small>
+                      <span class="ajaxcart__price">
+                        {{{discountedPrice}}}
+                      </span>
+                    {{else}}
+                      <span class="ajaxcart__price">
+                        {{{linePrice}}}
+                      </span>
+                    {{/if}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/items}}
+
+          <div class="cart__row">
+
+            <hr class="hr bg--main my3"/>
+
+            <div class="grid">
+
+              <div class="grid__item md--up--one-half">
+                <div class="md--up--pr4">
+                  {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
+                    <label class="inline-block mb1 font-size--sm" for="CartSpecialInstructions">{% endraw %}{{ 'cart.general.note' | t }}{% raw %}</label>
+                    <textarea class="bg--transparent border--active-text color--active-text full--w" name="note" id="CartSpecialInstructions">{% endraw %}{{ cart.note }}{% raw %}</textarea>
+                  {% endraw %}{% endif %}{% raw %}
+                </div>
+              </div>
+
+              <div class="grid__item md--up--one-half md--up--text-align--right mt3 md--up--mt0 {% endraw %}{% unless settings.cart_notes_enable %}right{% endunless %}{% raw %}">
+                <p class="font-size--xs md--up--font-size--s m0">{% endraw %}{{ 'cart.general.shipping_at_checkout' | t }}{% raw %}</p>
+                <div class="table full--w font-size--m mt1">
+                  <div class="table-cell text-align--left md--up--text-align--right">
+                    <p>{% endraw %}{{ 'cart.general.subtotal' | t }}{% raw %}</p>
+                  </div>
+                  <div class="table-cell text-align--right">
+                    <p>{{{totalPrice}}}</p>
+                    {{#if totalCartDiscount}}
+                      <p class="ajaxcart__savings text-center"><em>{{{totalCartDiscount}}}</em></p>
+                    {{/if}}
+                  </div>
+                </div>
+                <div class="grid grid--half-gutter">
+                  <div class="grid__item text-align--right lg--up--two-thirds lg--up--push-one-third">
+                    <input type="submit" name="checkout" class="checkout btn__ajax-checkout btn border--none p1 block full--w border--active-text bg--active-text color--active-text--overlay hv--active-accent--overlay hv-bg--active-accent hv--border--active-accent" value="{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}" data-desktop-active-last-item>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </form>
+  {% endraw %}
+  </script>
+  <script id="AjaxQty" type="text/template">
+  {% raw %}
+    <div class="ajaxcart__qty">
+      <div class="relative font-size--s ">
+        <button type="button" class="js-qty__adjust js-qty__adjust--minus bg--transparent border--transparent font-size--xs absolute top--0 left--0 full--h" data-id="{{key}}" data-qty="{{itemMinus}}">
+          {% endraw %}{% include 'svg' | icon: 'icon-minus' %}{% raw %}
+        </button>
+        <input type="text" class="js-qty__num border--transparent bg--transparent text-align--center full--w font-size--m" value="{{itemQty}}" min="1" data-id="{{key}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}">
+        <button type="button" class="js-qty__adjust js-qty__adjust--plus  bg--transparent border--transparent  font-size--xs absolute top--0 right--0 full--h" data-id="{{key}}" data-qty="{{itemAdd}}">
+          {% endraw %}{% include 'svg' | icon: 'icon-plus' %}{% raw %}
+        </button>
+      </div>
+    </div>
+  {% endraw %}
+  </script>
+  <script id="JsQty" type="text/template">
+  {% raw %}
+    <div class="js-qty">
+      <div class="relative font-size--s">
+        <button type="button" class="js-qty__adjust js-qty__adjust--minus bg--transparent border--transparent font-size--xs absolute top--0 left--0 full--h" data-id="{{key}}" data-qty="{{itemMinus}}">
+          {% endraw %}{% include 'svg' | icon: 'icon-minus' %}{% raw %}
+        </button>
+        <input type="text" class="js-qty__num border--transparent bg--transparent text-align--center full--w font-size--m" value="{{itemQty}}" min="1" data-id="{{key}}" aria-label="quantity" pattern="[0-9]*" name="{{inputName}}" id="{{inputId}}">
+        <button type="button" class="js-qty__adjust js-qty__adjust--plus  bg--transparent border--transparent  font-size--xs  absolute top--0 right--0 full--h" data-id="{{key}}" data-qty="{{itemAdd}}">
+          {% endraw %}{% include 'svg' | icon: 'icon-plus' %}{% raw %}
+        </button>
+      </div>
+    </div>
+  {% endraw %}
+  </script>

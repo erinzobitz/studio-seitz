@@ -1,0 +1,159 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+
+{%- assign heading_fontsize__mobile_full = 'font-size--xxl line-height--7 md--line-height--7 lg--up--font-size--xxxl lg--up--line-height--9 wd--font-size--xxxxl wd--line-height--11' -%}
+{%- assign heading_fontsize__mobile_half = 'font-size--xl line-height--6 pm--font-size--xxl pm--line-height--7 lg--up--font-size--xxxl lg--up--line-height--8 wd--font-size--xxxxl wd--line-height--11' -%}
+{%- assign font_size = 'font-size--sm md--up--font-size--m line-height--3 lg--up--font-size--ml lg--up--line-height--5' -%}
+
+{%- if section.blocks.size == 0 -%}
+  {%- assign collection_count = collections.size -%}
+  {%- for collection in collections -%}
+    {%- if collection.handle == 'frontpage' -%}
+      {%- assign collection_count = collection_count | minus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign collection_count = section.blocks.size -%}
+{%- endif -%}
+
+{%- assign remainder =  collection_count | modulo:2 -%}
+{%- if remainder == 0 -%}
+  {%- assign odd_count = false -%}
+{%- else -%}
+  {%- assign odd_count = true -%}
+{%- endif -%}
+
+{% assign text_position = section.settings.text_position %}
+
+<section class="cascade {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}">
+  <div class="max-site-width px2 lg--up--px3">
+    <div class="cascading-content">
+      <div class="items">
+        <div class="item-sizer"></div>
+        <div class="column-sizer"></div>
+
+        {% assign col_count_desktop = 1 %}
+        {% assign index = 1 %}
+
+        {% if section.blocks.size == 0 %}
+          {% for collection in collections %}
+            {% unless collection.handle == 'frontpage' %}
+              {% assign title = collection.title %}
+              {% assign show_cta = section.settings.show_cta %}
+              {% assign cta_text = 'collections.general.list_link' | t %}
+              {% assign heading_class = heading_fontsize__mobile_full %}
+              {% assign local_color = section.settings.overlay_color %}
+              {% include 'list-collections__loop' %}
+            {% endunless %}
+          {% endfor %}
+        {% else %}
+          {% for block in section.blocks %}
+            {% if block.settings.collection and block.settings.collection != '' %}
+              {% assign collection = collections[block.settings.collection] %}
+              {% assign title = collection.title %}
+              {% assign show_cta = block.settings.show_collection_link %}
+              {% assign cta_text = block.settings.cta_text %}
+              {% assign heading_class = heading_fontsize__mobile_full %}
+              {% assign local_color = block.settings.text_color %}
+              {% include 'list-collections__loop' %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections list page",
+  "class": "section-store",
+  "settings": [
+    {
+       "type": "paragraph",
+       "content": "All of your collections are listed by default. To customize your list, add collections below."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show call to action",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        { "value": "over", "label": "Over image"},
+        { "value": "under", "label": "Underneath image"}
+      ]
+    },
+    {
+       "type": "select",
+       "id": "overlay_color",
+       "label": "Overlay text color",
+       "info": "Default overlay text color. If using blocks, color is set in each block.",
+       "options": [
+         { "value": "primary", "label": "Primary text"},
+         { "value": "secondary", "label": "Secondary text"},
+         { "value": "tertiary", "label": "Tertiary text"},
+         { "value": "quarternary", "label": "Quarternary text"},
+         { "value": "white", "label": "White"}
+       ]
+    },
+    {
+      "type":      "header",
+      "content":   "Color"
+    },
+    {
+       "type": "select",
+       "id": "color_scheme",
+       "label": "Color scheme",
+       "options": [
+          { "value": "primary", "label": "Primary"},
+          { "value": "secondary ", "label": "Secondary"},
+          { "value": "tertiary", "label": "Tertiary"},
+          { "value": "quarternary", "label": "Quarternary"}
+       ]
+    }
+  ],
+  "blocks" :  [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+           "type": "collection",
+           "id": "collection",
+           "label": "Choose collection:"
+        },
+        {
+           "type": "select",
+           "id": "text_color",
+           "label": "Overlay text color",
+           "options": [
+             { "value": "primary", "label": "Primary text"},
+             { "value": "secondary", "label": "Secondary text"},
+             { "value": "tertiary", "label": "Tertiary text"},
+             { "value": "quarternary", "label": "Quarternary text"},
+             { "value": "white", "label": "White"}
+           ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_collection_link",
+          "label": "Show link to collection",
+          "default": true
+        },
+        {
+          "id": "cta_text",
+          "type": "text",
+          "label": "Link text",
+          "default": "Shop now"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

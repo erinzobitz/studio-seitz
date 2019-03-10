@@ -1,0 +1,103 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+
+<section class="newsletter {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="newsletter" data-section-id="{{ section.id }}">
+  <div class="max-site-width lg--up--px3">
+    <div class="grid">
+
+      <div class="grid__item lg--up--one-quarter">
+        <div class="pb1 pl2 pr4 lg--up--p0">
+          {% if section.settings.title == blank %}
+            <h2 class="{{ global__heading_font_size }} m0">{{ 'homepage.onboarding.collection_title' | t }}</h2>
+          {% else %}
+            <h2 class="{{ global__heading_font_size }} m0">{{ section.settings.title }}</h2>
+          {% endif %}
+        </div>
+      </div>
+      <div class="grid__item lg--up--one-quarter">
+        <div class="pb3 px2 lg--up--p0">
+          {% if section.settings.text != blank %}
+            <div class="line-height--3 {{ global__basic_font_size }}">
+              {{ section.settings.text }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="grid__item lg--up--two-quarters">
+        <div class="px2 lg--up--px0">
+          {% form 'customer' %}
+            {{ form.errors | default_errors }}
+            {% if form.posted_successfully? %}
+              <p class="form--success f--main">{{ 'general.newsletter_form.confirmation' | t }}</p>
+            {% else %}
+              <div class="input-group">
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <label for="Email" class="hide">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+                <input type="email"
+                  name="contact[email]"
+                  id="Email"
+                  class="input-group-field px2 py1 bg--transparent border--{{ section_color }}-text color--{{ section_color }}-text"
+                  value="{% if customer %}{{ customer.email }}{% endif %}"
+                  placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}"
+                  autocorrect="off"
+                  autocapitalize="off">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn border--none newsletter__submit px2 py1 bg--{{ section_color }}-text border--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg_border }}" name="commit" id="Subscribe">
+                    <span class="newsletter__submit">{{ 'general.newsletter_form.submit' | t }}</span>
+                  </button>
+                </span>
+              </div>
+            {% endif %}
+          {% endform %}
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Sign up to our newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Receive special offers and first look at new products.</p>"
+    },
+    {
+       "type":      "paragraph",
+       "content":   "Customers who subscribe will have their email address added to the “accepts marketing” [customer list](/admin/customers?query=&accepts_marketing=1)."
+    },
+    {
+      "type":      "header",
+      "content":   "Color"
+    },
+    {
+       "type": "select",
+       "id": "color_scheme",
+       "label": "Color scheme",
+       "options": [
+          { "value": "primary", "label": "Primary"},
+          { "value": "secondary ", "label": "Secondary"},
+          { "value": "tertiary", "label": "Tertiary"},
+          { "value": "quarternary", "label": "Quarternary"}
+       ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "category": "Promotional"
+    }
+  ]
+}
+{% endschema %}

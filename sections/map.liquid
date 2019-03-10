@@ -1,0 +1,164 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+
+{%- assign display_map = false -%}
+{%- assign onboarding = false -%}
+{%- assign use_image = false -%}
+{%- assign map_image = section.settings.map_image -%}
+
+{%- if section.settings.api_key == blank  -%}
+  {%- if section.settings.map_image  %}
+    {%- assign use_image = true -%}
+  {%- else -%}
+    {%- assign onboarding = true -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if section.settings.api_key != blank and section.settings.map_address -%}
+  {%- assign display_map = true -%}
+{%- endif -%}
+
+<section class="map {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="map" data-section-id="{{ section.id }}">
+  <div class="max-site-width lg--up--px3">
+    <div class="lg--up--grid">
+      <div class="lg--up--grid__item lg--up--one-quarter">
+        <div class="pb3 pl2 pr4 lg--up--px0">
+
+          {% if section.settings.title == blank %}
+            <h2 class="{{ global__heading_font_size }}">{{ 'homepage.onboarding.collection_title' | t }}</h2>
+          {% else %}
+            <h2 class="{{ global__heading_font_size }}">{{ section.settings.title }}</h2>
+          {% endif %}
+
+          {% unless section.settings.address == blank %}
+            <div class="richtext line-height--3 {{ global__basic_font_size }}">
+               {{ section.settings.address }}
+            </div>
+          {% endunless %}
+
+          {% if section.settings.map_address != blank and section.settings.button_text != blank %}
+            <a href="//maps.google.com?daddr={{ section.settings.map_address | escape }}" class="inline-block {{ global__homepage_more_link }} {{ global__basic_font_size }}  {{ global__link_underline }}  {{ global__hover_underline }}" target="_blank" >
+              {{ section.settings.button_text | escape }}
+            </a>
+          {% endif %}
+
+        </div>
+      </div>
+      <div class="lg--up--grid__item lg--up--three-quarters">
+        <div class="relative px2 lg--up--px0 ">
+          {% if onboarding == true %}
+            <div class="{{ placeholder_bg }}">
+              {{ 'lifestyle-2' | placeholder_svg_tag }}
+            </div>
+          {% endif %}
+          {% if use_image %}
+            {% capture img_id %}FeatureImage-{{ map_image.id }}{% endcapture %}
+            {% capture wrapper_id %}FeatureImageWrapper-{{ map_image.id }}{% endcapture %}
+            {%- assign img_url = map_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+              <div style="padding-top:{{ 1 | divided_by: map_image.aspect_ratio | times: 100}}%;">
+                <img id="{{ img_id }}"
+                     class="resp-img lazyload"
+                     data-src="{{ img_url }}"
+                     data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                     data-aspectratio="{{ map_image.aspect_ratio }}"
+                     data-sizes="auto"
+                     alt="{{ map_image.alt | escape }}">
+                 <img id="{{ img_id }}"
+                      class="resp-img-placeholder"
+                      src="{{ map_image | img_url: '1x1' }}"
+                      width="{{ map_image.width }}"
+                      height="{{ map_image.height }}"
+                      alt="{{ map_image.alt | escape }}">
+              </div>
+            </div>
+            <noscript>
+              <img src="{{ feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
+            </noscript>
+          {% endif %}
+          {% if display_map %}
+          <div class="map-wrapper">
+            <div class="map-section__container"
+                 id="Map-{{ section.id }}"
+                 data-map
+                 data-address-setting="{{ section.settings.map_address | escape }}"
+                 data-api-key="{{ section.settings.api_key }}">
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Map",
+    "class": "index-section index-map-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Heading",
+        "default": "Our store"
+      },
+      {
+        "id": "address",
+        "type": "richtext",
+        "label": "Address and hours",
+        "default": "<p>123 Fake St.<br>Toronto, Canada</p><p>Mon - Fri, 10am - 9pm<br>Saturday, 11am - 9pm<br>Sunday, 11am - 5pm</p>"
+      },
+      {
+        "id": "map_address",
+        "type": "text",
+        "label": "Map address",
+        "info": "Google Maps will find the exact location",
+        "default": "80 Spadina Ave, Toronto"
+      },
+      {
+        "id": "button_text",
+        "type": "text",
+        "label": "Map link label",
+        "default": "Get directions"
+      },
+      {
+        "id": "api_key",
+        "type": "text",
+        "label": "Google Maps API key",
+        "info": "You’ll need to [register a Google Maps API Key](https://help.shopify.com/manual/using-themes/troubleshooting/map-section-api-key) to display the map"
+      },
+      {
+        "type": "image_picker",
+        "id": "map_image",
+        "label": "Image",
+        "info": "Used if no Google Maps API key is provided."
+      },
+      {
+        "type": "header",
+        "content": "Color"
+      },
+      {
+         "type": "select",
+         "id": "color_scheme",
+         "label": "Color scheme",
+         "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary ", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"},
+            { "value": "quarternary", "label": "Quarternary"}
+         ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Map",
+        "category": "Store information"
+      }
+    ]
+  }
+{% endschema %}

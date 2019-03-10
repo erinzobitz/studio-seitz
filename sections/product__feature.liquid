@@ -1,0 +1,80 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+
+{%- assign product = all_products[section.settings.selected_product] -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+{%- assign hide_drop_down_labels = section.settings.hide_drop_down_labels -%}
+{%- assign show_quantity = section.settings.show_quantity -%}
+{%- assign enable_payment_button = section.settings.enable_payment_button -%}
+{%- assign section_id = section.id -%}
+
+<section class="product-feature {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-id="{{ section.id }}" data-section-type="product" itemscope itemtype="http://schema.org/Product">
+  <meta itemprop="name" content="{{ product.title }}">
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ featured_image | img_url: '800x' }}">
+  <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+  <div class="max-site-width md--up--px2 lg--up--px3">
+    {% if product == empty %}
+      {% include 'product__onboarding' %}
+    {% else %}
+      {% assign feature_product = true %}
+      {% assign section_id = section.id %}
+      {% include 'product__top-section' %}
+    {% endif %}
+  </div>
+
+  {% unless product == empty %}
+    <script type="application/json" data-product-json>
+      {{ product | json }}
+    </script>
+  {% endunless %}
+
+</section>
+
+{% schema %}
+{
+  "name": "Featured product",
+  "settings": [
+    {
+       "type": "product",
+       "id": "selected_product",
+       "label": "Choose product:"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_payment_button",
+      "label": "Show dynamic checkout button",
+      "info": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quantity",
+      "label": "Show quantity"
+    },
+    {
+      "type":      "header",
+      "content":   "Color"
+    },
+    {
+       "type": "select",
+       "id": "color_scheme",
+       "label": "Color scheme",
+       "options": [
+          { "value": "primary", "label": "Primary"},
+          { "value": "secondary ", "label": "Secondary"},
+          { "value": "tertiary", "label": "Tertiary"},
+          { "value": "quarternary", "label": "Quarternary"}
+       ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured product",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}

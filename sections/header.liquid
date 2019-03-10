@@ -1,0 +1,374 @@
+{%- assign section_color = 'primary' -%}
+{%- include 'global-variables' -%}
+
+<style>
+  {%- if section.settings.logo != blank -%}
+    .site-header__logo-image {
+      max-width: {{ section.settings.logo_max_width }}px;
+    }
+  {%- endif -%}
+</style>
+
+{%- assign feature_image_placeholder = false -%}
+{% if section.settings.show_banner %}
+  {%- if  template.name == 'index' -%}
+    {% comment %}
+    Add class to body to fix section padding for first section
+    {% endcomment %}
+    <script>
+      document.body.classList.add("banner-image");
+    </script>
+    {% if section.settings.banner %}
+      {%- assign feature_image = section.settings.banner -%}
+      {%- assign padding = '100vh' -%}
+      {%- if section.settings.banner_image_style == 'fit_content' %}
+        {%- capture padding -%}{{ 1 | divided_by: feature_image.aspect_ratio | times: 100 }}%{%- endcapture -%}
+      {%- endif -%}
+    {% else %}
+      {%- assign feature_image_placeholder = true -%}
+      {%- assign padding = '100vh' -%}
+      {%- if section.settings.banner_image_style == 'fit_content' %}
+        {%- capture padding -%}38.55%{%- endcapture -%}
+      {%- endif -%}
+    {% endif %}
+    <div style="padding-top:{{ padding }};"></div>
+  {%- endif -%}
+{% endif %}
+
+<div data-section-id="{{ section.id }}" data-section-type="header"  data-template="{{ template.name }}">
+
+  {% unless section.settings.banner and template.name == 'index'  %}
+  <div class="header-placeholder full--w hide" data-header-placeholder></div>
+  {% endunless %}
+
+  <header class="site-header {% if section.settings.show_banner and template.name == 'index'  %}absolute top--0 left--0{% endif %} full--w {% if section.settings.show_announcement %}{% if section.settings.home_page_only == false or template.name == 'index' %}has-announcement{% endif %}{% endif %}" data-site-header>
+
+    <div class="header__shifter full--w"></div>
+
+    <div class="header__main">
+
+      <div class="max-site-width px2 lg--up--px3">
+        <div class="relative">
+          <a class="header__close fixed lg-up--full--w text-align--right top--0 right--0 p2 font-size--m pointer color--active-text hv--active-accent" data-close-header tabindex="0">
+            {% include 'svg' | icon: 'icon-close' %}
+          </a>
+        </div>
+      </div>
+
+      {% if section.settings.show_announcement %}
+        {% capture class %}block full--w bg--{{ section.settings.announcement_color }}-background color--{{ section.settings.announcement_color }}-text px2 py1  font-size--sm text-align--center {% endcapture %}
+        {% if section.settings.home_page_only == false or template.name == 'index' %}
+          {% if section.settings.link == blank %}
+            <div class="announcement-bar {{ class }}">
+          {% else %}
+            <a href="{{ section.settings.link }}" class="announcement-bar announcement-bar--link  {{ class }} hv--{{ section.settings.announcement_color }}-accent">
+          {% endif %}
+            <p class="m0 announcement-bar__message">{{ section.settings.text | escape }}</p>
+          {% if section.settings.link == blank %}
+            </div>
+          {% else %}
+            </a>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+
+        <div class="header-table flex items--center justify--between full--w px2 py3 max-site-width lg--up--px3  lg--up--relative">
+          <div class="header-table__bookend align--middle text-align--left lg--up--hide md--dn--flex--1-basis-0">
+            <div class="js">
+              {% if section.settings.show_menu_icon %}
+                <button type="button" class="t--header-navigation site-header__menu-btn btn border--none font-size--m bg--transparent" aria-controls="MobileNav" aria-expanded="false" data-active-header-trigger data-active-target="navigation">
+                  <div class="left">{% include 'svg' | icon: 'icon-menu' %}</div>
+                </button>
+              {% else %}
+                <a class="t--header-navigation header__link color--{{ section_color }}-text hv--header-active-accent font-size--m bg--transparent inline-block pointer" aria-controls="MobileNav" aria-expanded="false" data-active-header-trigger data-active-target="navigation"  tabindex="0">
+                  <div class="header__link-wrapper">{{ 'general.navigation.menu' | t }}</div>
+                </a>
+              {% endif %}
+            </div>
+            {% include 'no-js__mobile-menu' %}
+          </div>
+          <div class="nav__container align--middle text-align--left md--dn--hide lg--up--flex--1 overflow--hidden">
+            <div data-desktop-navigation-container>
+              <nav role="navigation">
+                <ul class="t--header-navigation site-nav list--reset m0 p0 font-size--m mxn1 no-wrap inline-block"  data-desktop-navigation-list>
+                  {% for link in linklists[section.settings.main_linklist].links %}
+                    {%- assign child_list_handle = link.title | handleize -%}
+                    {% if menus[child_list_handle].links != blank %}
+                      <li class="nav__item site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}  inline-block">
+                        <a class="site-nav__link color--{{ section_color }}-text color--header-active  px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-first-level-link="desktop" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0"  aria-haspopup="true">
+                          <div class="header__link-wrapper">
+                            {{ link.title }}
+                            <span class="site-nav__chevron-down font-size--xxs align--middle inline-block site-nav__svg">{% include 'svg', icon: 'icon-chevron-down' %}</span>
+                            <span class="site-nav__chevron-up font-size--xxs  align--middle inline-block site-nav__svg hide">{% include 'svg', icon: 'icon-chevron-up' %}</span>
+                          </div>
+                        </a>
+                        {%- assign link_handle = link.title | handleize -%}
+                        {% include 'no-js__submenu' %}
+                      </li>
+                    {% else %}
+                      <li class="nav__item inline-block {% if link.active %}site-nav--active{% endif %}" >
+                        <a href="{{ link.url }}" class="site-nav__link color--{{ section_color }}-text color--header-active px1 align--top header__link inline-block no-wrap" data-top-level-item>
+                          <div class="header__link-wrapper">{{ link.title }}</div>
+                        </a>
+                      </li>
+                    {% endif %}
+                  {% endfor %}
+                  <li class="site-nav--has-submenu inline-block hide" data-desktop-navigation-more-link>
+                    <a class="site-nav__link color--{{ section_color }}-text  color--header-active px2 inline-block header__link no-wrap pointer" data-desktop-navigation-more-link-trigger  data-top-level-item tabindex="0">
+                      <div class="header__link-wrapper">
+                        {{ 'general.navigation.more' | t }}
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="header-table__center align--middle text-align--center flex--grow--1  md--dn--flex--1-basis-0 lg--up--flex--grow--0 lg--justify--center lg--items--center">
+            {% if template.name == 'index' %}
+              <h1 class="header__logo m0 lg--up--px3 {% if section.settings.logo != blank %}font-size--0{% endif %}" itemscope itemtype="http://schema.org/Organization">
+            {% else %}
+              <div class="header__logo {% unless section.settings.logo != blank %}h1{% else %}font-size--0{% endunless %} m0  lg--up--px3" itemscope itemtype="http://schema.org/Organization">
+            {% endif %}
+                <a href="/" itemprop="url" class="font-size--xl color--{{ section_color }}-text color--header-active f--heading  site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+                  {% if section.settings.logo != blank %}
+                    {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
+                    <img src="{{ section.settings.logo | img_url: image_size }}"
+                         srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                         alt="{{ section.settings.logo.alt | default: shop.name }}"
+                         itemprop="logo">
+                  {% else %}
+                    {{ shop.name }}
+                  {% endif %}
+                </a>
+            {% if template.name == 'index' %}
+              </h1>
+            {% else %}
+              </div>
+            {% endif %}
+          </div>
+          <div class="header__meta header-table__bookend align--middle text-align--right lg--up--flex--1 md--dn--flex--1-basis-0 lg--up--justify--end no-wrap">
+            <div class="mxn1">
+
+              {% if shop.customer_accounts_enabled %}
+                {% if customer %}
+                <a href="/account" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active  font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-top-level-item>
+                  <div class="header__link-wrapper">
+                    {{ 'layout.customer.account' | t }}
+                  </div>
+                </a>
+                {% else %}
+                <a href="/account/login" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active  font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-top-level-item>
+                  <div class="header__link-wrapper">
+                    {{ 'layout.customer.log_in' | t }}
+                  </div>
+                </a>
+                {% endif %}
+              {% endif %}
+
+              {% if section.settings.show_search %}
+              <a href="/search"  class="t--header-navigation header__link color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-active-header-trigger data-active-target="search" data-search-button tabindex="0"  data-top-level-item  aria-haspopup="true" data-search-button>
+                <div class="header__link-wrapper">
+                  {{ 'general.search.submit' | t }}
+                </div>
+              </a>
+              {% endif %}
+
+              <a href="/cart" id="CartLink" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer m0 px1" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
+                <div class="header__link-wrapper">
+                  {% if section.settings.show_cart_icon %}
+                  <span class="cart__icon">{% include 'svg' | icon: 'icon-cart' %}</span>
+                  {% else %}
+                  {{ 'layout.cart.title' | t }}
+                  {% endif %}
+                  {% unless section.settings.show_cart_icon %}({% endunless %}<span id="CartCount">{{ cart.item_count }}</span>{% unless section.settings.show_cart_icon %}){% endunless %}
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    {% include 'header-active' %}
+
+    <div class="header__active-overlay" data-header-overlay></div>
+
+  </header>
+
+  {% if section.settings.show_banner and template.name == 'index'  %}
+    {% if section.settings.banner %}
+      {% assign feature_image = section.settings.banner %}
+      {% capture img_id %}FeatureImage-{{ feature_image.id }}{% endcapture %}
+      {% capture wrapper_id %}FeatureImageWrapper-{{ feature_image.id }}{% endcapture %}
+      {%- assign img_url = feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+      {%- assign padding = '100vh' -%}
+      {% if section.settings.banner_image_style == 'fit_content' %}
+      {%- capture padding %}{{ 1 | divided_by: feature_image.aspect_ratio | times: 100 }}%{% endcapture %}
+      {% endif %}
+      <div id="{{ wrapper_id }}" class="js banner_image absolute top--0 left--0 full--w">
+        <div class="lazyload bg-cover"
+            data-bgset="{% include 'bgset', image: feature_image %}"
+            data-sizes="auto"
+            data-parent-fit="cover"
+            style="padding-top:{{ padding }}; background-image: url({{ feature_image | img_url: '300x300' }}); background-size: cover;">
+          <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb2"  data-banner-scroll>
+            <button class="btn border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+          </a>
+        </div>
+      </div>
+      <noscript>
+        <img src="{{ feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
+      </noscript>
+    {% else %}
+      <div class="banner__placeholder  {% unless section.settings.banner_image_style == 'fit_content' %}full{% endunless %} bg--placeholder-dark js banner_image absolute top--0 left--0 full--w">
+        <div class="banner__placeholder-svg full--w full--h">
+          {{ 'lifestyle-1' | placeholder_svg_tag }}
+        </div>
+        <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb2"  data-banner-scroll>
+          <button class="btn border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+        </a>
+      </div>
+    {% endif %}
+  {% endif %}
+
+</div>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_cart_icon",
+        "label": "Show cart icon",
+        "info": "If disabled text will be shown instead of icon"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "range",
+        "id": "logo_max_width",
+        "min": 50,
+        "max": 450,
+        "step": 10,
+        "unit": "px",
+        "label": "Custom logo width",
+        "default": 250
+      },
+      {
+        "type": "header",
+        "content": "Navigation"
+      },
+      {
+        "type": "link_list",
+        "id": "main_linklist",
+        "label": "Menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_all_navigation_links",
+        "label": "Enable links to drop-down link headings"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search",
+        "label": "Show search"
+      },
+      {
+        "type": "header",
+        "content": "Mobile menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_menu_icon",
+        "label": "Show menu icon",
+        "info": "If disabled text will be shown instead of icon"
+      },
+      {
+        "type": "link_list",
+        "id": "secondary_linklist",
+        "label": "Secondary menu"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_search_sidebar",
+        "label": "Show search"
+      },
+      {
+        "type": "header",
+        "content": "Announcement bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_announcement",
+        "label": "Show announcement",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "home_page_only",
+        "label": "Home page only",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "text",
+        "label": "Text",
+        "default": "Announce something here"
+      },
+      {
+         "type": "select",
+         "id": "announcement_color",
+         "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary ", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"},
+            { "value": "quarternary", "label": "Quarternary"}
+         ],
+         "label": "Announcement color combination"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Banner"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_banner",
+        "label": "Show banner",
+        "default": false
+      },
+      {
+        "type": "image_picker",
+        "id": "banner",
+        "label": "Image",
+        "info": "1400x800px recommended "
+      },
+      {
+        "type": "select",
+        "id": "banner_image_style",
+        "label": "Image style:",
+        "options": [
+          {
+            "value": "full_screen",
+            "label": "Full Screen"
+          },
+          {
+            "value": "fit_content",
+            "label": "Content"
+          }
+        ],
+        "info": "Use \'Content\' style if you want to avoid image cropping."
+      }
+    ]
+  }
+{% endschema %}

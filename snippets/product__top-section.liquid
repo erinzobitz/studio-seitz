@@ -1,0 +1,224 @@
+<div class="{% if product.images.size > 1 %}lg--up--seven-eighths{% endif %} mx--auto">
+  <div class="grid">
+    <div class="grid__item md--up--one-half">
+      <div class="product__images relative md--up--text-align--right font-size--0">
+
+        {% assign product_thumbnail_grid = 'md--up--one-sixth' %}
+        {% if product.images.size > 1 and feature_product == false %}
+          <div class="product__thumbnails relative overflow--hidden {{ product_thumbnail_grid }} md--up--pr2 md--up--absolute md--up--full--h md--up--overflow--y-scroll js"  data-mobile-flickity  data-product-thumbnails>
+            <div class="product-flickity__slides pb3 md--up--mtn2 md--up--flex md--up--flex--column">
+              {%- for image in product.images -%}
+                {%- assign active_class = '' -%}
+                {%- if featured_image == image.src -%}
+                  {%- assign active_class = 'active' -%}
+                {%- endif -%}
+                {%- assign ratio = image.aspect_ratio -%}
+                {%- assign force_crop = false -%}
+                {%- if ratio < 0.2 -%}
+                  {%- assign force_crop = true -%}
+                  {%- assign ratio = 1 -%}
+                {%- endif -%}
+                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <div class="nine-twelfths md--up--one-whole md--up--mt2 md--up--flex--auto">
+                  <div class="px2 md--up--px0">
+                    <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--{{ section_color }}-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
+                    {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
+                    {% capture wrapper_id %}FeatureImageWrapper-{{ image.id }}{% endcapture %}
+                    <div id="{{ wrapper_id }}" class="resp-img-wrapper js overflow--hidden">
+                      <div style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;">
+                        <img id="{{ img_id }}"
+                             class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                             src="{{ image | img_url: '300x' }}"
+                             data-src="{{ img_url }}"
+                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                             data-aspectratio="{{ ratio }}"
+                             data-sizes="auto"
+                             alt="{{ image.alt | escape }}">
+                         <img id="{{ img_id }}"
+                              class="resp-img-placeholder"
+                              src="{{ product.featured_image | img_url: '1x1' }}"
+                              width="1px"
+                              height="1px"
+                              alt="{{ product.featured_image.alt | escape }}">
+                      </div>
+                    </div>
+                    <noscript>
+                      <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="product__image">
+                    </noscript>
+                    </a>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <div class="md--up--hide">
+              <div class="spacer pt1"></div>
+              <div class='mobile-flickity__button-container absolute bottom--0 right--0 pt1 pr2'>
+                <button class="btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm">{% include 'icon-next' %}</button>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if featured_image != blank %}
+          {% assign feature_image_class = 'sm--hide md--up--five-sixths' %}
+          {% if product.images.size == 1 or feature_product == true %}
+          {% assign feature_image_class = 'one-whole px2 md--up--px0 md--up--one-whole wd--seven-eighths' %}
+          {% endif %}
+          {% if feature_product %}
+          <a href="{{ product.url }}">
+          {% endif %}
+          <div class="product__feature-image {{ feature_image_class }} {{ product_feature_image_grid }} inline-block">
+            {% capture img_id %}ProductImage-{{ featured_image.id }}{% endcapture %}
+            {% capture wrapper_id %}ProductImageWrapper-{{ featured_image.id }}{% endcapture %}
+            {% assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+            <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+              <div style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100}}%;"  data-feature-product-wrapper>
+                <img
+                  id="ProductPhotoImg"
+                  class="resp-img product-single__photo lazyload {{ img_id_class }}"
+                  src="{{ featured_image | img_url: '300x300' }}"
+                  data-src="{{ img_url }}"
+                  data-widths="[180, 360, 590, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                  data-aspectratio="{{ featured_image.aspect_ratio }}"
+                  data-sizes="auto"
+                  data-image-id="{{ featured_image.id }}"
+                  alt="{{ featured_image.alt | escape }}"
+                  data-product-featured-image>
+                <img id="{{ img_id }}"
+                     class="resp-img-placeholder"
+                     src="{{ product.featured_image | img_url: '1x1' }}"
+                     width="{{ product.featured_image.width }}"
+                     height="{{ product.featured_image.height }}"
+                     alt="{{ product.featured_image.alt | escape }}">
+              </div>
+            </div>
+            <div class="no-js">
+              <noscript>
+                <img id="{{ wrapper_id }}" class="product-single__photo"
+                  src="{{ featured_image | img_url: 'master' }}"
+                  alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
+              </noscript>
+            </div>
+          </div>
+          {% if feature_product %}
+          </a>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="grid__item md--up--one-half">
+      <div class="lg--up--pl3 wd--pt3 wd--pl4">
+        <div class="px2 mt3 max-width--1 md--up--pt0 lg--up--px3">
+
+          {%- if feature_product -%}
+          <a class="color--{{ section_color }}-text" href="{{ product.url }}"><h2 class="{{ global__heading_font_size }} m0 mb1">{{ product.title }}</h2></a>
+          {%- else -%}
+          <h1 class="f--heading {{ global__heading_font_size }} m0 mb1">{{ product.title }}</h1>
+          {%- endif -%}
+
+          <div class="font-size--ml" data-price-wrapper>
+            <span {% if product.compare_at_price_max > product.price %}class="color--{{ section_color }}-accent"{% endif %} data-product-price>
+              {{ current_variant.price | money }}
+            </span>
+            {% if product.compare_at_price_max > product.price %}
+              <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+              <s class="ml1 inline-block" data-compare-price>
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  {{ current_variant.compare_at_price | money }}
+                {% endif %}
+              </s>
+            {% endif %}
+          </div>
+
+          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+            <div id="AddToCartForm--{{ section_id }}" class="form-vertical">
+            {% form 'product', product %}
+              {% unless product.has_only_default_variant %}
+                {% for option in product.options_with_values %}
+                  <div class="selector-wrapper js mt2 font-size--m">
+                    {% unless hide_drop_down_labels %}
+                    <label class="block" for="SingleOptionSelector-{{ forloop.index0 }}">
+                      {{ option.name }}
+                    </label>
+                    {% endunless %}
+                    <select
+                      class="bg--transparent border--{{ section_color }}-text color--{{ section_color }}-text p1 block full--w font-size--sm mt1"
+                      id="SingleOptionSelector-{{ forloop.index0 }}"
+                      data-single-option-selector
+                      data-index="option{{ option.position }}">
+                      {% for value in option.values %}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}selected="selected"{% endif %}>
+                            {{ value }}
+                        </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                {% endfor %}
+              {% endunless %}
+
+              <select name="id" class="no-js" data-product-select>
+                {% for variant in product.variants %}
+                  <option
+                    {% if variant == current_variant %}selected="selected"{% endif %}
+                    {% unless variant.available %}disabled="disabled"{% endunless %}
+                    value="{{ variant.id }}">
+                      {{ variant.title }}
+                  </option>
+                {% endfor %}
+              </select>
+
+              {% if show_quantity %}
+              <div class="mt2 font-size--m flex items--center">
+                <div class="pr2">
+                  <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+                </div>
+                <div class="flex--1 js-qty-wrapper color--{{ section_color }}-text">
+                  <input class="bg--transparent border--{{ section_color }}-text p1 font-size--sm mt1" type="number" id="Quantity" name="quantity" value="1" min="1">
+                </div>
+              </div>
+              {% endif %}
+
+              <div class="add-to-cart-container mt3 {% unless current_variant.available %}hide-pay-buttons{% endunless %}  {% if enable_payment_button %}cta-content--pay-buttons{% endif %}" data-add-to-cart-container>
+                <button
+                  class="btn border--none btn--add-to-cart color-scheme--{{ section_color }} {% if enable_payment_button %}bg--transparent color--{{ section_color }}-text border--{{ section_color }}-text hv--{{ section_color }}-accent hv--border--{{ section_color }}-accent {% else %}border--none bg--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg }}{% endif %} p1 full--w block"
+                  type="submit"
+                  name="add"
+                  id="AddToCart--{{ section_id }}"
+                  data-add-to-cart
+                  {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+                    <span data-add-to-cart-text>
+                      {% if current_variant.available %}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {% else %}
+                        {{ 'products.product.sold_out' | t }}
+                      {% endif %}
+                    </span>
+                </button>
+                {% if enable_payment_button %}
+                  <div class="mt2 payment-button-wrapper color--{{ section_color }}">{{ form | payment_button }}</div>
+                {% endif %}
+              </div>
+
+            {% endform %}
+            </div>
+
+            {% if show_share_links %}
+            <div {% unless enable_payment_button %}class="mt3"{% endunless %}>
+              {% include 'page-share' %}
+            </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

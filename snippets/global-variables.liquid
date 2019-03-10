@@ -1,0 +1,25 @@
+{%- assign global__section_with_padding_class = 'py4 lg--up--py5' -%}
+{%- assign global__heading_font_size = 'f--heading font-size--xxxl line-height--8 wd--font-size--xxxxl wd--line-height--11' -%}
+{%- assign global__basic_font_size = 'font-size--sm line-height--4 wd--font-size--m wd--line-height--4' -%}
+
+{%- assign heading_fontsize__mobile_full = global__heading_font_size -%}
+{%- assign heading_fontsize__mobile_half = 'f--heading font-size--xl line-height--5 pm--font-size--xxxl pm--line-height--8 wd--font-size--xxxxl wd--line-height--11' -%}
+
+{%- capture global__link_underline -%}f--accent inline-block link-underline color--{{ section_color }}-text border-bottom--{{ section_color }}-text{%- endcapture -%}
+{%- assign global__homepage_more_link = 'mt2 lg--up--mt3 inline-block' -%}
+
+{%- capture global__hover_underline -%}hv--{{ section_color }}-accent hv--border-bottom--{{ section_color }}-accent{%- endcapture -%}
+{%- capture global__hover_bg -%}hv-bg--{{ section_color }}-accent hv--{{ section_color }}-accent--overlay{%- endcapture -%}
+{%- capture global__hover_border -%}hv--border--{{ section_color }}-accent hv--{{ section_color }}-accent{%- endcapture -%}
+{%- capture global__hover_bg_border -%}hv-bg--{{ section_color }}-accent hv--border--{{ section_color }}-accent hv--{{ section_color }}-accent--overlay{%- endcapture -%}
+
+{%- assign primary_background_color = settings['color_primary_background'] -%}
+{%- assign secondary_background_color = settings['color_secondary_background'] -%}
+{%- assign tertiary_background_color = settings['color_tertiary_background'] -%}
+
+{%- assign fade_in = false -%}
+{%- if settings.fade_in_items -%}
+  {%- assign fade_in = true -%}
+{%- endif -%}
+
+{%- include 'placeholder-color' -%}

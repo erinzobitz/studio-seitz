@@ -1,0 +1,78 @@
+{%- if collection.image -%}
+  {%- assign image = collection.image -%}
+{%- else -%}
+  {%- for product in collection.products limit:1 -%}
+    {%- assign image = product.featured_image.src -%}
+  {%- endfor -%}
+{%- endif -%}
+<div class="image-with-text__container relative">
+  {% if text_position == 'under' %}
+  <a href="{{ collection.url }}">
+  {% endif %}
+    <div class="image-with-text__image">
+      {% assign image_ratio = block.settings.image.aspect_ratio  | plus: 0 %}
+      <div class="image-holder">
+        {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
+        {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
+        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+          <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+            <img id="{{ img_id }}"
+                class="resp-img lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                data-aspectratio="{{ image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ image.alt | escape }}">
+            <img id="{{ img_id }}"
+                  class="resp-img-placeholder"
+                  src="{{ image | img_url: '1x1' }}"
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                  alt="{{ image.alt | escape }}">
+          </div>
+        </div>
+        <noscript>
+          <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+        </noscript>
+      </div>
+    </div>
+  {% if text_position == 'under' %}
+  </a>
+  {% endif %}
+  {% if text_position == 'over' %}
+  <div class="image-with-text__content absolute full top--0 left--0 p1 z2">
+    <a href="{{ collection.url }}" class="block full color--{{ local_color }}-text hv--{{ local_color }}-accent collection-item__link">
+      <div class="table full">
+        <div class="table-cell text-align--center align--middle">
+          <div class="inline-block  align--middle">
+            <h2 class=" m0 {{ heading_class }}">{{ title }}</h2>
+            {% if show_cta %}
+              <p class="{% if block.settings.block_width_mobile == 'half' %}sm--hide{% endif %} m0 lg--up--mt1 inline-block link-underline f--accent collection-item__button color--{{ local_color }}-text border-bottom--{{ local_color }}-text">
+                {{ cta_text }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% else %}
+  <div class="image-with-text__content full p1 z2 pt2 lg-up--pt3">
+    <a href="{{ collection.url }}" class="block full color--{{ section_color }}-text hv--{{ section_color }}-accent collection-item__link">
+      <div class="table full">
+        <div class="table-cell text-align--center align--middle">
+          <div class="inline-block  align--middle">
+            <h2 class=" m0 {{ heading_class }}">{{ title }}</h2>
+            {% if show_cta %}
+              <p class="{% if block.settings.block_width_mobile == 'half' %}sm--hide{% endif %} mt1 collection-item__button inline-block link-underline f--accent color--{{ section_color }}-text border-bottom--{{ section_color }}-text">
+                {{ cta_text }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endif %}
+</div>

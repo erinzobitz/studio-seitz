@@ -1,0 +1,48 @@
+<header role="banner">
+
+  {% if collection.image and section.settings.show_collection_image %}
+  <div class="mb3 lg--up--mb4 md--up--four-fifths mx--auto">
+    {% assign image = collection.image  %}
+    {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
+    {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
+    {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+      <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+        <img id="{{ img_id }}"
+             class="resp-img lazyload"
+             data-src="{{ img_url }}"
+             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+             data-aspectratio="{{ image.aspect_ratio }}"
+             data-sizes="auto"
+             alt="{{ image.alt | escape }}">
+         <img id="{{ img_id }}"
+              class="resp-img-placeholder"
+              src="{{ image | img_url: '1x1' }}"
+              width="{{ image.width }}"
+              height="{{ image.height }}"
+              alt="{{ image.alt | escape }}">
+      </div>
+    </div>
+    <noscript>
+      <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+    </noscript>
+  </div>
+  {% endif %}
+
+  <div class="lg--up--flex">
+    <div class="lg--up--one-half lg--up--self--end">
+      <h1 class="f--heading  font-size--xxl line-height-6 wd--font-size--xxxl m0 pb1">
+        <span class="">{{ collection.title }}</span>
+      </h1>
+      {% if collection.description != blank %}
+        <div class="m0 f--main {{ global__basic_font_size }} three-quarters">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="mt3 lg--up--mt0 lg--up--one-half lg--up--flex lg--up--text-align--right">
+      {% include 'collection-sorting' %}
+    </div>
+  </div>
+
+</header>

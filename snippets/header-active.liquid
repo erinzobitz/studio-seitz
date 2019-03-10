@@ -1,0 +1,55 @@
+{%- assign section_color = 'active' -%}
+{%- include 'global-variables' -%}
+
+<div class="header__active lg--up--relative color--{{ section_color }}-text" data-header-active>
+
+  <div class="max-site-width px2 pt3 lg--up--px3 lg--up--pt3">
+
+    {% comment %}
+    Navigation
+    {% endcomment %}
+    <div class="hide" data-active-name="navigation" data-active-section>
+      <div class="lg--up--hide">
+        {% include 'navigation__mobile' %}
+      </div>
+      <div class="md--dn--hide">
+        {% include 'navigation__desktop' %}
+      </div>
+    </div>
+
+    {% comment %}
+    Cart
+    {% endcomment %}
+    <script type="text/html" id="spinner">
+      <div class="mt5 relative">
+        <div class="spinner color--{{ section_color }}-text"></div>
+      </div>
+    </script>
+    <div class="hide px2" data-active-name="cart" data-active-section>
+      <div id="CartContainer" class="{{ global__basic_font_size }}">
+        <div class="mt5 relative">
+          <div class="spinner color--{{ section_color }}-text"></div>
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+    Search
+    {% endcomment %}
+    <div class="hide" data-active-name="search" data-active-section>
+      <div class="mx--auto lg--up--one-half">
+        <form action="/search" method="get" class="input-group search" role="search">
+          {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
+          <label for="search" class="hide">{{ 'general.search.submit' | t }}</label>
+          <input id="search" type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="py1 search__input input-group-field border--none bg--transparent border-bottom--{{ section_color }}-text font-size--xl color--active-text" aria-label="{{ 'general.search.placeholder' | t }}" data-search-input data-desktop-active-first-item>
+          <span class="input-group-btn search-btn">
+            <button type="submit" class="block font-size--xl bg--transparent color--{{ section_color }}-text border--none" data-desktop-active-last-item>
+              {% include 'svg', icon: 'icon-search' %}
+            </button>
+          </span>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,74 @@
+{%- assign section_color = 'primary' -%}
+{%- include 'global-variables' -%}
+
+<section class="page {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
+  <div class="max-site-width px2 lg--up--px3">
+    <div class="lg--up--seven-eighths mx--auto">
+      <div class="grid">
+        <div class="grid__item lg--up--two-fifths">
+          <h1 class="{{ global__heading_font_size }} m0">{{ page.title }}</h1>
+          <div class="rte mt2  {{ global__basic_font_size }}">
+            {{ page.content }}
+          </div>
+        </div>
+        <div class="grid__item lg--up--three-fifths  mt3 lg--up--mt0">
+
+          {% form 'contact' %}
+
+            {% if form.posted_successfully? %}
+              <p class="form-success">
+                {{ 'contact.form.post_success' | t }}
+              </p>
+            {% endif %}
+
+            {{ form.errors | default_errors }}
+
+            <label class="mt2 block" for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+            <input type="text"
+              class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="contact[name]"
+              id="ContactFormName"
+              placeholder="{{ 'contact.form.name' | t }}"
+              value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
+
+            <label class="mt2 block" for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+            <input type="email"
+              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="contact[email]"
+              id="ContactFormEmail"
+              placeholder="{{ 'contact.form.email' | t }}"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off">
+
+            <label class="mt2 block" for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+            <input type="tel"
+              class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="contact[phone]"
+              id="ContactFormPhone"
+              placeholder="{{ 'contact.form.phone' | t }}"
+              value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+              pattern="[0-9\-]*">
+
+            <label class="mt2 block" for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
+            <textarea rows="10"
+              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+              name="contact[body]"
+              id="ContactFormMessage"
+              placeholder="{{ 'contact.form.message' | t }}">
+              {% if form.body %}
+                {{ form.body }}
+              {% endif %}
+            </textarea>
+
+            <input type="submit" class="block full--w max-width--1 btn border--none mt3 px2 py1 bg--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg }}" value="{{ 'contact.form.send' | t }}">
+
+          {% endform %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

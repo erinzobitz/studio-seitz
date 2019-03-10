@@ -1,0 +1,249 @@
+{%- assign section_color = section.settings.color_combination -%}
+{%- include 'global-variables' -%}
+
+
+<footer class="{{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
+  <div class="max-site-width lg--up--px3">
+    <div class="grid px2 lg--up--px0 ">
+      <div class="grid__item mb3 md--up--one-whole lg--up--one-seventh">
+        <div class="grid">
+          <div class="grid__item one-third lg--up--one-whole">
+            <a href="/" class="font-size--xl f--heading color--{{ section_color }}-text">
+              {% assign logo_max_width = 100 %}
+              {% if section.settings.logo != blank %}
+                {% capture image_size %}{{ logo_max_width }}x{% endcapture %}
+                <img src="{{ section.settings.logo | img_url: image_size }}"
+                     srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                     alt="{{ section.settings.logo.alt | default: shop.name }}"
+                     >
+              {% else %}
+                {{ shop.name }}
+              {% endif %}
+            </a>
+          </div>
+          <div class="grid__item two-thirds text-align--right lg--up--one-whole lg--up--mt2 lg--up--text-align--left">
+            {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+            <ul class="list--reset p0 m0 mxn1">
+              {% for social in social_accounts %}
+                {%- assign social_handle = social | handleize -%}
+                {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+
+                {% if settings[social_link] != blank %}
+                  <li class="inline-block">
+                    <a class="color--{{ section_color }}-text px1 font-size--xxs mb1 block" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                      {% include social_icon %}
+                      <span class="icon-fallback-text">{{ social }}</span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="grid__item mb3 md--up--one-whole lg--up--six-sevenths">
+        <div class="grid">
+
+        {% case section.blocks.size %}
+          {% when 1 %}
+            {% assign footer_grid_width = 'md--up--one-whole lg--up--one-whole' %}
+          {% when 2 %}
+            {% assign footer_grid_width = 'md--up--one-half lg--up--one-half' %}
+          {% when 3 %}
+            {% assign footer_grid_width = 'md--up--one-whole lg--up--one-third' %}
+          {% else %}
+            {% assign footer_grid_width = 'md--up--one-whole lg--up--one-whole' %}
+        {% endcase %}
+
+          {% for block in section.blocks %}
+          <div class="grid__item {{ global__basic_font_size }} {{ footer_grid_width }} mb3 lg-up--mb0">
+
+            {% if block.type == 'menus' %}
+
+              {% assign single_linklist = false %}
+
+              {% if block.settings.main_linklist == blank and block.settings.secondary_linklist != blank %}
+                {% assign single_linklist = true %}
+              {% endif %}
+
+              {% if block.settings.main_linklist != blank and block.settings.secondary_linklist == blank %}
+                {% assign single_linklist = true %}
+              {% endif %}
+
+              <div class="grid">
+                {% if block.settings.main_linklist  != blank %}
+                  {% assign link_list = block.settings.main_linklist %}
+                  {% include 'footer__linklist' %}
+                {% endif %}
+                {% if block.settings.secondary_linklist  != blank %}
+                  {% assign link_list = block.settings.secondary_linklist %}
+                  {% include 'footer__linklist' %}
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if block.type == 'richtext' %}
+              <div class="three-quarters lg--up--one-whole richtext">
+                {{ block.settings.text }}
+              </div>
+              {% endif %}
+
+            {% if block.type == 'newsletter' %}
+              {% if block.settings.text != blank %}
+                  <div class="line-height--3 {{ global__basic_font_size }}">
+                    {{ block.settings.text}}
+                  </div>
+                {% endif %}
+                {% form 'customer' %}
+                  {{ form.errors | default_errors }}
+                  {% if form.posted_successfully? %}
+                    <p class="form--success f--main">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                  {% else %}
+                    <div class="input-group">
+                      <input type="hidden" name="contact[tags]" value="newsletter">
+                      <label for="Email" class="hide">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+                      <input type="email"
+                        name="contact[email]"
+                        id="Email"
+                        class="input-group-field px2 py1 bg--transparent border--{{ section_color }}-text color--{{ section_color }}-text font-size--s"
+                        value="{% if customer %}{{ customer.email }}{% endif %}"
+                        placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}"
+                        autocorrect="off"
+                        autocapitalize="off">
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn border--none newsletter__submit px2 py1 font-size--s bg--{{ section_color }}-text border--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg_border }}" name="commit" id="Subscribe">
+                          <span class="newsletter__submit">{{ 'general.newsletter_form.submit' | t }}</span>
+                        </button>
+                      </span>
+                    </div>
+                  {% endif %}
+                {% endform %}
+            {% endif %}
+
+          </div>
+          {% endfor %}
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="grid {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}grid--rev{% endif %} px2 mt2 lg--up--px0">
+
+      {% if section.settings.show_payment_icons %}
+        {% unless shop.enabled_payment_types == empty %}
+        <div class="grid__item lg--up--one-half mb3 lg--up--mb0">
+          <div class="text-align--left lg--up--text-align--right">
+            <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
+            <ul class="payment-icons m0 p0 list--reset font-size--xl mxn1">
+              {% for type in shop.enabled_payment_types %}
+                <li class="inline-block">
+                  {{ type | payment_type_svg_tag: class:'payment-icon' }}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        {% endunless %}
+      {% endif %}
+
+      <div class="grid__item lg--up--one-half">
+        <div class="footer__credit">
+          <p>&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br>
+        <i>Photos by Stephen Kent Johnson; Styling by Erin Swift</i></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "Show payment icons",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_theme_credit",
+        "label": "Show theme credit",
+        "default": true
+      },
+      {
+        "type":      "header",
+        "content":   "Color"
+      },
+      {
+         "type": "select",
+         "id": "color_combination",
+         "label": "Combination",
+         "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary ", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"},
+            { "value": "quarternary", "label": "Quarternary"}
+         ]
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menus",
+        "name": "Menus",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "main_linklist",
+            "label": "Menu",
+            "default": "footer",
+            "info": "This menu won't show dropdown items"
+          },
+          {
+            "type": "link_list",
+            "id": "secondary_linklist",
+            "label": "Secondary Menu",
+            "info": "This menu won't show dropdown items"
+          }
+        ]
+      },
+      {
+        "type": "richtext",
+        "name": "Rich text",
+        "limit": 1,
+        "settings": [
+          {
+            "id": "text",
+            "type": "richtext",
+            "label": "Text",
+            "default": "<p>Use this to add additional information about your store, e.g. address / contact details.</p>"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "Newsletter",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Receive special offers and first look at new products.</p>"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}

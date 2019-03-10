@@ -1,0 +1,13 @@
+<div class="grid grid--uniform sm--grid--half-gutter mtn3 lg--up--mtn4">
+  {% for product in collection.products %}
+    <div class="product-grid-item grid__item sm--{{ posts_per_row_mobile }} md--up--{{ posts_per_row_desktop }} mt3 lg--up--mt4">
+        {% include 'product-grid-item', text_color: section.settings.section_color %}
+    </div>
+  {% else %}
+    {% for i in (1..section.settings.no_products) %}
+    <div class="product-grid-item  grid__item  lg--up--one-third">
+      {% include 'product-grid-item__onboarding' %}
+    </div>
+    {% endfor %}
+  {% endfor %}
+</div>

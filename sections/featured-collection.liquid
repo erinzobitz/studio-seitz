@@ -1,0 +1,142 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+
+{%- assign grid_item_width = '' -%}
+{%- case section.settings.no_products -%}
+  {%- when '3' -%}
+    {%- assign grid_item_width = 'lg--up--one-third' -%}
+  {%- when '4' -%}
+    {%- assign grid_item_width = 'lg--up--one-quarter' -%}
+  {%- when '6' -%}
+    {%- assign grid_item_width = 'lg--up--one-third' -%}
+  {%- when '8' -%}
+    {%- assign grid_item_width = 'lg--up--one-quarter' -%}
+{%- endcase -%}
+
+<section class="featured-collection {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-mobile-flickity="true" data-section-type="flickity-only" data-section-id="{{ section.id }}">
+  <div class="max-site-width lg--up--px3">
+
+    {%- assign collection = collections[section.settings.collection] -%}
+
+    <div class="lg--up--grid">
+      <div class="lg--up--grid__item lg--up--one-quarter">
+        <div class="featured-collection__info pb3 pl2 pr4 lg--up--px0">
+
+          {% if section.settings.selected_collection and section.settings.selected_collection != '' %}
+            {% if section.settings.title == blank %}
+              <h2 class="{{ global__heading_font_size }}">{{ collections[section.settings.selected_collection].title }}</h2>
+            {% else %}
+              <h2 class="{{ global__heading_font_size }}">{{ section.settings.title | escape }}</h2>
+            {% endif %}
+          {% else %}
+            {% if section.settings.title == blank %}
+              <h2 class="{{ global__heading_font_size }}">{{ 'homepage.onboarding.collection_title' | t }}</h2>
+            {% else %}
+              <h2 class="{{ global__heading_font_size }}">{{ section.settings.title }}</h2>
+            {% endif %}
+          {% endif %}
+
+          {% if section.settings.subheading != blank %}
+            <div class="{{ global__basic_font_size }}">
+              {{ section.settings.subheading }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.show_collection_link %}
+          <a class="{{ global__link_underline }} {{ global__hover_underline }} {{ global__homepage_more_link }} {{ global__basic_font_size }}" href="{{ collection.url }}" >
+            {{ 'collections.general.all_of_collection' | t: collection:  collection.title }}
+          </a>
+          {% endif %}
+
+        </div>
+      </div>
+      <div class="lg--up--grid__item lg--up--three-quarters">
+        <div class="mobile-flickity relative">
+          <div class="mobile-flickity__slides pb3 lg--up--grid grid--uniform lg--up--mtn3">
+            {% for product in collection.products limit: section.settings.no_products %}
+              <div class="product-grid-item nine-twelfths md--six-twelfths lg--up--grid__item {{ grid_item_width }} lg--up--mt3">
+                <div class="px2 lg--up--px0">{% include 'product-grid-item' %}</div>
+              </div>
+            {% else %}
+              {% for i in (1..section.settings.no_products) %}
+              <div class="product-grid-item nine-twelfths md--six-twelfths lg--up--grid__item {{ grid_item_width }} lg--up--mt3">
+                <div class="px2 lg--up--px0">{% include 'product-grid-item__onboarding' %}</div>
+              </div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+          <div class="lg--up--hide">
+            <div class="spacer pt1"></div>
+            <div class='mobile-flickity__button-container absolute bottom--0 right--0 pt1 pr2'>
+              <button class="btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm">{% include 'icon-next' %}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+         "type": "select",
+         "id": "no_products",
+         "options": [
+            { "value": "3", "label": "3 Products"},
+            { "value": "4", "label": "4 Products"},
+            { "value": "6", "label": "6 Products"},
+            { "value": "8", "label": "8 Products"}
+         ],
+         "label": "Number of products"
+      },
+      {
+        "id": "subheading",
+        "type": "text",
+        "label": "Subheading",
+        "default": "Use this text to share information about your collection."
+      },
+      {
+        "type": "checkbox",
+        "id": "show_collection_link",
+        "label": "Show link to collection",
+        "default": true
+      },
+      {
+        "type":      "header",
+        "content":   "Color"
+      },
+      {
+         "type": "select",
+         "id": "color_scheme",
+         "label": "Color scheme",
+         "options": [
+            { "value": "primary", "label": "Primary"},
+            { "value": "secondary ", "label": "Secondary"},
+            { "value": "tertiary", "label": "Tertiary"},
+            { "value": "quarternary", "label": "Quarternary"}
+         ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

@@ -1,0 +1,15 @@
+{%- assign primary_brightness = settings.color_primary_background  | color_brightness | plus: 0  -%}
+{%- assign secondary_brightness = settings.color_secondary_background  | color_brightness | plus: 0 -%}
+{%- assign tertiary_brightness = settings.color_tertiary_background  | color_brightness | plus: 0  -%}
+{%- assign quaternary_brightness = settings.color_quaternary_background  | color_brightness | plus: 0  -%}
+{%- if section_color == 'primary' and primary_brightness > 127 -%}
+  {%- assign placeholder_bg = 'bg--placeholder-dark' -%}
+{%- elsif section_color == 'secondary' and secondary_brightness > 127 -%}
+  {%- assign placeholder_bg = 'bg--placeholder-dark' -%}
+{%- elsif section_color == 'tertiary' and tertiary_brightness > 127 -%}
+    {%- assign placeholder_bg = 'bg--placeholder-dark' -%}
+{%- elsif section_color == 'quaternary' and quaternary_brightness > 127 -%}
+    {%- assign placeholder_bg = 'bg--placeholder-dark' -%}
+{%- else -%}
+  {%- assign placeholder_bg = 'bg--placeholder-light' -%}
+{%- endif -%}

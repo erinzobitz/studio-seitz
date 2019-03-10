@@ -1,0 +1,26 @@
+<div class="blog-cascade" data-blog-cascade>
+  <div class="items">
+    <div class="item-sizer"></div>
+    <div class="column-sizer"></div>
+
+    {% assign col_count_desktop = 1 %}
+    {% for article in blog.articles %}
+      {% assign block_width_mobile = 'full' %}
+      {% assign block_width_desktop = 'half' %}
+      {% capture mobile_count %}{% cycle '1', '2' %}{% endcapture %}
+
+      <div class="item item--large-gap item--desktop--half item--mobile--full {% if forloop.first %}item--first{% endif %}  {% if last_col %}item--last{% endif %} {% if fade_in%}fade-in{% endif %}">
+        <div class="item__inner {% if mobile_count == '1' %}md--dn--pr4{% else %}md--dn--pl4{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+          {% assign blog_page = true %}
+          {% include 'article-grid-item__feature' %}
+        </div>
+      </div>
+
+      {% assign col_count_desktop = col_count_desktop | plus: 1 %}
+      {% if col_count_desktop == 5 %}
+        {% assign col_count_desktop = 1 %}
+      {% endif %}
+    {% endfor %}
+
+  </div>
+</div>

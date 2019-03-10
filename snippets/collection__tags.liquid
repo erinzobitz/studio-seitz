@@ -1,0 +1,14 @@
+<div class="grid__item lg--up--one-seventh lg--up--sticky top--0 {{ global__basic_font_size }}">
+  <a class="lg--up--hide p1 inline-block mxn1 mb1" data-tag-filter-mobile-trigger>
+    <div class="inline-block">
+    {{ 'collections.general.filter' | t }}
+    <span class="font-size--xxxxs inline-block align--middle">
+      <span class="chevron-down">{% include 'svg' | icon: 'icon-chevron-down' %}</span>
+      <span class="chevron-up hide">{% include 'svg' | icon: 'icon-chevron-up' %}</span>
+    </span>
+    </div>
+  </a>
+  <ul class="list--reset m0 mtn1 pb3 lg--up--pb0 lg--up--pt3 md--dn--hide {{ global__basic_font_size }}" data-tag-list>
+    {% include 'collection__tag-items' %}
+  </ul>
+</div>

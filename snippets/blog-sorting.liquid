@@ -1,0 +1,38 @@
+  <!-- /snippets/collection-sorting.liquid -->
+<div class="md--dn--table full--w lg--up--self--end">
+
+  {% if tags_enabled %}
+  <div class="md--dn--table-cell md--dn--one-half md--dn--align--top">
+    <div class="lg--up--hide {{ global__basic_font_size }} mxn1">
+      <a class="lg--up--hide px1 inline-block pointer" data-tag-filter-mobile-trigger>
+        <div class="inline-block">
+        {{ 'collections.general.filter' | t }}
+        <span class="font-size--xxxxs inline-block align--middle">
+          <span class="chevron-down">{% include 'svg' | icon: 'icon-chevron-down' %}</span>
+          <span class="chevron-up hide">{% include 'svg' | icon: 'icon-chevron-up' %}</span>
+        </span>
+        </div>
+      </a>
+      <div class="p1 md--dn--hide" data-tag-list>
+        <ul class="list--reset m0 mtn1 pb3 pt2 lg--up--pb0 lg--up--pt3{{ global__basic_font_size }}">
+          <li class="mb1">
+            <a class="inline-block" href="{{ blog.url }}"><span {% unless current_tags %} class="border-bottom--main"{% endunless %}>All</span></a>
+          </li>
+          {% for tag in blog.all_tags %}
+            {% if current_tags contains tag %}
+            <li class="mb1">
+                <a class="inline-block" href="{{ blog.url }}/tagged/{{ tag | handle }}"><span class="border-bottom--main">{{ tag }}</span></a>
+            </li>
+            {% else %}
+            <li class="mb1">
+                <a class="inline-block" href="{{ blog.url }}/tagged/{{ tag | handle }}"><span>{{ tag }}</span></a>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+

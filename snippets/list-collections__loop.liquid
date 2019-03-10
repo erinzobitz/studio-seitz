@@ -1,0 +1,34 @@
+{%- if forloop.first and odd_count -%}
+  {%- assign block_width_mobile = 'full' -%}
+  {%- assign block_width_desktop = 'full' -%}
+{%- else -%}
+  {%- assign block_width_mobile = 'full' -%}
+  {%- assign block_width_desktop = 'half' -%}
+{%- endif -%}
+
+{%- if index == 2 and odd_count -%}
+  {%- assign first_col_desktop = true -%}
+{%- else -%}
+  {%- assign first_col_desktop = false -%}
+{%- endif -%}
+
+{%- capture mobile_count -%}{%- cycle '1', '2' -%}{%- endcapture -%}
+
+<div class="item item--desktop--{{ block_width_desktop }} item--mobile--full {% if forloop.first %}item--first{% endif %} {% if first_col_desktop %}first-col--desktop{% endif %} {% if last_col %}item--last{% endif %}  {% if fade_in%}fade-in{% endif %}">
+  <div class="item__inner {% if block_width_desktop == 'full' %}lg--up--two-thirds lg--up--mx--auto{% endif %}">
+    <div class=" {% if mobile_count == '1' %}md--dn--pr4{% else %}md--dn--pl4{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+      {% if placeholder %}
+        {% assign local_color = 'primary' %}
+        {% include 'cascade__collection-placeholder' %}
+      {% else %}
+        {% include 'collection-item' %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{%- assign col_count_desktop = col_count_desktop | plus: 1 -%}
+{%- if col_count_desktop == 5 -%}
+  {%- assign col_count_desktop = 1 -%}
+{%- endif %}
+{%- assign index = index | plus: 1 -%}

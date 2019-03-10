@@ -1,0 +1,174 @@
+{%- assign section_color = section.settings.color_scheme -%}
+{%- include 'global-variables' -%}
+{%- assign collection_count = section.blocks.size -%}
+{%- assign remainder =  collection_count | modulo:2 -%}
+{%- if remainder == 0 -%}
+  {%- assign odd_count = false -%}
+{%- else -%}
+  {%- assign odd_count = true -%}
+{%- endif -%}
+
+{% assign text_position = section.settings.text_position %}
+
+<section class="cascade {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}"  data-fade-in="{{ fade_in }}">
+  <div class="max-site-width px2 lg--up--px3">
+    <div class="cascading-content">
+      <div class="items">
+        <div class="item-sizer"></div>
+        <div class="column-sizer"></div>
+
+        {% assign col_count_desktop = 1 %}
+        {% assign index = 1 %}
+
+        {% if section.settings.title != blank %}
+          <div
+              class="item item--heading item--desktop--full item--mobile--full item--first first-col--desktop first-col--mobile"
+              {{ block.shopify_attributes }}>
+              <div class="item__inner {% if section.settings.heading_text_align == 'text-align--center' %}five-sixths mx--auto lg--up--mx--auto lg--up--five-sixths{% else %}lg--up--m0{% endif %}">
+                <div class="rich-text {{ section.settings.heading_text_align }}">
+                  <div class="{% if section.settings.heading_text_align == 'text-align--center' %}seven-eighths mx--auto pm--three-quarters wd--two-thirds{% endif %}">
+                      <h2 class="m0 f--heading {{ global__heading_font_size }}">
+                        {{ section.settings.title }}
+                      </h2>
+                  </div>
+                </div>
+              </div>
+          </div>
+        {% endif %}
+
+        {% for block in section.blocks %}
+          {% if block.settings.collection and block.settings.collection != '' %}
+            {% assign collection = collections[block.settings.collection] %}
+            {% assign title = collection.title %}
+            {% assign show_cta = block.settings.show_collection_link %}
+            {% assign cta_text = block.settings.cta_text %}
+            {% assign heading_class = heading_fontsize__mobile_full %}
+            {% assign local_color = block.settings.text_color %}
+            {% assign text_position = section.settings.text_position %}
+            {% include 'list-collections__loop' %}
+          {% else %}
+            {% assign placeholder = true %}
+            {% include 'list-collections__loop' %}
+          {% endif %}
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection list",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "select",
+      "id": "heading_text_align",
+      "label": "Heading text alignment",
+      "options": [
+       {
+         "value": "text-align--left",
+         "label": "Left"
+       },
+       {
+         "value": "text-align--center",
+         "label": "Center"
+       },
+       {
+         "value": "text-align--right",
+         "label": "Right"
+       }
+      ],
+      "default":   "text-align--left"
+    },
+    {
+      "type":      "header",
+      "content":   "Collections"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        { "value": "over", "label": "Over image"},
+        { "value": "under", "label": "Underneath image"}
+      ]
+    },
+    {
+      "type":      "header",
+      "content":   "Color"
+    },
+    {
+       "type": "select",
+       "id": "color_scheme",
+       "label": "Color scheme",
+       "options": [
+          { "value": "primary", "label": "Primary"},
+          { "value": "secondary ", "label": "Secondary"},
+          { "value": "tertiary", "label": "Tertiary"},
+          { "value": "quarternary", "label": "Quarternary"}
+       ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+           "type": "collection",
+           "id": "collection",
+           "label": "Choose collection:"
+        },
+        {
+           "type": "select",
+           "id": "text_color",
+           "label": "Overlay text color",
+           "options": [
+             { "value": "primary", "label": "Primary text"},
+             { "value": "secondary", "label": "Secondary text"},
+             { "value": "tertiary", "label": "Tertiary text"},
+             { "value": "quarternary", "label": "Quarternary text"},
+             { "value": "white", "label": "White"}
+           ]
+        },
+        {
+          "type": "checkbox",
+          "id": "show_collection_link",
+          "label": "Show link to collection",
+          "default": true
+        },
+        {
+          "id": "cta_text",
+          "type": "text",
+          "label": "Link text",
+          "default": "Shop now"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection list",
+      "category": "Collection",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
