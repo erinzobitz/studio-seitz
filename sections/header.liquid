@@ -1,4 +1,4 @@
-{%- assign section_color = 'primary' -%}
+{%- assign section_color = 'tertiary' -%}
 {%- include 'global-variables' -%}
 
 <style>
@@ -46,15 +46,6 @@
     <div class="header__shifter full--w"></div>
 
     <div class="header__main">
-
-      <div class="max-site-width px2 lg--up--px3">
-        <div class="relative">
-          <a class="header__close fixed lg-up--full--w text-align--right top--0 right--0 p2 font-size--m pointer color--active-text hv--active-accent" data-close-header tabindex="0">
-            {% include 'svg' | icon: 'icon-close' %}
-          </a>
-        </div>
-      </div>
-
       {% if section.settings.show_announcement %}
         {% capture class %}block full--w bg--{{ section.settings.announcement_color }}-background color--{{ section.settings.announcement_color }}-text px2 py1  font-size--sm text-align--center {% endcapture %}
         {% if section.settings.home_page_only == false or template.name == 'index' %}
@@ -72,34 +63,24 @@
         {% endif %}
       {% endif %}
 
-        <div class="header-table flex items--center justify--between full--w px2 py3 max-site-width lg--up--px3  lg--up--relative">
-          <div class="header-table__bookend align--middle text-align--left lg--up--hide md--dn--flex--1-basis-0">
+        <div class="header-table flex items--center justify--between px2 pt3 lg--up--px3 full--w py3 max-site-width relative">
+          <div class="header-table__bookend align--middle text-align--left">
             <div class="js">
-              {% if section.settings.show_menu_icon %}
-                <button type="button" class="t--header-navigation site-header__menu-btn btn border--none font-size--m bg--transparent" aria-controls="MobileNav" aria-expanded="false" data-active-header-trigger data-active-target="navigation">
-                  <div class="left">{% include 'svg' | icon: 'icon-menu' %}</div>
-                </button>
-              {% else %}
-                <a class="t--header-navigation header__link color--{{ section_color }}-text hv--header-active-accent font-size--m bg--transparent inline-block pointer" aria-controls="MobileNav" aria-expanded="false" data-active-header-trigger data-active-target="navigation"  tabindex="0">
-                  <div class="header__link-wrapper">{{ 'general.navigation.menu' | t }}</div>
-                </a>
-              {% endif %}
             </div>
             {% include 'no-js__mobile-menu' %}
           </div>
-          <div class="nav__container align--middle text-align--left md--dn--hide lg--up--flex--1 overflow--hidden">
+          <div class="nav__container align--middle text-align--left flex--1 overflow--hidden">
             <div data-desktop-navigation-container>
               <nav role="navigation">
-                <ul class="t--header-navigation site-nav list--reset m0 p0 font-size--m mxn1 no-wrap inline-block"  data-desktop-navigation-list>
+                <ul class="t--header-navigation site-nav list--reset m0 p0 font-size--m mxn1 no-wrap inline-block" data-desktop-navigation-list>
                   {% for link in linklists[section.settings.main_linklist].links %}
                     {%- assign child_list_handle = link.title | handleize -%}
                     {% if menus[child_list_handle].links != blank %}
-                      <li class="nav__item site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}  inline-block">
+                      <li class="nav__item site-nav--has-submenu{% if link.active %} site-nav--active{% endif %} inline-block">
                         <a class="site-nav__link color--{{ section_color }}-text color--header-active  px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-first-level-link="desktop" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0"  aria-haspopup="true">
                           <div class="header__link-wrapper">
-                            {{ link.title }}
-                            <span class="site-nav__chevron-down font-size--xxs align--middle inline-block site-nav__svg">{% include 'svg', icon: 'icon-chevron-down' %}</span>
-                            <span class="site-nav__chevron-up font-size--xxs  align--middle inline-block site-nav__svg hide">{% include 'svg', icon: 'icon-chevron-up' %}</span>
+                            <span class="site-nav__chevron-down font-size--xxs align--middle inline-block site-nav__svg">{% include 'svg', icon: 'icon-menu' %}</span>
+                            <span class="site-nav__chevron-up font-size--xxs align--middle inline-block site-nav__svg hide">{% include 'svg', icon: 'icon-close' %}</span>
                           </div>
                         </a>
                         {%- assign link_handle = link.title | handleize -%}
@@ -113,13 +94,6 @@
                       </li>
                     {% endif %}
                   {% endfor %}
-                  <li class="site-nav--has-submenu inline-block hide" data-desktop-navigation-more-link>
-                    <a class="site-nav__link color--{{ section_color }}-text  color--header-active px2 inline-block header__link no-wrap pointer" data-desktop-navigation-more-link-trigger  data-top-level-item tabindex="0">
-                      <div class="header__link-wrapper">
-                        {{ 'general.navigation.more' | t }}
-                      </div>
-                    </a>
-                  </li>
                 </ul>
               </nav>
             </div>
@@ -147,7 +121,7 @@
               </div>
             {% endif %}
           </div>
-          <div class="header__meta header-table__bookend align--middle text-align--right lg--up--flex--1 md--dn--flex--1-basis-0 lg--up--justify--end no-wrap">
+          <div class="header-table__bookend align--middle text-align--right lg--up--flex--1 md--dn--flex--1-basis-0 lg--up--justify--end no-wrap">
             <div class="mxn1">
 
               {% if shop.customer_accounts_enabled %}
@@ -174,7 +148,7 @@
               </a>
               {% endif %}
 
-              <a href="/cart" id="CartLink" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer m0 px1" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
+              <a href="/cart" id="CartLink" class="t--header-navigation header__link header__link--focus color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer m0 px1" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
                 <div class="header__link-wrapper">
                   {% if section.settings.show_cart_icon %}
                   <span class="cart__icon">{% include 'svg' | icon: 'icon-cart' %}</span>

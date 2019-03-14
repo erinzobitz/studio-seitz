@@ -4835,12 +4835,6 @@ Header Active (Modal)
     }
   }
 
-  @include media-query($medium-down) {
-    .header-table {
-      display: none;
-    }
-  }
-
   .header__close {
     display: block;
     transition: all 0.2s cubic-bezier(0.46, 0.01, 0.32, 1);
@@ -4863,9 +4857,8 @@ Header Active (Modal)
     opacity: 1;
   }
 
-  .announcement-bar,
-  .header__logo {
-    visibility: hidden;
+  .announcement-bar {
+    display: none;
   }
 
   .header-table__center {
@@ -4880,11 +4873,6 @@ Header Active (Modal)
 
   .nav__container {
     overflow: unset;
-  }
-
-  .header__link.isSelected .header__link-wrapper,
-  .header__link:hover .header__link-wrapper {
-    border-bottom: 1px solid $active-text;
   }
 
   .header__active-overlay {
@@ -4905,6 +4893,28 @@ Header Active (Modal)
 
   .site-nav {
     white-space: normal;
+  }
+
+  .site-nav__content {
+    padding-left: 0;
+
+    @include media-query($medium-up) {
+      padding-left: 55px;
+    }
+  }
+
+  .site-nav__content--secondary {
+    padding-top: 100px;
+  }
+
+  .site-nav__content--secondary--flex {
+    display: flex;
+    flex-direction: column;
+
+    @include media-query($medium-up) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
   }
 }
 
@@ -5223,10 +5233,9 @@ Header
   border-bottom: 1px solid transparent;
 }
 
-.header__link.isSelected,
-.header__link:hover {
-  .header__link-wrapper {
-    border-bottom: 1px solid $color-primary-text;
+.header__link--focus {
+  &:focus {
+    opacity: 0.2;
   }
 }
 
@@ -5694,3 +5703,47 @@ Gift Card
   letter-spacing: 0.2em;
 }
 
+/* =======================================================================
+
+Seitz Patterns
+========================================================================== */
+
+.action-button {
+  font-family: $seitz-font--semi-bold;
+  font-size: 14px;
+  height: 52px;
+  line-height: 50px;
+  text-align: center;
+  width: 200px;
+
+  &.action-button--contrast {
+    background-color: transparent;
+    border: 1px solid $white;
+    color: $white;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+}
+
+.text__header {
+  &.text__header--1 {
+    font-family: $seitz-font--semi-bold;
+    font-size: 125px;
+  }
+
+  &.text__header--2 {
+    font-family: $seitz-font--semi-bold;
+    font-size: 45px;
+    letter-spacing: -1px;
+    line-height: 60px;
+
+    @include media-query($medium-up) {
+      font-size: 85px;
+      letter-spacing: 0;
+      line-height: 100px;
+    }
+  }
+}

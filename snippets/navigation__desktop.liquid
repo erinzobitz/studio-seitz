@@ -39,15 +39,6 @@
               {% assign last_list = false %}
             {% endif %}
             <div class="px3">
-              <h4 class=" t--header-navigation mt1 mb1 inline-block">
-                {% if link_all %}
-                <a href="{{ childlink.url }}" class="color--active-text hv--active-accent">
-                {% endif %}
-                {{ childlink.title }}
-                {% if link_all %}
-                </a>
-                {% endif %}
-              </h4>
               <ul class="navigation__second-level f--heading list--reset m0 font-size--xxl mxn1 mb2">
                 {% for childchildlink in childlink.links %}
                 <li class="nav__item{% if childchildlink.active %} nav__item--active{% endif %}">
@@ -65,16 +56,7 @@
         {% endif %}
 
       {% else %}
-      <div class="inline-block">
-        <h4 class=" t--header-navigation mt1 mb2">
-          {% if link_all %}
-          <a href="{{ childlink.url }}" class="color--active-text hv--active-accent">
-          {% endif %}
-          <span class="inline-block">{{ menus[child_list_handle].title }}</span>
-          {% if link_all %}
-          </a>
-          {% endif %}
-        </h4>
+      <div class="site-nav__content">
         <ul class="navigation__second-level f--heading list--reset m0 font-size--xxl mxn1">
           {% for childlink in menus[child_list_handle].links %}
             {% if childlink.links != blank %}
@@ -97,11 +79,22 @@
               </li>
             {% else %}
               <li class="nav__item{% if childlink.active %} nav__item--active{% endif %}">
-                <a href="{{ childlink.url }}" class="nav__link block p1 line-height--6 color--active-text hv--active-accent" {% if forloop.first %}data-desktop-active-first-item{% endif %} {% if forloop.last%}data-desktop-active-last-item{% endif %}>{{ childlink.title }}</a>
+                <a href="{{ childlink.url }}" class="text__header text__header--2 nav__link block p1 color--active-text hv--active-accent" {% if forloop.first %}data-desktop-active-first-item{% endif %} {% if forloop.last%}data-desktop-active-last-item{% endif %}>{{ childlink.title }}</a>
               </li>
             {% endif %}
           {% endfor %}
         </ul>
+        <div class="site-nav__content--secondary">
+          <button href="#" class="action-button action-button--contrast">Request A Quote</button>
+          <div class="site-nav__content--secondary--flex py3">
+            <span class="site-nav__content--secondary--flex sm--py2">
+              <a class="footer__credit" href="tel:+13475991403">+1.347.599.1403</a>
+              <span class="sm--hide">&nbsp;</span>
+              <a class="footer__credit" href="mailto: studio@studioseitz.com">studio@studioseitz.com</a>
+            </span>
+            <div class="footer__credit">©2019 Studio Seitz, LLC. All rights reserved.</div>
+          </div>
+        </div>
       </div>
       {% endif %}
     </div>
