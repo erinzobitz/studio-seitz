@@ -3210,6 +3210,10 @@ h6,
 .list--reset {
   list-style: none;
   padding-left: 0;
+
+  &.list--reset--no-margin {
+    margin: 0;
+  }
 }
 
 .list--inline {
@@ -4946,20 +4950,6 @@ Header Active (Modal)
       padding-left: 55px;
     }
   }
-
-  .site-nav__content--secondary {
-    padding-top: 100px;
-  }
-
-  .site-nav__content--secondary--flex {
-    display: flex;
-    flex-direction: column;
-
-    @include media-query($medium-up) {
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  }
 }
 
 .site-header.active.has-announcement {
@@ -5267,6 +5257,26 @@ Header
   transition: background-color 0.2s ease-in-out;
 }
 
+.site-header__logo-image {
+  img {
+    height: 35px;
+    width: auto;
+
+    @include media-query($small) {
+      height: 30px;
+    }
+  }
+}
+
+.header-table__top {
+  padding-top: 50px;
+  padding-bottom: 130px;
+
+  @include media-query($small) {
+    padding-top: 25px;
+    padding-bottom: 50px;
+  }
+}
 
 .header-table__center {
   padding-bottom: 0.3rem;
@@ -5330,15 +5340,43 @@ Footer
   }
 }
 
-.footer__credit {
-  font-size: 16px;
-  color: #666666;
+.footer__input-group {
+  border-bottom: 1px solid rgba($white, 0.2);
 }
 
+.footer__input {
+  color: $white;
+  padding-left: 0;
+  border: none;
+  outline: none;
 
+  &::placeholder {
+    color: rgba($white, 0.2);
+  }
+}
+
+.footer__credit {
+  color: $white;
+  font-family: $seitz-font;
+  font-size: 15px;
+  line-height: 25px;
+  @include opacity(0.2);
+}
+
+.footer__credit--link {
+  color: $white;
+  border-bottom: 1px solid $white;
+  @include opacity(1);
+
+  &:hover {
+    border-bottom: none;
+  }
+}
 
 .footer__nav-link-span {
-  padding-bottom: 0.2rem;
+  font-size: 15px;
+  line-height: 25px;
+  @include opacity(0.2);
   border-bottom: 1px solid transparent;
 
   .footer__nav-link.color--primary-text:hover & {
@@ -5352,6 +5390,41 @@ Footer
   }
   .footer__nav-link.color--quarternary-text:hover & {
     border-bottom: 1px solid $color-quarternary-text;
+  }
+}
+
+.social-icon {
+  &:hover {
+    svg {
+      path, circle {
+        fill: $white !important;
+      }
+    }
+  }
+
+  svg {
+    path, circle {
+      fill: rgba($white, 0.2) !important;
+    }
+  }
+}
+
+.newsletter__submit {
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    svg {
+      g {
+        stroke: $white;
+      }
+    }
+  }
+
+  svg {
+    g {
+      stroke: rgba($white, 0.2);
+    }
   }
 }
 
@@ -5756,7 +5829,6 @@ Seitz Patterns
   font-family: $seitz-font--semi-bold;
   font-size: 14px;
   height: 52px;
-  line-height: 50px;
   text-align: center;
   width: 200px;
 
@@ -5772,6 +5844,30 @@ Seitz Patterns
   }
 }
 
+.action-link {
+  &.action-link--white {
+    border-bottom: 1px solid $white;
+    color: $white;
+
+    &:hover {
+      border-bottom: none;
+    }
+  }
+}
+
+.label {
+  font-family: $seitz-font--bold;
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 26px;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.pt50 {
+  padding-top: 50px;
+}
+
 .text__header {
   &.text__header--1 {
     font-family: $seitz-font--semi-bold;
@@ -5782,12 +5878,37 @@ Seitz Patterns
     font-family: $seitz-font--semi-bold;
     font-size: 45px;
     letter-spacing: -1px;
-    line-height: 60px;
+    line-height: 40px;
 
     @include media-query($medium-up) {
       font-size: 85px;
-      letter-spacing: 0;
-      line-height: 100px;
+      line-height: 80px;
     }
+  }
+}
+
+.text__body {
+  &.text__body--1 {
+    font-size: 26px;
+  }
+
+  &.text__body--2 {
+    font-family: $seitz-font;
+    font-size: 18px;
+    line-height: 30px;
+
+    @include media-query($medium-up) {
+      font-size: 22px;
+      line-height: 34px;
+    }
+  }
+
+  &.text__body--3 {
+    font-size: 18px;
+    line-height: 34px;
+  }
+
+  &.text__body--white {
+    color: $white;
   }
 }
