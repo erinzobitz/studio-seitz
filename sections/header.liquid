@@ -75,9 +75,9 @@
                     {% if menus[child_list_handle].links != blank %}
                       <li class="nav__item site-nav--has-submenu{% if link.active %} site-nav--active{% endif %} inline-block">
                         <a class="site-nav__link color--{{ section_color }}-text color--header-active  px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-first-level-link="desktop" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0"  aria-haspopup="true">
-                          <div class="header__link-wrapper">
-                            <span class="site-nav__chevron-down align--middle inline-block site-nav__svg">{% include 'icon-menu' %}</span>
-                            <span class="site-nav__chevron-up align--middle inline-block site-nav__svg hide">{% include 'icon-close' %}</span>
+                          <div class="header__link-wrapper flex items--center">
+                            <span class="site-nav__chevron-down flex items--center site-nav__svg">{% include 'icon-menu' %}</span>
+                            <span class="site-nav__chevron-up flex items--center site-nav__svg hide">{% include 'icon-close' %}</span>
                           </div>
                         </a>
                         {%- assign link_handle = link.title | handleize -%}

@@ -3,7 +3,7 @@
 
 
 <footer class="{{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
-  <div class="max-site-width lg--up--px4">
+  <div class="max-site-width lg--up--px3">
     <div class="grid px2 lg--up--px0 ">
       <div class="grid__item mb3 md--up--one-whole lg--up--one-seventh">
         <div class="grid">
@@ -79,7 +79,7 @@
                 <div>
                   <a class="action-link action-link--white text__body text__body--2 text__body--white" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
                 </div>
-                <div class="text__body text__body--2 text__body--white pt50">
+                <div class="newsletter__label text__body text__body--2 text__body--white pt50">
                   {{ block.settings.text}}
                 </div>
                 {% form 'customer' %}
@@ -116,9 +116,9 @@
       </div>
     </div>
 
-    <div class="grid {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}grid--rev{% endif %} px2 mt2 lg--up--px0">
+    <div class="grid {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}grid--rev{% endif %} px2 mt2 lg--up--mt5 lg--up--px0">
       <div class="grid__item md--up--mb3 md--up--one-whole lg--up--one-seventh"></div>
-      <div class="grid__item md--up--mb3 md--up--one-whole lg--up--six-sevenths">
+      <div class="grid__item md--up--one-whole lg--up--six-sevenths">
         {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
 
         <div class="md--up--hide">
@@ -130,7 +130,7 @@
 
               {% if settings[social_link] != blank %}
                 <li class="inline-block">
-                  <a class="social-icon color--{{ section_color }}-text pr1 font-size--xxs mb1 block" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                  <a class="social-icon color--{{ section_color }}-text pr1 font-size--xxs mb1 block" target="_blank" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
                     {% include social_icon %}
                     <span class="icon-fallback-text">{{ social }}</span>
                   </a>

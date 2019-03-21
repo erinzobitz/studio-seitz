@@ -4849,8 +4849,11 @@ Header Active (Modal)
   display: none;
   opacity: 0;
   transition: opacity 0.1s cubic-bezier(0.46, 0.01, 0.32, 1);
-}
 
+  @include media-query($small) {
+     padding-bottom: 60px;
+   }
+}
 
 .header__shifter {
   height: 0;
@@ -4944,10 +4947,8 @@ Header Active (Modal)
   }
 
   .site-nav__content {
-    padding-left: 0;
-
     @include media-query($medium-up) {
-      padding-left: 55px;
+      margin-left: 55px;
     }
   }
 }
@@ -4956,6 +4957,10 @@ Header Active (Modal)
   .header__shifter {
     height: 0;
   }
+}
+
+.site-nav__content--secondary {
+  padding-top: 45px;
 }
 
 // header active
@@ -5412,6 +5417,8 @@ Footer
 .newsletter__submit {
   background-color: transparent;
   border: none;
+  padding-left: 0;
+  padding-right: 0;
 
   &:hover {
     svg {
@@ -5425,6 +5432,12 @@ Footer
     g {
       stroke: rgba($white, 0.2);
     }
+  }
+}
+
+.newsletter__label {
+  p {
+    margin: 0;
   }
 }
 
@@ -5834,7 +5847,7 @@ Seitz Patterns
 
   &.action-button--contrast {
     background-color: transparent;
-    border: 1px solid $white;
+    border: 2px solid $white;
     color: $white;
 
     &:hover {
@@ -5879,10 +5892,12 @@ Seitz Patterns
     font-size: 45px;
     letter-spacing: -1px;
     line-height: 40px;
+    margin-left: -4px;
 
     @include media-query($medium-up) {
       font-size: 85px;
       line-height: 80px;
+      margin-left: -6px;
     }
   }
 }
