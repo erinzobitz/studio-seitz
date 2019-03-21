@@ -22,6 +22,7 @@
     <div class="max-site-width md--up--px2 lg--up--px3">
       {% assign feature_product = false %}
       {% assign section_id = section.id %}
+      {% include 'product__hero-section' %}
       {% include 'product__top-section' %}
     </div>
 
@@ -60,6 +61,27 @@
     "name": "Product pages",
     "settings": [
       {
+        "type": "text",
+        "id": "mobile_title",
+        "label": "Mobile Title"
+      },
+      {
+        "type": "image_picker",
+        "id": "header_image",
+        "label": "Header Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_header_image",
+        "label": "Mobile Header Image"
+      },
+      {
+        "type": "text",
+        "id": "origin",
+        "label": "Origin",
+        "default": "Berneck, Switzerland"
+      },
+      {
          "type": "select",
          "id": "color_scheme",
          "label": "Color scheme",
@@ -72,30 +94,12 @@
       },
       {
         "type": "checkbox",
-        "id": "enable_payment_button",
-        "label": "Show dynamic checkout button",
-        "info": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)",
-        "default": false
-      },
-      {
-        "type": "checkbox",
-        "id": "show_quantity",
-        "label": "Show quantity option"
-      },
-      {
-        "type": "checkbox",
         "id": "hide_drop_down_labels",
         "label": "Hide label on selects"
       },
       {
-        "type": "checkbox",
-        "id": "show_share_buttons",
-        "label": "Show social media sharing buttons",
-        "default": true
-      },
-      {
-       "type":      "header",
-       "content":   "Product description"
+        "type":      "header",
+        "content":   "Product description"
       },
       {
          "type":      "paragraph",

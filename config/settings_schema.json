@@ -251,6 +251,38 @@
       },
       {
         "type": "header",
+        "content": "Quinary color scheme"
+      },
+      {
+        "type": "paragraph",
+        "content": "Available as an option for sections, templates and modals."
+      },
+      {
+        "type": "color",
+        "id": "color_quinary_text",
+        "label": "Text",
+        "default": "#162317"
+      },
+      {
+        "type": "color",
+        "id": "color_quinary_background",
+        "label": "Background",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_quinary_accent",
+        "label": "Accent",
+        "default": "#EB3131"
+      },
+      {
+        "type": "color",
+        "id": "color_quinary_meta",
+        "label": "Secondary",
+        "default": "#333333"
+      },
+      {
+        "type": "header",
         "content": "Borders"
       },
       {

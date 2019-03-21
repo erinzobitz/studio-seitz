@@ -5827,6 +5827,40 @@ Gift Card
 
 /* =======================================================================
 
+Custom Sections
+========================================================================== */
+
+// Hero Section
+.hero-section__title-container {
+  @include media-query($small) {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 335px;
+  }
+}
+
+.hero-section__text-container {
+  margin: 0 auto;
+  padding-bottom: 15px;
+  width: 90%;
+
+  @include media-query($small) {
+    padding-top: 10px;
+    width: 96%;
+  }
+}
+
+.hero-section__icon{
+  padding-top: 15px;
+  padding-bottom: 40px;
+
+  @include media-query($small) {
+    padding-bottom: 30px;
+  }
+}
+
+/* =======================================================================
+
 Seitz Patterns
 ========================================================================== */
 
@@ -5875,8 +5909,22 @@ Seitz Patterns
 
 .text__header {
   &.text__header--1 {
+    color: $white;
     font-family: $seitz-font--semi-bold;
     font-size: 125px;
+    letter-spacing: -4px;
+    line-height: normal;
+    margin-top: -98px;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+
+    @include media-query($small) {
+      font-size: 60px;
+      letter-spacing: -2px;
+      line-height: 60px;
+      margin-top: -42px;
+    }
   }
 
   &.text__header--2 {
@@ -5915,7 +5963,25 @@ Seitz Patterns
     line-height: 34px;
   }
 
+  &.text__body--3--slim {
+    letter-spacing: -0.45px;
+  }
+
   &.text__body--white {
+    color: $white;
+  }
+}
+
+.text__highlight {
+  &.text__highlight--1 {
+    font-family: $seitz-font--semi-bold;
+    font-size: 18px;
+    letter-spacing: 1px;
+    line-height: 30px;
+    text-transform: uppercase;
+  }
+
+  &.text__highlight--white {
     color: $white;
   }
 }
