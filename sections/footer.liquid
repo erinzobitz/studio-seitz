@@ -8,18 +8,8 @@
       <div class="grid__item mb3 md--up--one-whole lg--up--one-seventh">
         <div class="grid">
           <div class="grid__item one-third lg--up--one-whole">
-            <a href="/" class="font-size--xl f--heading color--{{ section_color }}-text">
-              {% assign logo_max_width = 100 %}
-              {% if section.settings.logo != blank %}
-                {% capture image_size %}{{ logo_max_width }}x{% endcapture %}
-                <img src="{{ section.settings.logo | img_url: image_size }}"
-                     srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-                     alt="{{ section.settings.logo.alt | default: shop.name }}"
-                     class="footer__logo"
-                     >
-              {% else %}
-                {{ shop.name }}
-              {% endif %}
+            <a href="/" class="site-logo font-size--xl f--heading color--{{ section_color }}-text">
+              {% include 'logo' %}
             </a>
           </div>
 
@@ -174,11 +164,6 @@
   {
     "name": "Footer",
     "settings": [
-      {
-        "type": "image_picker",
-        "id": "logo",
-        "label": "Logo image"
-      },
       {
         "type": "checkbox",
         "id": "show_payment_icons",

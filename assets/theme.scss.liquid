@@ -4848,10 +4848,12 @@ Header Active (Modal)
 .header__active {
   display: none;
   opacity: 0;
+  padding-top: 130px;
   transition: opacity 0.1s cubic-bezier(0.46, 0.01, 0.32, 1);
 
   @include media-query($small) {
      padding-bottom: 60px;
+     padding-top: 50px;
    }
 }
 
@@ -5237,9 +5239,12 @@ Header
 .site-logo {
   display: inline-block;
 
-  img {
-    display: block;
-    width: 100%;
+  svg {
+    height: 35px;
+
+    @include media-query($small) {
+      height: 30px;
+    }
   }
 }
 
@@ -5262,24 +5267,11 @@ Header
   transition: background-color 0.2s ease-in-out;
 }
 
-.site-header__logo-image {
-  img {
-    height: 35px;
-    width: auto;
-
-    @include media-query($small) {
-      height: 30px;
-    }
-  }
-}
-
 .header-table__top {
   padding-top: 50px;
-  padding-bottom: 130px;
 
   @include media-query($small) {
     padding-top: 25px;
-    padding-bottom: 50px;
   }
 }
 
