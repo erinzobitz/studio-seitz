@@ -4296,33 +4296,23 @@ html {
 }
 
 body#stabellenbank {
-  .site-header:not(.active) {
-    background-color: $stabellenbank-background;
-  }
+  background-color: $stabellenbank-background;
 }
 
 body#limen-teapot {
-  .site-header:not(.active) {
-    background-color: $limen-teapot-background;
-  }
+  background-color: $limen-teapot-background;
 }
 
 body#kommode {
-  .site-header:not(.active) {
-    background-color: $kommode-background;
-  }
+  background-color: $kommode-background;
 }
 
 body#napfstander {
-  .site-header:not(.active) {
-    background-color: $napfstander-background;
-  }
+  background-color: $napfstander-background;
 }
 
 body#pendant-light {
-  .site-header:not(.active) {
-    background-color: $pendant-light-background;
-  }
+  background-color: $pendant-light-background;
 }
 
 .max-site-width {
@@ -5905,22 +5895,40 @@ Custom Sections
   }
 }
 
+.product__details-container {
+  max-width: 200px;
+}
+
+.product__details-title {
+  padding-bottom: 18px;
+  border-bottom: 2px solid $color-primary-text;
+}
+
 /* =======================================================================
 
 Seitz Patterns
 ========================================================================== */
 
 .action-button {
+  background-color: $black;
+  border: 2px solid $black;
+  color: $white;
   font-family: $seitz-font--semi-bold;
   font-size: 14px;
   height: 52px;
   text-align: center;
-  width: 200px;
+  width: 100%;
+
+  &:hover {
+    background-color: $color-primary-accent;
+    border: 2px solid $color-primary-accent;
+  }
 
   &.action-button--contrast {
     background-color: transparent;
     border: 2px solid $white;
     color: $white;
+    width: 200px;
 
     &:hover {
       background-color: $white;
@@ -5930,6 +5938,15 @@ Seitz Patterns
 }
 
 .action-link {
+  border-bottom: 1px solid $black;
+  color: $black;
+  font-size: 15px;
+  line-height: 26px;
+
+  &:hover {
+    border-bottom: none;
+  }
+
   &.action-link--white {
     border-bottom: 1px solid $white;
     color: $white;
@@ -5960,7 +5977,7 @@ Seitz Patterns
     font-size: 125px;
     letter-spacing: -4px;
     line-height: normal;
-    margin-top: -98px;
+    margin-top: -103px;
     position: relative;
     text-align: center;
     z-index: 2;
@@ -5990,7 +6007,11 @@ Seitz Patterns
 
 .text__body {
   &.text__body--1 {
+    color: $color-primary-text;
     font-size: 26px;
+    line-height: 36px;
+
+    @include opacity(0.4);
   }
 
   &.text__body--2 {
@@ -6019,8 +6040,9 @@ Seitz Patterns
 }
 
 .text__highlight {
+  font-family: $seitz-font--semi-bold;
+
   &.text__highlight--1 {
-    font-family: $seitz-font--semi-bold;
     font-size: 18px;
     letter-spacing: 1px;
     line-height: 30px;
@@ -6029,5 +6051,10 @@ Seitz Patterns
 
   &.text__highlight--white {
     color: $white;
+  }
+
+  &.text__highlight--2 {
+    font-size: 15px;
+    line-height: 26px;
   }
 }

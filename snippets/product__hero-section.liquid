@@ -1,39 +1,18 @@
 <div class="hero-section bg--{{ section_color }}-background lg--up--seven-eighths mx--auto px2 md--up--px0">
-  {% assign image = section.settings.header_image  %}
-  {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
-  {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
-  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-
-  <div id="{{ wrapper_id }}" class="sm--hide resp-img-wrapper js">
-    <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
-      <img id="{{ img_id }}"
-           class="resp-img lazyload"
-           data-src="{{ img_url }}"
-           data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-           data-aspectratio="{{ image.aspect_ratio }}"
-           data-sizes="auto"
-           alt="{{ image.alt | escape }}">
-       <img id="{{ img_id }}"
-            class="resp-img-placeholder"
-            src="{{ image | img_url: '1x1' }}"
-            width="{{ image.width }}"
-            height="{{ image.height }}"
-            alt="{{ image.alt | escape }}">
-    </div>
+  <div class="sm--hide">
+    <img src="{{ product.metafields.attributes.header_image }}" alt="{{ product.title }}"/>
   </div>
+
   <div class="sm--hide hero-section__title-container">
     <div class="text__header text__header--1">{{ product.title }}</div>
   </div>
 
-  {% assign mobile_image = section.settings.mobile_header_image  %}
-  {%- assign mobile_img_url = mobile_image | img_url: '670x670' -%}
-
   <div class="md--up--hide">
-    <img src="{{ mobile_img_url | img_ur: '670x670' }}"/>
+    <img src="{{ product.metafields.attributes.mobile_header_image }}" alt="{{ product.title }}"/>
   </div>
 
   <div class="md--up--hide hero-section__title-container">
-    <div class="text__header text__header--1">{{ section.settings.mobile_title }}</div>
+    <div class="text__header text__header--1">{{ product.metafields.attributes.mobile_title }}</div>
   </div>
 
   <div class="hero-section__text-container">
@@ -44,7 +23,7 @@
 
   <div class="text-align--center">
     <div class="text__body text__body--3 text__body--slim text__body--white inline-block">Origin</div>
-    <div class="text__highlight text__highlight--1 text__highlight--white inline-block">{{ section.settings.origin }}</div>
+    <div class="text__highlight text__highlight--1 text__highlight--white inline-block">{{ product.metafields.attributes.origin }}</div>
 
     <div class="hero-section__icon">
       {%- include 'arrow-down' -%}

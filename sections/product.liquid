@@ -33,7 +33,7 @@
 
   </section>
 
-  <div class="product__details">
+  <div class="bg--secondary-background">
     <div class="max-site-width md--up--px2 lg--up--px3">
       {% assign section_id = section.id %}
       {% include 'product__top-section' %}
@@ -66,39 +66,6 @@
   {
     "name": "Product pages",
     "settings": [
-      {
-        "type": "text",
-        "id": "mobile_title",
-        "label": "Mobile Title"
-      },
-      {
-        "type": "image_picker",
-        "id": "header_image",
-        "label": "Header Image"
-      },
-      {
-        "type": "image_picker",
-        "id": "mobile_header_image",
-        "label": "Mobile Header Image"
-      },
-      {
-        "type": "text",
-        "id": "origin",
-        "label": "Origin",
-        "default": "Berneck, Switzerland"
-      },
-      {
-         "type": "select",
-         "id": "color_scheme",
-         "label": "Color scheme",
-         "options": [
-            { "value": "quarternary", "label": "Quarternary"},
-            { "value": "quinary", "label": "Quinary"},
-            { "value": "senary", "label": "Senary"},
-            { "value": "septenary", "label": "Septenary"},
-            { "value": "octonary", "label": "Octonary"}
-         ]
-      },
       {
         "type": "checkbox",
         "id": "hide_drop_down_labels",
