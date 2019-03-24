@@ -99,9 +99,9 @@
             {% if template.name == 'index' %}
               <h1 class="m0 lg--up--px3 {% if section.settings.logo != blank %}font-size--0{% endif %}" itemscope itemtype="http://schema.org/Organization">
             {% else %}
-              <div class="{% unless section.settings.logo != blank %}h1{% else %}font-size--0{% endunless %} m0  lg--up--px3" itemscope itemtype="http://schema.org/Organization">
+              <div class="font-size--0 m0 lg--up--px3" itemscope itemtype="http://schema.org/Organization">
             {% endif %}
-                <a href="/" itemprop="url" class="font-size--xl color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+                <a href="/" itemprop="url" class="color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
                   {% include 'logo' %}
                 </a>
             {% if template.name == 'index' %}

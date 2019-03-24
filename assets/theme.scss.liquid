@@ -2525,6 +2525,13 @@ Helper
 Colors
 ========================================================================== */
 
+// Product colors
+$stabellenbank-background: #2a4055;
+$limen-teapot-background: #4b4b44;
+$kommode-background: #5c6070;
+$napfstander-background: #977c81;
+$pendant-light-background: #a59b8d;
+
 $black: #000;
 $white: #fff;
 $white-accent: $color-primary-accent;
@@ -4288,6 +4295,36 @@ html {
   background-color: $color-primary-background;
 }
 
+body#stabellenbank {
+  .site-header:not(.active) {
+    background-color: $stabellenbank-background;
+  }
+}
+
+body#limen-teapot {
+  .site-header:not(.active) {
+    background-color: $limen-teapot-background;
+  }
+}
+
+body#kommode {
+  .site-header:not(.active) {
+    background-color: $kommode-background;
+  }
+}
+
+body#napfstander {
+  .site-header:not(.active) {
+    background-color: $napfstander-background;
+  }
+}
+
+body#pendant-light {
+  .site-header:not(.active) {
+    background-color: $pendant-light-background;
+  }
+}
+
 .max-site-width {
   @include clearfix;
   max-width: $width-site;
@@ -4867,10 +4904,15 @@ Header Active (Modal)
   z-index: 50;
 }
 
+.site-header {
+  @include media-query($small) {
+    padding-bottom: 25px;
+  }
+}
+
 .site-header.full-height {
   height: 100vh;
 }
-
 
 .site-header.active {
   background-color: $active-background;
@@ -5273,10 +5315,6 @@ Header
   @include media-query($small) {
     padding-top: 25px;
   }
-}
-
-.header-table__center {
-  padding-bottom: 0.3rem;
 }
 
 .header__link-wrapper {
@@ -5831,6 +5869,14 @@ Custom Sections
 ========================================================================== */
 
 // Hero Section
+.hero-section {
+  padding-top: 50px;
+
+  @include media-query($small) {
+    padding-top: 0;
+  }
+}
+
 .hero-section__title-container {
   @include media-query($small) {
     margin-left: auto;

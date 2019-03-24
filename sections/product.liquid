@@ -3,7 +3,7 @@
 
 <div class="product" data-section-id="{{ section.id }}" data-product-section-id="{{ section.id }}" data-section-type="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
 
-  <section class="color--{{ section_color }}-text bg--{{ section_color }}-background {{ global__section_with_padding_class }}">
+  <section class="color--{{ section_color }}-text bg--{{ section_color }}-background">
 
     {%- assign current_variant = product.selected_or_first_available_variant -%}
     {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
@@ -23,7 +23,6 @@
       {% assign feature_product = false %}
       {% assign section_id = section.id %}
       {% include 'product__hero-section' %}
-      {% include 'product__top-section' %}
     </div>
 
     {% unless product == empty %}
@@ -33,6 +32,13 @@
     {% endunless %}
 
   </section>
+
+  <div class="product__details">
+    <div class="max-site-width md--up--px2 lg--up--px3">
+      {% assign section_id = section.id %}
+      {% include 'product__top-section' %}
+    </div>
+  </div>
 
   {% if product.description != empty or product.description != '' %}
     {% assign section_color = section.settings.description_color_scheme %}

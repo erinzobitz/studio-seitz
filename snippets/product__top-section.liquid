@@ -21,7 +21,7 @@
                 {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                 <div class="nine-twelfths md--up--one-whole md--up--mt2 md--up--flex--auto">
                   <div class="px2 md--up--px0">
-                    <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--{{ section_color }}-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
+                    <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--primary-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
                     {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
                     {% capture wrapper_id %}FeatureImageWrapper-{{ image.id }}{% endcapture %}
                     <div id="{{ wrapper_id }}" class="resp-img-wrapper js overflow--hidden">
@@ -53,7 +53,7 @@
             <div class="md--up--hide">
               <div class="spacer pt1"></div>
               <div class='mobile-flickity__button-container absolute bottom--0 right--0 pt1 pr2'>
-                <button class="btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm">{% include 'icon-next' %}</button>
+                <button class="btn border--none bg--transparent btn--next color--primary-text hv--primary-accent font-size--sm">{% include 'icon-next' %}</button>
               </div>
             </div>
           </div>
@@ -112,13 +112,13 @@
         <div class="px2 mt3 max-width--1 md--up--pt0 lg--up--px3">
 
           {%- if feature_product -%}
-          <a class="color--{{ section_color }}-text" href="{{ product.url }}"><h2 class="{{ global__heading_font_size }} m0 mb1">{{ product.title }}</h2></a>
+          <a class="color--primary-text" href="{{ product.url }}"><h2 class="{{ global__heading_font_size }} m0 mb1">{{ product.title }}</h2></a>
           {%- else -%}
           <h1 class="f--heading {{ global__heading_font_size }} m0 mb1">{{ product.title }}</h1>
           {%- endif -%}
 
           <div class="font-size--ml" data-price-wrapper>
-            <span {% if product.compare_at_price_max > product.price %}class="color--{{ section_color }}-accent"{% endif %} data-product-price>
+            <span {% if product.compare_at_price_max > product.price %}class="color--primary-accent"{% endif %} data-product-price>
               {{ current_variant.price | money }}
             </span>
             {% if product.compare_at_price_max > product.price %}
@@ -147,7 +147,7 @@
                     </label>
                     {% endunless %}
                     <select
-                      class="bg--transparent border--{{ section_color }}-text color--{{ section_color }}-text p1 block full--w font-size--sm mt1"
+                      class="bg--transparent border--primary-text color--primary-text p1 block full--w font-size--sm mt1"
                       id="SingleOptionSelector-{{ forloop.index0 }}"
                       data-single-option-selector
                       data-index="option{{ option.position }}">
@@ -179,15 +179,15 @@
                 <div class="pr2">
                   <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
                 </div>
-                <div class="flex--1 js-qty-wrapper color--{{ section_color }}-text">
-                  <input class="bg--transparent border--{{ section_color }}-text p1 font-size--sm mt1" type="number" id="Quantity" name="quantity" value="1" min="1">
+                <div class="flex--1 js-qty-wrapper color--primary-text">
+                  <input class="bg--transparent border--primary-text p1 font-size--sm mt1" type="number" id="Quantity" name="quantity" value="1" min="1">
                 </div>
               </div>
               {% endif %}
 
               <div class="add-to-cart-container mt3 {% unless current_variant.available %}hide-pay-buttons{% endunless %}  {% if enable_payment_button %}cta-content--pay-buttons{% endif %}" data-add-to-cart-container>
                 <button
-                  class="btn border--none btn--add-to-cart color-scheme--{{ section_color }} {% if enable_payment_button %}bg--transparent color--{{ section_color }}-text border--{{ section_color }}-text hv--{{ section_color }}-accent hv--border--{{ section_color }}-accent {% else %}border--none bg--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg }}{% endif %} p1 full--w block"
+                  class="btn border--none btn--add-to-cart color-scheme--primary {% if enable_payment_button %}bg--transparent color--primary-text border--primary-text hv--primary-accent hv--border--primary-accent {% else %}border--none bg--primary-text color--primary-text--overlay {{ global__hover_bg }}{% endif %} p1 full--w block"
                   type="submit"
                   name="add"
                   id="AddToCart--{{ section_id }}"
@@ -202,7 +202,7 @@
                     </span>
                 </button>
                 {% if enable_payment_button %}
-                  <div class="mt2 payment-button-wrapper color--{{ section_color }}">{{ form | payment_button }}</div>
+                  <div class="mt2 payment-button-wrapper color--primary">{{ form | payment_button }}</div>
                 {% endif %}
               </div>
 
