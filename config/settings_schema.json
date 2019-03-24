@@ -229,25 +229,25 @@
         "type": "color",
         "id": "color_quarternary_text",
         "label": "Text",
-        "default": "#162317"
+        "default": "#1d1d1d"
       },
       {
         "type": "color",
         "id": "color_quarternary_background",
         "label": "Background",
-        "default": "#ffffff"
+        "default": "#2a4055"
       },
       {
         "type": "color",
         "id": "color_quarternary_accent",
         "label": "Accent",
-        "default": "#EB3131"
+        "default": "#ede9e6"
       },
       {
         "type": "color",
         "id": "color_quarternary_meta",
         "label": "Secondary",
-        "default": "#333333"
+        "default": "#ffffff"
       },
       {
         "type": "header",
@@ -261,25 +261,121 @@
         "type": "color",
         "id": "color_quinary_text",
         "label": "Text",
-        "default": "#162317"
+        "default": "#1d1d1d"
       },
       {
         "type": "color",
         "id": "color_quinary_background",
         "label": "Background",
-        "default": "#ffffff"
+        "default": "#4b4b44"
       },
       {
         "type": "color",
         "id": "color_quinary_accent",
         "label": "Accent",
-        "default": "#EB3131"
+        "default": "#ede9e6"
       },
       {
         "type": "color",
         "id": "color_quinary_meta",
         "label": "Secondary",
-        "default": "#333333"
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Senary color scheme"
+      },
+      {
+        "type": "paragraph",
+        "content": "Available as an option for sections, templates and modals."
+      },
+      {
+        "type": "color",
+        "id": "color_senary_text",
+        "label": "Text",
+        "default": "#1d1d1d"
+      },
+      {
+        "type": "color",
+        "id": "color_senary_background",
+        "label": "Background",
+        "default": "#5c6070"
+      },
+      {
+        "type": "color",
+        "id": "color_senary_accent",
+        "label": "Accent",
+        "default": "#ede9e6"
+      },
+      {
+        "type": "color",
+        "id": "color_senary_meta",
+        "label": "Secondary",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Septenary color scheme"
+      },
+      {
+        "type": "paragraph",
+        "content": "Available as an option for sections, templates and modals."
+      },
+      {
+        "type": "color",
+        "id": "color_septenary_text",
+        "label": "Text",
+        "default": "#1d1d1d"
+      },
+      {
+        "type": "color",
+        "id": "color_septenary_background",
+        "label": "Background",
+        "default": "#977c81"
+      },
+      {
+        "type": "color",
+        "id": "color_septenary_accent",
+        "label": "Accent",
+        "default": "#ede9e6"
+      },
+      {
+        "type": "color",
+        "id": "color_septenary_meta",
+        "label": "Secondary",
+        "default": "#ffffff"
+      },
+      {
+        "type": "header",
+        "content": "Octonary color scheme"
+      },
+      {
+        "type": "paragraph",
+        "content": "Available as an option for sections, templates and modals."
+      },
+      {
+        "type": "color",
+        "id": "color_octonary_text",
+        "label": "Text",
+        "default": "#1d1d1d"
+      },
+      {
+        "type": "color",
+        "id": "color_octonary_background",
+        "label": "Background",
+        "default": "#977c81"
+      },
+      {
+        "type": "color",
+        "id": "color_octonary_accent",
+        "label": "Accent",
+        "default": "#ede9e6"
+      },
+      {
+        "type": "color",
+        "id": "color_octonary_meta",
+        "label": "Secondary",
+        "default": "#ffffff"
       },
       {
         "type": "header",
