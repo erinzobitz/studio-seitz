@@ -5977,10 +5977,15 @@ Seitz Patterns
     font-size: 125px;
     letter-spacing: -4px;
     line-height: normal;
-    margin-top: -103px;
+    margin-top: -104px;
     position: relative;
     text-align: center;
     z-index: 2;
+
+    @include media-query($medium) {
+      font-size: 90px;
+      margin-top: -78px;
+    }
 
     @include media-query($small) {
       font-size: 60px;
