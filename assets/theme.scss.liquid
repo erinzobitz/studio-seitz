@@ -5272,11 +5272,19 @@ Header
   display: inline-block;
 
   svg {
-    height: 35px;
+    height: 30px;
 
-    @include media-query($small) {
-      height: 30px;
+    @include media-query($medium-up) {
+      height: 35px;
     }
+  }
+}
+
+.site-logo--footer {
+  margin-left: -6px;
+
+  @include media-query($medium-up) {
+    margin-left: 0;
   }
 }
 
@@ -5897,11 +5905,19 @@ Custom Sections
 
 .product__details-container {
   max-width: 200px;
+
+  @include media-query($small) {
+    max-width: 100%;
+  }
 }
 
 .product__details-title {
   padding-bottom: 18px;
   border-bottom: 2px solid $color-primary-text;
+}
+
+.product__description {
+  margin-top: -3px;
 }
 
 /* =======================================================================
@@ -6008,9 +6024,18 @@ Seitz Patterns
       margin-left: -6px;
     }
   }
+
+  &.text__header--3 {
+    font-family: $seitz-font;
+    font-size: 50px;
+    letter-spacing: -1px;
+    line-height: 55px;
+  }
 }
 
 .text__body {
+  font-family: $seitz-font;
+
   &.text__body--1 {
     color: $color-primary-text;
     font-size: 26px;
@@ -6020,7 +6045,6 @@ Seitz Patterns
   }
 
   &.text__body--2 {
-    font-family: $seitz-font;
     font-size: 18px;
     line-height: 30px;
 
@@ -6037,6 +6061,16 @@ Seitz Patterns
 
   &.text__body--3--slim {
     letter-spacing: -0.45px;
+  }
+
+  &.text__body--4 {
+    color: $color-primary-text;
+    font-size: 15px;
+    line-height: 26px;
+  }
+
+  &.text__body--lighten {
+    @include opacity(0.4);
   }
 
   &.text__body--white {

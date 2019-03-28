@@ -1,7 +1,7 @@
-<div class="{% if product.images.size > 1 %}lg--up--seven-eighths{% endif %} mx--auto">
+<div class="lg--up--ten-twelfths mx--auto px2 mb5 md--up--px0">
   <div class="grid">
     <div class="grid__item md--up--one-third">
-      <div class="product__details-container pr2 mt3 max-width--1 md--up--pt0 lg--up--pr3">
+      <div class="product__details-container mt5">
         <h1 class="product__details-title text__highlight text__highlight--2">{{ product.title }}</h1>
 
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -51,58 +51,77 @@
               <a href="#product-details" class="action-link">View product details</a>
             </div>
 
-            <div class="text__body text__body--1 mt3 mb3" data-price-wrapper>
-              <span {% if product.compare_at_price_max > product.price %}class="color--secondary-accent"{% endif %} data-product-price>
-                {{ current_variant.price | money }}
-              </span>
-              {% if product.compare_at_price_max > product.price %}
-                <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-                <s class="ml1 inline-block" data-compare-price>
-                  {% if current_variant.compare_at_price > current_variant.price %}
-                    {{ current_variant.compare_at_price | money }}
-                  {% endif %}
-                </s>
-              {% endif %}
-            </div>
-
-            <div class="add-to-cart-container mt3 {% unless current_variant.available %}hide-pay-buttons{% endunless %}  {% if enable_payment_button %}cta-content--pay-buttons{% endif %}" data-add-to-cart-container>
-              <button
-                class="action-button"
-                type="submit"
-                name="add"
-                id="AddToCart--{{ section_id }}"
-                data-add-to-cart
-                {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-                  <span data-add-to-cart-text>
-                    {% if current_variant.available %}
-                      {{ 'products.product.add_to_cart' | t }}
-                    {% else %}
-                      {{ 'products.product.sold_out' | t }}
+            {% if product.metafields.attributes.show_add_to_cart == 1 %}
+              <div class="text__body text__body--1 mt3 mb3" data-price-wrapper>
+                <span {% if product.compare_at_price_max > product.price %}class="color--secondary-accent"{% endif %} data-product-price>
+                  {{ current_variant.price | money }}
+                </span>
+                {% if product.compare_at_price_max > product.price %}
+                  <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+                  <s class="ml1 inline-block" data-compare-price>
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      {{ current_variant.compare_at_price | money }}
                     {% endif %}
-                  </span>
-              </button>
-              {% if enable_payment_button %}
-                <div class="mt2 payment-button-wrapper color--secondary">{{ form | payment_button }}</div>
-              {% endif %}
-            </div>
+                  </s>
+                {% endif %}
+              </div>
 
+              <div class="add-to-cart-container mt3 mb2 {% unless current_variant.available %}hide-pay-buttons{% endunless %}  {% if enable_payment_button %}cta-content--pay-buttons{% endif %}" data-add-to-cart-container>
+                <button
+                  class="action-button"
+                  type="submit"
+                  name="add"
+                  id="AddToCart--{{ section_id }}"
+                  data-add-to-cart
+                  {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+                    <span data-add-to-cart-text>
+                      {% if current_variant.available %}
+                        {{ 'products.product.add_to_cart' | t }}
+                      {% else %}
+                        {{ 'products.product.sold_out' | t }}
+                      {% endif %}
+                    </span>
+                </button>
+                {% if enable_payment_button %}
+                  <div class="mt2 payment-button-wrapper color--secondary">{{ form | payment_button }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
           {% endform %}
           </div>
+
+          {% if product.metafields.attributes.show_add_to_cart == 0 %}
+            <div class="mt3 mb2">
+              <button href="/pages/request-a-quote" class="action-button">Request A Quote</button>
+            </div>
+          {% endif %}
 
           {% if show_share_links %}
           <div {% unless enable_payment_button %}class="mt3"{% endunless %}>
             {% include 'page-share' %}
           </div>
           {% endif %}
-
         </div>
 
+        {% if product.metafields.attributes.show_made_to_order_text == 1 %}
+          <div class="text__body text__body--4 mb2">
+            Made-to-order for emphasis on quality and reducing unnecessary waste
+          </div>
+        {% endif %}
+        <div class="text__body text__body--lighten text__body--4">
+          Lead time {{ product.metafields.attributes.lead_time }}
+        </div>
       </div>
     </div>
 
     <div class="grid__item md--up--two-thirds">
-      <div class="product__images relative md--up--text-align--right font-size--0 mt3">
+      <div class="mt5">
+        <div class="product__description text__header text__header--3 mb2">{{ product.metafields.attributes.detail_title }}</div>
+        <div class="text__body text__body--1 mb2">{{ product.metafields.attributes.detail_sub_title }}</div>
+        <p class="text__body text__body--3">{{ product.metafields.attributes.detail_description_1 }}</p>
+      </div>
 
+      <div class="product__images relative md--up--text-align--right font-size--0 mb3 mt3">
         {% assign product_thumbnail_grid = 'md--up--one-sixth' %}
         {% if product.images.size > 1 and feature_product == false %}
           <div class="product__thumbnails relative overflow--hidden {{ product_thumbnail_grid }} md--up--pr2 md--up--absolute md--up--full--h md--up--overflow--y-scroll js"  data-mobile-flickity  data-product-thumbnails>
@@ -204,6 +223,10 @@
           </a>
           {% endif %}
         {% endif %}
+      </div>
+
+      <div>
+        <p class="text__body text__body--3">{{ product.metafields.attributes.detail_description_2 }}</p>
       </div>
     </div>
   </div>
