@@ -19,7 +19,7 @@
     <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
     <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
-    <div class="max-site-width md--up--px2 lg--up--px3">
+    <div class="max-site-width md--up--px2">
       {% assign feature_product = false %}
       {% assign section_id = section.id %}
       {% include 'product__hero-section' %}
@@ -34,23 +34,11 @@
   </section>
 
   <div class="bg--secondary-background">
-    <div class="max-site-width md--up--px2 lg--up--px3">
+    <div class="max-site-width md--up--px2">
       {% assign section_id = section.id %}
       {% include 'product__top-section' %}
     </div>
   </div>
-
-  {% if product.description != empty or product.description != '' %}
-    {% assign section_color = section.settings.description_color_scheme %}
-    {% include 'global-variables' %}
-    <div class="product__description {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
-      <div class="max-site-width px2 lg--up--px3">
-        <div class="rte mx--auto {{ global__basic_font_size }} {% unless section.settings.enable_split_description %}max-width--3{% endunless %}" id="productDescription" {% if section.settings.enable_split_description %}data-split="true"{% endif %} data-fade-in="{{ fade_in }}" data-product-description>
-          {{ product.description }}
-        </div>
-      </div>
-    </div>
-  {% endif %}
 
   {% if section.settings.show_related_products %}
     {% assign section_color = section.settings.related_products_color_scheme %}

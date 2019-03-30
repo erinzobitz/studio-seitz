@@ -1,7 +1,7 @@
-<div class="lg--up--ten-twelfths mx--auto px2 mb5 md--up--px0">
+<div class="product__top-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
   <div class="grid">
-    <div class="grid__item md--up--one-third">
-      <div class="product__details-container mt5">
+    <div class="grid__item md--up--three-twelfths">
+      <div class="product__details-container">
         <h1 class="product__details-title text__highlight text__highlight--2">{{ product.title }}</h1>
 
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
@@ -92,7 +92,9 @@
 
           {% if product.metafields.attributes.show_add_to_cart == 0 %}
             <div class="mt3 mb2">
-              <button href="/pages/request-a-quote" class="action-button">Request A Quote</button>
+              <a href="/pages/request-a-quote" class="action-button action-button--contrast--inverse">
+                Request A Quote
+              </a>
             </div>
           {% endif %}
 
@@ -114,18 +116,18 @@
       </div>
     </div>
 
-    <div class="grid__item md--up--two-thirds">
-      <div class="mt5">
+    <div class="grid__item md--up--nine-twelfths">
+      <div class="md--up--seven-tenths">
         <div class="product__description text__header text__header--3 mb2">{{ product.metafields.attributes.detail_title }}</div>
         <div class="text__body text__body--1 mb2">{{ product.metafields.attributes.detail_sub_title }}</div>
-        <p class="text__body text__body--3">{{ product.metafields.attributes.detail_description_1 }}</p>
+        <div class="text__body text__body--3">{{ product.metafields.attributes.detail_description_1 }}</div>
       </div>
 
-      <div class="product__images relative md--up--text-align--right font-size--0 mb3 mt3">
+      <div class="md--up--hide product__images relative font-size--0">
         {% assign product_thumbnail_grid = 'md--up--one-sixth' %}
         {% if product.images.size > 1 and feature_product == false %}
-          <div class="product__thumbnails relative overflow--hidden {{ product_thumbnail_grid }} md--up--pr2 md--up--absolute md--up--full--h md--up--overflow--y-scroll js"  data-mobile-flickity  data-product-thumbnails>
-            <div class="product-flickity__slides pb3 md--up--mtn2 md--up--flex md--up--flex--column">
+          <div class="product__thumbnails relative overflow--hidden {{ product_thumbnail_grid }} js" data-mobile-flickity data-product-thumbnails>
+            <div class="product-flickity__slides pb3">
               {%- for image in product.images -%}
                 {%- assign active_class = '' -%}
                 {%- if featured_image == image.src -%}
@@ -138,8 +140,8 @@
                   {%- assign ratio = 1 -%}
                 {%- endif -%}
                 {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <div class="nine-twelfths md--up--one-whole md--up--mt2 md--up--flex--auto">
-                  <div class="px2 md--up--px0">
+                <div class="nine-twelfths">
+                  <div class="px2">
                     <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--secondary-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
                     {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
                     {% capture wrapper_id %}FeatureImageWrapper-{{ image.id }}{% endcapture %}
@@ -169,19 +171,19 @@
                 </div>
               {% endfor %}
             </div>
-            <div class="md--up--hide">
-              <div class="spacer pt1"></div>
-              <div class='mobile-flickity__button-container absolute bottom--0 right--0 pt1 pr2'>
-                <button class="btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm">{% include 'icon-next' %}</button>
-              </div>
+            <div class="spacer pt1"></div>
+            <div class='mobile-flickity__button-container absolute bottom--0 right--0 pt1 pr2'>
+              <button class="btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm">{% include 'arrow-right' %}</button>
             </div>
           </div>
         {% endif %}
+      </div>
 
+      <div class="sm--hide product__images relative font-size--0 mb3 mt3">
         {% if featured_image != blank %}
-          {% assign feature_image_class = 'sm--hide md--up--five-sixths' %}
+          {% assign feature_image_class = 'sm--hide md--up--seven-tenths' %}
           {% if product.images.size == 1 or feature_product == true %}
-          {% assign feature_image_class = 'one-whole px2 md--up--px0 md--up--one-whole wd--seven-eighths' %}
+          {% assign feature_image_class = 'one-whole md--up--px0 md--up--one-whole wd--seven-eighths' %}
           {% endif %}
           {% if feature_product %}
           <a href="{{ product.url }}">
@@ -223,9 +225,43 @@
           </a>
           {% endif %}
         {% endif %}
+
+        {% assign product_thumbnail_grid = 'md--up--one-sixth' %}
+        {% if product.images.size > 1 and feature_product == false %}
+          <div class="product__thumbnails" data-mobile-flickity data-product-thumbnails>
+            <div class="product-flickity__slides pt2 flex">
+              {%- for image in product.images -%}
+                {%- assign active_class = '' -%}
+                {%- if featured_image == image.src -%}
+                  {%- assign active_class = 'active' -%}
+                {%- endif -%}
+                {%- assign ratio = image.aspect_ratio -%}
+                {%- assign force_crop = false -%}
+                {%- if ratio < 0.2 -%}
+                  {%- assign force_crop = true -%}
+                  {%- assign ratio = 1 -%}
+                {%- endif -%}
+                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }}" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
+                  <div class="product-flickity__indicator">
+                  </div>
+                </a>
+              {% endfor %}
+            </div>
+            <div class="product-flickity__controls md--up--seven-tenths pt1">
+              <div class="text__block-quote text__block-quote--1">
+                {{ product.metafields.attributes.carousel_text }}
+              </div>
+              <div>
+                <button class="btn border--none bg--transparent pr2 btn--desktop--prev">{% include 'arrow-left' %}</button>
+                <button class="btn border--none bg--transparent btn--desktop--next">{% include 'arrow-right' %}</button>
+              </div>
+            </div>
+          </div>
+        {% endif %}
       </div>
 
-      <div>
+      <div class="md--up--seven-tenths">
         <p class="text__body text__body--3">{{ product.metafields.attributes.detail_description_2 }}</p>
       </div>
     </div>

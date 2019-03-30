@@ -5833,6 +5833,27 @@ Product
 
 // Flickity
 /* enable Flickity by default */
+.product-flickity__slides{
+  a.active {
+    .product-flickity__indicator {
+      background-color: $black;
+    }
+  }
+}
+
+.product-flickity__indicator {
+  background-color: rgba($black, 0.1);
+  border-radius: 50%;
+  height: 10px;
+  margin-right: 10px;
+  width: 10px;
+}
+
+.product-flickity__controls {
+  display: flex;
+  justify-content: space-between;
+}
+
 .product-flickity__slides::after {
   content: 'flickity';
   display: none; /* hide :after */
@@ -5886,21 +5907,24 @@ Custom Sections
 .hero-section__text-container {
   margin: 0 auto;
   padding-bottom: 15px;
-  width: 90%;
 
   @include media-query($small) {
     padding-top: 10px;
-    width: 96%;
   }
 }
 
-.hero-section__icon{
+.hero-section__icon {
   padding-top: 15px;
   padding-bottom: 40px;
 
   @include media-query($small) {
     padding-bottom: 30px;
   }
+}
+
+.product__top-section {
+  padding-top: 140px;
+  padding-bottom: 115px;
 }
 
 .product__details-container {
@@ -5920,6 +5944,13 @@ Custom Sections
   margin-top: -3px;
 }
 
+.product__images {
+
+  @include media-query($medium-up) {
+    margin: 75px 0;
+  }
+}
+
 /* =======================================================================
 
 Seitz Patterns
@@ -5929,9 +5960,10 @@ Seitz Patterns
   background-color: $black;
   border: 2px solid $black;
   color: $white;
+  display: inline-block;
   font-family: $seitz-font--semi-bold;
   font-size: 14px;
-  height: 52px;
+  padding: 13px;
   text-align: center;
   width: 100%;
 
@@ -5949,6 +5981,17 @@ Seitz Patterns
     &:hover {
       background-color: $white;
       color: $black;
+    }
+  }
+
+  &.action-button--contrast--inverse {
+    background-color: $white;
+    border: 2px solid $black;
+    color: $black;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
     }
   }
 }
@@ -6093,6 +6136,16 @@ Seitz Patterns
   }
 
   &.text__highlight--2 {
+    font-size: 15px;
+    line-height: 26px;
+  }
+}
+
+.text__block-quote {
+  font-family: $seitz-font--italic;
+
+  &.text__block-quote--1 {
+    color: rgba($black, 0.4);
     font-size: 15px;
     line-height: 26px;
   }
