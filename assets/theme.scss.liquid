@@ -4121,6 +4121,11 @@ Mobile Flickity
 ========================================================================== */
 
 /* enable Flickity by default */
+.mobile-flickity__button-container {
+  align-items: center;
+  justify-content: space-between;
+}
+
 .mobile-flickity__slides::after {
   content: 'flickity';
   display: none; /* hide :after */
@@ -5850,7 +5855,9 @@ Product
 }
 
 .product-flickity__controls {
+  align-items: center;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -5923,8 +5930,18 @@ Custom Sections
 }
 
 .product__top-section {
-  padding-top: 140px;
-  padding-bottom: 115px;
+  padding-top: 55px;
+  padding-bottom: 55px;
+
+  @include media-query($medium-up) {
+    padding-top: 100px;
+    padding-bottom: 85px;
+  }
+
+  @include media-query($large-up) {
+    padding-top: 140px;
+    padding-bottom: 115px;
+  }
 }
 
 .product__details-container {
@@ -6070,9 +6087,14 @@ Seitz Patterns
 
   &.text__header--3 {
     font-family: $seitz-font;
-    font-size: 50px;
+    font-size: 35px;
     letter-spacing: -1px;
-    line-height: 55px;
+    line-height: 40px;
+
+    @include media-query($medium-up) {
+      font-size: 50px;
+      line-height: 55px;
+    }
   }
 }
 
@@ -6081,10 +6103,14 @@ Seitz Patterns
 
   &.text__body--1 {
     color: $color-primary-text;
-    font-size: 26px;
-    line-height: 36px;
-
+    font-size: 18px;
+    line-height: 30px;
     @include opacity(0.4);
+
+    @include media-query($medium-up) {
+      font-size: 26px;
+      line-height: 36px;
+    }
   }
 
   &.text__body--2 {
@@ -6098,8 +6124,13 @@ Seitz Patterns
   }
 
   &.text__body--3 {
-    font-size: 18px;
-    line-height: 34px;
+    font-size: 15px;
+    line-height: 26px;
+
+    @include media-query($medium-up) {
+      font-size: 18px;
+      line-height: 34px;
+    }
   }
 
   &.text__body--3--slim {

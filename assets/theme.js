@@ -2103,6 +2103,7 @@ theme.Product = (function() {
     productThumbnailHolder: "[data-product-thumbnails]",
     singleOptionSelector: "[data-single-option-selector]",
     mobileFlickity: "[data-mobile-flickity]",
+    nextImage: "[data-next-image]",
     productDescription: "[data-product-description]"
   };
 
@@ -2182,6 +2183,21 @@ theme.Product = (function() {
     this.$productThumbs.click(function(e) {
       e.preventDefault();
       self.productThumbnailClick($(this));
+    });
+
+    this.$nextImage = $(selectors.nextImage);
+
+    this.$nextImage.click(function(e) {
+      e.preventDefault();
+      var $activeImage = $(this).parent().prev().children(
+                           ".product__thumbnail.active"
+                         );
+
+      if ($activeImage.next().length !== 0) {
+        $activeImage.next().click();
+      } else {
+        $activeImage.prev().click();
+      }
     });
 
     // Ajax Cart
