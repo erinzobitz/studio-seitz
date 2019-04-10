@@ -1,8 +1,8 @@
-<div class="product__top-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
+<div class="page-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
   <div class="grid">
     <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
-      <div class="product__details-container">
-        <h1 class="product__details-title text__highlight text__highlight--2">{{ product.title }}</h1>
+      <div class="detail__container">
+        <h1 class="detail__title text__highlight text__highlight--2">{{ product.title }}</h1>
 
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
@@ -20,7 +20,7 @@
                   </label>
                   {% endunless %}
                   <select
-                    class="bg--transparent border--secondary-text color--secondary-text p1 block full--w font-size--sm mt1"
+                    class="product__select p1 block full--w md--up--font-size--sm mt1"
                     id="SingleOptionSelector-{{ forloop.index0 }}"
                     data-single-option-selector
                     data-index="option{{ option.position }}">
@@ -118,12 +118,12 @@
 
     <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
       <div class="pt3 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
-        <div class="product__description text__header text__header--3 mb1 md--up--mb2">{{ product.metafields.attributes.detail_title }}</div>
+        <div class="detail__sibling-content text__header text__header--3 mb1 md--up--mb2">{{ product.metafields.attributes.detail_title }}</div>
         <div class="text__body text__body--1 mb1 md--up--mb2">{{ product.metafields.attributes.detail_sub_title }}</div>
         <div class="text__body text__body--3">{{ product.metafields.attributes.detail_description_1 }}</div>
       </div>
 
-      <div class="md--up--hide product__images relative mt2 font-size--0">
+      <div class="md--up--hide product__images relative mt3 font-size--0">
         {% assign product_thumbnail_grid = 'md--up--one-sixth' %}
         {% if product.images.size > 1 and feature_product == false %}
           <div class="product__thumbnails relative overflow--hidden {{ product_thumbnail_grid }} js" data-mobile-flickity data-product-thumbnails>
@@ -175,7 +175,7 @@
               <div class="text__block-quote text__block-quote--1">
                 {{ product.metafields.attributes.carousel_text }}
               </div>
-              <button class="btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm pt1 pr0 pl2">{% include 'arrow-right' %}</button>
+              <button class="icon-button btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm pt1 pr0 pl2">{% include 'arrow-right' %}</button>
             </div>
           </div>
         {% endif %}
@@ -250,18 +250,20 @@
                 </a>
               {% endfor %}
             </div>
-            <div class="product-flickity__controls md--up--nine-tenths lg--up--eight-tenths pt1">
-              <div class="text__block-quote text__block-quote--1">
-                {{ product.metafields.attributes.carousel_text }}
+            <div class="md--up--nine-tenths lg--up--eight-tenths pt1">
+              <div class="product-flickity__controls">
+                <div class="text__block-quote text__block-quote--1">
+                  {{ product.metafields.attributes.carousel_text }}
+                </div>
+                <button class="icon-button btn border--none bg--transparent px0 btn--next pl2" data-next-image>{% include 'arrow-right' %}</button>
               </div>
-              <button class="btn border--none bg--transparent px0 btn--next" data-next-image>{% include 'arrow-right' %}</button>
             </div>
           </div>
         {% endif %}
       </div>
 
       <div class="pt3 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
-        <p class="text__body text__body--3">{{ product.metafields.attributes.detail_description_2 }}</p>
+        <div class="text__body text__body--3">{{ product.metafields.attributes.detail_description_2 }}</div>
       </div>
     </div>
   </div>

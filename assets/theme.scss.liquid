@@ -471,6 +471,10 @@ $transform-transition: transform 0.4s cubic-bezier(0.46, 0.01, 0.32, 1);
  Colors
 ========================================================================== */
 
+/* Seitz custom */
+$color-seitz-gray: #ede9e6;
+$color-seitz-gray-hover: #dcd5cf;
+
 /* Primary combination */
 
 $color-primary-text: {{ settings.color_primary_text }};
@@ -1282,6 +1286,14 @@ Flex
 @mixin flex($i) {
   .#{$i}flex {
     display: flex;
+  }
+
+  .#{$i}flex--responsive {
+    flex-direction: column;
+
+    @include media-query($medium-up) {
+      flex-direction: row;
+    }
   }
 
   .#{$i}flex--wrap {
@@ -2526,11 +2538,11 @@ Colors
 ========================================================================== */
 
 // Product colors
-$stabellenbank-background: #2a4055;
-$limen-teapot-background: #4b4b44;
-$kommode-background: #5c6070;
-$napfstander-background: #977c81;
-$pendant-light-background: #a59b8d;
+$stabellenbank-background: #26425C;
+$limen-teapot-background: #606372;
+$kommode-background: #4D4D45;
+$napfstander-background: #9E8283;
+$pendant-light-background: #A9A192;
 
 $black: #000;
 $white: #fff;
@@ -4320,6 +4332,37 @@ body#pendant-light {
   background-color: $pendant-light-background;
 }
 
+body#frequently-asked-qs,
+body#request-a-quote {
+  background-color: $white;
+}
+
+body#frequently-asked-qs,
+body#request-a-quote,
+body.template-blog {
+  .site-header:not(.active) {
+    .site-header--contrast-logo {
+      display: inline-block;
+    }
+
+    .site-header--standard-logo {
+      display: none;
+    }
+
+    .site-nav__svg {
+      svg {
+        path {
+          stroke: $black;
+        }
+      }
+    }
+
+    .header__link {
+      color: $black;
+    }
+  }
+}
+
 .max-site-width {
   @include clearfix;
   max-width: $width-site;
@@ -4905,6 +4948,14 @@ Header Active (Modal)
   }
 }
 
+.site-header--contrast-logo {
+  display: none;
+}
+
+.site-header--standard-logo {
+  display: inline-block;
+}
+
 .site-header.full-height {
   height: 100vh;
 }
@@ -5274,8 +5325,6 @@ Header
 }
 
 .site-logo {
-  display: inline-block;
-
   svg {
     height: 30px;
 
@@ -5325,6 +5374,10 @@ Header
   border-bottom: 1px solid transparent;
 }
 
+.header__link {
+  color: $white;
+}
+
 .header__link--focus {
   &:focus {
     opacity: 0.2;
@@ -5332,7 +5385,6 @@ Header
 }
 
 .site-nav__svg {
-  //padding-left: 0.5rem;
   padding-bottom: 0.1rem;
 }
 
@@ -5429,6 +5481,10 @@ Footer
   .footer__nav-link.color--quarternary-text:hover & {
     border-bottom: 1px solid $color-quarternary-text;
   }
+}
+
+.footer__nav-title {
+  padding-bottom: 15px;
 }
 
 .social-icon {
@@ -5857,7 +5913,6 @@ Product
 .product-flickity__controls {
   align-items: center;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -5929,7 +5984,47 @@ Custom Sections
   }
 }
 
-.product__top-section {
+.image__section--full-width {
+  margin-bottom: -6px;
+}
+
+.product__images {
+  @include media-query($medium-up) {
+    margin: 75px 0;
+  }
+}
+
+.product__select {
+  background-color: rgba($color-seitz-gray, 0.5);
+  border: none;
+}
+
+.product__workmanship {
+  background: linear-gradient(to right, $color-seitz-gray-hover 50%, $color-seitz-gray 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .25s ease-out;
+
+  &:hover {
+    background-position: left bottom;
+  }
+}
+
+.button {
+  border: 1px solid black;
+  border-radius: 3px;
+  width: 100px;
+  height: 30px;
+  display: block;
+
+  background: linear-gradient(to right, black 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all .5s ease-out;
+}
+
+
+.page-section {
   padding-top: 55px;
   padding-bottom: 55px;
 
@@ -5944,27 +6039,52 @@ Custom Sections
   }
 }
 
-.product__details-container {
-  max-width: 200px;
+.page-style {
+  h4 {
+    font-size: 18px;
+    line-height: 30px;
+    @include opacity(0.4);
 
-  @include media-query($small) {
-    max-width: 100%;
+    @include media-query($medium-up) {
+      font-size: 26px;
+      line-height: 36px;
+    }
   }
-}
 
-.product__details-title {
-  padding-bottom: 18px;
-  border-bottom: 2px solid $color-primary-text;
-}
+  h4 ~ h4 {
+    padding-top: 15px;
 
-.product__description {
-  margin-top: -3px;
-}
+    @include media-query($medium-up) {
+      padding-top: 20px;
+    }
+  }
 
-.product__images {
+  p {
+    font-size: 15px;
+    line-height: 26px;
 
-  @include media-query($medium-up) {
-    margin: 75px 0;
+    @include media-query($medium-up) {
+      font-size: 18px;
+      line-height: 34px;
+    }
+  }
+
+  a:not(.action-button) {
+    color: $black;
+    border-bottom: 1px solid $black;
+
+    &:hover {
+      color: $black;
+      border-bottom: none;
+    }
+
+    &.link--inverse {
+      border-bottom: none;
+
+      &:hover {
+        border-bottom: 1px solid $black;
+      }
+    }
   }
 }
 
@@ -5982,6 +6102,7 @@ Seitz Patterns
   font-size: 14px;
   padding: 13px;
   text-align: center;
+  transition: all 150ms linear;
   width: 100%;
 
   &:hover {
@@ -6011,6 +6132,10 @@ Seitz Patterns
       color: $white;
     }
   }
+
+  @include media-query($medium-up) {
+    width: 200px;
+  }
 }
 
 .action-link {
@@ -6033,13 +6158,50 @@ Seitz Patterns
   }
 }
 
+.icon-button {
+  &:hover {
+    @include opacity(0.35);
+  }
+}
+
+.detail__container {
+  max-width: 200px;
+
+  @include media-query($small) {
+    max-width: 100%;
+  }
+}
+
+.detail__title {
+  padding-bottom: 18px;
+  border-bottom: 2px solid $color-primary-text;
+}
+
+.detail__sibling-content {
+  margin-top: -3px;
+}
+
+.detail {
+  font-size: 15px;
+  line-height: 26px;
+}
+
 .label {
   font-family: $seitz-font--bold;
   font-size: 11px;
   letter-spacing: 2px;
   line-height: 26px;
-  padding-bottom: 15px;
   text-transform: uppercase;
+}
+
+.line-length {
+  @include media-query($small) {
+    max-width: 100%;
+  }
+}
+
+.line-length--large {
+  max-width: 860px;
 }
 
 .pt50 {
@@ -6096,6 +6258,40 @@ Seitz Patterns
       line-height: 55px;
     }
   }
+
+  &.text__header--4 {
+    font-family: $seitz-font--semi-bold;
+    font-size: 60px;
+    letter-spacing: -2px;
+    line-height: 60px;
+    text-align: center;
+
+    @include media-query($medium-up) {
+      font-size: 80px;
+      line-height: 85px;
+      max-width: 500px;
+      text-align: left;
+    }
+
+    @include media-query($large-up) {
+      font-size: 100px;
+      line-height: 110px;
+      max-width: 500px;
+      text-align: left;
+    }
+  }
+
+  &.text__header--5 {
+    font-size: 35px;
+    letter-spacing: -1px;
+    line-height: 40px;
+
+    @include media-query($medium-up) {
+      font-size: 34px;
+      letter-spacing: -0.68px;
+      line-height: 26px;
+    }
+  }
 }
 
 .text__body {
@@ -6131,6 +6327,11 @@ Seitz Patterns
       font-size: 18px;
       line-height: 34px;
     }
+  }
+
+  &.text__body--3--consistent {
+    font-size: 18px;
+    line-height: 34px;
   }
 
   &.text__body--3--slim {

@@ -1,14 +1,35 @@
-{%- assign section_color = 'primary' -%}
+{%- assign section_color = 'secondary' -%}
 {%- include 'global-variables' -%}
-<section class="page {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
-  <div class="max-site-width px2 lg--up--px3">
-    <div class="mx--auto lg--up--seven-eighths">
+<section class="page page-style sm--pt2 pb3 md--up--py4 bg--{{ section_color }}-background">
+  <div class="max-site-width md--up--px2">
+    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+
       <div class="grid">
-        <div class="grid__item lg--up--two-fifths">
-          <h1 class="{{ global__heading_font_size }} m0">{{ page.title }}</h1>
+        <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <br>
         </div>
-        <div class="grid__item lg--up--three-fifths mt3 lg--up--mt0">
-          <div class="rte {{ global__basic_font_size }}">
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <h1 class="text__header text__header--4 pr2">{{ page.title }}</h1>
+        </div>
+      </div>
+
+      <div class="grid py1 md--up--py3">
+        <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <div class="detail__container">
+            <div class="detail__title text__highlight text__highlight--2">Contact the Studio</div>
+            <div class="mt2 label">Call</div>
+            <a class="detail link--inverse" href="tel:+13475991403">+1.347.599.1403</a>
+            <div class="mt1 md--up--mt2 label">Email</div>
+            <a class="detail" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
+            <div class="my3">
+              <a href="/pages/request-a-quote" class="action-button action-button--contrast--inverse">
+                Request A Quote
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <div class="detail__sibling-content md--up--nine-tenths lg--up--eight-tenths rte">
             {{ page.content }}
           </div>
         </div>

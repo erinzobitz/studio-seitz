@@ -40,6 +40,10 @@
     </div>
   </div>
 
+  {% if product.metafields.attributes.show_full_width_image == 1 %}
+    {% include 'product__hero-2-section' %}
+  {% endif %}
+
   {% if section.settings.show_related_products %}
     {% assign section_color = section.settings.related_products_color_scheme %}
     {% include 'global-variables' %}
@@ -48,6 +52,21 @@
     </div>
   {% endif %}
 
+  <a href="/pages/craftsmanship">
+    <div class="product__workmanship bg--primary-background">
+      <div class="max-site-width md--up--px2">
+        <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0 pb2 pt3 md--up--py4">
+          <div class="text__header text__header--5">Precise Workmanship</div>
+          <div class="flex flex--responsive justify--between pt1">
+            <div class="line-length line-length--large text__body text__body--1">
+              {{ product.metafields.attributes.workmanship }}
+            </div>
+            <div class="pt2 md--up--pl5">{% include 'arrow-right' %}</div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
 </div>
 
 {% schema %}

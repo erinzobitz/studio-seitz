@@ -2189,14 +2189,15 @@ theme.Product = (function() {
 
     this.$nextImage.click(function(e) {
       e.preventDefault();
-      var $activeImage = $(this).parent().prev().children(
+      var $images = $(this).parent().parent().prev().children();
+      var $activeImage = $(this).parent().parent().prev().children(
                            ".product__thumbnail.active"
                          );
 
       if ($activeImage.next().length !== 0) {
         $activeImage.next().click();
       } else {
-        $activeImage.prev().click();
+        $images.first().click();
       }
     });
 

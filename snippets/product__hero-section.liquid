@@ -16,14 +16,18 @@
   </div>
 
   <div class="hero-section__text-container px1 md--up--px3">
-    <div class="text__body text__body--3 text__body--white text-align--center">
+    <div class="text__body text__body--3 text__body--3--consistent text__body--white text-align--center">
       {{ product.description }}
     </div>
   </div>
 
   <div class="text-align--center">
-    <div class="text__body text__body--3 text__body--slim text__body--white inline-block">Origin</div>
-    <div class="text__highlight text__highlight--1 text__highlight--white inline-block">{{ product.metafields.attributes.origin }}</div>
+    <span class="text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
+      Origin
+      <span class="text__highlight text__highlight--1 text__highlight--white">
+        {{ product.metafields.attributes.origin }}
+      </span>
+    </span>
 
     <div class="hero-section__icon">
       {%- include 'arrow-down' -%}

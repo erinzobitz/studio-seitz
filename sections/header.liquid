@@ -101,8 +101,11 @@
             {% else %}
               <div class="font-size--0 m0 lg--up--px3" itemscope itemtype="http://schema.org/Organization">
             {% endif %}
-                <a href="/" itemprop="url" class="color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+                <a href="/" itemprop="url" class="site-header--standard-logo color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
                   {% include 'logo' %}
+                </a>
+                <a href="/" itemprop="url" class="site-header--contrast-logo color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+                  {% include 'logo--contrast' %}
                 </a>
             {% if template.name == 'index' %}
               </h1>
@@ -137,7 +140,7 @@
               </a>
               {% endif %}
 
-              <a href="/cart" id="CartLink" class="t--header-navigation header__link header__link--focus color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer m0 px1" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
+              <a href="/cart" id="CartLink" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent inline-block pointer m0 px1" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
                 <div class="header__link-wrapper">
                   {% if section.settings.show_cart_icon %}
                   <span class="cart__icon">{% include 'svg' | icon: 'icon-cart' %}</span>

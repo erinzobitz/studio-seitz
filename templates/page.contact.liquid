@@ -1,74 +1,135 @@
-{%- assign section_color = 'primary' -%}
+{%- assign section_color = 'secondary' -%}
 {%- include 'global-variables' -%}
 
-<section class="page {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
-  <div class="max-site-width px2 lg--up--px3">
-    <div class="lg--up--seven-eighths mx--auto">
+{%- assign section_color = 'secondary' -%}
+{%- include 'global-variables' -%}
+
+<section class="page page-style sm--pt2 pb3 md--up--py4 bg--{{ section_color }}-background">
+  <div class="max-site-width md--up--px2">
+    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+
       <div class="grid">
-        <div class="grid__item lg--up--two-fifths">
-          <h1 class="{{ global__heading_font_size }} m0">{{ page.title }}</h1>
-          <div class="rte mt2  {{ global__basic_font_size }}">
-            {{ page.content }}
+        <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <br>
+        </div>
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <h1 class="text__header text__header--4 pr2">{{ page.title }}</h1>
+        </div>
+      </div>
+
+      <div class="grid py1 md--up--py3">
+        <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <div class="detail__container mb3">
+            <div class="detail__title text__highlight text__highlight--2">Contact the Studio</div>
+            <div class="mt2 label">Call</div>
+            <a class="detail link--inverse" href="tel:+13475991403">+1.347.599.1403</a>
+            <div class="mt1 md--up--mt2 label">Email</div>
+            <a class="detail" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
           </div>
         </div>
-        <div class="grid__item lg--up--three-fifths  mt3 lg--up--mt0">
 
-          {% form 'contact' %}
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <div class="detail__sibling-content md--up--nine-tenths lg--up--eight-tenths rte">
+            {{ page.content }}
+          </div>
 
-            {% if form.posted_successfully? %}
-              <p class="form-success">
-                {{ 'contact.form.post_success' | t }}
-              </p>
-            {% endif %}
+          <div class="mt3 md--up--nine-tenths lg--up--eight-tenths rte">
+            {% form 'contact' %}
 
-            {{ form.errors | default_errors }}
-
-            <label class="mt2 block" for="ContactFormName">{{ 'contact.form.name' | t }}</label>
-            <input type="text"
-              class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-              name="contact[name]"
-              id="ContactFormName"
-              placeholder="{{ 'contact.form.name' | t }}"
-              value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}">
-
-            <label class="mt2 block" for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
-            <input type="email"
-              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
-              name="contact[email]"
-              id="ContactFormEmail"
-              placeholder="{{ 'contact.form.email' | t }}"
-              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-              spellcheck="false"
-              autocomplete="off"
-              autocapitalize="off">
-
-            <label class="mt2 block" for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
-            <input type="tel"
-              class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-              name="contact[phone]"
-              id="ContactFormPhone"
-              placeholder="{{ 'contact.form.phone' | t }}"
-              value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-              pattern="[0-9\-]*">
-
-            <label class="mt2 block" for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
-            <textarea rows="10"
-              class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
-              name="contact[body]"
-              id="ContactFormMessage"
-              placeholder="{{ 'contact.form.message' | t }}">
-              {% if form.body %}
-                {{ form.body }}
+              {% if form.posted_successfully? %}
+                <p class="form-success">
+                  {{ 'contact.form.post_success' | t }}
+                </p>
               {% endif %}
-            </textarea>
 
-            <input type="submit" class="block full--w max-width--1 btn border--none mt3 px2 py1 bg--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg }}" value="{{ 'contact.form.send' | t }}">
+              {{ form.errors | default_errors }}
 
-          {% endform %}
+              <label class="block" for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+              <input type="text"
+                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[name]"
+                id="ContactFormName"
+                placeholder="{{ 'contact.form.name' | t }}"
+                value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                required>
 
+              <label class="mt2 block" for="ContactFormCompany">{{ 'contact.form.company' | t }}</label>
+              <input type="text"
+                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[company]"
+                id="ContactFormCompany"
+                placeholder="{{ 'contact.form.company' | t }}"
+                autocomplete="off"
+                autocapitalize="off">
+
+              <label class="mt2 block" for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+              <input type="email"
+                class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[email]"
+                id="ContactFormEmail"
+                placeholder="{{ 'contact.form.email' | t }}"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                spellcheck="false"
+                autocomplete="off"
+                autocapitalize="off"
+                required>
+
+              <label class="mt2 block" for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+              <input type="tel"
+                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[phone]"
+                id="ContactFormPhone"
+                placeholder="{{ 'contact.form.phone' | t }}"
+                value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                pattern="[0-9\-]*"
+                required>
+
+              <label class="mt2 block" for="ContactFormProjectName">{{ 'contact.form.project_name' | t }}</label>
+              <input type="tel"
+                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[project_name]"
+                id="ContactFormProjectName"
+                placeholder="{{ 'contact.form.project_name' | t }}"
+                autocomplete="off"
+                autocapitalize="off">
+
+              <label class="mt2 block" for="ContactFormLocation">{{ 'contact.form.location' | t }}</label>
+              <input type="tel"
+                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[location]"
+                id="ContactFormLocation"
+                placeholder="{{ 'contact.form.location' | t }}"
+                autocomplete="off"
+                autocapitalize="off">
+
+              <label class="mt2 block" for="ContactFormTimeLine">{{ 'contact.form.timeline' | t }}</label>
+              <input type="tel"
+                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[timeline]"
+                id="ContactFormTimeLine"
+                placeholder="{{ 'contact.form.timeline' | t }}"
+                autocomplete="off"
+                autocapitalize="off">
+
+              <label class="mt2 block" for="ContactFormMessage">Specifications/Notes*</label>
+              <textarea rows="10"
+                class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+                name="contact[body]"
+                id="ContactFormMessage"
+                placeholder="{{ 'contact.form.message' | t }}"
+                required>
+                {% if form.body %}
+                  {{ form.body }}
+                {% endif %}
+              </textarea>
+
+              <input type="submit" class="action-button block full--w max-width--1 btn border--none mt3 px2 py1" value="{{ 'contact.form.send' | t }}">
+
+            {% endform %}
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
