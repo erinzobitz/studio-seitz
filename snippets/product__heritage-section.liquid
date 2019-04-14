@@ -1,0 +1,59 @@
+{%- capture position -%}{{ product.metafields.attributes.heritage_details_position }}{%- endcapture -%}
+
+<div class="product__heritage-section page-section--small lg--up--ten-twelfths mx--auto md--up--px0">
+  <div class="grid">
+    <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+      <br>
+    </div>
+    <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+      <div class="sm--px2 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
+        <div class="text__header text__header--3 mb1 md--up--mb2">
+          {{ product.metafields.attributes.heritage_title }}
+        </div>
+        <div class="text__body text__body--1 mb1 md--up--mb2">
+          {{ product.metafields.attributes.heritage_sub_title }}
+        </div>
+        <div class="text__body text__body--3">
+          {{ product.metafields.attributes.heritage_description_1 }}
+        </div>
+      </div>
+
+      <div class="product__heritage-section__region product__heritage-section__region--{{ position }}">
+        <div class="product__heritage-section__region__details">
+          <div class="product__heritage-section__region__shield">
+            <img src="{{ product.metafields.attributes.region_shield }}"/>
+          </div>
+          <div class="product__heritage-section__region__text">
+            <div class="label label--lighten">Heritage</div>
+            <div class="product__heritage-section__region__name detail__title detail__title--small text__highlight text__highlight--2">
+              {{ product.metafields.attributes.region }}
+            </div>
+            <div class="sm--hide line-length--medium pt2 text__body text__body--5 text__body--lighten">
+              {{ product.metafields.attributes.region_description }}
+            </div>
+          </div>
+        </div>
+        <div class="md--up--hide pt2 text__body text__body--5 text__body--lighten">
+          {{ product.metafields.attributes.region_description }}
+        </div>
+        <div class="product__heritage-section__region__image-container">
+          <img src="{{ product.metafields.attributes.region_image }}" class="product__heritage-section__region__image"/>
+          <div class="pt1 text__block-quote text__block-quote--1">
+            {{ product.metafields.attributes.region_image_text }}
+          </div>
+        </div>
+      </div>
+
+      <div class="md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
+        {% if product.metafields.attributes.heritage_sub_title_2 != blank %}
+          <div class="text__body text__body--1 mb1 md--up--mb2">
+            {{ product.metafields.attributes.heritage_sub_title_2 }}
+          </div>
+        {% endif %}
+        <div class="text__body text__body--3">
+          {{ product.metafields.attributes.heritage_description_2 }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

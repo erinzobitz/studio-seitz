@@ -1,0 +1,36 @@
+{% if product.metafields.attributes.show_vertical_image == 1 %}
+  <div class="max-site-width md--up--px2">
+    <div class="page-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
+      <div class="grid">
+        <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <br>
+        </div>
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <div class="md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
+            <div class="md--up--hide">
+              <img src="{{ product.metafields.attributes.m_full_width_or_vertical_image }}" alt="{{ product.title }}"/>
+            </div>
+
+            <div class="sm--hide">
+              <img src="{{ product.metafields.attributes.full_width_or_vertical_image }}" alt="{{ product.title }}"/>
+            </div>
+
+            <div class="pt1 text__block-quote text__block-quote--1">
+              {{ product.metafields.attributes.vertical_image_text }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <div class="image__section--full-width">
+    <div class="md--up--hide">
+      <img src="{{ product.metafields.attributes.m_full_width_or_vertical_image }}" alt="{{ product.title }}"/>
+    </div>
+
+    <div class="sm--hide">
+      <img src="{{ product.metafields.attributes.full_width_or_vertical_image }}" alt="{{ product.title }}"/>
+    </div>
+  </div>
+{% endif %}

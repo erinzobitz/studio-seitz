@@ -5971,7 +5971,7 @@ Custom Sections
   padding-bottom: 15px;
 
   @include media-query($small) {
-    padding-top: 10px;
+    padding-top: 15px;
   }
 }
 
@@ -5999,6 +5999,107 @@ Custom Sections
   border: none;
 }
 
+.product__heritage-section__region {
+  background-color: $color-seitz-gray;
+  padding: 38px 20px;
+  margin: 50px 0;
+  width: 100%;
+
+  @include media-query($medium-up) {
+    padding: 75px;
+    margin: 75px 0;
+    width: 110%;
+  }
+}
+
+.product__heritage-section__region--right {
+  display: flex;
+  flex-direction: row-reverse;
+
+  @include media-query($small) {
+    flex-direction: column;
+  }
+}
+
+.product__heritage-section__region__details {
+  display: flex;
+
+  .product__heritage-section__region--right & {
+    margin-left: 45px;
+    flex-direction: column;
+
+    @include media-query($small) {
+      flex-direction: row;
+      margin-left: 0;
+    }
+  }
+}
+
+.product__heritage-section__region__name {
+  margin-top: -7px;
+  width: 100%;
+
+  @include media-query($medium-up) {
+    margin-top: 0;
+    width: 200px;
+  }
+}
+
+.product__heritage-section__region__image-container {
+  padding-top: 50px;
+
+  .product__heritage-section__region--right & {
+    padding-top: 0;
+
+    @include media-query($small) {
+      padding-top: 30px;
+    }
+  }
+
+  @include media-query($small) {
+    padding-top: 30px;
+  }
+}
+
+.product__heritage-section__region__text {
+  flex-grow: 1;
+
+  .product__heritage-section__region--top & {
+    margin-top: -8px;
+    margin-left: 25px;
+  }
+
+  .product__heritage-section__region--right & {
+    padding-top: 30px;
+
+    @include media-query($small) {
+      padding-top: 0;
+      margin-top: -8px;
+      margin-left: 25px;
+    }
+  }
+}
+
+.product__heritage-section__region__shield {
+  flex: 0 0 115px;
+
+  img {
+    width: 115px;
+  }
+
+  @include media-query($small) {
+    flex-basis: 43px;
+
+    img {
+      width: 43px;
+    }
+  }
+}
+
+.product__heritage-section__region__image {
+  border: 10px solid $white;
+}
+
 .product__workmanship {
   background: linear-gradient(to right, $color-seitz-gray-hover 50%, $color-seitz-gray 50%);
   background-size: 200% 100%;
@@ -6007,6 +6108,14 @@ Custom Sections
 
   &:hover {
     background-position: left bottom;
+  }
+}
+
+.product__workmanship--arrow {
+  padding-bottom: 15px;
+
+  @include media-query($medium-up) {
+    padding-bottom: 0;
   }
 }
 
@@ -6036,6 +6145,16 @@ Custom Sections
   @include media-query($large-up) {
     padding-top: 140px;
     padding-bottom: 115px;
+  }
+}
+
+.page-section--small {
+  padding-top: 40px;
+  padding-bottom: 55px;
+
+  @include media-query($medium-up) {
+    padding-top: 90px;
+    padding-bottom: 110px;
   }
 }
 
@@ -6177,6 +6296,10 @@ Seitz Patterns
   border-bottom: 2px solid $color-primary-text;
 }
 
+.detail__title--small {
+  padding-bottom: 10px;
+}
+
 .detail__sibling-content {
   margin-top: -3px;
 }
@@ -6194,14 +6317,20 @@ Seitz Patterns
   text-transform: uppercase;
 }
 
-.line-length {
+.label--lighten {
+  @include opacity(0.4);
+}
+
+.line-length--large {
+  max-width: 860px;
+
   @include media-query($small) {
     max-width: 100%;
   }
 }
 
-.line-length--large {
-  max-width: 860px;
+.line-length--medium {
+  max-width: 330px;
 }
 
 .pt50 {
@@ -6331,7 +6460,7 @@ Seitz Patterns
 
   &.text__body--3--consistent {
     font-size: 18px;
-    line-height: 34px;
+    line-height: 30px;
   }
 
   &.text__body--3--slim {
@@ -6342,6 +6471,12 @@ Seitz Patterns
     color: $color-primary-text;
     font-size: 15px;
     line-height: 26px;
+  }
+
+  &.text__body--5 {
+    font-family: $seitz-font--semi-bold;
+    font-size: 13px;
+    line-height: 22px;
   }
 
   &.text__body--lighten {
