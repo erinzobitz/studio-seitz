@@ -9,7 +9,7 @@
     <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
 
       <div class="grid">
-        <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+        <div class="sm--hide grid__item mt2 md--up--four-twelfths lg--up--three-twelfths">
           <br>
         </div>
         <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
@@ -43,88 +43,105 @@
               {% endif %}
 
               {{ form.errors | default_errors }}
+              <div class="grid">
+                <div class="grid__item md--up--one-half">
+                  <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
+                  <input type="text"
+                    class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                    name="contact[name]"
+                    id="ContactFormName"
+                    placeholder="{{ 'contact.form.name' | t }}"
+                    value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                    required>
+                </div>
 
-              <label class="block" for="ContactFormName">{{ 'contact.form.name' | t }}</label>
-              <input type="text"
-                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[name]"
-                id="ContactFormName"
-                placeholder="{{ 'contact.form.name' | t }}"
-                value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
-                required>
+                <div class="grid__item md--up--one-half">
+                  <label for="ContactFormCompany">{{ 'contact.form.company' | t }}</label>
+                  <input type="text"
+                    class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                    name="contact[company]"
+                    id="ContactFormCompany"
+                    placeholder="{{ 'contact.form.company' | t }}"
+                    autocomplete="off"
+                    autocapitalize="off">
+                </div>
 
-              <label class="mt2 block" for="ContactFormCompany">{{ 'contact.form.company' | t }}</label>
-              <input type="text"
-                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[company]"
-                id="ContactFormCompany"
-                placeholder="{{ 'contact.form.company' | t }}"
-                autocomplete="off"
-                autocapitalize="off">
+                <div class="grid__item md--up--one-half mt2">
+                  <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+                  <input type="email"
+                    class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+                    name="contact[email]"
+                    id="ContactFormEmail"
+                    placeholder="{{ 'contact.form.email' | t }}"
+                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                    spellcheck="false"
+                    autocomplete="off"
+                    autocapitalize="off"
+                    required>
+                </div>
 
-              <label class="mt2 block" for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
-              <input type="email"
-                class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[email]"
-                id="ContactFormEmail"
-                placeholder="{{ 'contact.form.email' | t }}"
-                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-                spellcheck="false"
-                autocomplete="off"
-                autocapitalize="off"
-                required>
+                <div class="grid__item md--up--one-half mt2">
+                  <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+                  <input type="tel"
+                    class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                    name="contact[phone]"
+                    id="ContactFormPhone"
+                    placeholder="{{ 'contact.form.phone' | t }}"
+                    value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                    pattern="[0-9\-]*"
+                    required>
+                </div>
 
-              <label class="mt2 block" for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
-              <input type="tel"
-                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[phone]"
-                id="ContactFormPhone"
-                placeholder="{{ 'contact.form.phone' | t }}"
-                value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-                pattern="[0-9\-]*"
-                required>
+                <div class="grid__item mt2">
+                  <label for="ContactFormProjectName">{{ 'contact.form.project_name' | t }}</label>
+                  <input type="tel"
+                    class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                    name="contact[project_name]"
+                    id="ContactFormProjectName"
+                    placeholder="{{ 'contact.form.project_name' | t }}"
+                    autocomplete="off"
+                    autocapitalize="off">
+                </div>
 
-              <label class="mt2 block" for="ContactFormProjectName">{{ 'contact.form.project_name' | t }}</label>
-              <input type="tel"
-                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[project_name]"
-                id="ContactFormProjectName"
-                placeholder="{{ 'contact.form.project_name' | t }}"
-                autocomplete="off"
-                autocapitalize="off">
+                <div class="grid__item md--up--one-half mt2">
+                  <label for="ContactFormLocation">{{ 'contact.form.location' | t }}</label>
+                  <input type="tel"
+                    class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                    name="contact[location]"
+                    id="ContactFormLocation"
+                    placeholder="{{ 'contact.form.location' | t }}"
+                    autocomplete="off"
+                    autocapitalize="off">
+              </div>
 
-              <label class="mt2 block" for="ContactFormLocation">{{ 'contact.form.location' | t }}</label>
-              <input type="tel"
-                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[location]"
-                id="ContactFormLocation"
-                placeholder="{{ 'contact.form.location' | t }}"
-                autocomplete="off"
-                autocapitalize="off">
+              <div class="grid__item md--up--one-half mt2">
+                <label for="ContactFormTimeLine">{{ 'contact.form.timeline' | t }}</label>
+                <input type="tel"
+                  class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
+                  name="contact[timeline]"
+                  id="ContactFormTimeLine"
+                  placeholder="{{ 'contact.form.timeline' | t }}"
+                  autocomplete="off"
+                  autocapitalize="off">
+              </div>
 
-              <label class="mt2 block" for="ContactFormTimeLine">{{ 'contact.form.timeline' | t }}</label>
-              <input type="tel"
-                class="block mt1 full--w px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[timeline]"
-                id="ContactFormTimeLine"
-                placeholder="{{ 'contact.form.timeline' | t }}"
-                autocomplete="off"
-                autocapitalize="off">
+              <div class="grid__item mt2">
+                <label for="ContactFormMessage">Specifications/Notes*</label>
+                <textarea rows="10"
+                  class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+                  name="contact[body]"
+                  id="ContactFormMessage"
+                  placeholder="{{ 'contact.form.message' | t }}"
+                  required>
+                  {% if form.body %}
+                    {{ form.body }}
+                  {% endif %}
+                </textarea>
+              </div>
 
-              <label class="mt2 block" for="ContactFormMessage">Specifications/Notes*</label>
-              <textarea rows="10"
-                class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
-                name="contact[body]"
-                id="ContactFormMessage"
-                placeholder="{{ 'contact.form.message' | t }}"
-                required>
-                {% if form.body %}
-                  {{ form.body }}
-                {% endif %}
-              </textarea>
-
-              <input type="submit" class="action-button block full--w max-width--1 btn border--none mt3 px2 py1" value="{{ 'contact.form.send' | t }}">
-
+              <div class="grid__item">
+                <input type="submit" class="action-button block full--w max-width--1 btn border--none mt3 px2 py1" value="{{ 'contact.form.send' | t }}">
+              </div>
             {% endform %}
 
           </div>

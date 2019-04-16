@@ -1,0 +1,56 @@
+{% assign product_collection = product.collections.first %}
+
+<div class="page-section lg--up--ten-twelfths mx--auto px2 md--up--px0" id="product-specs">
+  <div class="grid">
+    <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
+      <div class="detail__container">
+        <div class="detail__title text__highlight text__highlight--2">
+          {{ product.title }}
+        </div>
+        <div class="label pt2">Collection</div>
+        <div class="text__body text__body--4 ">
+          {{ product_collection.title }}
+        </div>
+        <div class="label pt2">Materials</div>
+        <div class="text__body text__body--4 ">
+          {{ product.metafields.attributes.materials }}
+        </div>
+        <div class="label pt2">Dimensions</div>
+        <div class="text__body text__body--4 ">
+          {{ product.metafields.attributes.dimensions }}
+        </div>
+        <div class="pt35">
+          <a download href="{{ product.metafields.attributes.tear_sheet_pdf }}" class="action-link">
+            Download tear sheet
+          </a>
+        </div>
+        <div class="pt50 text__body text__body--4">
+          Have a project?
+        </div>
+        <div class="pt2">
+          <a href="/pages/request-a-quote" class="action-button action-button--contrast--inverse">
+            Request A Quote
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+      {% if product.metafields.attributes.spec_image_count == 1 %}
+        <div class="product__spec--image">
+          <div class="sm--hide">
+            <img src="{{ product.metafields.attributes.spec_image_1 }}"/>
+          </div>
+
+          <div class="md--up--hide">
+            <img src="{{ product.metafields.attributes.mobile_spec_image_1 }}"/>
+          </div>
+        </div>
+      {% elsif product.metafields.attributes.spec_image_count == 2 %}
+
+      {% elsif product.metafields.attributes.spec_image_count == 2 %}
+
+      {% endif %}
+    </div>
+  </div>
+</div>

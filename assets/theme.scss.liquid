@@ -2544,6 +2544,10 @@ $kommode-background: #4D4D45;
 $napfstander-background: #9E8283;
 $pendant-light-background: #A9A192;
 
+// Page backgrounds
+$collection-background: #391A20;
+$studio-background: #1D1D1D;
+
 $black: #000;
 $white: #fff;
 $white-accent: $color-primary-accent;
@@ -4312,6 +4316,10 @@ html {
   background-color: $color-primary-background;
 }
 
+body.template-collection{
+  background-color: $collection-background;
+}
+
 body#stabellenbank {
   background-color: $stabellenbank-background;
 }
@@ -5712,6 +5720,10 @@ $full_dt: percentage($full_dt / $container_dt);
     &.item--large-gap {
       padding-bottom: 240px;
     }
+
+    &.item--desktop--full--no-padding {
+      padding-bottom: 0;
+    }
   }
 
   .first-col--desktop {
@@ -5994,6 +6006,19 @@ Custom Sections
   }
 }
 
+.product__spec--image {
+  background-image: url("https://cdn.shopify.com/s/files/1/0074/3859/8244/files/background-grid.svg");
+  background-repeat: repeat;
+  display: flex;
+  height: 580px;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 90%;
+  }
+}
+
 .product__select {
   background-color: rgba($color-seitz-gray, 0.5);
   border: none;
@@ -6005,7 +6030,7 @@ Custom Sections
   margin: 50px 0;
   width: 100%;
 
-  @include media-query($medium-up) {
+  @include media-query($large-up) {
     padding: 75px;
     margin: 75px 0;
     width: 110%;
@@ -6331,6 +6356,10 @@ Seitz Patterns
 
 .line-length--medium {
   max-width: 330px;
+}
+
+.pt35 {
+  padding-top: 35px;
 }
 
 .pt50 {
