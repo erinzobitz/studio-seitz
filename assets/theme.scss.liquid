@@ -4316,8 +4316,13 @@ html {
   background-color: $color-primary-background;
 }
 
-body.template-collection{
+body.template-collection {
   background-color: $collection-background;
+}
+
+body#about-seitz,
+body#craftsmanship {
+  background-color: $studio-background;
 }
 
 body#stabellenbank {
@@ -5978,9 +5983,36 @@ Custom Sections
   }
 }
 
+.hero-section__logo-container {
+  margin-top: -143px;
+  text-align: center;
+
+  svg {
+    height: 200px;
+    width: 100%;
+  }
+
+  @include media-query($medium) {
+    margin-top: -109px;
+
+    svg {
+      height: 150px;
+    }
+  }
+
+  @include media-query($small) {
+    margin-top: -64px;
+
+    svg {
+      height: 85px;
+    }
+  }
+}
+
 .hero-section__text-container {
   margin: 0 auto;
   padding-bottom: 15px;
+  text-align: center;
 
   @include media-query($small) {
     padding-top: 15px;

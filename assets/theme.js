@@ -2104,6 +2104,7 @@ theme.Product = (function() {
     singleOptionSelector: "[data-single-option-selector]",
     mobileFlickity: "[data-mobile-flickity]",
     nextImage: "[data-next-image]",
+    smoothScroll: "[data-smooth-scroll]",
     productDescription: "[data-product-description]"
   };
 
@@ -2199,6 +2200,18 @@ theme.Product = (function() {
       } else {
         $images.first().click();
       }
+    });
+
+    this.$smoothScroll = $(selectors.smoothScroll);
+
+    this.$smoothScroll.click(function(e) {
+      e.preventDefault();
+
+      var smoothScrollAnchor = $(this).attr("href");
+
+      $('html, body').animate({
+        scrollTop: $(smoothScrollAnchor).offset().top
+      }, 500);
     });
 
     // Ajax Cart
