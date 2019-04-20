@@ -4358,7 +4358,8 @@ body.template-blog {
       display: inline-block;
     }
 
-    .site-header--standard-logo {
+    .site-header--standard-logo,
+    .site-header--studio {
       display: none;
     }
 
@@ -4372,6 +4373,19 @@ body.template-blog {
 
     .header__link {
       color: $black;
+    }
+  }
+}
+
+body#about-seitz {
+  .site-header:not(.active) {
+    .site-header--contrast-logo,
+    .site-header--standard-logo {
+      display: none;
+    }
+
+    .site-header--studio {
+      display: inline-block;
     }
   }
 }
@@ -4958,6 +4972,24 @@ Header Active (Modal)
 .site-header {
   @include media-query($small) {
     padding-bottom: 25px;
+  }
+}
+
+.site-header--studio {
+  display: none;
+  color: $white;
+  font-family: $seitz-font--semi-bold;
+  font-size: 38px;
+  letter-spacing: -1px;
+  line-height: 30px;
+
+  &:hover {
+    color: $white;
+  }
+
+  @include media-query($medium-up) {
+    font-size: 44px;
+    line-height: 35px;
   }
 }
 
@@ -5984,7 +6016,7 @@ Custom Sections
 }
 
 .hero-section__logo-container {
-  margin-top: -143px;
+  margin-top: -144px;
   text-align: center;
 
   svg {
@@ -6001,7 +6033,7 @@ Custom Sections
   }
 
   @include media-query($small) {
-    margin-top: -64px;
+    margin-top: -65px;
 
     svg {
       height: 85px;
@@ -6030,6 +6062,27 @@ Custom Sections
 
 .image__section--full-width {
   margin-bottom: -6px;
+}
+
+.product--arrow {
+  line-height: 30px;
+  padding-left: 5px;
+  vertical-align: middle;
+
+  svg {
+    width: 20px;
+    height: 17px;
+  }
+
+  @include media-query($medium-up) {
+    line-height: 36px;
+    padding-left: 10px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
 .product__images {
@@ -6123,7 +6176,7 @@ Custom Sections
 
   .product__heritage-section__region--top & {
     margin-top: -8px;
-    margin-left: 25px;
+    margin-left: 15px;
   }
 
   .product__heritage-section__region--right & {
@@ -6215,6 +6268,14 @@ Custom Sections
   }
 }
 
+.page-section--small--bottom-only {
+  padding-bottom: 55px;
+
+  @include media-query($medium-up) {
+    padding-bottom: 110px;
+  }
+}
+
 .page-style {
   h4 {
     font-size: 18px;
@@ -6227,12 +6288,14 @@ Custom Sections
     }
   }
 
-  h4 ~ h4 {
+  h4 ~ h4:not(.p0) {
     padding-top: 15px;
 
     @include media-query($medium-up) {
       padding-top: 20px;
     }
+
+
   }
 
   p {
@@ -6242,6 +6305,14 @@ Custom Sections
     @include media-query($medium-up) {
       font-size: 18px;
       line-height: 34px;
+    }
+  }
+
+  img {
+    padding: 15px 0;
+
+    @include media-query($medium-up) {
+      padding: 50px 0;
     }
   }
 
@@ -6499,6 +6570,10 @@ Seitz Patterns
     }
   }
 
+  &.text__body--1--dark {
+    @include opacity(1);
+  }
+
   &.text__body--2 {
     font-size: 18px;
     line-height: 30px;
@@ -6566,6 +6641,11 @@ Seitz Patterns
   &.text__highlight--2 {
     font-size: 15px;
     line-height: 26px;
+  }
+
+  &.text__highlight--3{
+    font-size: 15px;
+    line-height: 30px;
   }
 }
 

@@ -91,31 +91,10 @@
       <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="product__img">
     </noscript>
   {% endunless %}
-  <p class="color--{{ section_color }}-text m0 mt2 {{ global__basic_font_size }}">{{ product.title }}</p>
-  <p class="{% if on_sale %}color--{{ section_color }}-accent{% else %}color--{{ section_color }}-meta{% endif %} m0  {{ global__basic_font_size }}">
-    {% if sold_out %}
-      <span class="sold-out color--{{ section_color }}-meta {% if on_sale %}mr1{% endif %}">{{ 'products.product.sold_out' | t }}</span>
-    {% else %}
-      <span {% if on_sale %}class="mr1"{% endif %}>
-        {% if on_sale %}
-          {% if product.price_varies %}
-            {% assign sale_price = product.price | money %}
-            {{ 'products.product.from_text_html' | t: price: sale_price }}
-          {% else %}
-            {{ product.price | money }}
-          {% endif %}
-        {% else %}
-          {% if product.price_varies %}
-            {% assign price = product.price | money %}
-            {{ 'products.product.from_text_html' | t: price: price }}
-          {% else %}
-            {{ product.price | money }}
-          {% endif %}
-        {% endif %}
-      </span>
-    {% endif %}
-    {% if on_sale and sold_out != true %}
-      <s class="color--{{ section_color }}-meta">{{ product.compare_at_price | money }}</s>
-    {% endif %}
-  </p>
+  <div class="m0 mt1 md--up--mt2">
+    <p class="color--{{ section_color }}-text text__body text__body--1 text__body--1--dark inline-block">
+      {{ product.title }}
+    </p>
+    <div class="product--arrow inline-block">{% include 'arrow-right' %}</div>
+  </div>
 </a>
