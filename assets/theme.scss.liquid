@@ -6007,6 +6007,23 @@ Custom Sections
   }
 }
 
+.hero-section__logo-container {
+  margin: -185px auto 71px auto;
+  text-align: center;
+
+  @include media-query($medium) {
+    margin-bottom: 62px;
+    margin-top: -160px;
+    width: 85px;
+  }
+
+  @include media-query($small) {
+    margin-bottom: 56px;
+    margin-top: -138px;
+    width: 70px;
+  }
+}
+
 .hero-section__title-container {
   @include media-query($small) {
     margin-left: auto;
@@ -6015,7 +6032,7 @@ Custom Sections
   }
 }
 
-.hero-section__logo-container {
+.hero-section__title-container--logo {
   margin-top: -144px;
   text-align: center;
 
