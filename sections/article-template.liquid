@@ -39,79 +39,13 @@
   {%- endunless -%}
 {%- endif -%}
 
-<section class="article {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" role="article" itemscope itemtype="http://schema.org/Article">
-  <div class="max-site-width px2 lg--up--px3">
-
-    <div class="grid">
-      <div class="grid__item lg--up--one-third lg--up--text-align--right lg--up--sticky lg--up--top--0 py1">
-        <div class="lg--up--pl3 wd--pt3 lg--up--inline-block lg--up--text-align--left">
-          <div class="lg--up--hide pb2">
-          {% unless article.image == blank %}
-            {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
-            {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
-            {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-            <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
-              <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
-                <img id="{{ img_id }}"
-                  class="resp-img lazyload"
-                  data-src="{{ img_url }}"
-                  data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
-                  data-aspectratio="{{ article.image.aspect_ratio }}"
-                  data-sizes="auto"
-                  alt="{{ article.image.alt | escape }}">
-                <img id="{{ img_id }}"
-                  class="resp-img-placeholder"
-                  src="{{ article.image | img_url: '1x1' }}"
-                  width="{{ article.image.width }}"
-                  height="{{ article.image.height }}"
-                  alt="{{ article.image.alt | escape }}">
-              </div>
-            </div>
-            <noscript>
-              <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
-            </noscript>
-          {% endunless %}
-          </div>
-
-          <h2 class="{{ global__heading_font_size }} m0 mb2">{{ article.title }}</h2>
-
-          {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-
-          {% if show_author or show_date %}
-          <p class="color--meta m0 mt1 {{ global__basic_font_size }}">{% if show_author %}{{ 'blogs.article.by_author' | t: author: article.author }}<br/>{% endif %}{% if show_date %}{{  date }}{% endif %}</p>
-          {% endif %}
-
-          {% if blog.comments_enabled?  %}
-            <ul class=" list--reset  {{ global__basic_font_size }}">
-              {% if blog.comments_enabled? %}
-                <li>
-                  <a href="{{ article.url }}#comments" class="color--{{ section_color }}-text hv--{{ section_color }}-accent">
-                    {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
-                  </a>
-                </li>
-              {% endif %}
-            </ul>
-          {% endif %}
-
-          {% if show_tags %}
-          {% if article.tags.size > 0 %}
-            <ul class=" list--reset  {{ global__basic_font_size }}">
-              {% if article.tags.size > 0 %}
-                {% for tag in article.tags %}
-                  <li class="inline-block">
-                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="color--{{ section_color }}-text hv--{{ section_color }}-accent">#{{ tag }}</a>
-                    {% unless forloop.last %}&nbsp;{% endunless %}
-                  </li>
-                {% endfor %}
-              {% endif %}
-            </ul>
-          {% endif %}
-          {% endif %}
-        </div>
-      </div>
-      <div class="grid__item lg--up--two-thirds">
-        <div class="lg--up--px4">
-          <div class="md--dn--hide">
+<section class="article page-style page-style--image-top sm--pt2 pb3 md--up--py4 page--primary-background" role="article" itemscope itemtype="http://schema.org/Article">
+  <div class="max-site-width md--up--px2">
+    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+      <div class="grid">
+        <div class="grid__item lg--up--one-third lg--up--text-align--right lg--up--sticky lg--up--top--0 py1">
+          <div class="lg--up--text-align--left">
+            <div class="lg--up--hide pb2">
             {% unless article.image == blank %}
               {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
               {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
@@ -138,145 +72,205 @@
                 <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
               </noscript>
             {% endunless %}
-          </div>
+            </div>
 
-          <div class="rte lg--up--three-quarters {% if article.image %}mt3{% endif %}  {{ global__basic_font_size }}">
-            {{ article.content }}
-          </div>
+            <h2 class="text__header text__header--3">{{ article.title }}</h2>
 
-          {% if show_share_links %}
-          <div class="mt3">
-            {% include 'page-share' %}
-          </div>
-          {% endif %}
+            {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
 
-          {% if blog.comments_enabled? %}
-          <div class="comments lg--up--three-quarters mt3 {{ global__basic_font_size }}">
+            {% if show_author or show_date %}
+            <p class="text__body text__body--4">{{ date }}</p>
+            {% endif %}
 
-            <h3 class="f--heading font-size--ml">{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
+            {% if blog.comments_enabled?  %}
+              <ul class=" list--reset  {{ global__basic_font_size }}">
+                {% if blog.comments_enabled? %}
+                  <li>
+                    <a href="{{ article.url }}#comments" class="color--{{ section_color }}-text hv--{{ section_color }}-accent">
+                      {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+                    </a>
+                  </li>
+                {% endif %}
+              </ul>
+            {% endif %}
 
-            {% paginate article.comments by 5 %}
-            <div id="comments">
-
-              {% if comment and comment.status and paginate.current_page == 1 %}
-                <p class="form-success">
-                  {% if blog.moderated? and comment.status != 'published' %}
-                    {{ 'blogs.comments.success_moderated' | t }}
-                  {% else %}
-                    {{ 'blogs.comments.success' | t }}
-                  {% endif %}
-                </p>
-              {% endif %}
-
-              {% if number_of_comments > 0 %}
-                <ul class="list--reset">
-                  {% comment %}
-                    Display comment from URL parameters if it is waiting moderation
-                  {% endcomment %}
-                  {% if comment and comment.status != 'published' %}
-                    <li id="{{ comment.id }}">
-                      <div class="rte">
-                        {{ comment.content }}
-                      </div>
-                      {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-                      <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
-                    </li>
-                  {% endif %}
-
-                  {% for comment in article.comments %}
-                    {% if forloop.first %}
-                    <hr class="hr border-bottom--{{ section_color }}-text" />
-                    {% endif %}
-                    <li class="py2 border-bottom--{{ section_color }}-text" id="{{ comment.id }}">
-                      <div class="rte">
-                        {{ comment.content }}
-                      </div>
-                      {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-                      <p class="m0">{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+            {% if show_tags %}
+            {% if article.tags.size > 0 %}
+              <ul class=" list--reset  {{ global__basic_font_size }}">
+                {% if article.tags.size > 0 %}
+                  {% for tag in article.tags %}
+                    <li class="inline-block">
+                      <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="color--{{ section_color }}-text hv--{{ section_color }}-accent">#{{ tag }}</a>
+                      {% unless forloop.last %}&nbsp;{% endunless %}
                     </li>
                   {% endfor %}
-                </ul>
-
-                {% if paginate.pages > 1 %}
-                  {% include 'pagination__comments' %}
                 {% endif %}
-              {% endif %}
-
-            </div>
-            {% endpaginate %}
-
-            {% form 'new_comment', article %}
-              <h3 class="f--main {{ global__basic_font_size }} mt3">{{ 'blogs.comments.title' | t }}</h3>
-
-              {{ form.errors | default_errors }}
-
-              <label for="CommentAuthor" class="label-hidden">
-                {{ 'blogs.comments.name' | t }}
-              </label>
-              <input type="text"
-                     class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
-                     name="comment[author]"
-                     id="CommentAuthor"
-                     class="{% if form.errors contains 'author' %}input-error{% endif %}"
-                     placeholder="{{ 'blogs.comments.name' | t }}"
-                     value="{{ form.author }}"
-                     autocapitalize="words">
-
-              <label for="CommentEmail" class="label-hidden">
-                {{ 'blogs.comments.email' | t }}
-              </label>
-              <input type="email"
-                     class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
-                     name="comment[email]"
-                     id="CommentEmail"
-                     class="{% if form.errors contains 'email' %}input-error{% endif %}"
-                     placeholder="{{ 'blogs.comments.email' | t }}"
-                     value="{{ form.email }}"
-                     spellcheck="false"
-                     autocomplete="off"
-                     autocapitalize="off">
-
-              <label for="CommentBody" class="label-hidden">
-                {{ 'blogs.comments.message' | t }}
-              </label>
-              <textarea
-                name="comment[body]"
-                id="CommentBody"
-                class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text {% if form.errors contains 'body' %}input-error{% endif %}"
-                placeholder="{{ 'blogs.comments.message' | t }}">
-                {{ form.body }}
-              </textarea>
-
-              {% if blog.moderated? %}
-                <p>{{ 'blogs.comments.moderated' | t }}</p>
-              {% endif %}
-
-              <input type="submit" class="block full--w max-width--1 btn border--none mt3 px2 py1 bg--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg }}" value="{{ 'blogs.comments.post' | t }}">
-            {% endform %}
-
-          {% endif %}
-
-          {% if section.settings.show_next_previous_links %}
-            {% if blog.next_article or blog.previous_article %}
-            <div class="pagination {{ global__basic_font_size }} pt4">
-
-              {% if blog.next_article %}
-                <a class="p1 pointer left color--{{ section_color }}-text hv--{{ section_color }}-accent" href="{{ blog.next_article }}" title="{{ 'blogs.article.newer_post' | t }}">
-                  <span class="font-size--xxxxs inline-block align--top">{% include 'icon-chevron-left' %}</span>
-                  {{ 'blogs.article.newer_post' | t }}
-                </a>
-              {% endif %}
-
-              {% if blog.previous_article %}
-                <a class="p1 pointer right color--{{ section_color }}-text hv--{{ section_color }}-accent" href="{{ blog.previous_article }}" title="{{ 'blogs.article.older_post' | t }}">
-                  {{ 'blogs.article.older_post' | t  }}
-                  <span class="font-size--xxxxs inline-block align--top">{% include 'icon-chevron-right' %}</span>
-                </a>
-              {% endif %}
-
-            </div>
+              </ul>
             {% endif %}
-          {% endif %}
+            {% endif %}
+          </div>
+        </div>
+        <div class="grid__item md--up--mt2 lg--up--two-thirds">
+          <div class="lg--up--px4">
+            <div class="md--dn--hide">
+              {% unless article.image == blank %}
+                {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
+                {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
+                {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                  <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+                    <img id="{{ img_id }}"
+                      class="resp-img lazyload"
+                      src="{{ article.image | img_url: '100x' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ article.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ article.image.alt | escape }}">
+                    <img id="{{ img_id }}"
+                      class="resp-img-placeholder"
+                      src="{{ article.image | img_url: '1x1' }}"
+                      width="{{ article.image.width }}"
+                      height="{{ article.image.height }}"
+                      alt="{{ article.image.alt | escape }}">
+                  </div>
+                </div>
+                <noscript>
+                  <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
+                </noscript>
+              {% endunless %}
+            </div>
+
+            <div class="rte lg--up--three-quarters">
+              {{ article.content }}
+            </div>
+
+            {% if blog.comments_enabled? %}
+            <div class="comments lg--up--three-quarters mt3 {{ global__basic_font_size }}">
+
+              <h3 class="f--heading font-size--ml">{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
+
+              {% paginate article.comments by 5 %}
+              <div id="comments">
+
+                {% if comment and comment.status and paginate.current_page == 1 %}
+                  <p class="form-success">
+                    {% if blog.moderated? and comment.status != 'published' %}
+                      {{ 'blogs.comments.success_moderated' | t }}
+                    {% else %}
+                      {{ 'blogs.comments.success' | t }}
+                    {% endif %}
+                  </p>
+                {% endif %}
+
+                {% if number_of_comments > 0 %}
+                  <ul class="list--reset">
+                    {% comment %}
+                      Display comment from URL parameters if it is waiting moderation
+                    {% endcomment %}
+                    {% if comment and comment.status != 'published' %}
+                      <li id="{{ comment.id }}">
+                        <div class="rte">
+                          {{ comment.content }}
+                        </div>
+                        {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                        <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+                      </li>
+                    {% endif %}
+
+                    {% for comment in article.comments %}
+                      {% if forloop.first %}
+                      <hr class="hr border-bottom--{{ section_color }}-text" />
+                      {% endif %}
+                      <li class="py2 border-bottom--{{ section_color }}-text" id="{{ comment.id }}">
+                        <div class="rte">
+                          {{ comment.content }}
+                        </div>
+                        {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                        <p class="m0">{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+                      </li>
+                    {% endfor %}
+                  </ul>
+
+                  {% if paginate.pages > 1 %}
+                    {% include 'pagination__comments' %}
+                  {% endif %}
+                {% endif %}
+
+              </div>
+              {% endpaginate %}
+
+              {% form 'new_comment', article %}
+                <h3 class="f--main {{ global__basic_font_size }} mt3">{{ 'blogs.comments.title' | t }}</h3>
+
+                {{ form.errors | default_errors }}
+
+                <label for="CommentAuthor" class="label-hidden">
+                  {{ 'blogs.comments.name' | t }}
+                </label>
+                <input type="text"
+                       class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+                       name="comment[author]"
+                       id="CommentAuthor"
+                       class="{% if form.errors contains 'author' %}input-error{% endif %}"
+                       placeholder="{{ 'blogs.comments.name' | t }}"
+                       value="{{ form.author }}"
+                       autocapitalize="words">
+
+                <label for="CommentEmail" class="label-hidden">
+                  {{ 'blogs.comments.email' | t }}
+                </label>
+                <input type="email"
+                       class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text"
+                       name="comment[email]"
+                       id="CommentEmail"
+                       class="{% if form.errors contains 'email' %}input-error{% endif %}"
+                       placeholder="{{ 'blogs.comments.email' | t }}"
+                       value="{{ form.email }}"
+                       spellcheck="false"
+                       autocomplete="off"
+                       autocapitalize="off">
+
+                <label for="CommentBody" class="label-hidden">
+                  {{ 'blogs.comments.message' | t }}
+                </label>
+                <textarea
+                  name="comment[body]"
+                  id="CommentBody"
+                  class="block mt1 full--w  px2 py1 bg--transparent border--{{ section_color }}-text {% if form.errors contains 'body' %}input-error{% endif %}"
+                  placeholder="{{ 'blogs.comments.message' | t }}">
+                  {{ form.body }}
+                </textarea>
+
+                {% if blog.moderated? %}
+                  <p>{{ 'blogs.comments.moderated' | t }}</p>
+                {% endif %}
+
+                <input type="submit" class="block full--w max-width--1 btn border--none mt3 px2 py1 bg--{{ section_color }}-text color--{{ section_color }}-text--overlay {{ global__hover_bg }}" value="{{ 'blogs.comments.post' | t }}">
+              {% endform %}
+
+            {% endif %}
+
+            {% if section.settings.show_next_previous_links %}
+              {% if blog.next_article or blog.previous_article %}
+              <div class="pagination {{ global__basic_font_size }} pt4">
+
+                {% if blog.next_article %}
+                  <a class="action-link pointer left" href="{{ blog.next_article }}" title="{{ 'blogs.article.newer_post' | t }}">
+                    Previous
+                  </a>
+                {% endif %}
+
+                {% if blog.previous_article %}
+                  <a class="action-link pointer right" href="{{ blog.previous_article }}" title="{{ 'blogs.article.older_post' | t }}">
+                    Next
+                  </a>
+                {% endif %}
+
+              </div>
+              {% endif %}
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

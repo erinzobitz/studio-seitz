@@ -4352,7 +4352,8 @@ body#request-a-quote {
 
 body#frequently-asked-qs,
 body#request-a-quote,
-body.template-blog {
+body.template-blog,
+body.template-article {
   .site-header:not(.active) {
     .site-header--contrast-logo {
       display: inline-block;
@@ -6341,8 +6342,6 @@ Custom Sections
     @include media-query($medium-up) {
       padding-top: 20px;
     }
-
-
   }
 
   p {
@@ -6369,14 +6368,26 @@ Custom Sections
 
     &:hover {
       color: $black;
-      border-bottom: none;
+      border-bottom: 1px solid transparent;
     }
 
     &.link--inverse {
-      border-bottom: none;
+      border-bottom: 1px solid transparent;
 
       &:hover {
         border-bottom: 1px solid $black;
+      }
+    }
+  }
+
+  &.page-style--image-top {
+    img:first-child {
+      padding-top: 0;
+      padding-bottom: 15px;
+
+      @include media-query($medium-up) {
+        padding-top: 0;
+        padding-bottom: 50px;
       }
     }
   }
@@ -6439,7 +6450,7 @@ Seitz Patterns
   line-height: 26px;
 
   &:hover {
-    border-bottom: none;
+    border-bottom: 1px solid transparent;
   }
 
   &.action-link--white {
@@ -6447,7 +6458,7 @@ Seitz Patterns
     color: $white;
 
     &:hover {
-      border-bottom: none;
+      border-bottom: 1px solid transparent;
     }
   }
 }
