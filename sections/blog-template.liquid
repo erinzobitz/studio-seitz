@@ -14,62 +14,85 @@
 {%- assign layout = 'grid' -%}
 {%- endif -%}
 
-<section class="blog {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="blog" data-section-id="{{ section.id }}"  data-fade-in="{{ fade_in }}">
-  <div class="max-site-width px2 lg--up--px3">
+{%- assign section_color = 'secondary' -%}
+{%- include 'global-variables' -%}
 
-    {% paginate blog.articles by section.settings.no_posts %}
+<section class="page page--primary-background sm--pt2 pb3 md--up--py4" data-section-type="blog" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}">
+  <div class="max-site-width md--up--px2">
+    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
 
-      {% include 'blog__header' %}
-
-      <div class="grid mt3 lg--up--mt4">
-
-        {% if tags_enabled %}
-        <div class="grid__item lg--up--one-seventh lg--up--sticky top--0 {{ global__basic_font_size }} md--dn--hide">
-          <a class="color--{{ section_color }}-text lg--up--hide p1 inline-block mxn1 mb1 pointer" data-tag-filter-mobile-trigger>
-            <div class="inline-block">
-            {{ 'collections.general.filter' | t }}
-            <span class="font-size--xxxxs inline-block align--middle">
-              <span class="chevron-down">{% include 'svg' | icon: 'icon-chevron-down' %}</span>
-              <span class="chevron-up hide">{% include 'svg' | icon: 'icon-chevron-up' %}</span>
-            </span>
-            </div>
-          </a>
-          <ul class="list--reset m0 mtn1 pb3 pt2 lg--up--pb0 lg--up--pt3{{ global__basic_font_size }}">
-            <li class="mb1">
-              <a class="color--{{ section_color }}-text hv--border-bottom--{{ section_color }}-text inline-block" href="{{ blog.url }}"><span {% unless current_tags %} class="border-bottom--{{ section_color }}-text"{% endunless %}>All</span></a>
-            </li>
-            {% for tag in blog.all_tags %}
-              {% if current_tags contains tag %}
-              <li class="mb1">
-                  <a class="color--{{ section_color }}-text hv--border-bottom--{{ section_color }}-text inline-block" href="{{ blog.url }}/tagged/{{ tag | handle }}"><span class="border-bottom--main">{{ tag }}</span></a>
-              </li>
-              {% else %}
-              <li class="mb1">
-                  <a class="color--{{ section_color }}-text hv--border-bottom--{{ section_color }}-text inline-block" href="{{ blog.url }}/tagged/{{ tag | handle }}"><span>{{ tag }}</span></a>
-              </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
+      <div class="grid">
+        <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <br>
         </div>
-        {% endif %}
-
-        <div class="grid__item pt1 {% if section.settings.enable_tag_filter %}lg--up--six-sevenths{% endif %}">
-
-          {% if layout == 'grid' %}
-            {% include 'blog__grid' %}
-          {% else %}
-            {% include 'blog__list' %}
-          {% endif %}
-
-          {% if paginate.pages > 1 %}
-            {% include 'pagination' %}
-          {% endif %}
-
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <h1 class="text__header text__header--4 pr2">{{ blog.title }}</h1>
         </div>
       </div>
 
-    {% endpaginate %}
+      <div class="grid py1 md--up--py3">
+        <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <div class="lg--up--hide">
+            {% include 'blog-sorting' %}
+          </div>
+          <div class="md--dn--hide detail__container">
+            <div class="detail__title text__highlight text__highlight--2">Filter</div>
+            {% if tags_enabled %}
+              <div class="pt1 md--dn--hide">
+                <a class="color--{{ section_color }}-text lg--up--hide p1 inline-block mxn1 mb1 pointer" data-tag-filter-mobile-trigger>
+                  <div class="inline-block">
+                  {{ 'collections.general.filter' | t }}
+                  <span class="font-size--xxxxs inline-block align--middle">
+                    <span class="chevron-down">{% include 'svg' | icon: 'icon-chevron-down' %}</span>
+                    <span class="chevron-up hide">{% include 'svg' | icon: 'icon-chevron-up' %}</span>
+                  </span>
+                  </div>
+                </a>
+                <ul class="list--reset m0 mtn1 pb3 pt2 lg--up--pb0 lg--up--pt3{{ global__basic_font_size }}">
+                  <li class="mb1">
+                    <a class="action-link" href="{{ blog.url }}">All</a>
+                  </li>
+                  {% for tag in blog.all_tags %}
+                    {% if current_tags contains tag %}
+                    <li class="mb1">
+                        <a class="text__body--4 color--{{ section_color }}-text inline-block" href="{{ blog.url }}/tagged/{{ tag | handle }}"><span class="border-bottom--main">{{ tag }}</span></a>
+                    </li>
+                    {% else %}
+                    <li class="mb1">
+                        <a class="text__body--4 color--{{ section_color }}-text inline-block" href="{{ blog.url }}/tagged/{{ tag | handle }}"><span>{{ tag }}</span></a>
+                    </li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <div class="detail__sibling-content">
+            {% paginate blog.articles by section.settings.no_posts %}
 
+              <div class="grid">
+                <div class="grid__item pt1 {% if section.settings.enable_tag_filter %}lg--up--six-sevenths{% endif %}">
+
+                  {% if layout == 'grid' %}
+                    {% include 'blog__grid' %}
+                  {% else %}
+                    {% include 'blog__list' %}
+                  {% endif %}
+
+                  {% if paginate.pages > 1 %}
+                    {% include 'pagination' %}
+                  {% endif %}
+
+                </div>
+              </div>
+
+            {% endpaginate %}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 

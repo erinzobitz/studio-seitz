@@ -2548,7 +2548,7 @@ $pendant-light-background: #A9A192;
 $collection-background: #391A20;
 $studio-background: #1D1D1D;
 
-$black: #000;
+$black: #1D1D1D;
 $white: #fff;
 $white-accent: $color-primary-accent;
 $placeholder-light: rgba(255, 255, 255, 0.1);
@@ -5997,6 +5997,33 @@ Gift Card
 
 Custom Sections
 ========================================================================== */
+// Blogs
+.blogs__article {
+  border-top: 2px solid $color-primary-text;
+  margin-top: 10px;
+}
+
+.blogs__article-container {
+  max-width: 100%;
+
+  @include media-query($large-up) {
+    max-width: 315px;
+  }
+}
+
+.blogs__article__text {
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.blogs__article__text--title {
+  font-family: $seitz-font--semi-bold;
+}
+
+// .blogs__article__link {
+//   border-top: 2px solid $color-primary-text;
+//   margin-top: 10px;
+// }
 
 // Hero Section
 .hero-section {
@@ -6259,6 +6286,9 @@ Custom Sections
   transition: all .5s ease-out;
 }
 
+.page--primary-background {
+  background-color: $color-seitz-gray;
+}
 
 .page-section {
   padding-top: 55px;

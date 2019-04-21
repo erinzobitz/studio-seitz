@@ -3,9 +3,9 @@
 
   {% if tags_enabled %}
   <div class="md--dn--table-cell md--dn--one-half md--dn--align--top">
-    <div class="lg--up--hide {{ global__basic_font_size }} mxn1">
-      <a class="lg--up--hide px1 inline-block pointer" data-tag-filter-mobile-trigger>
-        <div class="inline-block">
+    <div class="detail__title sm--mb2 lg--up--hide">
+      <a class="lg--up--hide pointer" data-tag-filter-mobile-trigger>
+        <div class="text__highlight text__highlight--2">
         {{ 'collections.general.filter' | t }}
         <span class="font-size--xxxxs inline-block align--middle">
           <span class="chevron-down">{% include 'svg' | icon: 'icon-chevron-down' %}</span>
@@ -13,10 +13,10 @@
         </span>
         </div>
       </a>
-      <div class="p1 md--dn--hide" data-tag-list>
-        <ul class="list--reset m0 mtn1 pb3 pt2 lg--up--pb0 lg--up--pt3{{ global__basic_font_size }}">
-          <li class="mb1">
-            <a class="inline-block" href="{{ blog.url }}"><span {% unless current_tags %} class="border-bottom--main"{% endunless %}>All</span></a>
+      <div class="py1 md--dn--hide" data-tag-list>
+        <ul class="list--reset m0 mtn1 pt2 lg--up--pb0 lg--up--pt3{{ global__basic_font_size }}">
+          <li>
+            <a class="action-link" href="{{ blog.url }}"><span {% unless current_tags %} class="border-bottom--main"{% endunless %}>All</span></a>
           </li>
           {% for tag in blog.all_tags %}
             {% if current_tags contains tag %}
@@ -35,4 +35,3 @@
   </div>
   {% endif %}
 </div>
-
