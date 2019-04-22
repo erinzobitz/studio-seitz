@@ -521,12 +521,9 @@ var ajaxCart = (function(module, $) {
     // Show empty cart
     if (cart.item_count === 0) {
       $cartContainer.append(
-        '<p class="cart--empty-message text-align--center">' +
-          theme.strings.cartEmpty +
-          '</p>\n' +
-          '<p class="cookie-message">' +
-          theme.strings.cartCookies +
-          '</p>'
+        '<div class="line-length--medium"><div class="text__header text__header--2 text__header--2--extra text__header--white">' +
+        theme.strings.cartEmpty +
+        '</div><div class="mt3"><a href="/collections/2019" class="action-button action-button--contrast">View Collection</a></div></div>'
       );
       cartCallback(cart);
       return;
@@ -550,7 +547,7 @@ var ajaxCart = (function(module, $) {
       var prodImg;
       if (cartItem.image !== null) {
         prodImg = cartItem.image
-          .replace(/(\.[^.]*)$/, '_small$1')
+          .replace(/(\.[^.]*)$/, '_grande$1')
           .replace('http:', '');
       } else {
         prodImg =

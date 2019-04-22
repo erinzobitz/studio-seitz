@@ -316,6 +316,7 @@ $font-size-base: 16px;
 $grid-medium: 750px;
 $grid-large: 990px;
 $grid-widescreen: 1400px;
+$grid-gutter__small: 40px;
 $grid-gutter: 60px;
 $grid-gutter__large: 80px;
 $grid-mobile: 480px;
@@ -776,6 +777,24 @@ Grid
     @include media-query($widescreen) {
       padding-left: $grid-gutter__large;
     }
+
+    &[class*='--push'] {
+      position: relative;
+    }
+  }
+
+  .#{$i}grid--small {
+    @include clearfix;
+    margin: 0;
+    margin-left: -$grid-gutter__small;
+    padding: 0;
+    list-style: none;
+  }
+
+  .#{$i}grid__item--small {
+    float: left;
+    width: 100%;
+    padding-left: $grid-gutter__small;
 
     &[class*='--push'] {
       position: relative;
@@ -1741,6 +1760,12 @@ textarea {
   color: inherit; /* 1 */
   font: inherit; /* 2 */
   margin: 0; /* 3 */
+}
+
+input,
+textarea {
+  background-color: rgba($color-seitz-gray, 0.5);
+  border: none;
 }
 
 /**
@@ -3021,6 +3046,7 @@ Spacing
 
 html {
   font-size: $font-size-base;
+  overflow-x: hidden;
 }
 
 body,
@@ -4247,10 +4273,6 @@ select {
   text-size-adjust: 100%;
 }
 
-a:focus {
-  color: inherit;
-}
-
 img {
   max-width: 100%;
 }
@@ -4321,7 +4343,8 @@ body.template-collection {
 }
 
 body#about-seitz,
-body#craftsmanship {
+body#craftsmanship,
+body.template-cart {
   background-color: $studio-background;
 }
 
@@ -5284,6 +5307,27 @@ Gift Card Template
   }
 }
 
+.cart {
+  color: $white;
+}
+
+.cart__divider {
+  border-top: 2px solid $white;
+  height: 2px;
+  width: 100%;
+}
+
+.cart__divider--lighten {
+  border-top: 1px solid $white;
+  height: 1px;
+  width: 100%;
+  @include opacity(.2);
+}
+
+.js-qty__adjust,
+.js-qty__num {
+  color: $white;
+}
 
 /* =======================================================================
 
@@ -5425,7 +5469,7 @@ Header
 }
 
 .header__link--focus {
-  &:focus {
+  &:active {
     opacity: 0.2;
   }
 }
@@ -6221,7 +6265,12 @@ Custom Sections
 
   .product__heritage-section__region--top & {
     margin-top: -8px;
-    margin-left: 15px;
+    margin-left: 30px;
+
+    @include media-query($small) {
+      margin-left: 15px;
+
+    }
   }
 
   .product__heritage-section__region--right & {
@@ -6253,6 +6302,7 @@ Custom Sections
 
 .product__heritage-section__region__image {
   border: 10px solid $white;
+  box-shadow: 0 2px 4px 0 rgba($color-primary-text, 0.2), 0 2px 4px 0 rgba($color-primary-text, 0.2);
 }
 
 .product__workmanship {
@@ -6415,6 +6465,19 @@ Seitz Patterns
     border: 2px solid $color-primary-accent;
   }
 
+  &.action-button--red {
+    background-color: $color-primary-accent;
+    border: 2px solid $color-primary-accent;
+    color: $white;
+    width: 200px;
+
+    &:hover {
+      background-color: $white;
+      border: 2px solid $white;
+      color: $color-primary-accent;
+    }
+  }
+
   &.action-button--contrast {
     background-color: transparent;
     border: 2px solid $white;
@@ -6424,6 +6487,12 @@ Seitz Patterns
     &:hover {
       background-color: $white;
       color: $black;
+    }
+  }
+
+  &.action-button--mobile-full-width {
+    @include media-query($small) {
+      width: 100%;
     }
   }
 
@@ -6516,7 +6585,7 @@ Seitz Patterns
 }
 
 .line-length--medium {
-  max-width: 330px;
+  max-width: 700px;
 }
 
 .pt35 {
@@ -6566,6 +6635,14 @@ Seitz Patterns
     }
   }
 
+  &.text__header--2--extra {
+    line-height: 60px;
+
+    @include media-query($medium-up) {
+      line-height: 100px;
+    }
+  }
+
   &.text__header--3 {
     font-family: $seitz-font;
     font-size: 35px;
@@ -6610,6 +6687,10 @@ Seitz Patterns
       letter-spacing: -0.68px;
       line-height: 26px;
     }
+  }
+
+  &.text__header--white {
+    color: $white;
   }
 }
 
@@ -6673,8 +6754,16 @@ Seitz Patterns
     line-height: 22px;
   }
 
+  &.text__body--semi-bold {
+    font-family: $seitz-font--semi-bold;
+  }
+
   &.text__body--lighten {
     @include opacity(0.4);
+  }
+
+  &.text__body--lighten--extra {
+    @include opacity(0.2);
   }
 
   &.text__body--white {
@@ -6704,6 +6793,10 @@ Seitz Patterns
   &.text__highlight--3{
     font-size: 15px;
     line-height: 30px;
+  }
+
+  &.text__highlight--white {
+    color: $white;
   }
 }
 

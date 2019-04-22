@@ -8,35 +8,40 @@
 {% endcomment %}
   <script id="CartTemplate" type="text/template">
   {% raw %}
+    <h2 class="text__header text__header--2 text__header--white">Your Cart</h2>
     <form action="/cart" method="post" novalidate class="cart ajaxcart">
-      <div class="max-width--4 lg--up--px3 mx--auto color--active-text relative">
+      <div class="max-site-width relative">
 
         <div class="absolute top--0 left--0 full z1 cart__spinner hide" data-ajax-cart-spinner>
           <div class="spinner color--active-text"></div>
         </div>
 
-        <h2 class="f--heading md--up--hide">{% endraw %}{{ 'cart.general.title' | t }}{% raw %}</h2>
-
         <div class="cart">
           <div class="cart__row sm--hide">
             <div class="grid">
               <div class="grid__item lg--up--three-fifths">
-                <h2 class="f--heading">{% endraw %}{{ 'cart.general.title' | t }}{% raw %}</h2>
+                <div class="table full--w">
+                  <div class="table-cell one-third">
+                    <div class="text__body text__body--semi-bold">
+                      Item
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="grid__item lg--up--two-fifths">
                 <div class="table full--w">
                   <div class="table-cell one-third">
-                    <div class="js-qty-wrapper color--main">
-                      {% endraw %}{{ 'cart.label.quantity' | t }}{% raw %}
+                    <div class="js-qty-wrapper text-center color--main text__body text__body--semi-bold">
+                      Qty
                     </div>
                   </div>
-                  <div class="table-cell two-thirds text-align--right font-size--m">
+                  <div class="table-cell two-thirds text-align--right text__body text__body--semi-bold">
                     {% endraw %}{{ 'cart.label.total' | t }}{% raw %}
                   </div>
                 </div>
               </div>
             </div>
-            <hr class="hr bg--main mt2"/>
+            <div class="cart__divider mt2"></div>
           </div>
 
           {{#items}}
@@ -50,11 +55,11 @@
                       </a>
                   </div>
                   <div class="grid__item three-quarters">
-                    <div class="pl2">
+                    <div class="pl3 md--up--pl4">
 
                       <div class="table full--w">
                         <div class="table-cell two-thirds">
-                          <a class="f--heading font-size--m md--up--font-size--l color--active-text" href="{{url}}">{{name}}</a>
+                          <a class="text__highlight text__highlight--2 text__highlight--white" href="{{url}}">{{name}}</a>
                         </div>
                         <div class="table-cell text-align--right font-size--m one-third md--up--hide">
                           {{#if discountsApplied}}
@@ -71,7 +76,7 @@
                       </div>
 
                       {{#if variation}}
-                        <p class="ajaxcart__product-meta m0">{{variation}}</p>
+                        <p class="ajaxcart__product-meta text__body--4 m0 m0">{{variation}}</p>
                       {{/if}}
 
                       {% endraw %}{% if settings.cart_vendor_enable %}{% raw %}
@@ -100,8 +105,8 @@
                         </div>
                       </div>
 
-                      <a class="inline-block mt1 color--active-text ajaxcart__qty-adjust ajaxcart__qty--remove pointer hv--active-accent" data-line="{{line}}">
-                        <small>{% endraw %}{{ 'cart.general.remove' | t }}{% raw %}</small>
+                      <a class="inline-block text__body text__body--4 text__body--lighten--extra text__body--white mt1 ajaxcart__qty-adjust ajaxcart__qty--remove pointer hv--active-accent" data-line="{{line}}">
+                        <div>{% endraw %}{{ 'cart.general.remove' | t }}{% raw %}</div>
                       </a>
 
                     </div>
@@ -145,23 +150,13 @@
 
           <div class="cart__row">
 
-            <hr class="hr bg--main my3"/>
+            <div class="cart__divider--lighten my3"></div>
 
             <div class="grid">
 
-              <div class="grid__item md--up--one-half">
-                <div class="md--up--pr4">
-                  {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
-                    <label class="inline-block mb1 font-size--sm" for="CartSpecialInstructions">{% endraw %}{{ 'cart.general.note' | t }}{% raw %}</label>
-                    <textarea class="bg--transparent border--active-text color--active-text full--w" name="note" id="CartSpecialInstructions">{% endraw %}{{ cart.note }}{% raw %}</textarea>
-                  {% endraw %}{% endif %}{% raw %}
-                </div>
-              </div>
-
-              <div class="grid__item md--up--one-half md--up--text-align--right mt3 md--up--mt0 {% endraw %}{% unless settings.cart_notes_enable %}right{% endunless %}{% raw %}">
-                <p class="font-size--xs md--up--font-size--s m0">{% endraw %}{{ 'cart.general.shipping_at_checkout' | t }}{% raw %}</p>
+              <div class="grid__item">
                 <div class="table full--w font-size--m mt1">
-                  <div class="table-cell text-align--left md--up--text-align--right">
+                  <div class="table-cell text-align--left">
                     <p>{% endraw %}{{ 'cart.general.subtotal' | t }}{% raw %}</p>
                   </div>
                   <div class="table-cell text-align--right">
@@ -171,15 +166,14 @@
                     {{/if}}
                   </div>
                 </div>
-                <div class="grid grid--half-gutter">
-                  <div class="grid__item text-align--right lg--up--two-thirds lg--up--push-one-third">
-                    <input type="submit" name="checkout" class="checkout btn__ajax-checkout btn border--none p1 block full--w border--active-text bg--active-text color--active-text--overlay hv--active-accent--overlay hv-bg--active-accent hv--border--active-accent" value="{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}" data-desktop-active-last-item>
+                <em class="text__body text__body--4 text__body--lighten--extra text__body--white">Shipping and taxes not included. You will be contacted to arrange specific shipping needs.</em>
+                <div class="mt3 grid grid--half-gutter">
+                  <div class="grid__item">
+                    <input type="submit" name="checkout" class="checkout btn__ajax-checkout action-button action-button--red action-button--mobile-full-width" value="{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}" data-desktop-active-last-item>
                   </div>
                 </div>
               </div>
-
             </div>
-
           </div>
         </div>
       </div>

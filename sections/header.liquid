@@ -143,7 +143,7 @@
               </a>
               {% endif %}
 
-              <a href="/cart" id="CartLink" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent inline-block pointer m0 px1" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
+              <a href="/cart" id="CartLink" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 px1 flex justify--end items--center" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
                 <div class="header__link-wrapper">
                   {% if section.settings.show_cart_icon %}
                   <span class="cart__icon">{% include 'svg' | icon: 'icon-cart' %}</span>
