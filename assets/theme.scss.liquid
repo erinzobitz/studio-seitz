@@ -4993,12 +4993,6 @@ Header Active (Modal)
   z-index: 50;
 }
 
-.site-header {
-  @include media-query($small) {
-    padding-bottom: 25px;
-  }
-}
-
 .site-header--studio {
   display: none;
   color: $white;
@@ -6065,17 +6059,12 @@ Custom Sections
   font-family: $seitz-font--semi-bold;
 }
 
-// .blogs__article__link {
-//   border-top: 2px solid $color-primary-text;
-//   margin-top: 10px;
-// }
-
 // Hero Section
 .hero-section {
   padding-top: 50px;
 
   @include media-query($small) {
-    padding-top: 0;
+    padding-top: 25px;
   }
 }
 
