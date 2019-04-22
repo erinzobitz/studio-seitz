@@ -291,13 +291,18 @@
                         {% assign heading_class = 'f--heading font-size--xxl line-height--7 pm--font-size--xxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
                       {% endif %}
                     {% endif %}
-                    <h2 class=" m0 {{ heading_class }}">
+                    <h2 class="mx--auto line-length--medium text__header text__header--3">
                       {{ block.settings.heading }}
                     </h2>
                   {% endif %}
                   {% if block.settings.rich_text != blank  %}
-                  <div class="richtext {{ font_size }} {% if block.settings.heading != blank %}mt2{% endif %}">
+                  <div class="richtext text__body text__body--1">
                     {{ block.settings.rich_text }}
+                  </div>
+                  {% endif %}
+                  {% if block.settings.paragraph_rich_text != blank  %}
+                  <div class="richtext text__body text__body--3">
+                    {{ block.settings.paragraph_rich_text }}
                   </div>
                   {% endif %}
                   {% if block.settings.cta_url != blank %}
@@ -751,6 +756,11 @@
           "type": "richtext",
           "label": "Text",
           "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+        },
+        {
+          "id": "paragraph_rich_text",
+          "type": "richtext",
+          "label": "Paragraph"
         },
         {
           "type": "header",
