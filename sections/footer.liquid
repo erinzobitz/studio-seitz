@@ -1,159 +1,160 @@
 {%- assign section_color = section.settings.color_combination -%}
 {%- include 'global-variables' -%}
 
-
-<footer class="{{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background">
-  <div class="max-site-width lg--up--px3">
-    <div class="grid px2 lg--up--px0 ">
-      <div class="grid__item mb3 md--up--one-whole lg--up--one-seventh">
-        <div class="grid">
-          <div class="grid__item one-third lg--up--one-whole">
-            <a href="/" class="site-logo site-logo--footer font-size--xl f--heading color--{{ section_color }}-text">
-              {% include 'logo' %}
-            </a>
-          </div>
-
-        </div>
+<footer class="pt50--md--down py3 lg--up--py4 color--{{ section_color }}-text bg--{{ section_color }}-background">
+  <div class="max-site-width md--up--px2">
+    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+      <div class="lg--up--px0">
+        <a href="/" class="site-logo site-logo--footer font-size--xl f--heading color--{{ section_color }}-text">
+          {% include 'logo' %}
+        </a>
       </div>
-      <div class="grid__item md--up--one-whole lg--up--six-sevenths">
-        <div class="grid">
+      <div class="grid lg--up--px0 pt50">
+        <div class="grid__item md--up--one-whole">
+          <div class="grid">
 
-        {% case section.blocks.size %}
-          {% when 1 %}
-            {% assign footer_grid_width = 'md--up--one-whole lg--up--one-whole' %}
-          {% when 2 %}
-            {% assign footer_grid_width = 'md--up--one-half lg--up--one-half' %}
-          {% when 3 %}
-            {% assign footer_grid_width = 'md--up--one-whole lg--up--one-third' %}
-          {% else %}
-            {% assign footer_grid_width = 'md--up--one-whole lg--up--one-whole' %}
-        {% endcase %}
+          {% case section.blocks.size %}
+            {% when 1 %}
+              {% assign footer_grid_width = 'md--up--one-whole lg--up--one-whole' %}
+            {% when 2 %}
+              {% assign footer_grid_width = 'md--up--one-half lg--up--one-half' %}
+            {% when 3 %}
+              {% assign footer_grid_width = 'md--up--one-whole lg--up--one-third' %}
+            {% else %}
+              {% assign footer_grid_width = 'md--up--one-whole lg--up--one-whole' %}
+          {% endcase %}
 
-          {% for block in section.blocks %}
-          <div class="grid__item {{ global__basic_font_size }} {{ footer_grid_width }} mb3 lg-up--mb0">
+            {% for block in section.blocks %}
+            <div class="grid__item {{ global__basic_font_size }} {{ footer_grid_width }} mb3 lg-up--mb0">
 
-            {% if block.type == 'menus' %}
+              {% if block.type == 'menus' %}
 
-              {% assign single_linklist = false %}
+                {% assign single_linklist = false %}
 
-              {% if block.settings.main_linklist == blank and block.settings.secondary_linklist != blank %}
-                {% assign single_linklist = true %}
-              {% endif %}
-
-              {% if block.settings.main_linklist != blank and block.settings.secondary_linklist == blank %}
-                {% assign single_linklist = true %}
-              {% endif %}
-
-              <div class="grid">
-                {% if block.settings.main_linklist  != blank %}
-                  {% assign link_list = block.settings.main_linklist %}
-                  {% include 'footer__linklist' %}
+                {% if block.settings.main_linklist == blank and block.settings.secondary_linklist != blank %}
+                  {% assign single_linklist = true %}
                 {% endif %}
-                {% if block.settings.secondary_linklist  != blank %}
-                  {% assign link_list = block.settings.secondary_linklist %}
-                  {% include 'footer__linklist' %}
+
+                {% if block.settings.main_linklist != blank and block.settings.secondary_linklist == blank %}
+                  {% assign single_linklist = true %}
                 {% endif %}
-              </div>
-            {% endif %}
 
-            {% if block.type == 'richtext' %}
-              <div class="three-quarters lg--up--one-whole richtext">
-                {{ block.settings.text }}
-              </div>
-              {% endif %}
-
-              {% if block.type == 'newsletter' %}
-                <div class="mtn1">
-                  <a class="text__body text__body--2 text__body--white" href="tel:+13475991403">+1.347.599.1403</a>
-                </div>
-                <div>
-                  <a class="action-link action-link--white text__body text__body--2 text__body--white" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
-                </div>
-                <div class="newsletter__label text__body text__body--2 text__body--white pt50">
-                  {{ block.settings.text}}
-                </div>
-                {% form 'customer' %}
-                  {{ form.errors | default_errors }}
-                  {% if form.posted_successfully? %}
-                    <p class="form--success f--main">{{ 'general.newsletter_form.confirmation' | t }}</p>
-                  {% else %}
-                    <div class="footer__input-group input-group">
-                      <input type="hidden" name="contact[tags]" value="newsletter">
-                      <label for="Email" class="hide">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
-                      <input type="email"
-                        name="contact[email]"
-                        id="Email"
-                        class="text__body text__body--2 footer__input input-group-field py1 bg--transparent"
-                        value="{% if customer %}{{ customer.email }}{% endif %}"
-                        placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}"
-                        autocorrect="off"
-                        autocapitalize="off">
-                      <span class="input-group-btn">
-                        <button type="submit" class="newsletter__submit py1" name="commit" id="Subscribe">
-                          {% include 'arrow-right' %}
-                        </button>
-                      </span>
-                    </div>
+                <div class="grid">
+                  {% if block.settings.main_linklist  != blank %}
+                    {% assign link_list = block.settings.main_linklist %}
+                    {% include 'footer__linklist' %}
                   {% endif %}
-                {% endform %}
-            {% endif %}
+                  {% if block.settings.secondary_linklist  != blank %}
+                    {% assign link_list = block.settings.secondary_linklist %}
+                    {% include 'footer__linklist' %}
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              {% if block.type == 'richtext' %}
+                <div class="three-quarters lg--up--one-whole richtext">
+                  {{ block.settings.text }}
+                </div>
+                {% endif %}
+
+                {% if block.type == 'newsletter' %}
+                  <div class="mtn1">
+                    <a class="text__body text__body--2 text__body--white" href="tel:+13475991403">+1.347.599.1403</a>
+                  </div>
+                  <div>
+                    <a class="action-link action-link--white text__body text__body--2 text__body--white" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
+                  </div>
+                  <div class="newsletter__label text__body text__body--2 text__body--white pt50">
+                    {{ block.settings.text}}
+                  </div>
+                  {% form 'customer' %}
+                    {{ form.errors | default_errors }}
+                    {% if form.posted_successfully? %}
+                      <p class="form--success f--main">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                    {% else %}
+                      <div class="footer__input-group input-group">
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+                        <label for="Email" class="hide">{{ 'general.newsletter_form.newsletter_email' | t }}</label>
+                        <input type="email"
+                          name="contact[email]"
+                          id="Email"
+                          class="text__body text__body--2 footer__input input-group-field py1 bg--transparent"
+                          value="{% if customer %}{{ customer.email }}{% endif %}"
+                          placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}"
+                          autocorrect="off"
+                          autocapitalize="off">
+                        <span class="input-group-btn">
+                          <button type="submit" class="newsletter__submit py1" name="commit" id="Subscribe">
+                            {% include 'arrow-right' %}
+                          </button>
+                        </span>
+                      </div>
+                    {% endif %}
+                  {% endform %}
+              {% endif %}
+
+            </div>
+            {% endfor %}
+
 
           </div>
-          {% endfor %}
-
-
         </div>
       </div>
-    </div>
 
-    <div class="grid {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}grid--rev{% endif %} px2 mt2 lg--up--mt5 lg--up--px0">
-      <div class="grid__item md--up--mb3 md--up--one-whole lg--up--one-seventh"></div>
-      <div class="grid__item md--up--one-whole lg--up--six-sevenths">
-        {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
+      <div class="grid {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}grid--rev{% endif %} mt2 lg--up--mt5 lg--up--px0">
+        <div class="grid__item md--up--one-whole">
+          {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
 
-        <div class="md--up--hide">
-          <ul class="list--reset list--reset--no-margin">
-            {% for social in social_accounts %}
-              {%- assign social_handle = social | handleize -%}
-              {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-              {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+          <div class="md--up--hide">
+            <ul class="list--reset list--reset--no-margin">
+              {% for social in social_accounts %}
+                {%- assign social_handle = social | handleize -%}
+                {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
 
-              {% if settings[social_link] != blank %}
-                <li class="inline-block">
-                  <a class="social-icon color--{{ section_color }}-text pr1 font-size--xxs mb1 block" target="_blank" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-                    {% include social_icon %}
-                    <span class="icon-fallback-text">{{ social }}</span>
-                  </a>
-                </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-          <p class="footer__credit">&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br>
-            <i>Photos by <a class="footer__credit--link" href="http://stephenkentjohnson.com/">Stephen Kent Johnson</a>;</i><br>
-            <i>Styling by <a class="footer__credit--link" href="http://www.erinswift.com/">Erin Swift</a>;</i><br>
-            <i>Site Development by <a class="footer__credit--link" href="http://erinzobitz.com">Erin Zobitz</a></i>
-          </p>
-        </div>
+                {% if settings[social_link] != blank %}
+                  <li class="inline-block">
+                    <a class="social-icon color--{{ section_color }}-text pr1 font-size--xxs mb1 block" target="_blank" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                      {% include social_icon %}
+                      <span class="icon-fallback-text">{{ social }}</span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            <p class="footer__credit">&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br>
+              <i>Photos by <a class="footer__credit--link" href="http://stephenkentjohnson.com/" target="_blank">Stephen Kent Johnson</a>;</i><br>
+              <i>Styling by <a class="footer__credit--link" href="http://www.erinswift.com/" target="_blank">Erin Swift</a>;</i><br>
+              <i>Illustrations by <a class="footer__credit--link" href="https://www.malikafavre.com" target="_blank">Malika Favre</a>;</i><br>
+              <i>Site Development by <a class="footer__credit--link" href="https://twitter.com/erinzobitz" target="_blank">Erin Zobitz</a></i>
+            </p>
+          </div>
 
-        <div class="sm--hide">
-          <div class="footer__credit inline-block">&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br></div>
-          <ul class="right list--reset list--reset--no-margin">
-            {% for social in social_accounts %}
-              {%- assign social_handle = social | handleize -%}
-              {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-              {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+          <div class="sm--hide">
+            <div class="footer__credit inline-block">&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br></div>
+            <ul class="right list--reset list--reset--no-margin">
+              {% for social in social_accounts %}
+                {%- assign social_handle = social | handleize -%}
+                {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
+                {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
 
-              {% if settings[social_link] != blank %}
-                <li class="inline-block">
-                  <a class="social-icon color--{{ section_color }}-text pl1 font-size--xxs mb1 block" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-                    {% include social_icon %}
-                    <span class="icon-fallback-text">{{ social }}</span>
-                  </a>
-                </li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-          <br><i class="footer__credit">Photos by <a class="footer__credit--link" href="http://stephenkentjohnson.com/">Stephen Kent Johnson</a>; Styling by <a class="footer__credit--link" href="http://www.erinswift.com/">Erin Swift</a>; Site Development by <a class="footer__credit--link" href="http://erinzobitz.com">Erin Zobitz</a></i>
+                {% if settings[social_link] != blank %}
+                  <li class="inline-block">
+                    <a class="social-icon color--{{ section_color }}-text pl1 font-size--xxs mb1 block" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                      {% include social_icon %}
+                      <span class="icon-fallback-text">{{ social }}</span>
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            <br><i class="footer__credit">
+              Photos by <a class="footer__credit--link" target="_blank" href="http://stephenkentjohnson.com/">Stephen Kent Johnson</a>;
+                Styling by <a class="footer__credit--link" target="_blank" href="http://www.erinswift.com/">Erin Swift</a>;
+                  Illustrations by <a class="footer__credit--link" target="_blank" href="https://www.malikafavre.com">Malika Favre</a>;
+                    Site Development by <a class="footer__credit--link" target="_blank" href="https://twitter.com/erinzobitz">Erin Zobitz</a>
+             </i>
+          </div>
         </div>
       </div>
     </div>

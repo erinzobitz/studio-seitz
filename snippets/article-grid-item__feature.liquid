@@ -98,7 +98,18 @@
     {% endif %}
 
   {% else %}
-    <p class="m0 mt2 {{ global__basic_font_size }} }">{{ article.title }}</p>
-  {% endif %}
+    <div class="blogs__article__text blogs__article__text--title">
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </div>
 
+    <div class="mt1 blogs__article__text">
+      {% if article.excerpt.size > 0 %}
+        {{ article.excerpt }}
+      {% else %}
+        <p>
+          {{ article.content | strip_html | truncatewords: 20 }}
+        </p>
+      {% endif %}
+    </div>
+  {% endif %}
 </div>

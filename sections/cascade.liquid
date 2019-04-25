@@ -4,9 +4,9 @@
 {%- assign font_size = 'font-size--sm md--up--font-size--m line-height--3' -%}
 {%- assign font_size = global__basic_font_size -%}
 
-<section class="cascade {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
-  <div class="max-site-width px2 lg--up--px3">
-    <div class="cascading-content">
+<section class="cascade pb3 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
+  <div class="max-site-width px2">
+    <div class="cascading-content lg--up--ten-twelfths mx--auto">
       <div class="items overflow--hidden">
         <div class="item-sizer"></div>
         <div class="column-sizer"></div>
@@ -67,7 +67,7 @@
             data-width="{{ block_width_desktop }}"
             data-block-id="{{ block.id }}"
             >
-            <div class="item__inner {% if block_width_mobile == 'full' %}five-sixths mx--auto{% endif %} {% if block_width_desktop == 'full' %}lg--up--five-sixths lg--up--mx--auto{% else %}lg--up--one-whole{% endif %}" {{ block.shopify_attributes }}>
+            <div class="item__inner {% if block_width_mobile == 'full' %}md--up--five-sixths mx--auto{% endif %} {% if block_width_desktop == 'full' %}lg--up--five-sixths lg--up--mx--auto{% else %}lg--up--one-whole{% endif %}" {{ block.shopify_attributes }}>
 
               {% comment %}
               /* ============================================================================
@@ -163,23 +163,23 @@
                       </div>
                     {% endif %}
                   </div>
-                  <div class="image-with-text__content absolute full top--0 left--0 p1 z1">
+                  <div class="image-with-text__content absolute full top--0 left--0 z1">
                     {% if cta_url != blank %}
                     <a href="{{ cta_url }}" class="block full color--{{ section_color }}-text">
                     {% endif %}
                       <div class="table full">
-                        <div class="table-cell text-align--center align--middle">
-                          <div class="inline-block  align--middle">
+                        <div class="table-cell text-align--right align--bottom">
+                          <div class="inline-block align--bottom ">
                             {% if block_width_mobile == 'full' %}
                               {% assign heading_class = heading_fontsize__mobile_full %}
                             {% else %}
                               {% assign heading_class = heading_fontsize__mobile_half %}
                             {% endif %}
                             {% if heading != blank %}
-                            <h2 class=" m0 {{ heading_class }} color--{{ local_color }}-text">{{ heading }}</h2>
+                            <h2 class="label m0 color--{{ local_color }}-text">{{ heading }}</h2>
                             {% endif %}
                             {% if cta_text != blank %}
-                              <p class="{% if block_width_mobile == 'half' %}sm--hide{% endif %} m0 lg--up--mt1 inline-block {{ font_size }} link-underline f--accent color--{{ local_color }}-text border-bottom--{{ local_color }}-text hv--{{ local_color }}-accent hv--border-bottom--{{ local_color }}-accent" href="" target="_blank" >
+                              <p class="{% if block_width_mobile == 'half' %}sm--hide{% endif %} m0 inline-block text__body text__body--4 text__body--white" href="" target="_blank" >
                                 {{ cta_text }}
                               </p>
                             {% endif %}
@@ -200,7 +200,7 @@
               ============================================================================== *
               {% endcomment %}
               {% if block.type == 'video' %}
-                <div class="video-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                <div class="video-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}md--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
                   {% if block.settings.video_url %}
                     {% if block.settings.video_url.type == 'youtube' %}
                       {% capture image_url_mq %}//img.youtube.com/vi/{{ block.settings.video_url.id }}/mqdefault.jpg{% endcapture %}
@@ -277,7 +277,7 @@
               {% endcomment %}
               {% if block.type == 'rich_text' or block.type == 'heading' or block.type == 'text' %}
               <div class="rich-text rich-text--{{ block.id }} {{ block.settings.text_align}}">
-                <div class="seven-eighths mx--auto pm--three-quarters wd--two-thirds">
+                <div class="md--up--seven-eighths md--up--mx--auto md--up--pm--three-quarters wd--two-thirds">
                   {% if block.settings.heading != blank   %}
                     {% if block_width_mobile == 'full' %}
                       {% assign heading_class = heading_fontsize__mobile_full %}
@@ -291,7 +291,7 @@
                         {% assign heading_class = 'f--heading font-size--xxl line-height--7 pm--font-size--xxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
                       {% endif %}
                     {% endif %}
-                    <h2 class="mx--auto line-length--medium text__header text__header--3">
+                    <h2 class="mx--auto sm--pt3 pt4 line-length--medium text__header text__header--3">
                       {{ block.settings.heading }}
                     </h2>
                   {% endif %}
@@ -306,7 +306,7 @@
                   </div>
                   {% endif %}
                   {% if block.settings.cta_url != blank %}
-                  <a class="inline-block {{ global__homepage_more_link }} {{ font_size }}  {{ global__link_underline }} {{ global__hover_underline }}" href="{{ block.settings.cta_url }}" >
+                  <a class="inline-block action-link" href="{{ block.settings.cta_url }}" >
                     {{ block.settings.cta_text }}
                   </a>
                   {% endif %}
@@ -370,7 +370,7 @@
                               {% else %}
                                 {% assign heading_class = heading_fontsize__mobile_half %}
                               {% endif %}
-                              <h2 class=" m0 {{ heading_class }} color--{{ local_color }}-text">{{ collection.title }}</h2>
+                              <h2 class=" m0 label">{{ collection.title }}</h2>
                               {% if block.settings.show_collection_link %}
                                 <p class="{% if block_width_mobile == 'half' %}sm--hide{% endif %} m0 lg--up--mt1 inline-block {{ font_size }} link-underline f--accent color--{{ local_color }}-text border-bottom--{{ local_color }}-text hv--{{ local_color }}-accent hv--border-bottom--{{ local_color }}-accent" href="" target="_blank" >
                                   {{ block.settings.cta_text }}
@@ -609,6 +609,11 @@
           "type": "image_picker",
           "id": "image",
           "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Mobile Image"
         },
         {
           "type": "text",

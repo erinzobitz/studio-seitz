@@ -4224,6 +4224,12 @@ Mobile Navigation
 Pagination
 ========================================================================== */
 
+.page {
+  @include media-query($small) {
+    margin-top: 25px;
+  }
+}
+
 .page.current {
   border-bottom: 1px solid $color-primary-text;
 }
@@ -4383,7 +4389,8 @@ body.template-article {
     }
 
     .site-header--standard-logo,
-    .site-header--studio {
+    .site-header--studio,
+    .site-header--white {
       display: none;
     }
 
@@ -4401,10 +4408,45 @@ body.template-article {
   }
 }
 
+body.template-collection,
+body.template-product {
+  .site-header:not(.active) {
+    .site-header--white {
+      display: inline-block;
+    }
+
+    .site-header--standard-logo,
+    .site-header--studio,
+    .site-header--contrast-logo {
+      display: none;
+    }
+  }
+}
+
+body.template-index {
+  .site-header:not(.active) {
+    .site-header--contrast-logo,
+    .site-header--white,
+    .site-header--standard-logo,
+    .site-header--studio {
+      display: none;
+    }
+
+    .site-nav__svg {
+      svg {
+        path {
+          stroke: $black;
+        }
+      }
+    }
+  }
+}
+
 body#about-seitz {
   .site-header:not(.active) {
     .site-header--contrast-logo,
-    .site-header--standard-logo {
+    .site-header--standard-logo,
+    .site-header--white {
       display: none;
     }
 
@@ -5015,6 +5057,10 @@ Header Active (Modal)
   display: none;
 }
 
+.site-header--white {
+  display: none;
+}
+
 .site-header--standard-logo {
   display: inline-block;
 }
@@ -5097,12 +5143,6 @@ Header Active (Modal)
 
   .site-nav {
     white-space: normal;
-  }
-
-  .site-nav__content {
-    @include media-query($medium-up) {
-      margin-left: 55px;
-    }
   }
 }
 
@@ -5188,6 +5228,29 @@ No JS
 
   .image-with-text__container .item--image {
     width: 100%;
+  }
+}
+
+.image-with-text__content {
+  padding-bottom: 70px;
+  padding-right: 100px;
+
+  @include media-query($medium) {
+    padding-bottom: 35px;
+    padding-right: 40px;
+  }
+
+  @include media-query($small) {
+    padding-bottom: 15px;
+    padding-right: 20px;
+  }
+}
+
+.item__inner {
+  .rich-text {
+    @include media-query($small) {
+      text-align: left;
+    }
   }
 }
 
@@ -5489,6 +5552,33 @@ Header
   }
 }
 
+.banner_image__logo {
+  bottom: 70px;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 600px;
+
+  @include media-query($medium) {
+    width: 450px;
+
+    svg {
+      height: 152px;
+      width: 450px;
+    }
+  }
+
+  @include media-query($small) {
+    width: 250px;
+
+    svg {
+      height: 84px;
+      width: 250px;
+    }
+  }
+}
+
 
 
 
@@ -5771,7 +5861,7 @@ $full_dt: percentage($full_dt / $container_dt);
 
   .item--mobile--full {
     width: $full_mb;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
   }
 
   .first-col--mobile {
@@ -5791,7 +5881,7 @@ $full_dt: percentage($full_dt / $container_dt);
 
   .item--desktop--full {
     width: $full_dt;
-    padding-bottom: 120px;
+    padding-bottom: 60px;
 
     &.item--large-gap {
       padding-bottom: 240px;
@@ -6036,7 +6126,35 @@ Gift Card
 
 Custom Sections
 ========================================================================== */
+.slideshow__flickity__button-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0;
+
+  @include media-query($small) {
+    margin-top: -30px;
+  }
+}
+
 // Blogs
+.homepage-blog__title-container {
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @include media-query($small) {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.homepage-blog__mobile-carousel {
+  @include media-query($small) {
+    margin-left: -20px;
+  }
+}
+
 .blogs__article {
   border-top: 2px solid $color-primary-text;
   margin-top: 10px;
@@ -6628,6 +6746,12 @@ Seitz Patterns
 
 .pt50 {
   padding-top: 50px;
+}
+
+.pt50--md--down {
+  @include media-query($medium-down) {
+    padding-top: 50px;
+  }
 }
 
 .text__header {

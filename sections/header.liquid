@@ -107,6 +107,9 @@
                 <a href="/" itemprop="url" class="site-header--contrast-logo color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
                   {% include 'logo--contrast' %}
                 </a>
+                <a href="/" itemprop="url" class="site-header--white color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
+                  {% include 'logo--white' %}
+                </a>
                 <a href="/" itemprop="url" class="site-header--studio color--{{ section_color }}-text color--header-active f--heading site-logo {% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
                   Studio
                 </a>
@@ -181,6 +184,15 @@
             data-sizes="auto"
             data-parent-fit="cover"
             style="padding-top:{{ padding }}; background-image: url({{ feature_image | img_url: '300x300' }}); background-size: cover;">
+          <div class="absolute sm--pb2 banner_image__logo">
+            {% include 'logo__large--white' %}
+            <div class="sm--hide pt3 text-align--center text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
+              Heritage brought to
+              <span class="text__highlight text__highlight--1 text__highlight--white">
+                The modern home
+              </span>
+            </div>
+          </div>
           <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb2"  data-banner-scroll>
             <button class="btn border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
           </a>
