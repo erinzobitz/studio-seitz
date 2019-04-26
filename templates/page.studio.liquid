@@ -104,7 +104,14 @@
 
     <div class="lg--up--ten-twelfths mx--auto">
       <div class="homepage-blog__title-container pb3 flex">
-        <h2 class="sm--mb1 text__header text__header--3">{{ blog.title }}</h2>
+        <div class="homepage-blog__title flex justify--between">
+          <h2 class="sm--mb1 text__header text__header--3">{{ blog.title }}</h2>
+          <div class="lg--up--hide">
+            <div class='mobile-flickity__button-container p0'>
+              <button class="icon-button pt1 px0 btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm">{% include 'arrow-right' %}</button>
+            </div>
+          </div>
+        </div>
 
         <div class="homepage-blog __info">
           <a class="inline-block action-link" href="{{ blog.url }}" >

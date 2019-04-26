@@ -1,7 +1,7 @@
 {% assign product_collection = product.collections.first %}
 
 <div class="page-section lg--up--ten-twelfths mx--auto px2 md--up--px0" id="product-specs">
-  <div class="grid">
+  <div class="grid grid--flex--mobile">
     <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
       <div class="detail__container">
         <div class="detail__title text__highlight text__highlight--2">
@@ -35,20 +35,77 @@
       </div>
     </div>
 
-    <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+    <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths sm--mb2">
       {% if product.metafields.attributes.spec_image_count == 1 %}
         <div class="product__spec--image">
-          <div class="sm--hide">
-            <img src="{{ product.metafields.attributes.spec_image_1 }}"/>
-          </div>
+          <img src="{{ product.metafields.attributes.spec_image_1 }}" class="md--dn--hide" alt="Stabellenbank spec"/>
 
-          <div class="md--up--hide">
-            <img src="{{ product.metafields.attributes.mobile_spec_image_1 }}"/>
-          </div>
+          <img src="{{ product.metafields.attributes.mobile_spec_image_1 }}" class="lg--up--hide" alt="Stabellenbank spec"/>
         </div>
       {% elsif product.metafields.attributes.spec_image_count == 2 %}
+        <div class="product__spec--image product__spec--image--no-flex">
+          <div class="product__spec--image-spec">
+            <div class="product__spec--images relative">
+              <div class="product__feature-image">
+                {% assign featured_image = images[product.metafields.attributes.spec_image_1] %}
+                {% capture img_id %}ProductSpecImage-{{ featured_image.id }}{% endcapture %}
+                {% capture wrapper_id %}ProductSpecImageWrapper-{{ featured_image.id }}{% endcapture %}
+                {% assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                  <div style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100}}%;" data-feature-spec-wrapper>
+                    <img
+                      id="ProductPhotoImg"
+                      class="resp-img product-single__photo lazyload {{ img_id_class }}"
+                      src="{{ featured_image | img_url: '100x' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 590, 720]"
+                      data-aspectratio="{{ featured_image.aspect_ratio }}"
+                      data-sizes="auto"
+                      data-image-id="{{ featured_image.id }}"
+                      alt="{{ featured_image.alt | escape }}"
+                      data-product-featured-spec-image>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      {% elsif product.metafields.attributes.spec_image_count == 2 %}
+          <div class="product__thumbnails pt2 md--up--pt3" data-product-spec-thumbnails>
+            {%- assign active_class_1 = 'active' -%}
+            {%- assign active_class_2 = '' -%}
+
+            {%- if featured_image == image_1.src -%}
+              {%- assign active_class_1 = 'active' -%}
+              {%- assign active_class_2 = '' -%}
+            {%- endif -%}
+            {%- assign ratio_1 = image_1.aspect_ratio -%}
+
+            {%- if featured_image == image_2.src -%}
+              {%- assign active_class_2 = 'active' -%}
+              {%- assign active_class_1 = '' -%}
+            {%- endif -%}
+            {%- assign ratio_2 = image_2.aspect_ratio -%}
+
+            {% assign image_1 = images[product.metafields.attributes.spec_image_1] %}
+            {% assign image_2 = images[product.metafields.attributes.spec_image_2] %}
+            <div class="product-flickity__slides product-flickity__spec-slides pt3 flex justify--center">
+              {% assign img_1_url = image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <a href="{{ img_url }}" class="product__thumbnail product__thumbnail--spec {% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class_1 }}" data-product-spec-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_1.aspect_ratio | times: 100}}">
+                <div class="product-flickity__indicator">
+                </div>
+                <div class="active--text py1 text-align--center">{{ product.metafields.attributes.spec_image_1_text }}</div>
+              </a>
+
+              {% assign img_2_url = image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+              <a href="{{ img_2_url }}" class="product__thumbnail product__thumbnail--spec {% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class_2 }}" data-product-spec-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_2.aspect_ratio | times: 100}}">
+                <div class="product-flickity__indicator">
+                </div>
+                <div class="active--text py1 text-align--center">{{ product.metafields.attributes.spec_image_2_text }}</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% elsif product.metafields.attributes.spec_image_count == 3 %}
 
       {% endif %}
     </div>

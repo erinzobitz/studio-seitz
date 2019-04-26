@@ -2093,11 +2093,15 @@ theme.Product = (function() {
     originalSelectorId: "[data-product-select]",
     priceWrapper: "[data-price-wrapper]",
     productFeaturedImage: "[data-product-featured-image]",
+    productFeaturedSpecImage: "[data-product-featured-spec-image]",
     productFeaturedImageWrapper: "[data-feature-product-wrapper]",
+    productFeaturedSpecWrapper: "[data-feature-spec-wrapper]",
     productJson: "[data-product-json]",
     productPrice: "[data-product-price]",
     productThumbs: "[data-product-single-thumbnail]",
+    productSpecThumbs: "[data-product-spec-single-thumbnail]",
     productThumbnailHolder: "[data-product-thumbnails]",
+    productSpecThumbnailHolder: "[data-product-spec-thumbnails]",
     singleOptionSelector: "[data-single-option-selector]",
     mobileFlickity: "[data-mobile-flickity]",
     nextImage: "[data-next-image]",
@@ -2142,6 +2146,12 @@ theme.Product = (function() {
       this.$container
     );
 
+    this.$featuredSpecImage = $(selectors.productFeaturedSpecImage, this.$container);
+    this.$featuredSpecImageWrapper = $(
+      selectors.productFeaturedSpecWrapper,
+      this.$container
+    );
+
     this.$container.on(
       "variantChange" + this.namespace,
       this.updateAddToCartState.bind(this)
@@ -2150,6 +2160,22 @@ theme.Product = (function() {
       "variantPriceChange" + this.namespace,
       this.updateProductPrices.bind(this)
     );
+
+    if (this.$featuredSpecImage.length > 0) {
+      this.settings.imageSize = slate.Image.imageSize(
+        this.$featuredSpecImage.attr("src")
+      );
+
+      slate.Image.preload(
+        this.productSingleObject.images,
+        this.settings.imageSize
+      );
+
+      this.$container.on(
+        "variantImageChange" + this.namespace,
+        this.updateProductImage.bind(this)
+      );
+    }
 
     if (this.$featuredImage.length > 0) {
       this.settings.imageSize = slate.Image.imageSize(
@@ -2181,6 +2207,17 @@ theme.Product = (function() {
     this.$productThumbs.click(function(e) {
       e.preventDefault();
       self.productThumbnailClick($(this));
+    });
+
+    this.$productSpecThumbs = $(selectors.productSpecThumbs, this.$container);
+    this.$productSpecThumbnailHolder = $(
+      selectors.productSpecThumbnailHolder,
+      this.$container
+    );
+    var self = this;
+    this.$productSpecThumbs.click(function(e) {
+      e.preventDefault();
+      self.productSpecThumbnailClick($(this));
     });
 
     this.$nextImage = $(selectors.nextImage);
@@ -2462,6 +2499,35 @@ theme.Product = (function() {
         (thumbsHolderHeight + thumbHeight) / 2;
 
       this.$productThumbnailHolder.animate({
+        scrollTop: scrollY
+      });
+    },
+
+    productSpecThumbnailClick: function(item) {
+      item = $(item);
+
+      var thumbHeight = this.$productSpecThumbs.height();
+      var thumbsHolderHeight = this.$productSpecThumbnailHolder.height();
+      var img_url = item.attr("href");
+      var padding = item.data("aspectratio") + "%";
+      this.$featuredImage.attr(
+        "src",
+        "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+      );
+
+      this.$featuredSpecImage.attr("srcset", "");
+      this.$featuredSpecImage.attr("data-src", img_url);
+      this.$featuredSpecImage.removeClass("lazyloaded").addClass("lazyload");
+      this.$featuredSpecImageWrapper.css("padding-top", padding);
+      this.$productSpecThumbs.removeClass("active");
+      item.addClass("active");
+
+      var scrollY =
+        item.position().top +
+        this.$productSpecThumbnailHolder.scrollTop() -
+        (thumbsHolderHeight + thumbHeight) / 2;
+
+      this.$productSpecThumbnailHolder.animate({
         scrollTop: scrollY
       });
     },

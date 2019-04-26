@@ -140,8 +140,8 @@
                   {%- assign ratio = 1 -%}
                 {%- endif -%}
                 {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <div class="nine-twelfths">
-                  <div class="pr2">
+                <div class="one-whole">
+                  <div>
                     <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--secondary-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
                     {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
                     {% capture wrapper_id %}FeatureImageWrapper-{{ image.id }}{% endcapture %}
