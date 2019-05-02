@@ -316,7 +316,7 @@ $font-size-base: 16px;
 $grid-medium: 750px;
 $grid-large: 990px;
 $grid-widescreen: 1400px;
-$grid-gutter__small: 40px;
+$grid-gutter__small: 30px;
 $grid-gutter: 60px;
 $grid-gutter__large: 80px;
 $grid-mobile: 480px;
@@ -789,6 +789,22 @@ Grid
     margin-left: -$grid-gutter__small;
     padding: 0;
     list-style: none;
+
+    @include media-query($small) {
+      margin-left: -20px;
+    }
+  }
+
+  .#{$i}grid--small-carousel {
+    @include clearfix;
+    margin: 0;
+    margin-left: -$grid-gutter__small;
+    padding: 0;
+    list-style: none;
+
+    @include media-query($small) {
+      margin-left: -20px;
+    }
   }
 
   .#{$i}grid__item--small {
@@ -798,6 +814,10 @@ Grid
 
     &[class*='--push'] {
       position: relative;
+    }
+
+    @include media-query($small) {
+      padding-left: 20px;
     }
   }
 
@@ -6144,6 +6164,14 @@ Custom Sections
 }
 
 // Blogs
+.homepage-blog__container {
+  padding: 50px 0;
+
+  @include media-query($medium-down) {
+    padding: 0;
+  }
+}
+
 .homepage-blog__title-container {
   align-items: center;
   flex-direction: row;
@@ -6366,14 +6394,16 @@ Custom Sections
   background-repeat: repeat;
   border: 1px solid rgba($color-seitz-gray, 0.6);
   display: flex;
+  min-height: 100%;
   height: 100%;
   justify-content: center;
   align-items: center;
   padding: 35px 30px !important;
+  position: relative;
   width: 100%;
 
   @include media-query($large-up) {
-    height: 580px;
+    min-height: 580px;
     padding: 0 30px;
     width: 110%;
   }
@@ -6415,7 +6445,7 @@ Custom Sections
   display: flex;
 
   .product__heritage-section__region--right & {
-    margin-left: 45px;
+    margin-left: 30px;
     flex-direction: column;
 
     @include media-query($small) {
@@ -6470,7 +6500,7 @@ Custom Sections
     @include media-query($small) {
       padding-top: 0;
       margin-top: -8px;
-      margin-left: 25px;
+      margin-left: 15px;
     }
   }
 }
@@ -6729,6 +6759,12 @@ Seitz Patterns
       border-bottom: 1px solid transparent;
     }
   }
+
+  &.action-link--large {
+    @include media-query($medium-up) {
+      font-size: 18px;
+    }
+  }
 }
 
 .icon-button {
@@ -6901,6 +6937,10 @@ Seitz Patterns
       letter-spacing: -0.68px;
       line-height: 26px;
     }
+  }
+
+  &.text__header--align-left {
+    margin-left: -5px;
   }
 
   &.text__header--white {

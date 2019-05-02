@@ -14,25 +14,20 @@
 {%- endcase -%}
 
 <section class="homepage-blog sm--pt3 pt4 {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="flickity-only" data-section-id="{{ section.id }}">
-  <div class="max-site-width px2">
+  <div class="max-site-width sm--pr0 px2">
 
     {%- assign blog = blogs['news'] -%}
 
-    <div class="lg--up--ten-twelfths mx--auto">
+    <div class="homepage-blog__container lg--up--ten-twelfths mx--auto">
       <div class="homepage-blog__title-container pb3 flex">
-        {% if blog != empty and section.blog.title != '' %}
-          {% if section.settings.title == blank %}
-            <h2 class="sm--mb1 text__header text__header--3">{{ blog.title }}</h2>
-          {% else %}
-            <h2 class="sm--mb1 text__header text__header--3">{{ section.settings.title | escape }}</h2>
-          {% endif %}
-        {% else %}
-          {% if section.settings.title == blank %}
-            <h2 class="sm--mb1 text__header text__header--3">{{ 'homepage.onboarding.blog_section_title' | t }}</h2>
-          {% else %}
-            <h2 class="sm--mb1 text__header text__header--3">{{ section.settings.title }}</h2>
-          {% endif %}
-        {% endif %}
+        <div class="homepage-blog__title flex justify--between">
+          <h2 class="text__header text__header--3 text__header--align-left">{{ blog.title }}</h2>
+          <div class="lg--up--hide">
+            <div class='mobile-flickity__button-container p0'>
+              <button class="icon-button px0 pt1 sm--pr2 btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm">{% include 'arrow-right' %}</button>
+            </div>
+          </div>
+        </div>
 
         <div class="homepage-blog __info">
           {% if section.settings.subheading != blank %}
@@ -42,29 +37,21 @@
           {% endif %}
 
           {% if section.settings.show_blog_link %}
-          <a class="inline-block action-link" href="{{ blog.url }}" >
+          <a class="inline-block action-link action-link--large" href="{{ blog.url }}" >
             See all
           </a>
           {% endif %}
         </div>
       </div>
 
-      <div class="lg--up--grid">
-        <div class="lg--up--grid__item">
-          <div class="homepage-blog__mobile-carousel mobile-flickity relative">
-            <div class="mobile-flickity__slides pb3 lg--up--grid grid--uniform lg--up--mtn3">
-            {% for article in blog.articles limit:section.settings.no_posts %}
-              <div class="blog-grid-item nine-twelfths md--six-twelfths lg--up--grid__item {{ grid_item_width }} lg--up--mt3">
-                <div class="px2 lg--up--px0">
-                  {% include 'article-grid-item__feature' %}
-                </div>
+      <div class="grid--small-carousel">
+        <div class="grid__item--small">
+          <div class="homepage-blog__mobile-carousel md--dn--pl2 mobile-flickity relative">
+            <div class="mobile-flickity__slides pb3 grid--small grid--uniform lg--up--mtn3">
+            {% for article in blog.articles limit:3 %}
+              <div class="blog-grid-item nine-twelfths md--six-twelfths grid__item--small lg--up--one-third lg--up--mt3">
+                <div>{% include 'article-grid-item__feature' %}</div>
               </div>
-            {% else %}
-              {% for i in (1..section.settings.no_posts) %}
-              <div class="product-grid-item nine-twelfths md--six-twelfths lg--up--grid__item {{ grid_item_width }} lg--up--mt3">
-                <div class="px2 lg--up--px0">{% include 'article-grid-item__onboarding' %}</div>
-              </div>
-              {% endfor %}
             {% endfor %}
 
             </div>
