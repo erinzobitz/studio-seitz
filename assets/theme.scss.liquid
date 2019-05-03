@@ -875,6 +875,12 @@ Grid
   }
 }
 
+.grid--flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 @include grid('');
 
 @each $breakpoint in $breakpoint-has-widths {
@@ -6574,6 +6580,18 @@ Custom Sections
   @include media-query($large-up) {
     padding-top: 140px;
     padding-bottom: 115px;
+  }
+}
+
+.page-section--top-only {
+  padding-top: 55px;
+
+  @include media-query($medium-up) {
+    padding-top: 100px;
+  }
+
+  @include media-query($large-up) {
+    padding-top: 140px;
   }
 }
 

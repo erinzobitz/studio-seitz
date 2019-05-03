@@ -1,4 +1,4 @@
-<section class="craftsmanship" data-section-id="craftsmanship" data-product-section-id="craftsmanship" data-section-type="craftsmanship">
+<section class="craftsmanship" data-section-type="carousel" data-section-id="{{ section.id }}">
   <div class="max-site-width md--up--px2">
     <div class="hero-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
       <div class="sm--hide">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="page-section bg--secondary-background">
+  <div class="page-section--top-only bg--secondary-background">
     <div class="max-site-width md--up--px2 page-sub-section">
       <div class="page-style lg--up--ten-twelfths mx--auto px2 md--up--px0">
         <div class="grid">
@@ -115,73 +115,293 @@
     </div>
 
     <div class="max-site-width md--up--px2 page-sub-section">
-      <div class="page-style lg--up--ten-twelfths mx--auto px2 md--up--px0">
-        <div class="sm--hide product__images relative font-size--0 mb3 mt3">
-          <div class="product__feature-image sm--hide md--up--nine-tenths lg--up--eight-tenths inline-block">
-            {% assign featured_image = images['fassler-slide-01.jpg'] %}
-            {% capture img_id %}ProductImage-{{ featured_image.id }}{% endcapture %}
-            {% capture wrapper_id %}ProductImageWrapper-{{ featured_image.id }}{% endcapture %}
-            {% assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+      <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+        <div class="grid grid--flex grid--flex--mobile">
+          <div class="grid__item md--up--seven-twelfths">
+            {%- assign image_1 = images['fassler-slide-01.jpg'] -%}
+            {%- assign img_1_url = image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-            <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
-              <div style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100}}%;" data-feature-product-wrapper>
-                <img
-                  id="ProductPhotoImg"
-                  class="resp-img product-single__photo lazyload {{ img_id_class }}"
-                  src="{{ featured_image | img_url: '300x300' }}"
-                  data-src="{{ img_url }}"
-                  data-widths="[180, 360, 590, 720, 900, 1080, 1296, 1512, 1728, 2048]"
-                  data-aspectratio="{{ featured_image.aspect_ratio }}"
-                  data-sizes="auto"
-                  data-image-id="{{ featured_image.id }}"
-                  alt="{{ featured_image.alt | escape }}"
-                  data-product-featured-image/>
-            </div>
-            </div>
-          </div>
+            {%- assign image_2 = images['fassler-slide-02.jpg'] -%}
+            {%- assign img_2_url = image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-          <div class="product__thumbnails" data-product-thumbnails>
-            {%- assign active_class = '' -%}
+            {%- assign image_3 = images['fassler-slide-03.jpg'] -%}
+            {%- assign img_3_url = image_3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign image_4 = images['fassler-slide-04.jpg'] -%}
+            {%- assign img_4_url = image_4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign image_5 = images['fassler-slide-05.jpg'] -%}
+            {%- assign img_5_url = image_5 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign image_6 = images['fassler-slide-06.jpg'] -%}
+            {%- assign img_6_url = image_6 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
             {%- assign force_crop = false -%}
 
-            <div class="product-flickity__slides pt2 flex">
-              {%- assign image = images['fassler-slide-01.jpg'] -%}
-              {%- if featured_image == image.src -%}
-                {%- assign active_class = 'active' -%}
-              {%- endif -%}
-              {%- assign ratio = image.aspect_ratio -%}
-              {%- if ratio < 0.2 -%}
-                {%- assign force_crop = true -%}
-                {%- assign ratio = 1 -%}
-              {%- endif -%}
-              {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-              <a href="{{ img_url }}" class="product__thumbnail block cursor--default md--up--pointer {{ active_class }}" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
-                <div class="product-flickity__indicator">
+            {%- assign ratio_1 = image_1.aspect_ratio -%}
+            {%- if ratio_1 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign ratio_1 = 1 -%}
+            {%- endif -%}
+
+            {%- assign ratio_2 = image_2.aspect_ratio -%}
+            {%- if ratio_2 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign ratio_2 = 1 -%}
+            {%- endif -%}
+
+            {%- assign ratio_3 = image_3.aspect_ratio -%}
+            {%- if ratio_3 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign ratio_3 = 1 -%}
+            {%- endif -%}
+
+            {%- assign ratio_4 = image_4.aspect_ratio -%}
+            {%- if ratio_4 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign ratio_4 = 1 -%}
+            {%- endif -%}
+
+            {%- assign ratio_5 = image_5.aspect_ratio -%}
+            {%- if ratio_5 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign ratio_5 = 1 -%}
+            {%- endif -%}
+
+            {%- assign ratio_6 = image_6.aspect_ratio -%}
+            {%- if ratio_6 < 0.6 -%}
+              {%- assign force_crop = true -%}
+              {%- assign ratio_6 = 1 -%}
+            {%- endif -%}
+
+            <div class="md--up--hide product__images relative mt3 font-size--0">
+              <div class="product__thumbnails relative overflow--hidden md--up--one-sixth js" data-carousel-mobile-flickity data-carousel-thumbnails>
+                <div class="mobile-flickity__slides">
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ img_1_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_1.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_1.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_1 | times: 100}}%;">
+                          <img id="{{ image_1.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image_1 | img_url: '300x' }}"
+                               data-src="{{ img_1_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_1 }}"
+                               data-sizes="auto"
+                               alt="{{ image_1.alt | escape }}">
+                           <img id="{{ image_1.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ image_1 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ image_1.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ img_2_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_2.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_2.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_2 | times: 100}}%;">
+                          <img id="{{ image_2.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image_2 | img_url: '300x' }}"
+                               data-src="{{ img_2_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_2 }}"
+                               data-sizes="auto"
+                               alt="{{ image_2.alt | escape }}">
+                           <img id="{{ image_2.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ image_2 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ image_2.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ img_3_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_3.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_3.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_3 | times: 100}}%;">
+                          <img id="{{ image_3.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image_3 | img_url: '300x' }}"
+                               data-src="{{ img_3_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_3 }}"
+                               data-sizes="auto"
+                               alt="{{ image_3.alt | escape }}">
+                           <img id="{{ image_3.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ image_3 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ image_3.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ img_4_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_4.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_4.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_4 | times: 100}}%;">
+                          <img id="{{ image_4.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image_4 | img_url: '300x' }}"
+                               data-src="{{ img_4_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_4 }}"
+                               data-sizes="auto"
+                               alt="{{ image_4.alt | escape }}">
+                           <img id="{{ image_4.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ image_4 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ image_4.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ img_5_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_5.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_5.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_5 | times: 100}}%;">
+                          <img id="{{ image_5.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image_5 | img_url: '300x' }}"
+                               data-src="{{ img_5_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_5 }}"
+                               data-sizes="auto"
+                               alt="{{ image_5.alt | escape }}">
+                           <img id="{{ image_5.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ image_5 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ image_5.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ img_6_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_6.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_6.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_6 | times: 100}}%;">
+                          <img id="{{ image_6.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image_6 | img_url: '300x' }}"
+                               data-src="{{ img_6_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_6 }}"
+                               data-sizes="auto"
+                               alt="{{ image_6.alt | escape }}">
+                           <img id="{{ image_6.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ image_6 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ image_6.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
                 </div>
-              </a>
-              {%- assign image_2 = images['fassler-slide-01.jpg'] -%}
-              {%- if featured_image == image_2.src -%}
-                {%- assign active_class = 'active' -%}
-              {%- endif -%}
-              {%- assign ratio_2 = image_2.aspect_ratio -%}
-              {%- if ratio_2 < 0.2 -%}
-                {%- assign force_crop = true -%}
-                {%- assign ratio_2 = 1 -%}
-              {%- endif -%}
-              {%- assign img_2_url = image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-              <a href="{{ img_2_url }}" class="product__thumbnail block cursor--default md--up--pointer {{ active_class }}" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_2.aspect_ratio | times: 100}}">
-                <div class="product-flickity__indicator">
+                <div class='mobile-flickity__button-container flex bottom--0 right--0 pt1'>
+                  <div class="text__block-quote text__block-quote--1">
+                      Adalbert Fässler inside his workshop
+                  </div>
+                  <button class="icon-button btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm pt1 pr0 pl2">{% include 'arrow-right' %}</button>
                 </div>
-              </a>
-            </div>
-            <div class="md--up--nine-tenths lg--up--eight-tenths pt1">
-              <div class="product-flickity__controls">
-                <div class="text__block-quote text__block-quote--1">
-                  Adalbert Fässler inside his workshop
-                </div>
-                <button class="icon-button btn border--none bg--transparent px0 btn--next pl2" data-next-image>{% include 'arrow-right' %}</button>
               </div>
             </div>
+
+            <div class="sm--hide product__images relative font-size--0 mb3 mt3">
+              <div class="product__feature-image sm--hide md--up--nine-tenths lg--up--eight-tenths inline-block">
+                {% assign featured_image = images['fassler-slide-01.jpg'] %}
+                {% capture img_id %}CarouselImage-{{ featured_image.id }}{% endcapture %}
+                {% capture wrapper_id %}CarouselImageWrapper-{{ featured_image.id }}{% endcapture %}
+                {% assign img_url = featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+
+                <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                  <div style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100}}%;" data-carousel-feature-image-wrapper>
+                    <img
+                      id="CarouselImg"
+                      class="resp-img product-single__photo lazyload"
+                      src="{{ featured_image | img_url: '300x300' }}"
+                      data-src="{{ img_url }}"
+                      data-widths="[180, 360, 590, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ featured_image.aspect_ratio }}"
+                      data-sizes="auto"
+                      data-image-id="{{ featured_image.id }}"
+                      alt="{{ featured_image.alt | escape }}"
+                      data-carousel-featured-image/>
+                    <img id="{{ img_id }}"
+                         class="resp-img-placeholder"
+                         src="{{ featured_image | img_url: '1x1' }}"
+                         width="{{ featured_image.width }}"
+                         height="{{ featured_image.height }}"
+                         alt="{{ featured_image.alt | escape }}">
+                </div>
+                </div>
+              </div>
+
+              <div class="product__thumbnails carousel__thumbnails" data-carousel-thumbnails>
+                <div class="product-flickity__slides pt2 flex">
+                  <a href="{{ img_1_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer active" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_1.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ img_2_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_2.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ img_3_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_3.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ img_4_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_4.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ img_5_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer {{ active_class }}" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_5.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ img_6_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer {{ active_class }}" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_6.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                </div>
+                <div class="md--up--nine-tenths lg--up--eight-tenths pt1">
+                  <div class="product-flickity__controls">
+                    <div class="text__block-quote text__block-quote--1">
+                      Adalbert Fässler inside his workshop
+                    </div>
+                    <button class="icon-button btn border--none bg--transparent px0 btn--next pl2" data-carousel-next-image>{% include 'arrow-right' %}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid__item ten-twelfths md--up--five-twelfths">
+            <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/fassler-hero-02_63877336-2bb9-4460-9e21-ff7d78bf54bc.jpg?41530"
+                 alt="Fassler Studio">
           </div>
         </div>
       </div>
@@ -234,6 +454,262 @@
 
     <div class="max-site-width md--up--px2 page-sub-section">
       <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+        <div class="grid grid--flex grid--flex--mobile">
+          <div class="grid__item md--up--seven-twelfths">
+            {%- assign two_image_1 = images['maetzler-slide-01.jpg'] -%}
+            {%- assign two_img_1_url = two_image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign two_image_2 = images['maetzler-slide-02.jpg'] -%}
+            {%- assign two_img_2_url = two_image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign two_image_3 = images['maetzler-slide-03.jpg'] -%}
+            {%- assign two_img_3_url = two_image_3 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign two_image_4 = images['maetzler-slide-04.jpg'] -%}
+            {%- assign two_img_4_url = two_image_4 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign two_image_5 = images['maetzler-slide-05.jpg'] -%}
+            {%- assign two_img_5_url = two_image_5 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign force_crop = false -%}
+
+            {%- assign two_ratio_1 = two_image_1.aspect_ratio -%}
+            {%- if two_ratio_1 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign two_ratio_1 = 1 -%}
+            {%- endif -%}
+
+            {%- assign two_ratio_2 = two_image_2.aspect_ratio -%}
+            {%- if two_ratio_2 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign two_ratio_2 = 1 -%}
+            {%- endif -%}
+
+            {%- assign two_ratio_3 = two_image_3.aspect_ratio -%}
+            {%- if two_ratio_3 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign two_ratio_3 = 1 -%}
+            {%- endif -%}
+
+            {%- assign two_ratio_4 = two_image_4.aspect_ratio -%}
+            {%- if two_ratio_4 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign two_ratio_4 = 1 -%}
+            {%- endif -%}
+
+            {%- assign two_ratio_5 = two_image_5.aspect_ratio -%}
+            {%- if two_ratio_5 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign two_ratio_5 = 1 -%}
+            {%- endif -%}
+
+            <div class="md--up--hide product__images relative mt3 font-size--0">
+              <div class="product__thumbnails relative overflow--hidden md--up--one-sixth js" data-carousel-two-mobile-flickity data-carousel-two-thumbnails>
+                <div class="mobile-flickity__slides">
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ two_img_1_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_1.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_1.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_1 | times: 100}}%;">
+                          <img id="{{ two_image_1.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ two_image_1 | img_url: '300x' }}"
+                               data-src="{{ two_img_1_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_1 }}"
+                               data-sizes="auto"
+                               alt="{{ two_image_1.alt | escape }}">
+                           <img id="{{ two_image_1.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ two_image_1 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ two_image_1.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ two_img_2_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_2.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ two_image_2.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_2 | times: 100}}%;">
+                          <img id="{{ two_image_2.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ two_image_2 | img_url: '300x' }}"
+                               data-src="{{ img_2_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_2 }}"
+                               data-sizes="auto"
+                               alt="{{ two_image_2.alt | escape }}">
+                           <img id="{{ two_image_2.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ two_image_2 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ two_image_2.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ two_img_3_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_3.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ two_image_3.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_3 | times: 100}}%;">
+                          <img id="{{ two_image_3.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ two_image_3 | img_url: '300x' }}"
+                               data-src="{{ two_img_3_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_3 }}"
+                               data-sizes="auto"
+                               alt="{{ two_image_3.alt | escape }}">
+                           <img id="{{ two_image_3.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ two_image_3 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ two_image_3.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ two_img_4_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_4.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ two_image_4.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_4 | times: 100}}%;">
+                          <img id="{{ two_image_4.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ two_image_4 | img_url: '300x' }}"
+                               data-src="{{ two_img_4_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_4 }}"
+                               data-sizes="auto"
+                               alt="{{ two_image_4.alt | escape }}">
+                           <img id="{{ two_image_4.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ two_image_4 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ two_image_4.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ two_img_5_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_5.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ two_image_5.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_5 | times: 100}}%;">
+                          <img id="{{ two_image_5.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ two_image_5 | img_url: '300x' }}"
+                               data-src="{{ two_img_5_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio_5 }}"
+                               data-sizes="auto"
+                               alt="{{ two_image_5.alt | escape }}">
+                           <img id="{{ two_image_5.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ two_image_5 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ two_image_5.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class='mobile-flickity__button-container flex bottom--0 right--0 pt1'>
+                  <div class="text__block-quote text__block-quote--1">
+                    Urs Castellazzi and Urs Mätzler inside their workshop
+                  </div>
+                  <button class="icon-button btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm pt1 pr0 pl2">{% include 'arrow-right' %}</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="sm--hide product__images relative font-size--0 mb3 mt3">
+              <div class="product__feature-image sm--hide md--up--nine-tenths lg--up--eight-tenths inline-block">
+                {% assign two_featured_image = images['maetzler-slide-01.jpg'] %}
+                {% capture two_img_id %}CarouselImage-{{ two_featured_image.id }}{% endcapture %}
+                {% capture wrapper_id %}CarouselImageWrapper-{{ two_featured_image.id }}{% endcapture %}
+                {% assign two_img_url = two_featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+
+                <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                  <div style="padding-top:{{ 1 | divided_by: featured_image.aspect_ratio | times: 100}}%;" data-carousel-two-feature-image-wrapper>
+                    <img
+                      id="CarouselImg"
+                      class="resp-img product-single__photo lazyload"
+                      src="{{ two_featured_image | img_url: '300x300' }}"
+                      data-src="{{ two_img_url }}"
+                      data-widths="[180, 360, 590, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ featured_image.aspect_ratio }}"
+                      data-sizes="auto"
+                      data-image-id="{{ two_featured_image.id }}"
+                      alt="{{ two_featured_image.alt | escape }}"
+                      data-carousel-two-featured-image/>
+                    <img id="{{ two_img_id }}"
+                         class="resp-img-placeholder"
+                         src="{{ two_featured_image | img_url: '1x1' }}"
+                         width="{{ two_featured_image.width }}"
+                         height="{{ two_featured_image.height }}"
+                         alt="{{ two_featured_image.alt | escape }}">
+                </div>
+                </div>
+              </div>
+
+              <div class="product__thumbnails carousel__thumbnails" data-carousel-two-thumbnails>
+                <div class="product-flickity__slides pt2 flex">
+                  <a href="{{ two_img_1_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer active" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_1.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ two_img_2_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_2.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ two_img_3_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_3.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ two_img_4_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_4.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ two_img_5_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer {{ active_class }}" data-carousel-two-single-thumbnail data-aspectratio="{{ 1 | divided_by: two_image_5.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                </div>
+                <div class="md--up--nine-tenths lg--up--eight-tenths pt1">
+                  <div class="product-flickity__controls">
+                    <div class="text__block-quote text__block-quote--1">
+                      Urs Castellazzi and Urs Mätzler inside their workshop
+                    </div>
+                    <button class="icon-button btn border--none bg--transparent px0 btn--next pl2" data-carousel-next-image>{% include 'arrow-right' %}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid__item ten-twelfths md--up--five-twelfths">
+            <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/maetzler-hero-02.jpg?42202"
+                 alt="Maetzler Studio">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-site-width md--up--px2 page-sub-section">
+      <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
         <div class="grid">
           <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
             <div class="detail__container">
@@ -266,6 +742,151 @@
                 drill presses, saws and grinders—the workshop produces a large number of intricate parts for traditonal and modern machines across Northern Europe.
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-site-width md--up--px2 page-sub-section">
+      <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+        <div class="grid grid--flex grid--flex--mobile">
+          <div class="grid__item md--up--seven-twelfths">
+            {%- assign three_image_1 = images['seitz-slide-01.jpg'] -%}
+            {%- assign three_img_1_url = three_image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign three_image_2 = images['seitz-slide-02.jpg'] -%}
+            {%- assign three_img_2_url = three_image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+            {%- assign force_crop = false -%}
+
+            {%- assign three_ratio_1 = three_image_1.aspect_ratio -%}
+            {%- if three_ratio_1 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign three_ratio_1 = 1 -%}
+            {%- endif -%}
+
+            {%- assign three_ratio_2 = three_image_2.aspect_ratio -%}
+            {%- if three_ratio_2 < 0.2 -%}
+              {%- assign force_crop = true -%}
+              {%- assign three_ratio_2 = 1 -%}
+            {%- endif -%}
+
+            <div class="md--up--hide product__images relative mt3 font-size--0">
+              <div class="product__thumbnails relative overflow--hidden md--up--one-sixth js" data-carousel-three-mobile-flickity data-carousel-three-thumbnails>
+                <div class="mobile-flickity__slides">
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ three_img_1_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-three-single-thumbnail data-aspectratio="{{ 1 | divided_by: three_image_1.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ image_1.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_1 | times: 100}}%;">
+                          <img id="{{ three_image_1.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ three_image_1 | img_url: '300x' }}"
+                               data-src="{{ three_img_1_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ three_ratio_1 }}"
+                               data-sizes="auto"
+                               alt="{{ three_image_1.alt | escape }}">
+                           <img id="{{ three_image_1.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ three_image_1 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ three_image_1.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="one-whole">
+                    <div>
+                      <a href="{{ three_img_2_url }}" class="block cursor--default md--up--pointer active md--up--active-border--secondary-text" data-carousel-single-thumbnail data-aspectratio="{{ 1 | divided_by: three_image_2.aspect_ratio | times: 100}}">
+                      <div id="FeatureImageWrapper-{{ three_three_image_2.id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio_2 | times: 100}}%;">
+                          <img id="{{ three_image_2.id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ three_image_2 | img_url: '300x' }}"
+                               data-src="{{ three_img_2_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ three_ratio_2 }}"
+                               data-sizes="auto"
+                               alt="{{ three_image_2.alt | escape }}">
+                           <img id="{{ three_image_2.id }}"
+                                class="resp-img-placeholder"
+                                src="{{ three_image_2 | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ three_image_2.alt | escape }}">
+                        </div>
+                      </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class='mobile-flickity__button-container flex bottom--0 right--0 pt1'>
+                  <div class="text__block-quote text__block-quote--1">
+                      Michael and Thomas Seitz inside their workshop
+                  </div>
+                  <button class="icon-button btn border--none bg--transparent btn--next color--secondary-text hv--secondary-accent font-size--sm pt1 pr0 pl2">{% include 'arrow-right' %}</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="sm--hide product__images relative font-size--0 mb3 mt3">
+              <div class="product__feature-image sm--hide md--up--nine-tenths lg--up--eight-tenths inline-block">
+                {% assign three_featured_image = images['seitz-slide-01.jpg'] %}
+                {% capture img_id %}CarouselImage-{{ three_featured_image.id }}{% endcapture %}
+                {% capture wrapper_id %}CarouselImageWrapper-{{ three_featured_image.id }}{% endcapture %}
+                {% assign three_img_url = three_featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+
+                <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                  <div style="padding-top:{{ 1 | divided_by: three_featured_image.aspect_ratio | times: 100}}%;" data-carousel-three-feature-image-wrapper>
+                    <img
+                      id="CarouselImg"
+                      class="resp-img product-single__photo lazyload"
+                      src="{{ three_featured_image | img_url: '300x300' }}"
+                      data-src="{{ three_img_url }}"
+                      data-widths="[180, 360, 590, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                      data-aspectratio="{{ three_featured_image.aspect_ratio }}"
+                      data-sizes="auto"
+                      data-image-id="{{ three_featured_image.id }}"
+                      alt="{{ three_featured_image.alt | escape }}"
+                      data-carousel-three-featured-image/>
+                    <img id="{{ img_id }}"
+                         class="resp-img-placeholder"
+                         src="{{ three_featured_image | img_url: '1x1' }}"
+                         width="{{ three_featured_image.width }}"
+                         height="{{ three_featured_image.height }}"
+                         alt="{{ three_featured_image.alt | escape }}">
+                </div>
+                </div>
+              </div>
+
+              <div class="product__thumbnails carousel__thumbnails" data-carousel-three-thumbnails>
+                <div class="product-flickity__slides pt2 flex">
+                  <a href="{{ three_img_1_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer active" data-carousel-three-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_1.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                  <a href="{{ three_img_2_url }}" class="carousel__thumbnail product__thumbnail block cursor--default md--up--pointer" data-carousel-three-single-thumbnail data-aspectratio="{{ 1 | divided_by: image_2.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                </div>
+                <div class="md--up--nine-tenths lg--up--eight-tenths pt1">
+                  <div class="product-flickity__controls">
+                    <div class="text__block-quote text__block-quote--1">
+                      Michael and Thomas Seitz inside their workshop
+                    </div>
+                    <button class="icon-button btn border--none bg--transparent px0 btn--next pl2" data-carousel-three-next-image>{% include 'arrow-right' %}</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid__item ten-twelfths md--up--five-twelfths">
+            <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/seitz-hero-02.jpg?41805"
+                 alt="Seitz Studio">
           </div>
         </div>
       </div>

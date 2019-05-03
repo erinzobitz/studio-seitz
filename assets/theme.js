@@ -2093,15 +2093,11 @@ theme.Product = (function() {
     originalSelectorId: "[data-product-select]",
     priceWrapper: "[data-price-wrapper]",
     productFeaturedImage: "[data-product-featured-image]",
-    productFeaturedSpecImage: "[data-product-featured-spec-image]",
     productFeaturedImageWrapper: "[data-feature-product-wrapper]",
-    productFeaturedSpecWrapper: "[data-feature-spec-wrapper]",
     productJson: "[data-product-json]",
     productPrice: "[data-product-price]",
     productThumbs: "[data-product-single-thumbnail]",
-    productSpecThumbs: "[data-product-spec-single-thumbnail]",
     productThumbnailHolder: "[data-product-thumbnails]",
-    productSpecThumbnailHolder: "[data-product-spec-thumbnails]",
     singleOptionSelector: "[data-single-option-selector]",
     mobileFlickity: "[data-mobile-flickity]",
     nextImage: "[data-next-image]",
@@ -2146,12 +2142,6 @@ theme.Product = (function() {
       this.$container
     );
 
-    this.$featuredSpecImage = $(selectors.productFeaturedSpecImage, this.$container);
-    this.$featuredSpecImageWrapper = $(
-      selectors.productFeaturedSpecWrapper,
-      this.$container
-    );
-
     this.$container.on(
       "variantChange" + this.namespace,
       this.updateAddToCartState.bind(this)
@@ -2160,22 +2150,6 @@ theme.Product = (function() {
       "variantPriceChange" + this.namespace,
       this.updateProductPrices.bind(this)
     );
-
-    if (this.$featuredSpecImage.length > 0) {
-      this.settings.imageSize = slate.Image.imageSize(
-        this.$featuredSpecImage.attr("src")
-      );
-
-      slate.Image.preload(
-        this.productSingleObject.images,
-        this.settings.imageSize
-      );
-
-      this.$container.on(
-        "variantImageChange" + this.namespace,
-        this.updateProductImage.bind(this)
-      );
-    }
 
     if (this.$featuredImage.length > 0) {
       this.settings.imageSize = slate.Image.imageSize(
@@ -2207,17 +2181,6 @@ theme.Product = (function() {
     this.$productThumbs.click(function(e) {
       e.preventDefault();
       self.productThumbnailClick($(this));
-    });
-
-    this.$productSpecThumbs = $(selectors.productSpecThumbs, this.$container);
-    this.$productSpecThumbnailHolder = $(
-      selectors.productSpecThumbnailHolder,
-      this.$container
-    );
-    var self = this;
-    this.$productSpecThumbs.click(function(e) {
-      e.preventDefault();
-      self.productSpecThumbnailClick($(this));
     });
 
     this.$nextImage = $(selectors.nextImage);
@@ -2499,35 +2462,6 @@ theme.Product = (function() {
         (thumbsHolderHeight + thumbHeight) / 2;
 
       this.$productThumbnailHolder.animate({
-        scrollTop: scrollY
-      });
-    },
-
-    productSpecThumbnailClick: function(item) {
-      item = $(item);
-
-      var thumbHeight = this.$productSpecThumbs.height();
-      var thumbsHolderHeight = this.$productSpecThumbnailHolder.height();
-      var img_url = item.attr("href");
-      var padding = item.data("aspectratio") + "%";
-      this.$featuredImage.attr(
-        "src",
-        "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-      );
-
-      this.$featuredSpecImage.attr("srcset", "");
-      this.$featuredSpecImage.attr("data-src", img_url);
-      this.$featuredSpecImage.removeClass("lazyloaded").addClass("lazyload");
-      this.$featuredSpecImageWrapper.css("padding-top", padding);
-      this.$productSpecThumbs.removeClass("active");
-      item.addClass("active");
-
-      var scrollY =
-        item.position().top +
-        this.$productSpecThumbnailHolder.scrollTop() -
-        (thumbsHolderHeight + thumbHeight) / 2;
-
-      this.$productSpecThumbnailHolder.animate({
         scrollTop: scrollY
       });
     },
@@ -3019,6 +2953,263 @@ theme.Video = (function() {
   }
 
   return Video;
+})();
+
+/**
+ * Video section Script
+ * ------------------------------------------------------------------------------
+ *
+ * @namespace Videos
+ */
+
+theme.Carousel = (function() {
+  var selectors = {
+    carouselFeaturedImage: "[data-carousel-featured-image]",
+    carouselFeaturedImageWrapper: "[data-carousel-feature-image-wrapper]",
+    carouselThumbs: "[data-carousel-single-thumbnail]",
+    carouselThumbnailHolder: "[data-carousel-thumbnails]",
+    carouselMobileFlickity: "[data-carousel-mobile-flickity]",
+    carouselNextImage: "[data-carousel-next-image]",
+
+    carouselTwoFeaturedImage: "[data-carousel-two-featured-image]",
+    carouselTwoFeaturedImageWrapper: "[data-carousel-two-feature-image-wrapper]",
+    carouselTwoThumbs: "[data-carousel-two-single-thumbnail]",
+    carouselTwoThumbnailHolder: "[data-carousel-two-thumbnails]",
+    carouselTwoMobileFlickity: "[data-carousel-two-mobile-flickity]",
+    carouselTwoNextImage: "[data-carousel-two-next-image]",
+
+    carouselThreeFeaturedImage: "[data-carousel-three-featured-image]",
+    carouselThreeFeaturedImageWrapper: "[data-carousel-three-feature-image-wrapper]",
+    carouselThreeThumbs: "[data-carousel-three-single-thumbnail]",
+    carouselThreeThumbnailHolder: "[data-carousel-three-thumbnails]",
+    carouselThreeMobileFlickity: "[data-carousel-three-mobile-flickity]",
+    carouselThreeNextImage: "[data-carousel-three-next-image]"
+  };
+  /**
+   * Product section constructor. Runs on page load as well as Theme Editor
+   * `section:load` events.
+   * @param {string} container - selector for the section container DOM element
+   */
+
+  function Carousel(container) {
+    this.$container = $(container);
+
+    this.$featuredImage = $(selectors.carouselFeaturedImage, this.$container);
+    this.$featuredImageWrapper = $(
+      selectors.carouselFeaturedImageWrapper,
+      this.$container
+    );
+
+    this.$mobileFlickity = $(selectors.carouselMobileFlickity, this.$container);
+    if (this.$mobileFlickity.length > 0) {
+      theme.mobileFlickity(this.$mobileFlickity);
+    }
+
+    this.$carouselThumbs = $(selectors.carouselThumbs, this.$container);
+    this.$carouselThumbnailHolder = $(
+      selectors.carouselThumbnailHolder,
+      this.$container
+    );
+    var self = this;
+
+    this.$carouselThumbs.click(function(e) {
+      e.preventDefault();
+      self.carouselThumbnailClick($(this));
+    });
+
+    this.$nextImage = $(selectors.carouselNextImage);
+
+    this.$nextImage.click(function(e) {
+      e.preventDefault();
+      var $images = $(this).parent().parent().prev().children();
+      var $activeImage = $(this).parent().parent().prev().children(
+                           ".product__thumbnail.active"
+                         );
+
+      if ($activeImage.next().length !== 0) {
+        $activeImage.next().click();
+      } else {
+        $images.first().click();
+      }
+    });
+
+    this.$featuredImageTwo = $(selectors.carouselTwoFeaturedImage, this.$container);
+    this.$featuredImageWrapperTwo = $(
+      selectors.carouselTwoFeaturedImageWrapper,
+      this.$container
+    );
+
+    this.$mobileFlickityTwo = $(selectors.carouselTwoMobileFlickity, this.$container);
+    if (this.$mobileFlickityTwo.length > 0) {
+      theme.mobileFlickity(this.$mobileFlickityTwo);
+    }
+
+    this.$carouselTwoThumbs = $(selectors.carouselTwoThumbs, this.$container);
+    this.$carouselTwoThumbnailHolder = $(
+      selectors.carouselTwoThumbnailHolder,
+      this.$container
+    );
+    var self = this;
+
+    this.$carouselTwoThumbs.click(function(e) {
+      e.preventDefault();
+      self.carouselTwoThumbnailClick($(this));
+    });
+
+    this.$nextImageTwo = $(selectors.carouselTwoNextImage);
+
+    this.$nextImageTwo.click(function(e) {
+      e.preventDefault();
+      var $images = $(this).parent().parent().prev().children();
+      var $activeImage = $(this).parent().parent().prev().children(
+                           ".product__thumbnail.active"
+                         );
+
+      if ($activeImage.next().length !== 0) {
+        $activeImage.next().click();
+      } else {
+        $images.first().click();
+      }
+    });
+
+    this.$featuredImageThree = $(selectors.carouselThreeFeaturedImage, this.$container);
+    this.$featuredImageWrapperThree = $(
+      selectors.carouselThreeFeaturedImageWrapper,
+      this.$container
+    );
+
+    this.$mobileFlickityThree = $(selectors.carouselThreeMobileFlickity, this.$container);
+    if (this.$mobileFlickityThree.length > 0) {
+      theme.mobileFlickity(this.$mobileFlickityThree);
+    }
+
+    this.$carouselThreeThumbs = $(selectors.carouselThreeThumbs, this.$container);
+    this.$carouselThreeThumbnailHolder = $(
+      selectors.carouselThreeThumbnailHolder,
+      this.$container
+    );
+    var self = this;
+
+    this.$carouselThreeThumbs.click(function(e) {
+      e.preventDefault();
+      self.carouselThreeThumbnailClick($(this));
+    });
+
+    this.$nextImageThree = $(selectors.carouselThreeNextImage);
+
+    this.$nextImageThree.click(function(e) {
+      e.preventDefault();
+      var $images = $(this).parent().parent().prev().children();
+      var $activeImage = $(this).parent().parent().prev().children(
+                           ".product__thumbnail.active"
+                         );
+
+      if ($activeImage.next().length !== 0) {
+        $activeImage.next().click();
+      } else {
+        $images.first().click();
+      }
+    });
+  }
+
+  Carousel.prototype = $.extend({}, Carousel.prototype, {
+    carouselThumbnailClick: function(item) {
+      item = $(item);
+
+      var thumbHeight = this.$carouselThumbs.height();
+      var thumbsHolderHeight = this.$carouselThumbnailHolder.height();
+      var img_url = item.attr("href");
+      var padding = item.data("aspectratio") + "%";
+      this.$featuredImage.attr(
+        "src",
+        "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+      );
+
+      this.$featuredImage.attr("srcset", "");
+      this.$featuredImage.attr("data-src", img_url);
+
+      this.$featuredImage.removeClass("lazyloaded").addClass("lazyload");
+      this.$featuredImageWrapper.css("padding-top", padding);
+      this.$carouselThumbs.removeClass("active");
+      item.addClass("active");
+
+      var scrollY =
+        item.position().top +
+        this.$carouselThumbnailHolder.scrollTop() -
+        (thumbsHolderHeight + thumbHeight) / 2;
+
+      this.$carouselThumbnailHolder.animate({
+        scrollTop: scrollY
+      });
+    },
+
+    carouselTwoThumbnailClick: function(item) {
+      item = $(item);
+
+      var thumbHeight = this.$carouselTwoThumbs.height();
+      var thumbsHolderHeight = this.$carouselTwoThumbnailHolder.height();
+      var img_url = item.attr("href");
+      var padding = item.data("aspectratio") + "%";
+      this.$featuredImageTwo.attr(
+        "src",
+        "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+      );
+
+      this.$featuredImageTwo.attr("srcset", "");
+      this.$featuredImageTwo.attr("data-src", img_url);
+
+      this.$featuredImageTwo.removeClass("lazyloaded").addClass("lazyload");
+      this.$featuredImageWrapperTwo.css("padding-top", padding);
+      this.$carouselTwoThumbs.removeClass("active");
+      item.addClass("active");
+
+      var scrollY =
+        item.position().top +
+        this.$carouselTwoThumbnailHolder.scrollTop() -
+        (thumbsHolderHeight + thumbHeight) / 2;
+
+      this.$carouselTwoThumbnailHolder.animate({
+        scrollTop: scrollY
+      });
+    },
+
+    carouselThreeThumbnailClick: function(item) {
+      item = $(item);
+
+      var thumbHeight = this.$carouselThreeThumbs.height();
+      var thumbsHolderHeight = this.$carouselThreeThumbnailHolder.height();
+      var img_url = item.attr("href");
+      var padding = item.data("aspectratio") + "%";
+      this.$featuredImageThree.attr(
+        "src",
+        "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+      );
+
+      this.$featuredImageThree.attr("srcset", "");
+      this.$featuredImageThree.attr("data-src", img_url);
+
+      this.$featuredImageThree.removeClass("lazyloaded").addClass("lazyload");
+      this.$featuredImageWrapperThree.css("padding-top", padding);
+      this.$carouselThreeThumbs.removeClass("active");
+      item.addClass("active");
+
+      var scrollY =
+        item.position().top +
+        this.$carouselThreeThumbnailHolder.scrollTop() -
+        (thumbsHolderHeight + thumbHeight) / 2;
+
+      this.$carouselThreeThumbnailHolder.animate({
+        scrollTop: scrollY
+      });
+    }
+    /**
+     * Updates the DOM with the specified image URL
+     *
+     * @param {string} src - Image src URL
+     */
+  });
+
+  return Carousel;
 })();
 
 theme.Cascade = (function() {
@@ -3527,6 +3718,7 @@ $(document).ready(function() {
   sections.register("collection", theme.Collection);
   sections.register("blog", theme.Blog);
   sections.register("flickity-only", theme.flickityOnly);
+  sections.register("carousel", theme.Carousel);
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
