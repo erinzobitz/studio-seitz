@@ -459,6 +459,38 @@
     ]
   },
   {
+    "name": "Image left with text",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Image with Text"
+      },
+      {
+        "type": "url",
+        "id": "cta_url",
+        "label": "Optional: Call to action link"
+      },
+      {
+        "type": "text",
+        "id": "cta_text",
+        "label": "Call to action link text",
+        "default": "Shop Now"
+      }
+    ]
+  },
+  {
     "name": "Social media",
     "settings": [
       {

@@ -1,0 +1,126 @@
+{%- assign section_color = 'secondary' -%}
+{%- include 'global-variables' -%}
+
+<section class="cascade pb3 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
+  <div class="cascading-content md--up--ten-twelfths">
+    {% assign heading = section.settings.heading %}
+    {% assign cta_text = section.settings.cta_text %}
+    {% assign cta_url = section.settings.cta_url %}
+    {% assign local_color = section.settings.section_color %}
+    <div class="image-with-text__container relative  {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+      <div class="sm--hide image-with-text__image">
+        {% assign image = section.settings.image %}
+        <div class="image-holder">
+          {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
+          {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
+          {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+            <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                   class="resp-img lazyload"
+                   src="{{ image | img_url: '300x' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                   data-aspectratio="{{ image.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ image.alt | escape }}">
+               <img id="{{ img_id }}"
+                    class="resp-img-placeholder"
+                    src="{{ image | img_url: '1x1' }}"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                    alt="{{ image.alt | escape }}">
+            </div>
+          </div>
+          <noscript>
+            <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+          </noscript>
+        </div>
+      </div>
+      <div class="md--up--hide image-with-text__image">
+        {% assign mobile_image = section.settings.mobile_image %}
+        <div class="image-holder">
+          {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
+          {% capture wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
+          {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+            <div style="padding-top:{{ 1 | divided_by: mobile_image.aspect_ratio | times: 100}}%;">
+              <img id="{{ mobile_img_id }}"
+                   class="resp-img lazyload"
+                   src="{{ mobile_image | img_url: '300x' }}"
+                   data-src="{{ mobile_img_url }}"
+                   data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                   data-aspectratio="{{ mobile_image.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ mobile_image.alt | escape }}">
+               <img id="{{ mobile_img_id }}"
+                    class="resp-img-placeholder"
+                    src="{{ mobile_image | img_url: '1x1' }}"
+                    width="{{ mobile_image.width }}"
+                    height="{{ mobile_image.height }}"
+                    alt="{{ mobile_image.alt | escape }}">
+            </div>
+          </div>
+          <noscript>
+            <img src="{{ mobile_image.src | img_url: 'large' }}" alt="{{ mobile_image.alt | escape }}" class="item--image">
+          </noscript>
+        </div>
+      </div>
+      <div class="image-with-text__content absolute full top--0 left--0 z1">
+        <a href="{{ cta_url }}" class="block full color--{{ section_color }}-text">
+          <div class="table full">
+            <div class="table-cell text-align--right align--bottom">
+              <div class="inline-block align--bottom">
+                <h2 class="label m0 color--tertiary-text">{{ heading }}</h2>
+                <p class="m0 inline-block text__body text__body--4 text__body--white" href="" target="_blank" >
+                    {{ cta_text }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image left with text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Image with Text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Optional: Call to action link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Call to action link text",
+      "default": "Shop Now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image left with text overlay",
+      "category": "Custom content"
+    }
+  ]
+}
+{% endschema %}
