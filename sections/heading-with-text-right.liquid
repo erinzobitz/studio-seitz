@@ -1,0 +1,80 @@
+{%- assign section_color = 'secondary' -%}
+
+<section class="cascade pb2 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
+  <div class="rich-text rich-text--{{ section.id }} {{ section.settings.text_align}}">
+    <div class="max-site-width sm--px2 md--up--pl2 relative">
+      <div>
+        <div class="grid">
+          <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+            <br>
+          </div>
+          <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+            <div class="md--up--six-eighths md--up--pm--three-quarters wd--two-thirds">
+              {% if section.settings.heading != blank   %}
+                {% if block_width_mobile == 'full' %}
+                  {% assign heading_class = heading_fontsize__mobile_full %}
+                {% else %}
+                  {% assign heading_class = heading_fontsize__mobile_half %}
+                {% endif %}
+                {% if section.type == 'heading' and section.settings.font_size == 'large' %}
+                  {% if block_width_mobile == 'full' %}
+                    {% assign heading_class = 'f--heading font-size--xxxl line-height--8 pm--font-size--xxxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
+                  {% else %}
+                    {% assign heading_class = 'f--heading font-size--xxl line-height--7 pm--font-size--xxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
+                  {% endif %}
+                {% endif %}
+                <h2 class="mx--auto sm--pt3 pt4 line-length--medium text__header text__header--3">
+                  {{ section.settings.heading }}
+                </h2>
+              {% endif %}
+              {% if section.settings.rich_text != blank  %}
+              <div class="richtext text__body text__body--1">
+                {{ section.settings.rich_text }}
+              </div>
+              {% endif %}
+              {% if section.settings.paragraph_rich_text != blank  %}
+              <div class="md--up--pt2 richtext text__body text__body--3">
+                {{ section.settings.paragraph_rich_text }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% schema %}
+  {
+    "name": "Heading with text",
+    "settings": [
+      {
+        "id": "heading",
+        "type": "text",
+        "label": "Heading",
+        "default": "Heading or impact text goes here."
+      },
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "id": "rich_text",
+        "type": "richtext",
+        "label": "Text",
+        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
+      },
+      {
+        "id": "paragraph_rich_text",
+        "type": "richtext",
+        "label": "Paragraph"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Header with text right",
+        "category": "Custom content"
+      }
+    ]
+  }
+  {% endschema %}

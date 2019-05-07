@@ -2211,6 +2211,17 @@ theme.Product = (function() {
       }, 500);
     });
 
+    var $bannerScroll = $("[data-banner-scroll]", this.$container);
+    $bannerScroll.click(function(e) {
+      e.preventDefault();
+      $("html, body").animate(
+        {
+          scrollTop: $("#product-top").offset().top + 1
+        },
+        400
+      );
+    });
+
     // Ajax Cart
     if (theme.data.cartMethod === "modal") {
       ajaxCart.init({
@@ -2901,6 +2912,7 @@ theme.Slideshow = (function() {
 
       $button.on("click", function() {
         $slides.flickity("next", true);
+        $slides.flickity("next", true);
       });
     },
 
@@ -2993,6 +3005,17 @@ theme.Carousel = (function() {
 
   function Carousel(container) {
     this.$container = $(container);
+
+    var $bannerScroll = $("[data-banner-scroll]", this.$container);
+    $bannerScroll.click(function(e) {
+      e.preventDefault();
+      $("html, body").animate(
+        {
+          scrollTop: $("#page-top").offset().top + 1
+        },
+        400
+      );
+    });
 
     this.$featuredImage = $(selectors.carouselFeaturedImage, this.$container);
     this.$featuredImageWrapper = $(
@@ -3110,6 +3133,10 @@ theme.Carousel = (function() {
         $images.first().click();
       }
     });
+
+    if (this.$container.data("fade-in") === true) {
+      theme.fadeIn(this.$container);
+    }
   }
 
   Carousel.prototype = $.extend({}, Carousel.prototype, {
@@ -3339,6 +3366,17 @@ theme.Collection = (function() {
 
     this.changeView();
     this.filterToggle();
+
+    var $bannerScroll = $("[data-banner-scroll]", this.$container);
+    $bannerScroll.click(function(e) {
+      e.preventDefault();
+      $("html, body").animate(
+        {
+          scrollTop: $("#collection-top").offset().top + 1
+        },
+        400
+      );
+    });
 
     Shopify.queryParams = {};
     if (location.search.length) {

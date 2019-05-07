@@ -1,101 +1,174 @@
 {%- assign section_color = section.settings.color_scheme -%}
 {%- include 'global-variables' -%}
 
-<section class="slideshow pb3 lg--up--pb4 bg--{{ section_color }}-background" data-section-type="slideshow" data-section-id="{{ section.id }}" {% if section.blocks.size > 2 %}data-wrap-around="true"{% endif %} data-slide-speed="{{ section.settings.slide_speed }}" {% if section.settings.auto_rotate %}data-auto-rotate="true"{% endif %}>
-  <div class="relative">
-    <div class="slideshow__slides">
+<section class="slideshow pb50 pb4 bg--{{ section_color }}-background" data-section-type="slideshow" data-section-id="{{ section.id }}" {% if section.blocks.size > 2 %}data-wrap-around="true"{% endif %} data-slide-speed="{{ section.settings.slide_speed }}" {% if section.settings.auto_rotate %}data-auto-rotate="true"{% endif %}>
+  <div class="max-site-width md--up--pl2 relative">
+    <div>
+      <div class="grid">
+        <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths">
+          <br>
+        </div>
+        <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
+          <div class="slideshow__slides">
 
-      {% for block in section.blocks %}
+            {% for block in section.blocks %}
 
-        {%- assign text_color_overlay = block.settings.color_overlay -%}
-        {%- assign content_position = block.settings.content_position -%}
-        {%- assign text_align = block.settings.text_align -%}
-        {%- assign heading = block.settings.heading -%}
-        {%- assign text = block.settings.text -%}
-        {%- assign cta_text = block.settings.cta_text -%}
-        {%- assign cta_url = block.settings.cta_url -%}
+              {%- assign text_color_overlay = block.settings.color_overlay -%}
+              {%- assign content_position = block.settings.content_position -%}
+              {%- assign text_align = block.settings.text_align -%}
+              {%- assign heading = block.settings.heading -%}
+              {%- assign text = block.settings.text -%}
+              {%- assign cta_text = block.settings.cta_text -%}
+              {%- assign cta_url = block.settings.cta_url -%}
 
-        {%- if block.settings.feature_image -%}
-          {%- assign feature_image = block.settings.feature_image -%}
-        {%- else -%}
-          {%- assign placeholder = true -%}
-        {%- endif -%}
+              {%- if block.settings.feature_image -%}
+                {%- assign feature_image = block.settings.feature_image -%}
+                {%- assign mobile_feature_image = block.settings.mobile_feature_image -%}
+              {%- else -%}
+                {%- assign placeholder = true -%}
+              {%- endif -%}
 
-        <div class="slideshow__slide four-fifths px2 lg--up--px3 max-width--5"  {{ block.shopify_attributes }}>
-          <div class="image-with-text__container relative color--{{ section_color }}-text lg--up--color--{{ text_color_overlay }}-text">
-
-            <div class="image-with-text__image">
-              {% if block.settings.feature_image  %}
-                {% capture img_id %}FeatureImage-{{ feature_image.id }}{% endcapture %}
-                {% capture wrapper_id %}FeatureImageWrapper-{{ feature_image.id }}{% endcapture %}
-                {%- assign img_url = feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
-                  <div style="padding-top:{{ 1 | divided_by: feature_image.aspect_ratio | times: 100}}%;">
-                    <img id="{{ img_id }}"
-                      class="resp-img feature-image__img-content lazyload"
-                      src="{{ feature_image | img_url: '300x' }}"
-                      data-src="{{ img_url }}"
-                      data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-                      data-aspectratio="{{ feature_image.aspect_ratio }}"
-                      data-sizes="auto"
-                      alt="{{ feature_image.alt | escape }}">
-                    <img id="{{ img_id }}"
-                      class="resp-img-placeholder"
-                      src="{{ feature_image | img_url: '1x1' }}"
-                      width="{{ feature_image.width }}"
-                      height="{{ feature_image.height }}"
-                      alt="{{ feature_image.alt | escape }}">
-                  </div>
-                </div>
-                <noscript>
-                  <img src="{{ feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
-                </noscript>
-              {% else %}
-                <div class="image-with-text__placeholder full {{ placeholder_bg }} p1 lg--up--p3">
-                  <div class="image-with-text__placeholder-svg">
-                    {{ 'lifestyle-1' | placeholder_svg_tag }}
-                  </div>
-                </div>
-              {% endif %}
-            </div>
-
-            <div class="image-with-text__content lg--up--absolute lg--up--full lg--up--top--0 lg--up--left--0 lg--up--p4 wd--p5 z1">
-              {% assign content_position = content_position | split: ' ' %}
-              <div class="lg--up--table lg--up--full">
-                <div class="lg--up--table-cell lg--up--{{ content_position[0] }} lg--up--{{ content_position[1] }}">
-                  <div class="inline-block lg--up--{{ text_align }} lg--up--one-third">
-                    <div class="mt3 lg--up--m0 lg--up--one-whole">
-                      {% if heading != blank %}
-                        <h2 class="{{ global__heading_font_size }} m0">{{ heading }}</h2>
-                      {% endif %}
-                      {% if text != blank %}
-                        <div class="text__block-quote text__block-quote--1">
-                          {{ text }}
+              <div class="sm--hide slideshow__slide four-fifths max-width--5"  {{ block.shopify_attributes }}>
+                <div class="image-with-text__container relative color--{{ section_color }}-text lg--up--color--{{ text_color_overlay }}-text">
+                  <div class="image-with-text__image">
+                    {% if block.settings.feature_image  %}
+                      {% capture img_id %}FeatureImage-{{ feature_image.id }}{% endcapture %}
+                      {% capture wrapper_id %}FeatureImageWrapper-{{ feature_image.id }}{% endcapture %}
+                      {%- assign img_url = feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                      <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                        <div style="padding-top:{{ 1 | divided_by: feature_image.aspect_ratio | times: 100}}%;">
+                          <img id="{{ img_id }}"
+                            class="resp-img feature-image__img-content lazyload"
+                            src="{{ feature_image | img_url: '300x' }}"
+                            data-src="{{ img_url }}"
+                            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                            data-aspectratio="{{ feature_image.aspect_ratio }}"
+                            data-sizes="auto"
+                            alt="{{ feature_image.alt | escape }}">
+                          <img id="{{ img_id }}"
+                            class="resp-img-placeholder"
+                            src="{{ feature_image | img_url: '1x1' }}"
+                            width="{{ feature_image.width }}"
+                            height="{{ feature_image.height }}"
+                            alt="{{ feature_image.alt | escape }}">
                         </div>
-                      {% endif %}
-                      {% if cta_url != blank %}
-                        <a class="mt2 inline-block {{ global__basic_font_size }} {{ global__link_underline }}  {{ global__hover_underline }} lg--up--color--{{ text_color_overlay }}-text lg--up--border-bottom--{{ text_color_overlay }}-text lg--up--hv--{{ hover_color_overlay }}-primary lg--up--hv--border-bottom--{{ hover_color_overlay }}-primary lg--up--inline-block" href="{{ cta_url }}">
-                          {{ cta_text }}
-                        </a>
-                      {% endif %}
+                      </div>
+                      <noscript>
+                        <img src="{{ feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
+                      </noscript>
+                    {% else %}
+                      <div class="image-with-text__placeholder full {{ placeholder_bg }} p1 lg--up--p3">
+                        <div class="image-with-text__placeholder-svg">
+                          {{ 'lifestyle-1' | placeholder_svg_tag }}
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="md--hide image-with-text__content lg--up--absolute lg--up--full lg--up--top--0 lg--up--left--0 lg--up--p4 wd--p5 z1">
+                    {% assign content_position = content_position | split: ' ' %}
+                    <div class="lg--up--table lg--up--full">
+                      <div class="lg--up--table-cell lg--up--{{ content_position[0] }} lg--up--{{ content_position[1] }}">
+                        <div class="inline-block lg--up--{{ text_align }} lg--up--one-third">
+                          <div class="mt3 lg--up--m0 lg--up--one-whole">
+                            {% if heading != blank %}
+                              <h2 class="{{ global__heading_font_size }} m0">{{ heading }}</h2>
+                            {% endif %}
+                            {% if text != blank %}
+                              <div class="text__block-quote text__block-quote--1">
+                                {{ text }}
+                              </div>
+                            {% endif %}
+                            {% if cta_url != blank %}
+                              <a class="mt2 inline-block {{ global__basic_font_size }} {{ global__link_underline }}  {{ global__hover_underline }} lg--up--color--{{ text_color_overlay }}-text lg--up--border-bottom--{{ text_color_overlay }}-text lg--up--hv--{{ hover_color_overlay }}-primary lg--up--hv--border-bottom--{{ hover_color_overlay }}-primary lg--up--inline-block" href="{{ cta_url }}">
+                                {{ cta_text }}
+                              </a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
-            </div>
 
+              <div class="md--up--hide slideshow__slide one-whole px2 lg--up--px3 max-width--5"  {{ block.shopify_attributes }}>
+                <div class="image-with-text__container relative color--{{ section_color }}-text lg--up--color--{{ text_color_overlay }}-text">
+                  <div class="image-with-text__image">
+                    {% if block.settings.mobile_feature_image  %}
+                      {% capture mobile_img_id %}FeatureImage-{{ mobile_feature_image.id }}{% endcapture %}
+                      {% capture wrapper_id %}FeatureImageWrapper-{{ mobile_feature_image.id }}{% endcapture %}
+                      {%- assign mobile_img_url = mobile_feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                      <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+                        <div style="padding-top:{{ 1 | divided_by: mobile_feature_image.aspect_ratio | times: 100}}%;">
+                          <img id="{{ mobile_img_id }}"
+                            class="resp-img feature-image__img-content lazyload"
+                            src="{{ mobile_feature_image | img_url: '300x' }}"
+                            data-src="{{ mobile_img_url }}"
+                            data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                            data-aspectratio="{{ mobile_feature_image.aspect_ratio }}"
+                            data-sizes="auto"
+                            alt="{{ mobile_feature_image.alt | escape }}">
+                          <img id="{{ mobile_img_id }}"
+                            class="resp-img-placeholder"
+                            src="{{ mobile_feature_image | img_url: '1x1' }}"
+                            width="{{ mobile_feature_image.width }}"
+                            height="{{ mobile_feature_image.height }}"
+                            alt="{{ mobile_feature_image.alt | escape }}">
+                        </div>
+                      </div>
+                      <noscript>
+                        <img src="{{ mobile_feature_image.src | img_url: 'large' }}" alt="{{ mobile_feature_image.alt | escape }}" class="feature-image__img-content">
+                      </noscript>
+                    {% else %}
+                      <div class="image-with-text__placeholder full {{ placeholder_bg }} p1 lg--up--p3">
+                        <div class="image-with-text__placeholder-svg">
+                          {{ 'lifestyle-1' | placeholder_svg_tag }}
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="md--hide image-with-text__content lg--up--absolute lg--up--full lg--up--top--0 lg--up--left--0 lg--up--p4 wd--p5 z1">
+                    {% assign content_position = content_position | split: ' ' %}
+                    <div class="lg--up--table lg--up--full">
+                      <div class="lg--up--table-cell lg--up--{{ content_position[0] }} lg--up--{{ content_position[1] }}">
+                        <div class="inline-block lg--up--{{ text_align }} lg--up--one-third">
+                          <div class="mt3 lg--up--m0 lg--up--one-whole">
+                            {% if heading != blank %}
+                              <h2 class="{{ global__heading_font_size }} m0">{{ heading }}</h2>
+                            {% endif %}
+                            {% if text != blank %}
+                              <div class="text__block-quote text__block-quote--1">
+                                {{ text }}
+                              </div>
+                            {% endif %}
+                            {% if cta_url != blank %}
+                              <a class="mt2 inline-block {{ global__basic_font_size }} {{ global__link_underline }}  {{ global__hover_underline }} lg--up--color--{{ text_color_overlay }}-text lg--up--border-bottom--{{ text_color_overlay }}-text lg--up--hv--{{ hover_color_overlay }}-primary lg--up--hv--border-bottom--{{ hover_color_overlay }}-primary lg--up--inline-block" href="{{ cta_url }}">
+                                {{ cta_text }}
+                              </a>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div class='slideshow__flickity__button-container flickity__button-container sm--px2 pr2 pt0 md--up--pt2'>
+            <div class="text__block-quote text__block-quote--1">
+              {{ section.settings.text_below_slides }}
+            </div>
+            <button class="icon-button btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm pt1">{% include 'arrow-right' %}</button>
           </div>
         </div>
-      {% endfor %}
-    </div>
-
-    <div class='slideshow__flickity__button-container flickity__button-container px2 lg--up--px3 pt0 md--up--pt3'>
-      <div class="text__block-quote text__block-quote--1">
-        {{ section.settings.text_below_slides }}
       </div>
-      <button class="icon-button btn border--none bg--transparent btn--next color--{{ section_color }}-text hv--{{ section_color }}-accent font-size--sm pt1">{% include 'arrow-right' %}</button>
     </div>
-
   </div>
 </section>
 
@@ -167,6 +240,11 @@
           "id": "feature_image",
           "label": "Image",
           "info": "2000 x 1060px recommended"
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_feature_image",
+          "label": "Mobile Image"
         },
         {
           "type": "text",

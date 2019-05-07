@@ -3078,6 +3078,10 @@ Spacing
 
 html {
   font-size: $font-size-base;
+}
+
+html,
+body {
   overflow-x: hidden;
 }
 
@@ -4461,7 +4465,11 @@ body.template-index {
     .site-header--white,
     .site-header--standard-logo,
     .site-header--studio {
-      display: none;
+      visibility: hidden;
+    }
+
+    .header__link {
+      color: $black;
     }
 
     .site-nav__svg {
@@ -5585,7 +5593,7 @@ Header
 }
 
 .banner_image__logo {
-  bottom: 70px;
+  bottom: 80px;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -5602,12 +5610,19 @@ Header
   }
 
   @include media-query($small) {
+    bottom: 9%;
     width: 250px;
 
     svg {
       height: 84px;
       width: 250px;
     }
+  }
+}
+
+.banner_image--sm--pb {
+  @include media-query($small) {
+    padding-bottom: 28%;
   }
 }
 
@@ -6158,6 +6173,37 @@ Gift Card
 
 Custom Sections
 ========================================================================== */
+
+@media only screen and (min-width: 1280px) {
+  .up--1280 {
+    display: block;
+  }
+
+  .dn--1280 {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1279px) {
+  .up--1280 {
+    display: none;
+  }
+
+  .dn--1280 {
+    display: block;
+  }
+}
+
+.items {
+  .product--simple:last-child {
+    padding-bottom: 10px;
+
+    @include media-query($medium-up) {
+      padding-bottom: 50px;
+    }
+  }
+}
+
 .slideshow__flickity__button-container {
   width: 100%;
   display: flex;
@@ -6165,8 +6211,25 @@ Custom Sections
   margin-top: 0;
 
   @include media-query($small) {
-    margin-top: -30px;
+    margin-top: -50px;
   }
+}
+
+.slideshow__slide {
+  @include media-query($medium-up) {
+    padding-right: 30px;
+  }
+}
+
+.image-left-with-text {
+  @include media-query($medium-up) {
+    padding-bottom: 120px;
+  }
+}
+
+.carousel__thumbnails--mobile {
+  margin-bottom: 10px;
+  margin-top: 60px;
 }
 
 // Blogs
@@ -6238,7 +6301,9 @@ Custom Sections
 
 .hero-section__logo-container {
   margin: -185px auto 71px auto;
+  position: relative;
   text-align: center;
+  z-index: 1;
 
   @include media-query($medium) {
     margin-bottom: 62px;
@@ -6262,8 +6327,10 @@ Custom Sections
 }
 
 .hero-section__title-container--logo {
-  margin-top: -144px;
+  margin-top: -138px;
+  position: relative;
   text-align: center;
+  z-index: 1;
 
   svg {
     height: 200px;
@@ -6271,7 +6338,7 @@ Custom Sections
   }
 
   @include media-query($medium) {
-    margin-top: -109px;
+    margin-top: -103px;
 
     svg {
       height: 150px;
@@ -6279,7 +6346,7 @@ Custom Sections
   }
 
   @include media-query($small) {
-    margin-top: -65px;
+    margin-top: -59px;
 
     svg {
       height: 85px;
@@ -6394,6 +6461,15 @@ Custom Sections
   max-width: 640px;
 }
 
+.product__spec--image-container {
+  margin-left: -10px;
+  margin-top: 1px;
+
+  img {
+    max-width: none;
+  }
+}
+
 .product__spec--image {
   background-image: url("https://cdn.shopify.com/s/files/1/0074/3859/8244/files/background-grid.svg");
   background-position: center;
@@ -6408,7 +6484,7 @@ Custom Sections
   position: relative;
   width: 100%;
 
-  @include media-query($large-up) {
+  @include media-query($medium-up) {
     min-height: 580px;
     padding: 0 30px;
     width: 110%;
@@ -6614,7 +6690,7 @@ Custom Sections
 }
 
 .page-sub-section {
-  padding-bottom: 25px;
+  padding-bottom: 40px;
 
   @include media-query($medium-up) {
     padding-bottom: 60px;
@@ -6686,6 +6762,28 @@ Custom Sections
         padding-top: 0;
         padding-bottom: 50px;
       }
+    }
+  }
+}
+
+.rich-text__header {
+  padding-top: 50px;
+
+  @include media-query($medium-up) {
+    padding-top: 125px;
+  }
+}
+
+.rich-text__header--first {
+  @include media-query($medium-up) {
+    padding-top: 155px;
+  }
+}
+
+.richtext {
+  @include media-query($large-up) {
+    p {
+      margin-bottom: 0;
     }
   }
 }
@@ -6799,8 +6897,28 @@ Seitz Patterns
   }
 }
 
+.detail__container--with-image {
+  @include media-query($small) {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-top: 30px;
+  }
+}
+
+.detail__container--img {
+  @include media-query($small) {
+    flex: 1 0 auto;
+  }
+}
+
+
 .detail__img {
   padding: 30px 0 15px 0;
+
+  @include media-query($small) {
+    padding: 0;
+  }
 }
 
 .detail__title {
@@ -6824,6 +6942,15 @@ Seitz Patterns
 .image__xl {
   margin-top: 8px;
   width: 120%;
+}
+
+.image__l {
+  margin-bottom: -6px;
+}
+
+.image--mobile--full-width {
+  margin-left: -20px;
+  margin-right: -20px;
 }
 
 .label {
@@ -6850,6 +6977,30 @@ Seitz Patterns
   max-width: 700px;
 }
 
+.pb50 {
+  @include media-query($small) {
+    padding-bottom: 50px;
+  }
+}
+
+.pb30 {
+  @include media-query($medium-up) {
+    padding-bottom: 30px;
+  }
+}
+
+.pb70 {
+  padding-bottom: 70px;
+
+  @include media-query($small) {
+    padding-bottom: 35px;
+  }
+}
+
+.pt30 {
+  padding-top: 30px;
+}
+
 .pt35 {
   padding-top: 35px;
 }
@@ -6871,21 +7022,21 @@ Seitz Patterns
     font-size: 125px;
     letter-spacing: -4px;
     line-height: normal;
-    margin-top: -104px;
+    margin-top: -98px;
     position: relative;
     text-align: center;
     z-index: 2;
 
     @include media-query($medium) {
       font-size: 90px;
-      margin-top: -78px;
+      margin-top: -71px;
     }
 
     @include media-query($small) {
       font-size: 60px;
       letter-spacing: -2px;
       line-height: 60px;
-      margin-top: -42px;
+      margin-top: -36px;
     }
   }
 
@@ -7069,6 +7220,10 @@ Seitz Patterns
 
   &.text__highlight--white {
     color: $white;
+  }
+
+  &.text__highlight--lighten {
+    @include opacity(.4);
   }
 }
 

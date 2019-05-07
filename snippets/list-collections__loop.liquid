@@ -16,7 +16,7 @@
 
 <div class="item item--desktop--{{ block_width_desktop }} item--mobile--full {% if forloop.first %}item--first{% endif %} {% if first_col_desktop %}first-col--desktop{% endif %} {% if last_col %}item--last{% endif %}  {% if fade_in%}fade-in{% endif %}">
   <div class="item__inner {% if block_width_desktop == 'full' %}lg--up--two-thirds lg--up--mx--auto{% endif %}">
-    <div class=" {% if mobile_count == '1' %}md--dn--pr4{% else %}md--dn--pl4{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+    <div class="{% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
       {% if placeholder %}
         {% assign local_color = 'primary' %}
         {% include 'cascade__collection-placeholder' %}

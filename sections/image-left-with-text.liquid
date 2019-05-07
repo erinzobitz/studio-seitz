@@ -1,7 +1,7 @@
 {%- assign section_color = 'secondary' -%}
 {%- include 'global-variables' -%}
 
-<section class="cascade pb3 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
+<section class="cascade pb2 image-left-with-text color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
   <div class="cascading-content md--up--ten-twelfths">
     {% assign heading = section.settings.heading %}
     {% assign cta_text = section.settings.cta_text %}
@@ -37,7 +37,7 @@
           </noscript>
         </div>
       </div>
-      <div class="md--up--hide image-with-text__image">
+      <div class="md--up--hide mb1 image-with-text__image">
         {% assign mobile_image = section.settings.mobile_image %}
         <div class="image-holder">
           {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
@@ -67,18 +67,18 @@
         </div>
       </div>
       <div class="image-with-text__content absolute full top--0 left--0 z1">
-        <a href="{{ cta_url }}" class="block full color--{{ section_color }}-text">
+        <div class="block full color--{{ section_color }}-text">
           <div class="table full">
             <div class="table-cell text-align--right align--bottom">
               <div class="inline-block align--bottom">
                 <h2 class="label m0 color--tertiary-text">{{ heading }}</h2>
-                <p class="m0 inline-block text__body text__body--4 text__body--white" href="" target="_blank" >
+                <p class="m0 sm--mb2 inline-block text__body text__body--4 text__body--white" href="" target="_blank" >
                     {{ cta_text }}
                 </p>
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   </div>

@@ -1,11 +1,57 @@
 <header role="banner">
   <div class="hero-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
     <div class="sm--hide">
-      <img src="{{ collection.image | img_url: '1400x' }}" alt="{{ collection.title }}"/>
+      {% assign image = collection.image  %}
+      {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
+      {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
+      {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+        <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+          <img id="{{ img_id }}"
+               class="resp-img lazyload"
+               data-src="{{ img_url }}"
+               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+               data-aspectratio="{{ image.aspect_ratio }}"
+               data-sizes="auto"
+               alt="{{ image.alt | escape }}">
+           <img id="{{ img_id }}"
+                class="resp-img-placeholder"
+                src="{{ image | img_url: '1x1' }}"
+                width="{{ image.width }}"
+                height="{{ image.height }}"
+                alt="{{ image.alt | escape }}">
+        </div>
+      </div>
+      <noscript>
+        <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+      </noscript>
     </div>
 
     <div class="md--up--hide">
-      <img src="{{ collection.metafields.attributes.mobile_collection_image }}" alt="{{ collection.title }}"/>
+      {% assign mobile_image = images[collection.metafields.attributes.mobile_collection_image]  %}
+      {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
+      {% capture wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
+      {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+        <div style="padding-top:{{ 1 | divided_by: mobile_image.aspect_ratio | times: 100}}%;">
+          <img id="{{ mobile_img_id }}"
+               class="resp-img lazyload"
+               data-src="{{ mobile_img_url }}"
+               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+               data-aspectratio="{{ mobile_image.aspect_ratio }}"
+               data-sizes="auto"
+               alt="{{ mobile_image.alt | escape }}">
+           <img id="{{ mobile_img_id }}"
+                class="resp-img-placeholder"
+                src="{{ mobile_image | img_url: '1x1' }}"
+                width="{{ mobile_image.width }}"
+                height="{{ mobile_image.height }}"
+                alt="{{ mobile_image.alt | escape }}">
+        </div>
+      </div>
+      <noscript>
+        <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+      </noscript>
     </div>
 
     <div class="hero-section__title-container">
@@ -27,7 +73,9 @@
       </span>
 
       <div class="hero-section__icon">
-        {%- include 'arrow-down' -%}
+        <a class="pointer" data-banner-scroll>
+          <button class="btn sm--pb2 border--none border--none bg--transparent">{% include 'icon-arrow-down' %}</button>
+        </a>
       </div>
     </div>
   </div>

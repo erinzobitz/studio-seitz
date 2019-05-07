@@ -169,50 +169,86 @@
 
   {% if section.settings.show_banner and template.name == 'index'  %}
     {% if section.settings.banner %}
-      {% assign feature_image = section.settings.banner %}
-      {% capture img_id %}FeatureImage-{{ feature_image.id }}{% endcapture %}
-      {% capture wrapper_id %}FeatureImageWrapper-{{ feature_image.id }}{% endcapture %}
-      {%- assign img_url = feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <div class="sm--hide">
+        {% assign feature_image = section.settings.banner %}
+        {% capture img_id %}FeatureImage-{{ feature_image.id }}{% endcapture %}
+        {% capture wrapper_id %}FeatureImageWrapper-{{ feature_image.id }}{% endcapture %}
+        {%- assign img_url = feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
-      {%- assign padding = '100vh' -%}
-      {% if section.settings.banner_image_style == 'fit_content' %}
-      {%- capture padding %}{{ 1 | divided_by: feature_image.aspect_ratio | times: 100 }}%{% endcapture %}
-      {% endif %}
-      <div id="{{ wrapper_id }}" class="js banner_image absolute top--0 left--0 full--w">
-        <div class="lazyload bg-cover"
-            data-bgset="{% include 'bgset', image: feature_image %}"
-            data-sizes="auto"
-            data-parent-fit="cover"
-            style="padding-top:{{ padding }}; background-image: url({{ feature_image | img_url: '300x300' }}); background-size: cover;">
-          <div class="absolute sm--pb2 banner_image__logo">
-            {% include 'logo__large--white' %}
-            <div class="sm--hide pt3 text-align--center text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
-              Heritage brought to
-              <span class="text__highlight text__highlight--1 text__highlight--white">
-                The modern home
-              </span>
+        {%- assign padding = '100vh' -%}
+        {% if section.settings.banner_image_style == 'fit_content' %}
+        {%- capture padding %}{{ 1 | divided_by: feature_image.aspect_ratio | times: 100 }}%{% endcapture %}
+        {% endif %}
+        <div id="{{ wrapper_id }}" class="js banner_image absolute top--0 left--0 full--w">
+          <div class="lazyload bg-cover"
+              data-bgset="{% include 'bgset', image: feature_image %}"
+              data-sizes="auto"
+              data-parent-fit="cover"
+              style="padding-top:{{ padding }}; background-image: url({{ feature_image | img_url: '300x300' }}); background-size: cover;">
+            <div class="absolute banner_image--sm--pb banner_image__logo">
+              {% include 'logo__large--white' %}
+              <div class="sm--hide pt3 text-align--center text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
+                Heritage brought to
+                <span class="text__highlight text__highlight--1 text__highlight--white">
+                  The modern home
+                </span>
+              </div>
             </div>
+            <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb30" data-banner-scroll>
+              <button class="btn banner_image--sm--pb border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+            </a>
           </div>
-          <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb2"  data-banner-scroll>
-            <button class="btn border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
-          </a>
         </div>
+        <noscript>
+          <img src="{{ feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
+        </noscript>
       </div>
-      <noscript>
-        <img src="{{ feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
-      </noscript>
+
+      <div class="md--up--hide">
+        {% assign mobile_feature_image = section.settings.mobile_banner %}
+        {% capture mobile_img_id %}FeatureImage-{{ mobile_feature_image.id }}{% endcapture %}
+        {% capture mobile_wrapper_id %}FeatureImageWrapper-{{ mobile_feature_image.id }}{% endcapture %}
+        {%- assign mobile_img_url = mobile_feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+
+        {%- assign padding = '100vh' -%}
+        {% if section.settings.banner_image_style == 'fit_content' %}
+        {%- capture padding %}{{ 1 | divided_by: mobile_feature_image.aspect_ratio | times: 100 }}%{% endcapture %}
+        {% endif %}
+        <div id="{{ mobile_wrapper_id }}" class="js banner_image absolute top--0 left--0 full--w">
+          <div class="lazyload bg-cover"
+              data-bgset="{% include 'bgset', image: mobile_feature_image %}"
+              data-sizes="auto"
+              data-parent-fit="cover"
+              style="padding-top:{{ padding }}; background-image: url({{ mobile_feature_image | img_url: '300x300' }}); background-size: cover;">
+            <div class="absolute banner_image--sm--pb banner_image__logo">
+              {% include 'logo__large--white' %}
+              <div class="sm--hide pt3 text-align--center text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
+                Heritage brought to
+                <span class="text__highlight text__highlight--1 text__highlight--white">
+                  The modern home
+                </span>
+              </div>
+            </div>
+            <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb30" data-banner-scroll>
+              <button class="btn banner_image--sm--pb border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+            </a>
+          </div>
+        </div>
+        <noscript>
+          <img src="{{ mobile_feature_image.src | img_url: 'large' }}" alt="{{ feature_image.alt | escape }}" class="feature-image__img-content">
+        </noscript>
+      </div>
     {% else %}
       <div class="banner__placeholder  {% unless section.settings.banner_image_style == 'fit_content' %}full{% endunless %} bg--placeholder-dark js banner_image absolute top--0 left--0 full--w">
         <div class="banner__placeholder-svg full--w full--h">
           {{ 'lifestyle-1' | placeholder_svg_tag }}
         </div>
-        <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb2"  data-banner-scroll>
+        <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb30"  data-banner-scroll>
           <button class="btn border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
         </a>
       </div>
     {% endif %}
   {% endif %}
-
 </div>
 
 {% schema %}
@@ -317,7 +353,12 @@
         "type": "image_picker",
         "id": "banner",
         "label": "Image",
-        "info": "1400x800px recommended "
+        "info": "1400x800px recommended"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile_banner",
+        "label": "Mobile Image"
       },
       {
         "type": "select",

@@ -4,7 +4,7 @@
 {%- assign font_size = 'font-size--sm md--up--font-size--m line-height--3' -%}
 {%- assign font_size = global__basic_font_size -%}
 
-<section class="cascade pb3 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
+<section class="cascade pb2 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
   <div class="max-site-width px2">
     <div class="cascading-content lg--up--ten-twelfths mx--auto">
       <div class="items overflow--hidden">
@@ -63,7 +63,7 @@
           {%- endif -%}
 
           <div
-            class="item item--desktop--{{ block_width_desktop }} item--mobile--{{ block_width_mobile }} item--{{ block.id }} {% if forloop.first %}item--first{% endif %} {% if first_col_desktop %}first-col--desktop{% endif %} {% if first_col_mobile %}first-col--mobile{% endif %} {% if last_col %}item--last{% endif %} {% if fade_in%}fade-in{% endif %}"
+            class="item item--desktop--{{ block_width_desktop }} item--mobile--{{ block_width_mobile }} {% if block.type == 'product_simple' %}product--simple{% endif %} item--{{ block.id }} {% if forloop.first %}item--first{% endif %} {% if first_col_desktop %}first-col--desktop{% endif %} {% if first_col_mobile %}first-col--mobile{% endif %} {% if last_col %}item--last{% endif %} {% if fade_in%}fade-in{% endif %}"
             data-width="{{ block_width_desktop }}"
             data-block-id="{{ block.id }}"
             >
@@ -79,7 +79,11 @@
                 {% if block.settings.image %}
                   {% assign image = block.settings.image %}
                   {% assign image_ratio = block.settings.image.aspect_ratio  | plus: 0 %}
-                  <div class="image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+
+                  {% assign mobile_image = block.settings.mobile_image %}
+                  {% assign mobile_image_ratio = block.settings.mobile_image.aspect_ratio  | plus: 0 %}
+
+                  <div class="sm--hide pb70 pt30 image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
                     {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
                     {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
                     {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
@@ -103,6 +107,33 @@
                     </div>
                     <noscript>
                       <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+                    </noscript>
+                  </div>
+
+                  <div class="md--up--hide pb70 image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                    {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
+                    {% capture mobile_wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
+                    {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                    <div id="{{ mobile_wrapper_id }}" class="resp-img-wrapper js"> d
+                      <div style="padding-top:{{ 1 | divided_by: mobile_image.aspect_ratio | times: 100}}%;">
+                        <img id="{{ mobile_img_id }}"
+                             class="resp-img lazyload"
+                             src="{{ mobile_image | img_url: '300x' }}"
+                             data-src="{{ mobile_img_url }}"
+                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                             data-aspectratio="{{ mobile_image.aspect_ratio }}"
+                             data-sizes="auto"
+                             alt="{{ mobile_image.alt | escape }}">
+                         <img id="{{ mobile_img_id }}"
+                              class="resp-img-placeholder"
+                              src="{{ mobile_image | img_url: '1x1' }}"
+                              width="{{ mobile_image.width }}"
+                              height="{{ mobile_image.height }}"
+                              alt="{{ mobile_image.alt | escape }}">
+                      </div>
+                    </div>
+                    <noscript>
+                      <img src="{{ mobile_image.src | img_url: 'large' }}" alt="{{ mobile_image.alt | escape }}" class="item--image">
                     </noscript>
                   </div>
                 {% else %}
@@ -277,7 +308,10 @@
               {% endcomment %}
               {% if block.type == 'rich_text' or block.type == 'heading' or block.type == 'text' %}
               <div class="rich-text rich-text--{{ block.id }} {{ block.settings.text_align}}">
-                <div class="md--up--seven-eighths md--up--mx--auto md--up--pm--three-quarters wd--two-thirds">
+                <div class="md--up--six-eighths md--up--mx--auto md--up--pm--three-quarters wd--three-fourths">
+                  {% if block.settings.is_first_heading == "true" %}
+                    {% assign first_heading_class = 'rich-text__header--first' %}
+                  {% endif %}
                   {% if block.settings.heading != blank   %}
                     {% if block_width_mobile == 'full' %}
                       {% assign heading_class = heading_fontsize__mobile_full %}
@@ -291,7 +325,7 @@
                         {% assign heading_class = 'f--heading font-size--xxl line-height--7 pm--font-size--xxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
                       {% endif %}
                     {% endif %}
-                    <h2 class="mx--auto sm--pt3 pt4 line-length--medium text__header text__header--3">
+                    <h2 class="mx--auto rich-text__header line-length--medium text__header text__header--3 {{ first_heading_class }}">
                       {{ block.settings.heading }}
                     </h2>
                   {% endif %}
@@ -306,7 +340,7 @@
                   </div>
                   {% endif %}
                   {% if block.settings.cta_url != blank %}
-                  <a class="inline-block action-link action-link--large" href="{{ block.settings.cta_url }}" >
+                  <a class="md--up--pt2 inline-block action-link action-link--large" href="{{ block.settings.cta_url }}" >
                     {{ block.settings.cta_text }}
                   </a>
                   {% endif %}
@@ -327,7 +361,7 @@
                     {% assign image = collection.image  %}
                   {% else %}
                     {% for product in collection.products limit:1 %}
-                      {% assign image = product.featured_image.src  %}
+                      {% assign image = images[product.metafields.attributes.mobile_header_image].src  %}
                     {% endfor %}
                   {% endif %}
                   <div class="image-with-text__container relative  {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
@@ -476,7 +510,7 @@
               ============================================================================== *
               {% endcomment %}
               {% if block.type == 'product_simple' %}
-              <div class="product product--{{ block.id }} {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+              <div class="product product--{{ block.id }} {% if col_count_mobile == 2 or col_count_mobile == 3 %}md--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
                 {%- assign product = all_products[block.settings.product] -%}
                 {% if product == empty %}
                   {% include 'product-grid-item__onboarding' %}
@@ -576,6 +610,11 @@
             "type": "image_picker",
             "id": "image",
             "label": "Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image"
           },
           {
             "type": "header",
@@ -751,6 +790,12 @@
           "type": "text",
           "label": "Heading",
           "default": "Heading or impact text goes here."
+        },
+        {
+          "id": "is_first_heading",
+          "type": "text",
+          "label": "First section on page?",
+          "default": "false"
         },
         {
           "type": "header",

@@ -43,54 +43,108 @@
   {%- assign sold_out = false -%}
 {%- endif -%}
 
-<a href="{{ product.url | within: collection }}" class="t--list-and-grid relative">
-  {% unless product.featured_image == blank %}
-
-    {%- assign ratio = product.featured_image.aspect_ratio -%}
-    {%- assign force_crop = false -%}
-    {%- if ratio < 0.5 -%}
-      {%- assign force_crop = true -%}
-      {%- assign ratio = 1 -%}
-    {%- endif -%}
-    {% capture img_id %}ProductImage-{{ product.featured_image.id }}{% endcapture %}
-    {% capture wrapper_id %}ProductImageWrapper-{{ product.featured_image.id }}{% endcapture %}
-    {%- assign img_url = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-    <div id="{{ wrapper_id }}" class="resp-img-wrapper {% if force_crop %}force-crop{% endif %} js">
-      {% if settings.products_show_badges %}
-        {% if on_sale or sold_out %}
-          <div class="absolute top--0 right--0 pt2 pr2 z2">
-            {% if on_sale and sold_out != true %}
-              <div class="product-grid-on-sale p1 font-size--s bg--{{ section_color }}-accent color--{{ section_color }}-accent--overlay">{{ 'products.product.on_sale' | t }}</div>
-            {% endif %}
-            {% if sold_out %}
-              <div class="{% if on_sale %}mt1{% endif %} product-grid-on-sale p1 font-size--s bg--{{ section_color }}-text color--{{ section_color }}-text--overlay">{{ 'products.product.sold_out' | t }}</div>
-            {% endif %}
-          </div>
-        {% endif %}
+<a href="{{ product.url | within: collection }}" class="sm--hide t--list-and-grid relative">
+  {%- assign image = images[product.metafields.attributes.collection_image] %}
+  {%- assign ratio = image.aspect_ratio -%}
+  {%- assign force_crop = false -%}
+  {%- if ratio < 0.5 -%}
+    {%- assign force_crop = true -%}
+    {%- assign ratio = 1 -%}
+  {%- endif -%}
+  {% capture img_id %}ProductImage-{{ image.id }}{% endcapture %}
+  {% capture wrapper_id %}ProductImageWrapper-{{ image.id }}{% endcapture %}
+  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  <div id="{{ wrapper_id }}" class="resp-img-wrapper {% if force_crop %}force-crop{% endif %} js">
+    {% if settings.products_show_badges %}
+      {% if on_sale or sold_out %}
+        <div class="absolute top--0 right--0 pt2 pr2 z2">
+          {% if on_sale and sold_out != true %}
+            <div class="product-grid-on-sale p1 font-size--s bg--{{ section_color }}-accent color--{{ section_color }}-accent--overlay">{{ 'products.product.on_sale' | t }}</div>
+          {% endif %}
+          {% if sold_out %}
+            <div class="{% if on_sale %}mt1{% endif %} product-grid-on-sale p1 font-size--s bg--{{ section_color }}-text color--{{ section_color }}-text--overlay">{{ 'products.product.sold_out' | t }}</div>
+          {% endif %}
+        </div>
       {% endif %}
-      <div style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;">
-        <img id="{{ img_id }}"
-             class="resp-img lazyload"
-             width="{{ product.featured_image.width }}"
-             height="{{ product.featured_image.height }}"
-             data-src="{{ img_url }}"
-             data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
-             data-aspectratio="{{ ratio }}"
-             data-ratio="{{ ratio }}"
-             data-sizes="auto"
-             alt="{{ product.featured_image.alt | escape }}">
-         <img id="{{ img_id }}"
-              class="resp-img-placeholder"
-              src="{{ product.featured_image | img_url: '1x1' }}"
-              width="{{ product.featured_image.width }}"
-              height="{{ product.featured_image.height }}"
-              alt="{{ product.featured_image.alt | escape }}">
-      </div>
+    {% endif %}
+    <div style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;">
+      <img id="{{ img_id }}"
+           class="resp-img lazyload"
+           width="{{ image.width }}"
+           height="{{ image.height }}"
+           data-src="{{ img_url }}"
+           data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+           data-aspectratio="{{ ratio }}"
+           data-ratio="{{ ratio }}"
+           data-sizes="auto"
+           alt="{{ image.alt | escape }}">
+       <img id="{{ img_id }}"
+            class="resp-img-placeholder"
+            src="{{ image | img_url: '1x1' }}"
+            width="{{ image.width }}"
+            height="{{ image.height }}"
+            alt="{{ image.alt | escape }}">
     </div>
-    <noscript>
-      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}" class="product__img">
-    </noscript>
-  {% endunless %}
+  </div>
+  <noscript>
+    <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="product__img">
+  </noscript>
+
+  <div class="m0 mt1 md--up--mt2">
+    <p class="color--{{ section_color }}-text text__body text__body--1 text__body--1--dark inline-block">
+      {{ product.title }}
+    </p>
+    <div class="product--arrow inline-block">{% include 'arrow-right' %}</div>
+  </div>
+</a>
+
+<a href="{{ product.url | within: collection }}" class="md--up--hide t--list-and-grid relative">
+  {%- assign mobile_image = images[product.metafields.attributes.mobile_collection_image] %}
+  {%- assign mobile_ratio = mobile_image.aspect_ratio -%}
+  {%- assign force_crop = false -%}
+  {%- if ratio < 0.5 -%}
+    {%- assign force_crop = true -%}
+    {%- assign ratio = 1 -%}
+  {%- endif -%}
+  {% capture mobile_img_id %}ProductImage-{{ mobile_image.id }}{% endcapture %}
+  {% capture mobile_wrapper_id %}ProductImageWrapper-{{ mobile_image.id }}{% endcapture %}
+  {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+  <div id="{{ mobile_wrapper_id }}" class="resp-img-wrapper {% if force_crop %}force-crop{% endif %} js">
+    {% if settings.products_show_badges %}
+      {% if on_sale or sold_out %}
+        <div class="absolute top--0 right--0 pt2 pr2 z2">
+          {% if on_sale and sold_out != true %}
+            <div class="product-grid-on-sale p1 font-size--s bg--{{ section_color }}-accent color--{{ section_color }}-accent--overlay">{{ 'products.product.on_sale' | t }}</div>
+          {% endif %}
+          {% if sold_out %}
+            <div class="{% if on_sale %}mt1{% endif %} product-grid-on-sale p1 font-size--s bg--{{ section_color }}-text color--{{ section_color }}-text--overlay">{{ 'products.product.sold_out' | t }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endif %}
+    <div style="padding-top:{{ 1 | divided_by: mobile_ratio | times: 100}}%;">
+      <img id="{{ mobile_img_id }}"
+           class="resp-img lazyload"
+           width="{{ mobile_image.width }}"
+           height="{{ mobile_image.height }}"
+           data-src="{{ mobile_img_url }}"
+           data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+           data-aspectratio="{{ ratio }}"
+           data-ratio="{{ ratio }}"
+           data-sizes="auto"
+           alt="{{ mobile_image.alt | escape }}">
+       <img id="{{ mobile_img_id }}"
+            class="resp-img-placeholder"
+            src="{{ mobile_image | img_url: '1x1' }}"
+            width="{{ mobile_image.width }}"
+            height="{{ mobile_image.height }}"
+            alt="{{ mobile_image.alt | escape }}">
+    </div>
+  </div>
+  <noscript>
+    <img src="{{ mobile_image.src | img_url: 'large' }}" alt="{{ mobile_image.alt | escape }}" class="product__img">
+  </noscript>
+
   <div class="m0 mt1 md--up--mt2">
     <p class="color--{{ section_color }}-text text__body text__body--1 text__body--1--dark inline-block">
       {{ product.title }}
