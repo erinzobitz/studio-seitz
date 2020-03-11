@@ -5,19 +5,21 @@
         <h1 class="detail__title text__highlight text__highlight--2">
           {{ product.title }}
           <span class="md--up--hide">
-            <div class="inline-block right text__highlight text__highlight--lighten" data-price-wrapper>
-              <span {% if product.compare_at_price_max > product.price %}class="color--secondary-accent"{% endif %} data-product-price>
-                {{ current_variant.price | money }}
-              </span>
-              {% if product.compare_at_price_max > product.price %}
-                <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-                <s class="ml1 inline-block" data-compare-price>
-                  {% if current_variant.compare_at_price > current_variant.price %}
-                    {{ current_variant.compare_at_price | money }}
-                  {% endif %}
-                </s>
-              {% endif %}
-            </div>
+            {% if product.metafields.attributes.show_add_to_cart == 1 %}
+              <div class="inline-block right text__highlight text__highlight--lighten" data-price-wrapper>
+                <span {% if product.compare_at_price_max > product.price %}class="color--secondary-accent"{% endif %} data-product-price>
+                  {{ current_variant.price | money }}
+                </span>
+                {% if product.compare_at_price_max > product.price %}
+                  <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+                  <s class="ml1 inline-block" data-compare-price>
+                    {% if current_variant.compare_at_price > current_variant.price %}
+                      {{ current_variant.compare_at_price | money }}
+                    {% endif %}
+                  </s>
+                {% endif %}
+              </div>
+            {% endif %}
           </span>
         </h1>
 

@@ -1,10 +1,16 @@
 {%- assign section_color = 'primary' -%}
 {%- include 'global-variables' -%}
 
-<section class="featured-collection {{ global__section_with_padding_class }} color--{{ section_color }}-text bg--{{ section_color }}-background" data-mobile-flickity="true">
-  <div class="max-site-width px2 lg--up--px3 text-align--center">
-    <h1>{{ 'general.404.title' | t }}</h1>
-    <p>{{ 'general.404.subtext_html' | t }}</p>
+<section class="featured-collection">
+  <div class="max-site-width md--up--px2 page-section">
+    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+      <div class="line-length--medium">
+    <h1 class="text__header text__header--2 text__header--2--extra">{{ 'general.404.title' | t }}</h1>
+    <div class="mt3">
+            <a href="/collections/heritage" class="action-button-menu action-button-menu--contrast--inverse">View Collection</a>
+          </div>
+  </div>
+    </div>
   </div>
 </section>
 

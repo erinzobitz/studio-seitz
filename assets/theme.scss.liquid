@@ -398,7 +398,7 @@ $space-1: 0.625rem !default;
 $space-2: 1.25rem !default;
 $space-3: 2.5rem !default;
 $space-4: 5rem !default;
-$space-5: 7.25rem !default;
+$space-5: 7.15% !default;
 
 $media-object-space: $space-1 !default;
 
@@ -2598,8 +2598,10 @@ Colors
 $stabellenbank-background: #26425C;
 $limen-teapot-background: #606372;
 $kommode-background: #4D4D45;
+$bedside-table-background: #4D4D45;
 $napfstander-background: #9E8283;
 $pendant-light-background: #A9A192;
+$candleholder-background: #606372;
 
 // Page backgrounds
 $collection-background: #391A20;
@@ -4221,7 +4223,7 @@ Mobile Flickity
 
 Sections
 ========================================================================== */
-//stylelint-disable 
+//stylelint-disable
 body:not(.banner-image) {
   .shopify-section:first-child section.bg--primary-background {
     padding-top: $space-2;
@@ -4385,12 +4387,15 @@ body.template-collection {
 }
 
 body#about-seitz,
-body#craftsmanship,
-body.template-cart {
+body#craftsmanship {
   background-color: $studio-background;
 }
 
 body#stabellenbank {
+  background-color: $stabellenbank-background;
+}
+
+body#stabellenstuhl {
   background-color: $stabellenbank-background;
 }
 
@@ -4402,6 +4407,10 @@ body#kommode {
   background-color: $kommode-background;
 }
 
+body#bedside-table {
+  background-color: $bedside-table-background;
+}
+
 body#napfstander {
   background-color: $napfstander-background;
 }
@@ -4410,15 +4419,31 @@ body#pendant-light {
   background-color: $pendant-light-background;
 }
 
+body#desk-light {
+  background-color: $pendant-light-background;
+}
+
+body#table-light {
+  background-color: $pendant-light-background;
+}
+
+body#candleholder {
+  background-color: $candleholder-background;
+}
+
 body#frequently-asked-qs,
-body#request-a-quote {
+body#request-a-quote,
+body.template-cart,
+body.template-404 {
   background-color: $white;
 }
 
 body#frequently-asked-qs,
 body#request-a-quote,
 body.template-blog,
-body.template-article {
+body.template-article,
+body.template-cart,
+body.template-404 {
   .site-header:not(.active) {
     .site-header--contrast-logo {
       display: inline-block;
@@ -4615,6 +4640,10 @@ Rich Text Editor
 
 .rte {
   font-family: $main-font-stack;
+  margin-top: 0px;
+  @include media-query($medium-up) {
+  margin-top: 50px;
+    }
 
   img {
     height: auto;
@@ -5056,12 +5085,13 @@ Header Active (Modal)
 .header__active {
   display: none;
   opacity: 0;
-  padding-top: 130px;
+  padding-top: 75px;
+  padding-bottom: 75px;
   transition: opacity 0.1s cubic-bezier(0.46, 0.01, 0.32, 1);
 
   @include media-query($small) {
      padding-bottom: 60px;
-     padding-top: 50px;
+     padding-top: 32px;
    }
 }
 
@@ -5405,17 +5435,16 @@ Gift Card Template
 }
 
 .cart {
-  color: $white;
 }
 
 .cart__divider {
-  border-top: 2px solid $white;
+  border-top: 2px solid;
   height: 2px;
   width: 100%;
 }
 
 .cart__divider--lighten {
-  border-top: 1px solid $white;
+  border-top: 1px solid;
   height: 1px;
   width: 100%;
   @include opacity(.2);
@@ -5423,7 +5452,6 @@ Gift Card Template
 
 .js-qty__adjust,
 .js-qty__num {
-  color: $white;
 }
 
 /* =======================================================================
@@ -5622,14 +5650,9 @@ Header
 
 .banner_image--sm--pb {
   @include media-query($small) {
-    padding-bottom: 28%;
+    padding-bottom: 35%;
   }
 }
-
-
-
-
-
 
 /* =======================================================================
 
@@ -6194,6 +6217,12 @@ Custom Sections
   }
 }
 
+.item--first + .product--simple {
+  @include media-query($medium-up) {
+    padding-top: 35px;
+  }
+}
+
 .items {
   .product--simple:last-child {
     padding-bottom: 10px;
@@ -6390,10 +6419,6 @@ Custom Sections
   padding: 0 15px;
   width: 50%;
 
-  @include media-query($medium-up) {
-    margin-bottom: 50px;
-    width: 100%;
-  }
 }
 
 .materials-grid__swatch__image {
@@ -6420,8 +6445,8 @@ Custom Sections
     padding-left: 10px;
 
     svg {
-      width: 100%;
-      height: 100%;
+      width: 29px;
+      height: 22px;
     }
   }
 }
@@ -6645,16 +6670,16 @@ Custom Sections
 }
 
 .page-section {
-  padding-top: 55px;
-  padding-bottom: 55px;
+  padding-top: 43px;
+  padding-bottom: 45px;
 
   @include media-query($medium-up) {
-    padding-top: 100px;
+    padding-top: 85px;
     padding-bottom: 85px;
   }
 
   @include media-query($large-up) {
-    padding-top: 140px;
+    padding-top: 85px;
     padding-bottom: 115px;
   }
 }
@@ -6728,10 +6753,10 @@ Custom Sections
   }
 
   img {
-    padding: 15px 0;
+    padding: 0;
 
     @include media-query($medium-up) {
-      padding: 50px 0;
+      padding: 0;
     }
   }
 
@@ -6753,14 +6778,14 @@ Custom Sections
     }
   }
 
-  &.page-style--image-top {
+ &.page-style--image-top {
     img:first-child {
       padding-top: 0;
-      padding-bottom: 15px;
+      padding-bottom: 0;
 
       @include media-query($medium-up) {
         padding-top: 0;
-        padding-bottom: 50px;
+        padding-bottom: 0;
       }
     }
   }
@@ -6856,6 +6881,72 @@ Seitz Patterns
     width: 200px;
   }
 }
+
+.action-button-menu {
+  background-color: $black;
+  border: 2px solid $black;
+  color: $white;
+  display: inline-block;
+  font-family: $seitz-font--semi-bold;
+  font-size: 14px;
+  padding: 13px;
+  text-align: center;
+  transition: all 150ms linear;
+  width: 100%;
+
+  &:hover {
+    background-color: $color-primary-accent;
+    border: 2px solid $color-primary-accent;
+  }
+
+  &.action-button-menu--red {
+    background-color: $color-primary-accent;
+    border: 2px solid $color-primary-accent;
+    color: $white;
+    width: 200px;
+
+    &:hover {
+      background-color: $white;
+      border: 2px solid $white;
+      color: $color-primary-accent;
+    }
+  }
+
+  &.action-button-menu--contrast {
+    background-color: transparent;
+    border: 2px solid $white;
+    color: $white;
+    width: 200px;
+
+    &:hover {
+      background-color: $white;
+      color: $black;
+    }
+  }
+
+  &.action-button-menu--mobile-full-width {
+    @include media-query($small) {
+      width: 100%;
+    }
+  }
+
+  &.action-button-menu--contrast--inverse {
+    background-color: $white;
+    border: 2px solid $black;
+    color: $black;
+    width:200px;
+
+    &:hover {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
+  @include media-query($medium-up) {
+    width: 200px;
+  }
+}
+
 
 .action-link {
   border-bottom: 1px solid $black;
@@ -6966,7 +7057,7 @@ Seitz Patterns
 }
 
 .line-length--large {
-  max-width: 860px;
+  max-width: 1000px;
 
   @include media-query($small) {
     max-width: 100%;
@@ -7086,6 +7177,7 @@ Seitz Patterns
       line-height: 85px;
       max-width: 500px;
       text-align: left;
+      margin-left:-8px;
     }
 
     @include media-query($large-up) {
@@ -7093,6 +7185,7 @@ Seitz Patterns
       line-height: 110px;
       max-width: 500px;
       text-align: left;
+      margin-left:-8px;
     }
   }
 
@@ -7135,6 +7228,14 @@ Seitz Patterns
   &.text__body--1--dark {
     @include opacity(1);
   }
+  
+  &.text__body--1 a:link {
+    border-bottom: 1px solid $color-primary-text;
+  }
+  
+  &.text__body--1 a:hover {
+    border-bottom: none;
+  }
 
   &.text__body--2 {
     font-size: 18px;
@@ -7154,6 +7255,14 @@ Seitz Patterns
       font-size: 18px;
       line-height: 34px;
     }
+  }
+  
+  &.text__body--3 a:link {
+    border-bottom: 1px solid #1d1d1d;
+  }
+  
+  &.text__body--3 a:hover {
+    border-bottom: none;
   }
 
   &.text__body--3--consistent {

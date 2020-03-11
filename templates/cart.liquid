@@ -5,7 +5,7 @@
   <div class="max-site-width md--up--px2 page-section">
     <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
       {% if cart.item_count > 0 %}
-        <h2 class="text__header text__header--2 text__header--white">Your Cart</h2>
+        <h2 class="text__header text__header--2 text__header--2--extra">Your Cart</h2>
         <form action="/cart" method="post" novalidate>
 
           <div class="cart">
@@ -52,7 +52,7 @@
                         <div class="pl3 md--up--pl4">
                           <div class="table full--w">
                             <div class="table-cell two-thirds">
-                              <a class="text__highlight text__highlight--2 text__highlight--white" href="{{ item.url }}">{{ item.product.title }}</a>
+                              <a class="text__highlight text__highlight--2" href="{{ item.url }}">{{ item.product.title }}</a>
                             </div>
                             <div class="table-cell text-align--right font-size--m one-third md--up--hide">
                               {{ item.line_price | money }}
@@ -94,7 +94,7 @@
                             {% endcomment %}
                           </div>
 
-                          <a class="inline-block text__body text__body--4 text__body--lighten--extra text__body--white mt1" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                          <a class="inline-block text__body text__body--4 text__body--lighten mt1" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
                             {{ 'cart.general.remove' | t }}
                           </a>
                         </div>
@@ -140,10 +140,10 @@
                       {% endif %}
                     </div>
                   </div>
-                  <em class="text__body text__body--4 text__body--lighten--extra text__body--white">Shipping and taxes not included. You will be contacted to arrange specific shipping needs.</em>
+                  <span class="text__block-quote text__block-quote--1">Shipping and taxes not included. For made-to-order items, we will contact you to arrange for your specific shipping needs.</em>
                   <div class="mt3 grid grid--half-gutter">
                     <div class="grid__item">
-                      <input type="submit" name="update" class="action-button action-button--contrast action-button--mobile-full-width sm--mb2 md--up--mr3" value="{{ 'cart.general.update' | t }}">
+                      <input type="submit" name="update" class="action-button action-button--contrast--inverse action-button--mobile-full-width sm--mb2 md--up--mr3" value="{{ 'cart.general.update' | t }}">
                       <input type="submit" name="checkout" class="action-button action-button--red action-button--mobile-full-width" value="{{ 'cart.general.checkout' | t }}">
                     </div>
                   </div>
@@ -158,9 +158,9 @@
         Cart empty state
         {% endcomment %}
         <div class="line-length--medium supports-cookies">
-          <div class="text__header text__header--2 text__header--2--extratext__header--white">{{ 'cart.general.empty' | t }}</div>
+          <div class="text__header text__header--2 text__header--2--extra">{{ 'cart.general.empty' | t }}</div>
           <div class="mt3">
-            <a href="/collections/2019" class="action-button action-button--contrast">View Collection</a>
+            <a href="/collections/heritage" class="action-button-menu action-button-menu--contrast--inverse">View Collection</a>
           </div>
         </div>
 

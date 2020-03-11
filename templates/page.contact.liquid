@@ -22,7 +22,7 @@
           <div class="detail__container mb3">
             <div class="detail__title text__highlight text__highlight--2">Contact the Studio</div>
             <div class="mt2 label">Call</div>
-            <a class="detail link--inverse" href="tel:+13475991403">+1.347.599.1403</a>
+            <a class="detail link--inverse" href="tel:+13475991403">+1 347 599 1403</a>
             <div class="mt1 md--up--mt2 label">Email</div>
             <a class="detail" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
           </div>
@@ -44,7 +44,7 @@
 
               {{ form.errors | default_errors }}
               <div class="grid--small">
-                <div class="grid__item--small md--up--one-half">
+                <div class="grid__item--small mt2">
                   <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
                   <input type="text"
                     class="block mt1 full--w px2 py1"
@@ -52,16 +52,6 @@
                     id="ContactFormName"
                     value="{% if form[name] %}{{ form[name] }}{% elsif customer %}{{ customer.name }}{% endif %}"
                     required>
-                </div>
-
-                <div class="grid__item--small md--up--one-half mt0 sm--mt2">
-                  <label for="ContactFormCompany">{{ 'contact.form.company' | t }}</label>
-                  <input type="text"
-                    class="block mt1 full--w px2 py1"
-                    name="contact[company]"
-                    id="ContactFormCompany"
-                    autocomplete="off"
-                    autocapitalize="off">
                 </div>
 
                 <div class="grid__item--small md--up--one-half mt2">
@@ -78,53 +68,32 @@
                 </div>
 
                 <div class="grid__item--small md--up--one-half mt2">
-                  <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+                  <label for="ContactFormPhone">Phone</label>
                   <input type="tel"
                     class="block mt1 full--w px2 py1"
                     name="contact[phone]"
                     id="ContactFormPhone"
                     value="{% if form[phone] %}{{ form[phone] }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-                    pattern="[0-9\-]*"
-                    required>
+                    pattern="[0-9\-]*">
                 </div>
 
                 <div class="grid__item--small mt2">
-                  <label for="ContactFormProjectName">{{ 'contact.form.project_name' | t }}</label>
-                  <input type="tel"
+                  <label for="ContactFormItems">Item(s) of Interest*</label>
+                  <input type="text"
                     class="block mt1 full--w px2 py1"
-                    name="contact[project_name]"
-                    id="ContactFormProjectName"
+                    name="contact[Items of Interest]"
+                    id="ContactFormItems"
                     autocomplete="off"
-                    autocapitalize="off">
+                    autocapitalize="off"
+                    required>
                 </div>
 
-                <div class="grid__item--small md--up--one-half mt2">
-                  <label for="ContactFormLocation">{{ 'contact.form.location' | t }}</label>
-                  <input type="tel"
-                    class="block mt1 full--w px2 py1"
-                    name="contact[location]"
-                    id="ContactFormLocation"
-                    autocomplete="off"
-                    autocapitalize="off">
-              </div>
-
-              <div class="grid__item--small md--up--one-half mt2">
-                <label for="ContactFormTimeLine">{{ 'contact.form.timeline' | t }}</label>
-                <input type="tel"
-                  class="block mt1 full--w px2 py1"
-                  name="contact[timeline]"
-                  id="ContactFormTimeLine"
-                  autocomplete="off"
-                  autocapitalize="off">
-              </div>
-
               <div class="grid__item--small mt2">
-                <label for="ContactFormMessage">Specifications/Notes*</label>
+                <label for="ContactFormMessage">Message</label>
                 <textarea rows="10"
                   class="block mt1 full--w  px2 py1"
-                  name="contact[body]"
-                  id="ContactFormMessage"
-                  required>
+                  name="contact[Message]"
+                  id="ContactFormMessage">
                   {% if form.body %}
                     {{ form.body }}
                   {% endif %}

@@ -523,7 +523,7 @@ var ajaxCart = (function(module, $) {
       $cartContainer.append(
         '<div class="line-length--medium"><div class="text__header text__header--2 text__header--2--extra text__header--white">' +
         theme.strings.cartEmpty +
-        '</div><div class="mt3"><a href="/collections/2019" class="action-button action-button--contrast">View Collection</a></div></div>'
+        '</div><div class="mt3"><a href="/collections/heritage" class="action-button action-button--contrast">View Collection</a></div></div>'
       );
       cartCallback(cart);
       return;
@@ -3772,7 +3772,7 @@ $(document).ready(function() {
     $tables: $(tableSelectors),
     tableWrapperClass: "rte__table-wrapper"
   });
-
+  
   // Target iframes to make them responsive
   var iframeSelectors =
     '.rte iframe[src*="youtube.com/embed"],' +
@@ -3793,3 +3793,4 @@ $(document).ready(function() {
 
   theme.watchQuantityInputs();
 });
+

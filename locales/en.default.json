@@ -8,13 +8,13 @@
       "page": "Page {{ page }}"
     },
     "404": {
-      "title": "404 Page Not Found",
+      "title": "Oops, That Page Doesn't Exist",
       "subtext_html": "The page you requested does not exist. Click <a class='color--primary border-bottom--primary' href=\"\/collections\/all\">here<\/a> to continue shopping."
     },
     "newsletter_form": {
-      "newsletter_email": "Enter email",
-      "submit": "Subscribe",
-      "confirmation": "Thanks for subscribing"
+      "newsletter_email": "enter your email",
+      "submit": "subscribe",
+      "confirmation": "thanks for subscribing"
     },
     "templates": {
       "grid_view": "Grid",
@@ -107,7 +107,7 @@
       "shipping_at_checkout": "Shipping & taxes calculated at checkout",
       "update": "Update Cart",
       "checkout": "Check Out",
-      "empty": "Your cart is currently empty.",
+      "empty": "Your Cart is Currently Empty",
       "cookies_required": "Enable cookies to use the shopping cart",
       "continue_browsing_html": "Continue browsing <a href=\"\/collections\/all\">here<\/a>.",
       "item_quantity": "Item quantity",
@@ -154,7 +154,7 @@
       "project_name": "Project Name",
       "location": "Location",
       "timeline": "Timeline",
-      "message": "Specification/Notes*",
+      "message": "Specification\/Notes*",
       "send": "Request A Quote",
       "post_success": "Thanks for contacting us. We'll get back to you as soon as possible."
     }
@@ -332,5 +332,19 @@
   },
   "date_formats": {
     "month_day_year": "%B %d, %Y"
+  },
+  "shopify": {
+    "checkout": {
+      "shipping": {
+        "free_rate_label": "To be determined"
+      },
+      "payment_summary": {
+        "free_label": "To be determined"
+      },
+      "order_summary": {
+        "free_shipping_discount_label": "To be determined",
+        "free_total_label": "To be determined"
+      }
+    }
   }
 }

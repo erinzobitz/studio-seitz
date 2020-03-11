@@ -8,7 +8,7 @@
 {% endcomment %}
   <script id="CartTemplate" type="text/template">
   {% raw %}
-    <h2 class="text__header text__header--2 text__header--white">Your Cart</h2>
+    <h2 class="text__header text__header--2 text__header--2--extra">Your Cart</h2>
     <form action="/cart" method="post" novalidate class="cart ajaxcart">
       <div class="max-site-width relative">
 
@@ -166,7 +166,7 @@
                     {{/if}}
                   </div>
                 </div>
-                <em class="text__body text__body--4 text__body--lighten--extra text__body--white">Shipping and taxes not included. You will be contacted to arrange specific shipping needs.</em>
+                <em class="text__body text__body--4 text__body--lighten--extra text__body--white">Shipping and taxes not included. For made-to-order items, we will contact you to arrange for your specific shipping needs.</em>
                 <div class="mt3 grid grid--half-gutter">
                   <div class="grid__item">
                     <input type="submit" name="checkout" class="checkout btn__ajax-checkout action-button action-button--red action-button--mobile-full-width" value="{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}" data-desktop-active-last-item>

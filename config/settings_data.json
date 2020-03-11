@@ -44,6 +44,11 @@
     "fade_in_items": true,
     "products_show_badges": true,
     "list_and_grid_align": "left",
+    "image": "",
+    "mobile_image": "",
+    "heading": "Image with Text",
+    "cta_url": "",
+    "cta_text": "Shop Now",
     "share_image": "",
     "social_sharing_blog": true,
     "share_facebook": true,
@@ -101,21 +106,20 @@
         "type": "header",
         "settings": {
           "show_cart_icon": true,
-          "logo": "shopify:\/\/shop_images\/Seitz.png",
-          "logo_max_width": 100,
           "main_linklist": "home",
           "show_all_navigation_links": true,
           "show_search": false,
           "show_menu_icon": true,
           "secondary_linklist": "",
           "show_search_sidebar": false,
-          "show_announcement": true,
+          "show_announcement": false,
           "home_page_only": false,
-          "text": "Visit us at ICFF in New York from May 19–22",
+          "text": "",
           "announcement_color": "tertiary",
           "link": "http:\/\/www.icff.com",
           "show_banner": true,
-          "banner": "shopify:\/\/shop_images\/17071_anakolodge_307-Nicolas-Sedlatchek-site-1918x1280.jpg",
+          "banner": "shopify:\/\/shop_images\/teapot.jpg",
+          "mobile_banner": "shopify:\/\/shop_images\/teapot-m.jpg",
           "banner_image_style": "full_screen"
         }
       },
@@ -125,8 +129,8 @@
           "1544071980102": {
             "type": "menus",
             "settings": {
-              "main_linklist": "footer",
-              "secondary_linklist": "social"
+              "main_linklist": "social",
+              "secondary_linklist": "footer"
             }
           },
           "1544414918978": {
@@ -141,7 +145,6 @@
           "1544414918978"
         ],
         "settings": {
-          "logo": "shopify:\/\/shop_images\/Seitz-White.png",
           "show_payment_icons": false,
           "show_theme_credit": false,
           "color_combination": "tertiary"
@@ -150,71 +153,26 @@
       "1527920766272": {
         "type": "cascade",
         "blocks": {
-          "1527920766272-0": {
-            "type": "heading",
+          "1555975961020": {
+            "type": "rich_text",
             "settings": {
               "heading": "Heritage Brought to the Modern Home",
-              "text_align": "text-align--center",
-              "font_size": "large",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          },
-          "1527920766272-3": {
-            "type": "text",
-            "settings": {
+              "is_first_heading": "true",
               "rich_text": "<p>Seitz builds upon the traditions that precede us&mdash;upholding modernist principles with tactile simplicity. Through honest materials and distinct techniques, we can transform our perception of everyday objects.<\/p>",
+              "paragraph_rich_text": "",
               "cta_url": "",
-              "cta_text": "",
+              "cta_text": "Shop now",
               "text_align": "text-align--center",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          },
-          "1550420432856": {
-            "type": "image_text_overlay",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/Bench.jpg",
-              "heading": "Stabellenbank",
-              "cta_url": "shopify:\/\/products\/stabellenbank",
-              "cta_text": "Made from solid European ash",
-              "section_color": "tertiary",
               "block_width_mobile": "full",
               "block_width": "full"
             }
           }
         },
         "block_order": [
-          "1527920766272-0",
-          "1527920766272-3",
-          "1550420432856"
+          "1555975961020"
         ],
         "settings": {
           "first_item": "right",
-          "color_scheme": "secondary"
-        }
-      },
-      "1527922188579": {
-        "type": "cascade",
-        "blocks": {
-          "1543985689853": {
-            "type": "rich_text",
-            "settings": {
-              "heading": "The Seitz name is no stranger to craft inside the municipality of Berneck, Switzerland—dating back to 1795.",
-              "rich_text": "<p>This small, yet industrious town has been home to artisans for hundreds&nbsp;of years&mdash;most notably for its ceramics. The Seitz family were one of many early craftsmen whose work influenced the region&rsquo;s handicrafts industry. Today, this tradition continues through the preservation and modern interpretation of local Swiss techniques.<\/p>",
-              "cta_url": "",
-              "cta_text": "",
-              "text_align": "text-align--left",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          }
-        },
-        "block_order": [
-          "1543985689853"
-        ],
-        "settings": {
-          "first_item": "left",
           "color_scheme": "secondary"
         }
       },
@@ -232,11 +190,7 @@
       "product": {
         "type": "product",
         "settings": {
-          "color_scheme": "primary",
-          "enable_payment_button": false,
-          "show_quantity": false,
           "hide_drop_down_labels": false,
-          "show_share_buttons": false,
           "enable_split_description": true,
           "description_color_scheme": "secondary",
           "show_related_products": false,
@@ -259,7 +213,9 @@
             "type": "rich_text",
             "settings": {
               "heading": "Meet the Collection",
-              "rich_text": "<p>The inaugural collection&nbsp;introduces five pieces into the modern home&mdash;partnering with our family of skilled craftsmen whose unparalleled passion is passed down from generation to generation within the cantons of Appenzell and Sankt Gallen, Switzerland<\/p>",
+              "is_first_heading": "false",
+              "rich_text": "<p>The inaugural collection introduces five pieces into the modern home&mdash;partnering with our family of skilled craftsmen within the cantons of Appenzell and Sankt Gallen, Switzerland.<\/p>",
+              "paragraph_rich_text": "",
               "cta_url": "",
               "cta_text": "Shop now",
               "text_align": "text-align--center",
@@ -339,8 +295,10 @@
             "type": "rich_text",
             "settings": {
               "heading": "Precise Workmanship",
+              "is_first_heading": "true",
               "rich_text": "<p>Our family of makers are committed to uphold the&nbsp;traditions of their craft&mdash;passed down from the generations before them. This passion and care instills the honesty&nbsp;that cannot be replicated in mass manufacturing.<\/p>",
-              "cta_url": "#",
+              "paragraph_rich_text": "",
+              "cta_url": "shopify:\/\/pages\/craftsmanship",
               "cta_text": "Learn about our commitment to craft",
               "text_align": "text-align--center",
               "block_width_mobile": "full",
@@ -351,6 +309,7 @@
             "type": "image",
             "settings": {
               "image": "shopify:\/\/shop_images\/workmanship.jpg",
+              "mobile_image": "shopify:\/\/shop_images\/workmanship-m.jpg",
               "block_width_mobile": "full",
               "block_width": "full"
             }
@@ -372,9 +331,9 @@
           "no_posts": 12,
           "enable_tag_filter": true,
           "show_subscribe_link": false,
-          "posts_per_row_desktop": "one-third",
+          "posts_per_row_desktop": "one-half",
           "show_author": false,
-          "show_date": true,
+          "show_date": false,
           "show_excerpt": true,
           "show_tags": true,
           "show_link": true
@@ -387,7 +346,7 @@
           "logo_max_width": "150",
           "title": "Heritage brought to the modern home",
           "newsletter_enable": true,
-          "newsletter_form_heading": "<p>+1.347.599.1403 \/&nbsp;<a href=\"mailto:studio@studioseitz.com\" title=\"mailto:studio@studioseitz.com\">studio@studioseitz.com<\/a><\/p>",
+          "newsletter_form_heading": "<p>+1 347 599 1403 \/&nbsp;<a href=\"mailto:studio@studioseitz.com\" title=\"mailto:studio@studioseitz.com\">studio@studioseitz.com<\/a><\/p>",
           "newsletter_placeholder": "Email address",
           "newsletter_button_text": "Submit",
           "show_share_buttons": false
@@ -399,9 +358,10 @@
           "1549675796123-0": {
             "type": "slide",
             "settings": {
-              "feature_image": "shopify:\/\/shop_images\/slide01.jpg",
+              "feature_image": "shopify:\/\/shop_images\/section-01-slide-01.jpg",
+              "mobile_feature_image": "shopify:\/\/shop_images\/section-01-slide-01-m.jpg",
               "heading": "",
-              "text": "Our craftsmen’s expertise in wood, simple connections and joinery enhance the architectural design.",
+              "text": "",
               "cta_url": "",
               "cta_text": "Shop Now",
               "content_position": "text-align--left align--top",
@@ -412,7 +372,8 @@
           "1549675796123-1": {
             "type": "slide",
             "settings": {
-              "feature_image": "shopify:\/\/shop_images\/slide02.jpg",
+              "feature_image": "shopify:\/\/shop_images\/section-01-slide-02.jpg",
+              "mobile_feature_image": "shopify:\/\/shop_images\/section-01-slide-02-m.jpg",
               "heading": "",
               "text": "",
               "cta_url": "",
@@ -429,14 +390,45 @@
         ],
         "settings": {
           "auto_rotate": false,
+          "text_below_slides": "Our craftsmen’s expertise in wood, simple connections and joinery enhance the architectural design.",
           "slide_speed": "5000",
           "color_scheme": "secondary"
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "settings": {
+          "color_scheme": "primary",
+          "show_author": false,
+          "show_date": true,
+          "show_share_buttons": false,
+          "show_tags": false,
+          "show_next_previous_links": true
+        }
+      },
+      "1556927692023": {
+        "type": "image-left-with-text",
+        "settings": {
+          "image": "shopify:\/\/shop_images\/hero-01_4211f367-ffb9-428a-ab78-a8b977b717ee.jpg",
+          "mobile_image": "shopify:\/\/shop_images\/hero-01-m_1.jpg",
+          "heading": "Stabellenbank",
+          "cta_url": "",
+          "cta_text": "Made from solid European ash"
+        }
+      },
+      "1556938821864": {
+        "type": "heading-with-text-right",
+        "settings": {
+          "heading": "",
+          "rich_text": "<p>The Seitz name is no stranger to craft inside  the municipality of Berneck, Switzerland&mdash;dating  back to 1795.<\/p>",
+          "paragraph_rich_text": "<p>This small, yet industrious town has been home to artisans for hundreds&nbsp;of years&mdash;most notably for its ceramics. The Seitz family were one of many early craftsmen whose work influenced the region&rsquo;s handicrafts industry. Today, this tradition continues through the preservation and modern interpretation of local Swiss techniques.<\/p>"
         }
       }
     },
     "content_for_index": [
       "1527920766272",
-      "1527922188579",
+      "1556927692023",
+      "1556938821864",
       "1549675796123",
       "1528020026534",
       "1543986581641",
@@ -524,8 +516,6 @@
         "header": {
           "type": "header",
           "settings": {
-            "logo": "",
-            "logo_max_width": 100,
             "main_linklist": "main-menu",
             "show_all_navigation_links": false,
             "show_search": true,
@@ -824,11 +814,7 @@
         "product": {
           "type": "product",
           "settings": {
-            "color_scheme": "primary",
-            "enable_payment_button": false,
-            "show_quantity": true,
             "hide_drop_down_labels": false,
-            "show_share_buttons": true,
             "enable_split_description": false,
             "description_color_scheme": "primary",
             "show_related_products": true,
@@ -925,8 +911,6 @@
         "header": {
           "type": "header",
           "settings": {
-            "logo": "",
-            "logo_max_width": 100,
             "main_linklist": "main-menu",
             "show_all_navigation_links": true,
             "show_search": true,
@@ -1180,11 +1164,7 @@
         "product": {
           "type": "product",
           "settings": {
-            "color_scheme": "primary",
-            "enable_payment_button": false,
-            "show_quantity": true,
             "hide_drop_down_labels": false,
-            "show_share_buttons": true,
             "enable_split_description": false,
             "description_color_scheme": "secondary",
             "show_related_products": true,
@@ -1354,8 +1334,6 @@
         "header": {
           "type": "header",
           "settings": {
-            "logo": "",
-            "logo_max_width": 120,
             "main_linklist": "main-menu",
             "show_all_navigation_links": true,
             "show_search": false,
@@ -1627,11 +1605,7 @@
         "product": {
           "type": "product",
           "settings": {
-            "color_scheme": "secondary",
-            "enable_payment_button": false,
-            "show_quantity": true,
             "hide_drop_down_labels": false,
-            "show_share_buttons": true,
             "enable_split_description": false,
             "description_color_scheme": "primary",
             "show_related_products": false,

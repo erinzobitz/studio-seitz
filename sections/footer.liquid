@@ -59,7 +59,7 @@
 
                 {% if block.type == 'newsletter' %}
                   <div class="mtn1">
-                    <a class="text__body text__body--2 text__body--white" href="tel:+13475991403">+1.347.599.1403</a>
+                    <a class="text__body text__body--2 text__body--white" href="tel:+13475991403">+1 347 599 1403</a>
                   </div>
                   <div>
                     <a class="action-link action-link--white text__body text__body--2 text__body--white" href="mailto:studio@studioseitz.com">studio@studioseitz.com</a>
@@ -140,7 +140,7 @@
 
                 {% if settings[social_link] != blank %}
                   <li class="inline-block">
-                    <a class="social-icon color--{{ section_color }}-text pl1 font-size--xxs mb1 block" href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
+                    <a class="social-icon color--{{ section_color }}-text pl1 font-size--xxs mb1 block" href="{{ settings[social_link] }}" target="_blank" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
                       {% include social_icon %}
                       <span class="icon-fallback-text">{{ social }}</span>
                     </a>
@@ -242,5 +242,4 @@
       }
     ]
   }
-
 {% endschema %}

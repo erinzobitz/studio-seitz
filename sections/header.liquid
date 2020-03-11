@@ -97,7 +97,7 @@
           </div>
           <div class="header-table__center align--middle text-align--center flex--grow--1  md--dn--flex--1-basis-0 lg--up--flex--grow--0 lg--justify--center lg--items--center">
             {% if template.name == 'index' %}
-              <h1 class="m0 lg--up--px3 {% if section.settings.logo != blank %}font-size--0{% endif %}" itemscope itemtype="http://schema.org/Organization">
+              <div class="font-size--0 m0 lg--up--px3 {% if section.settings.logo != blank %}{% endif %}" itemscope itemtype="http://schema.org/Organization">
             {% else %}
               <div class="font-size--0 m0 lg--up--px3" itemscope itemtype="http://schema.org/Organization">
             {% endif %}
@@ -114,7 +114,7 @@
                   Studio
                 </a>
             {% if template.name == 'index' %}
-              </h1>
+              </div>
             {% else %}
               </div>
             {% endif %}

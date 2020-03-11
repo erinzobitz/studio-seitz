@@ -63,9 +63,12 @@
     </noscript>
   {% endunless %}
 
+  <div class="blogs__article pt2 t--list-and-grid">
   {% if blog_page %}
 
-    <p class="f--heading color--{{ section_color }}-text m0 {% unless article.image == blank %}mt2{% endunless %} font-size--ml lg--up--font-size--l">{{ article.title }}</p>
+    <div class="blogs__article__text blogs__article__text--title">
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </div>
 
     {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
 
@@ -74,7 +77,7 @@
     {% endif %}
 
     {% if show_excerpt %}
-    <div class="rte font-size--sm mt2 line-height--3">
+    <div class="mt1 blogs__article__text">
       {% if article.excerpt.size > 0 %}
         {{ article.excerpt }}
       {% else %}
@@ -84,6 +87,7 @@
       {% endif %}
     </div>
     {% endif %}
+    </div>
 
     {% if blog.comments_enabled?  %}
       <ul class=" list--reset font-size--sm t--list-and-grid">
@@ -113,9 +117,9 @@
     {% endif %}
 
     {% if show_link %}
-    <p class="font-size--sm t--list-and-grid">
+    <!--<p class="font-size--sm t--list-and-grid">
       <a href="{{ article.url }}" class="inline-block"><span class="align--middle">{{ 'blogs.article.read_more' | t }}</span> <span class="font-size--xxxs align--middle inline-block">{% include 'svg' | icon: 'icon-next' %}</span></a>
-    </p>
+    </p>-->
     {% endif %}
 
   {% else %}

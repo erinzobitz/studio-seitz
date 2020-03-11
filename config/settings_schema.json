@@ -491,32 +491,6 @@
     ]
   },
   {
-    "name": "Heading with text",
-    "settings": [
-      {
-        "id": "heading",
-        "type": "text",
-        "label": "Heading",
-        "default": "Heading or impact text goes here."
-      },
-      {
-        "type": "header",
-        "content": "Text"
-      },
-      {
-        "id": "rich_text",
-        "type": "richtext",
-        "label": "Text",
-        "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
-      },
-      {
-        "id": "paragraph_rich_text",
-        "type": "richtext",
-        "label": "Paragraph"
-      }
-    ]
-  },
-  {
     "name": "Social media",
     "settings": [
       {
