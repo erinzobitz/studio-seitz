@@ -15,15 +15,15 @@
       {% if mega_nav %}
 
         {% if link_all %}
-        <div class="grid full--w">
-          <div class="grid__item one-quarter">
-            <h2 class="{{ global__heading_font_size }} m0">{{ menus[child_list_handle].title }}</h2>
-            <a class="{{ global__link_underline }} {{ global__hover_underline }} {{ global__homepage_more_link }} {{ global__basic_font_size }}" href="{{ link.url }}" >
-              {% assign title = menus[child_list_handle].title %}
-              {{ 'general.navigation.go_to' | t: title: title  }}
-            </a>
-          </div>
-          <div class="grid__item three-quarters">
+          <div class="grid full--w">
+            <div class="grid__item one-quarter">
+              <h2 class="{{ global__heading_font_size }} m0">{{ menus[child_list_handle].title }}</h2>
+              <a class="{{ global__link_underline }} {{ global__hover_underline }} {{ global__homepage_more_link }} {{ global__basic_font_size }}" href="{{ link.url }}" >
+                {% assign title = menus[child_list_handle].title %}
+                {{ 'general.navigation.go_to' | t: title: title  }}
+              </a>
+            </div>
+            <div class="grid__item three-quarters">
         {% endif %}
 
           <div class="flex flex--wrap mxn3">
@@ -84,10 +84,6 @@
             {% endif %}
           {% endfor %}
         </ul>
-
-        <div class="site-nav__content--secondary">
-          <a href="/pages/request-a-quote" class="action-button action-button--contrast">Request A Quote</a>
-        </div>
       </div>
       {% endif %}
     </div>

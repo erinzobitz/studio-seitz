@@ -67,27 +67,38 @@
             {% include 'no-js__mobile-menu' %}
           </div>
           <div class="nav__container align--middle text-align--left flex--1 overflow--hidden">
-            <div data-desktop-navigation-container>
+            <!-- Desktop Header -->
+            <div class="site-header--desktop">
               <nav role="navigation">
-                <ul class="t--header-navigation site-nav list--reset m0 p0 font-size--m mxn1 no-wrap inline-block" data-desktop-navigation-list>
+                <div class="flex">
+                  {% for link in linklists[section.settings.main_linklist].links %}
+                    <a href="{{ link.url }}" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer pr3" tabindex="0" data-top-level-item>
+                      {% if link.title == "Collection" %}
+                        <div class="header__link-wrapper flex">{{ link.title }}<span class="flex items--center site-nav__menu-icon site-nav__menu-icon--down site-nav__svg">{% include 'menu-dropdown' %}</span></div>
+                      {% else %}
+                        <div class="header__link-wrapper">{{ link.title }}</div>
+                      {% endif %}
+                    </a>
+                  {% endfor %}
+                </div>
+              </nav>
+            </div>
+
+            <!-- Mobile Header -->
+            <div class="site-header--mobile">
+              <nav role="navigation">
+                <ul class="t--header-navigation site-nav list--reset m0 p0 font-size--m mxn1 no-wrap inline-block">
                   {% for link in linklists[section.settings.main_linklist].links %}
                     {%- assign child_list_handle = link.title | handleize -%}
                     {% if menus[child_list_handle].links != blank %}
                       <li class="nav__item site-nav--has-submenu{% if link.active %} site-nav--active{% endif %} inline-block">
-                        <a class="site-nav__link color--{{ section_color }}-text color--header-active  px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-first-level-link="desktop" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0"  aria-haspopup="true">
+                        <a class="site-nav__link color--{{ section_color }}-text color--header-active  px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0" aria-haspopup="true">
                           <div class="header__link-wrapper flex items--center">
                             <span class="site-nav__chevron-down flex items--center site-nav__svg">{% include 'icon-menu' %}</span>
-                            <span class="site-nav__chevron-up flex items--center site-nav__svg hide">{% include 'icon-close' %}</span>
                           </div>
                         </a>
                         {%- assign link_handle = link.title | handleize -%}
                         {% include 'no-js__submenu' %}
-                      </li>
-                    {% else %}
-                      <li class="nav__item inline-block {% if link.active %}site-nav--active{% endif %}" >
-                        <a href="{{ link.url }}" class="site-nav__link color--{{ section_color }}-text color--header-active px1 align--top header__link inline-block no-wrap" data-top-level-item>
-                          <div class="header__link-wrapper">{{ link.title }}</div>
-                        </a>
                       </li>
                     {% endif %}
                   {% endfor %}
@@ -95,6 +106,7 @@
               </nav>
             </div>
           </div>
+
           <div class="header-table__center align--middle text-align--center flex--grow--1  md--dn--flex--1-basis-0 lg--up--flex--grow--0 lg--justify--center lg--items--center">
             {% if template.name == 'index' %}
               <div class="font-size--0 m0 lg--up--px3 {% if section.settings.logo != blank %}{% endif %}" itemscope itemtype="http://schema.org/Organization">
@@ -146,14 +158,10 @@
               </a>
               {% endif %}
 
-              <a href="/cart" id="CartLink" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 px1 flex justify--end items--center" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" {% endif %}  tabindex="0"  data-top-level-item  aria-haspopup="true">
+              <a href="/cart" id="CartLink" class="cart t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 px1 flex justify--end items--center" tabindex="0" data-top-level-item>
                 <div class="header__link-wrapper">
-                  {% if section.settings.show_cart_icon %}
-                  <span class="cart__icon">{% include 'svg' | icon: 'icon-cart' %}</span>
-                  {% else %}
-                  {{ 'layout.cart.title' | t }}
-                  {% endif %}
-                  {% unless section.settings.show_cart_icon %}({% endunless %}<span id="CartCount">{{ cart.item_count }}</span>{% unless section.settings.show_cart_icon %}){% endunless %}
+                  <span>Cart</span>
+                  <span id="CartCount">({{ cart.item_count }})</span>
                 </div>
               </a>
             </div>

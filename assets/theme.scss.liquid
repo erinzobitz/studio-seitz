@@ -4458,7 +4458,7 @@ body.template-404 {
     .site-nav__svg {
       svg {
         path {
-          stroke: $black;
+          fill: $black;
         }
       }
     }
@@ -4486,11 +4486,14 @@ body.template-product {
 
 body.template-index {
   .site-header:not(.active) {
-    .site-header--contrast-logo,
     .site-header--white,
     .site-header--standard-logo,
     .site-header--studio {
-      visibility: hidden;
+      display: none;
+    }
+
+    .site-header--contrast-logo {
+      display: inline-block;
     }
 
     .header__link {
@@ -4500,7 +4503,7 @@ body.template-index {
     .site-nav__svg {
       svg {
         path {
-          stroke: $black;
+          fill: $black;
         }
       }
     }
@@ -5101,8 +5104,14 @@ Header Active (Modal)
 }
 
 .header__close {
-  display: none;
+  display: block;
+  padding-top: 24px;
   z-index: 50;
+}
+
+.site-header--link {
+  font-family: $seitz-font--semi-bold;
+  font-size: 14px;
 }
 
 .site-header--studio {
@@ -5155,20 +5164,6 @@ Header Active (Modal)
     }
   }
 
-  .header__close {
-    display: block;
-    transition: all 0.2s cubic-bezier(0.46, 0.01, 0.32, 1);
-    svg {
-      transition: all 0.2s cubic-bezier(0.46, 0.01, 0.32, 1);
-    }
-  }
-
-  .header__close:hover {
-    svg {
-      transform: scale(1.2);
-    }
-  }
-
   .header__active {
     display: block;
   }
@@ -5178,6 +5173,10 @@ Header Active (Modal)
   }
 
   .announcement-bar {
+    display: none;
+  }
+
+  .cart {
     display: none;
   }
 
@@ -5434,16 +5433,13 @@ Gift Card Template
   }
 }
 
-.cart {
-}
-
-.cart__divider {
+.divider {
   border-top: 2px solid;
   height: 2px;
   width: 100%;
 }
 
-.cart__divider--lighten {
+.divider--lighten {
   border-top: 1px solid;
   height: 1px;
   width: 100%;
@@ -5576,8 +5572,25 @@ Header
   transition: background-color 0.2s ease-in-out;
 }
 
+
+.site-header--mobile {
+  display: block;
+
+  @include media-query($large-up) {
+    display: none;
+  }
+}
+
+.site-header--desktop {
+  display: none;
+
+  @include media-query($large-up) {
+    display: block;
+  }
+}
+
 .header-table__top {
-  padding-top: 50px;
+  padding-top: 30px;
 
   @include media-query($small) {
     padding-top: 25px;
@@ -5599,12 +5612,12 @@ Header
   }
 }
 
-.site-nav__svg {
-  padding-bottom: 0.1rem;
+.site-nav__menu-icon {
+  padding-left: 5px;
 }
 
-.cart__icon {
-  margin-right: -0.3rem;
+.site-nav__svg {
+  padding-bottom: 0.1rem;
 }
 
 .header__active-overlay {
@@ -7201,12 +7214,23 @@ Seitz Patterns
     }
   }
 
+  &.text__header--6 {
+    font-family: $seitz-font--semi-bold;
+    font-size: 22px;
+    letter-spacing: 0;
+    line-height: 22px;
+  }
+
   &.text__header--align-left {
     margin-left: -5px;
   }
 
   &.text__header--white {
     color: $white;
+  }
+
+  &.text__header--faint {
+    opacity: 40%;
   }
 }
 

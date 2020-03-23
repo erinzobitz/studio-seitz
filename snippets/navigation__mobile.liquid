@@ -2,20 +2,25 @@
 <div id="MobileNav" class="mobile-navigation absolute top--0 left--0 full color--active-text overflow--hidden">
   <div class="mobile-navigation-container absolute full--h overflow--hidden left--0 top--0" data-mobile-navigation-container>
     <div class="mobile-navigation__pane full--h full--vw left overflow--scroll py4 px2">
+      <div class="relative">
+        <a class="header__close fixed lg-up--full--w top--0 right--0 pr2 pointer color--active-text hv--active-accent" data-close-header tabindex="0">
+          {% include 'svg' | icon: 'icon-close' %}
+        </a>
+      </div>
 
       <ul class="mobile-navigation f--heading list--reset m0 font-size--xxl">
         {% for link in linklists[section.settings.main_linklist].links %}
           {% if link.links != blank %}
             {%- assign child_list_handle = link.title | handleize -%}
             <li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}" aria-haspopup="true">
-                <a class="mobile-nav__link mobile-nav__link--sublist block p1 pointer color--active-text hv--active-accent" data-first-level-link="mobile" data-key="{{ child_list_handle }}--{{ forloop.index }}" tabindex="0"  {% if forloop.last and section.settings.show_search_sidebar == false and menus[section.settings.secondary_linklist].links == blank  and shop.customer_accounts_enabled == false  %}data-mobile-active-last-item{% endif %}>
-                  <span class="align--middle">{{ link.title }}</span>
+                <a class="mobile-nav__link mobile-nav__link--sublist block p1 pb2 pointer color--active-text hv--active-accent" data-first-level-link="mobile" data-key="{{ child_list_handle }}--{{ forloop.index }}" tabindex="0"  {% if forloop.last and section.settings.show_search_sidebar == false and menus[section.settings.secondary_linklist].links == blank  and shop.customer_accounts_enabled == false  %}data-mobile-active-last-item{% endif %}>
+                  <span class="align--middle text__header text__header--2">{{ link.title }}</span>
                   <span class="font-size--m inline-block align--baseline">{% include 'svg' | icon: 'icon-chevron-right-small' %}</span>
                 </a>
             </li>
           {% else %}
             <li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}">
-              <a href="{{ link.url }}" class="mobile-nav__link block p1 color--active-text hv--active-accent" {% if forloop.last and section.settings.show_search_sidebar == false and menus[section.settings.secondary_linklist].links == blank  and shop.customer_accounts_enabled == false  %}data-mobile-active-last-item{% endif %}>{{ link.title }}</a>
+              <a href="{{ link.url }}" class="mobile-nav__link block p1 pb2 color--active-text hv--active-accent text__header text__header--2" {% if forloop.last and section.settings.show_search_sidebar == false and menus[section.settings.secondary_linklist].links == blank  and shop.customer_accounts_enabled == false  %}data-mobile-active-last-item{% endif %}>{{ link.title }}</a>
             </li>
           {% endif %}
         {% endfor %}
@@ -100,12 +105,11 @@
           {% endfor %}
 
           <div class="hide" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-mobile-second-level-section>
-
-            <h4 class=" t--header-navigation mt1 mb3">
+            <h4 class=" t--header-navigation mt1 mb1">
               {% if link_all %}
               <a href="{{ link.url }}" class="color--active-text hv--active-accent">
               {% endif %}
-              <span class="border-bottom--active-text hv--border-bottom--active-accent inline-block">{{ menus[child_list_handle].title }}</span>
+              <span class="text__header text__header--2">{{ menus[child_list_handle].title }}</span>
               {% if link_all %}
               </a>
               {% endif %}
@@ -125,20 +129,16 @@
                   {% assign last_list = false %}
                 {% endif %}
 
-                <h4 class=" t--header-navigation mt1 mb1 inline-block">
-                  {% if link_all %}
-                  <a href="{{ childlink.url }}" class="color--active-text hv--active-accent">
-                  {% endif %}
+                <h4 class=" t--header-navigation mt1 mb1 inline-block caps font-weight--bold">
                   {{ childlink.title }}
-                  {% if link_all %}
-                  </a>
-                  {% endif %}
                 </h4>
+
+                <div class="divider pb2"></div>
 
                 <ul class="mobile-navigation__second-level f--heading list--reset m0 font-size--xxl mxn1 mb2">
                   {% for childchildlink in childlink.links %}
                   <li class="mobile-nav__item{% if childchildlink.active %} mobile-nav__item--active{% endif %}">
-                    <a href="{{ childchildlink.url }}" class="mobile-nav__link block p1 line-height--6 color--active-text"  {% if forloop.first and first_list %}data-mobile-active-first-item{% endif %} {% if forloop.last and last_list %}data-mobile-active-last-item{% endif %}>{{ childchildlink.title }}</a>
+                    <a href="{{ childchildlink.url }}" class="mobile-nav__link block pb1 pl1 text__header text__header--6 text__header--white text__header--faint"  {% if forloop.first and first_list %}data-mobile-active-first-item{% endif %} {% if forloop.last and last_list %}data-mobile-active-last-item{% endif %}>{{ childchildlink.title }}</a>
                   </li>
                   {% endfor %}
                 </ul>

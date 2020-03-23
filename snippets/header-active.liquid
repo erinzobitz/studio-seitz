@@ -9,7 +9,12 @@
     Navigation
     {% endcomment %}
     <div class="hide" data-active-name="navigation" data-active-section>
-      {% include 'navigation__desktop' %}
+      <div class="lg--up--hide">
+        {% include 'navigation__mobile' %}
+      </div>
+      <div class="md--dn--hide">
+        {% include 'navigation__desktop' %}
+      </div>
     </div>
 
     {% comment %}

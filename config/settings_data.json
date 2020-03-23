@@ -106,7 +106,7 @@
         "type": "header",
         "settings": {
           "show_cart_icon": true,
-          "main_linklist": "home",
+          "main_linklist": "main-menu",
           "show_all_navigation_links": true,
           "show_search": false,
           "show_menu_icon": true,
@@ -420,7 +420,7 @@
         "type": "heading-with-text-right",
         "settings": {
           "heading": "",
-          "rich_text": "<p>The Seitz name is no stranger to craft inside  the municipality of Berneck, Switzerland&mdash;dating  back to 1795.<\/p>",
+          "rich_text": "<p>The Seitz name is no stranger to craft inside the municipality of Berneck, Switzerland&mdash;dating  back to 1795.<\/p>",
           "paragraph_rich_text": "<p>This small, yet industrious town has been home to artisans for hundreds&nbsp;of years&mdash;most notably for its ceramics. The Seitz family were one of many early craftsmen whose work influenced the region&rsquo;s handicrafts industry. Today, this tradition continues through the preservation and modern interpretation of local Swiss techniques.<\/p>"
         }
       }
