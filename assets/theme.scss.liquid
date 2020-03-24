@@ -2739,6 +2739,12 @@ $color-strings: (
   .#{$breakpoint}hv--#{$color} {
     &:hover {
       color: nth($colors, $i);
+
+      svg {
+        path {
+          fill: nth($colors, $i);
+        }
+      }
     }
   }
 
@@ -4256,6 +4262,10 @@ Mobile Navigation
   }
 }
 
+.mobile-navigation__pane {
+  padding-top: 110px;
+}
+
 
 /* =======================================================================
 
@@ -4546,8 +4556,8 @@ Icons
 .icon-wrapper > svg {
   display: inline-block;
   vertical-align: middle;
-  width: 2em;
-  height: 2em;
+  width: 100%;
+  height: 100%;
   fill: currentColor;
 }
 
@@ -5172,11 +5182,9 @@ Header Active (Modal)
     opacity: 1;
   }
 
-  .announcement-bar {
-    display: none;
-  }
-
-  .cart {
+  .announcement-bar,
+  .cart,
+  .site-nav__link, {
     display: none;
   }
 
@@ -5604,11 +5612,16 @@ Header
 
 .header__link {
   color: $white;
+  font-family: $seitz-font--semi-bold;
+  font-size: 14px;
+  letter-spacing: .25px;
 }
 
 .header__link--focus {
-  &:active {
-    opacity: 0.2;
+  &:active,
+  &:hover,
+  &:focus {
+    opacity: 0.4;
   }
 }
 
@@ -7230,7 +7243,7 @@ Seitz Patterns
   }
 
   &.text__header--faint {
-    opacity: 40%;
+    opacity: .4;
   }
 }
 

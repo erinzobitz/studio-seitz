@@ -1,7 +1,7 @@
 {% assign link_all = section.settings.show_all_navigation_links %}
 <div id="MobileNav" class="mobile-navigation absolute top--0 left--0 full color--active-text overflow--hidden">
   <div class="mobile-navigation-container absolute full--h overflow--hidden left--0 top--0" data-mobile-navigation-container>
-    <div class="mobile-navigation__pane full--h full--vw left overflow--scroll py4 px2">
+    <div class="mobile-navigation__pane full--h full--vw left overflow--scroll px2">
       <div class="relative">
         <a class="header__close fixed lg-up--full--w top--0 right--0 pr2 pointer color--active-text hv--active-accent" data-close-header tabindex="0">
           {% include 'svg' | icon: 'icon-close' %}
@@ -15,7 +15,7 @@
             <li class="mobile-nav__item{% if link.active %} mobile-nav__item--active{% endif %}" aria-haspopup="true">
                 <a class="mobile-nav__link mobile-nav__link--sublist block p1 pb2 pointer color--active-text hv--active-accent" data-first-level-link="mobile" data-key="{{ child_list_handle }}--{{ forloop.index }}" tabindex="0"  {% if forloop.last and section.settings.show_search_sidebar == false and menus[section.settings.secondary_linklist].links == blank  and shop.customer_accounts_enabled == false  %}data-mobile-active-last-item{% endif %}>
                   <span class="align--middle text__header text__header--2">{{ link.title }}</span>
-                  <span class="font-size--m inline-block align--baseline">{% include 'svg' | icon: 'icon-chevron-right-small' %}</span>
+                  <span class="mobile-nav__link--svg font-size--m inline-block align--baseline">{% include 'svg' | icon: 'icon-chevron-right-small' %}</span>
                 </a>
             </li>
           {% else %}
@@ -84,9 +84,11 @@
 
     <div class="mobile-navigation__pane full--h full--vw left overflow--scroll relative pt4 px2">
 
-      <button class="mobile-navigation__previous hide btn border--none bg--transparent inline-block p2 fixed top--0 left--0 font-size--ml color--active-text hv--active-accent" data-mobile-nav-previous>
-        {% include 'svg' | icon: 'icon-previous' %}
-      </button>
+      <div class="relative">
+        <a class="mobile-navigation__previous hide header__close fixed lg-up--full--w top--0 left--0 pl2 pointer color--active-text hv--active-accent" data-mobile-nav-previous>
+          {% include 'svg' | icon: 'icon-previous' %}
+        </a>
+      </div>
 
       {% comment %}
       Second Level

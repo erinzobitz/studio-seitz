@@ -87,22 +87,11 @@
             <!-- Mobile Header -->
             <div class="site-header--mobile">
               <nav role="navigation">
-                <ul class="t--header-navigation site-nav list--reset m0 p0 font-size--m mxn1 no-wrap inline-block">
-                  {% for link in linklists[section.settings.main_linklist].links %}
-                    {%- assign child_list_handle = link.title | handleize -%}
-                    {% if menus[child_list_handle].links != blank %}
-                      <li class="nav__item site-nav--has-submenu{% if link.active %} site-nav--active{% endif %} inline-block">
-                        <a class="site-nav__link color--{{ section_color }}-text color--header-active  px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0" aria-haspopup="true">
-                          <div class="header__link-wrapper flex items--center">
-                            <span class="site-nav__chevron-down flex items--center site-nav__svg">{% include 'icon-menu' %}</span>
-                          </div>
-                        </a>
-                        {%- assign link_handle = link.title | handleize -%}
-                        {% include 'no-js__submenu' %}
-                      </li>
-                    {% endif %}
-                  {% endfor %}
-                </ul>
+                <a class="site-nav__link color--{{ section_color }}-text color--header-active px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0" aria-haspopup="true">
+                  <div class="header__link-wrapper">
+                    <span class="site-nav__chevron-down flex items--center site-nav__svg">{% include 'icon-menu' %}</span>
+                  </div>
+                </a>
               </nav>
             </div>
           </div>
@@ -159,7 +148,7 @@
               {% endif %}
 
               <a href="/cart" id="CartLink" class="cart t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 px1 flex justify--end items--center" tabindex="0" data-top-level-item>
-                <div class="header__link-wrapper">
+                <div class="header__link-wrapper site-nav__link">
                   <span>Cart</span>
                   <span id="CartCount">({{ cart.item_count }})</span>
                 </div>
