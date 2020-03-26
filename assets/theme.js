@@ -1675,8 +1675,10 @@ theme.Header = (function() {
       /**
        * Close header when overlay is clicked
        */
-      this.$container.on("click", "[data-header-overlay]", function(evt) {
-        closeHeader();
+      $(document).on("click", "[data-header-overlay]", function(evt) {
+        if ($header.hasClass("active")) {
+          closeHeader();
+        }
       });
 
       /**
@@ -1956,9 +1958,11 @@ theme.Header = (function() {
           .find(".site-nav__chevron-down")
           .removeClass("hide");
         $activeHeaderTrigger.find(".site-nav__chevron-up").addClass("hide");
+        $(document).find("[data-header-overlay]").css('z-index', -1);
         if ($el !== "") {
           $el.addClass("isSelected");
           $el.attr("aria-expanded", "true");
+          $(document).find("[data-header-overlay]").css('z-index', 4);
           $el.find(".site-nav__chevron-down").addClass("hide");
           $el.find(".site-nav__chevron-up").removeClass("hide");
         }

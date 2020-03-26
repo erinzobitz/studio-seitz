@@ -68,24 +68,32 @@
           </div>
           <div class="nav__container align--middle text-align--left flex--1 overflow--hidden">
             <!-- Desktop Header -->
-            <div class="site-header--desktop">
-              <nav role="navigation">
-                <div class="flex">
-                  {% for link in linklists[section.settings.main_linklist].links %}
-                    <a href="{{ link.url }}" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer pr3" tabindex="0" data-top-level-item>
-                      {% if link.title == "Collection" %}
-                        <div class="header__link-wrapper flex">{{ link.title }}<span class="flex items--center site-nav__menu-icon site-nav__menu-icon--down site-nav__svg">{% include 'menu-dropdown' %}</span></div>
+            <div class="md--dn--hide">
+              <div data-desktop-navigation-container>
+                <nav role="navigation">
+                  <div class="flex">
+                    {% for link in linklists[section.settings.main_linklist].links %}
+                      {%- assign child_list_handle = link.title | handleize -%}
+                      {% if menus[child_list_handle].links != blank %}
+                        <a href="{{ link.url }}" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer pr3" tabindex="0" data-active-header-trigger data-active-target="navigation" data-first-level-link="desktop" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0"  aria-haspopup="true">
+                          <div class="header__link-wrapper flex">{{ link.title }}
+                            <span class="flex items--center site-nav__menu-icon site-nav__menu-icon--down site-nav__svg site-nav__chevron-down">{% include 'menu-dropdown' %}</span>
+                            <span class="flex hide items--center site-nav__menu-icon site-nav__menu-icon--up site-nav__svg site-nav__chevron-up">{% include 'menu-close' %}</span>
+                          </div>
+                        </a>
                       {% else %}
-                        <div class="header__link-wrapper">{{ link.title }}</div>
+                        <a href="{{ link.url }}" class="t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer pr3">
+                          <div class="header__link-wrapper">{{ link.title }}</div>
+                        </a>
                       {% endif %}
-                    </a>
-                  {% endfor %}
-                </div>
-              </nav>
+                    {% endfor %}
+                  </div>
+                </nav>
+              </div>
             </div>
 
             <!-- Mobile Header -->
-            <div class="site-header--mobile">
+            <div class="lg--up--hide">
               <nav role="navigation">
                 <a class="site-nav__link color--{{ section_color }}-text color--header-active px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0" aria-haspopup="true">
                   <div class="header__link-wrapper">
@@ -150,7 +158,7 @@
               <a href="/cart" id="CartLink" class="cart t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 px1 flex justify--end items--center" tabindex="0" data-top-level-item>
                 <div class="header__link-wrapper site-nav__link">
                   <span>Cart</span>
-                  <span id="CartCount">({{ cart.item_count }})</span>
+                  <span>(</span><span id="CartCount">{{ cart.item_count }}</span><span>)</span>
                 </div>
               </a>
             </div>
@@ -159,9 +167,7 @@
     </div>
 
     {% include 'header-active' %}
-
     <div class="header__active-overlay" data-header-overlay></div>
-
   </header>
 
   {% if section.settings.show_banner and template.name == 'index'  %}

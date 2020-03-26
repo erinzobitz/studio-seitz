@@ -2754,6 +2754,12 @@ $color-strings: (
     }
   }
 
+  .#{$breakpoint}hv-opacity--full {
+    &:hover {
+      opacity: 1 !important;
+    }
+  }
+
   .#{$breakpoint}border--#{$color} {
     border: 1px solid nth($colors, $i);
   }
@@ -4239,6 +4245,14 @@ body:not(.banner-image) {
   }
 }
 
+/* =======================================================================
+
+Desktop Navigation
+========================================================================== */
+
+.desktop-navigation-item {
+  width: 315px;
+}
 
 /* =======================================================================
 
@@ -4555,10 +4569,11 @@ Icons
 .icon,
 .icon-wrapper > svg {
   display: inline-block;
-  vertical-align: middle;
-  width: 100%;
-  height: 100%;
   fill: currentColor;
+  height: 2em;
+  max-height: 25px;
+  vertical-align: middle;
+  width: 2em;
 }
 
 .no-svg .icon {
@@ -5158,6 +5173,17 @@ Header Active (Modal)
   height: 100vh;
 }
 
+.header__active-overlay {
+  display: block;
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
 .site-header.active {
   background-color: $active-background;
   color: $active-text;
@@ -5169,6 +5195,9 @@ Header Active (Modal)
   left: 0;
 
   @include media-query($large-up) {
+    max-height: 470px;
+    overflow-y: hidden;
+
     .header__shifter {
       height: 43px;
     }
@@ -5180,6 +5209,14 @@ Header Active (Modal)
 
   .header__active.visible {
     opacity: 1;
+  }
+
+  .color--header-active {
+    color: $active-text;
+  }
+
+  .border-bottom--header--active {
+    border-bottom: 1px solid $active-text;
   }
 
   .announcement-bar,
@@ -5202,17 +5239,6 @@ Header Active (Modal)
     overflow: unset;
   }
 
-  .header__active-overlay {
-    display: block;
-    position: absolute;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-
   .header__meta {
     flex-grow: 0;
     flex-basis: auto;
@@ -5232,18 +5258,6 @@ Header Active (Modal)
 .site-nav__content--secondary {
   padding-top: 45px;
 }
-
-// header active
-.site-header.active {
-  .color--header-active {
-    color: $active-text;
-  }
-
-  .border-bottom--header--active {
-    border-bottom: 1px solid $active-text;
-  }
-}
-
 
 /* =======================================================================
 
@@ -5577,9 +5591,12 @@ Header
 .site-header {
   background-color: transparent;
   z-index: 10;
-  transition: background-color 0.2s ease-in-out;
-}
 
+  @include media-query($large-up) {
+    max-height: 65px;
+    transition: all .2s cubic-bezier(0.535, 0, 0, 1),visibility .2s linear;
+  }
+}
 
 .site-header--mobile {
   display: block;
@@ -5618,9 +5635,7 @@ Header
 }
 
 .header__link--focus {
-  &:active,
-  &:hover,
-  &:focus {
+  &:hover {
     opacity: 0.4;
   }
 }
@@ -5631,10 +5646,6 @@ Header
 
 .site-nav__svg {
   padding-bottom: 0.1rem;
-}
-
-.header__active-overlay {
-  display: none;
 }
 
 .banner__placeholder-svg {

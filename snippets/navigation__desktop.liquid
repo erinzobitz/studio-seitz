@@ -13,20 +13,7 @@
 
     <div class="hide" data-desktop-sub-nav="{{ child_list_handle }}--{{ forloop.index }}">
       {% if mega_nav %}
-
-        {% if link_all %}
-          <div class="grid full--w">
-            <div class="grid__item one-quarter">
-              <h2 class="{{ global__heading_font_size }} m0">{{ menus[child_list_handle].title }}</h2>
-              <a class="{{ global__link_underline }} {{ global__hover_underline }} {{ global__homepage_more_link }} {{ global__basic_font_size }}" href="{{ link.url }}" >
-                {% assign title = menus[child_list_handle].title %}
-                {{ 'general.navigation.go_to' | t: title: title  }}
-              </a>
-            </div>
-            <div class="grid__item three-quarters">
-        {% endif %}
-
-          <div class="flex flex--wrap mxn3">
+        <div class="flex flex--wrap mxn3">
           {% for childlink in menus[child_list_handle].links %}
             {% if forloop.first %}
               {% assign first_list = true %}
@@ -38,17 +25,23 @@
             {% else %}
               {% assign last_list = false %}
             {% endif %}
-            <div class="px3">
+            <div class="desktop-navigation-item pl3">
+              <h4 class="t--header-navigation mt1 mb1 inline-block caps font-weight--bold">
+                {{ childlink.title }}
+              </h4>
+
+              <div class="divider pb2"></div>
+
               <ul class="navigation__second-level f--heading list--reset m0 font-size--xxl mxn1 mb2">
                 {% for childchildlink in childlink.links %}
                 <li class="nav__item{% if childchildlink.active %} nav__item--active{% endif %}">
-                  <a href="{{ childchildlink.url }}" class="nav__link block p1 line-height--6 color--active-text hv--active-accent" data-desktop-sub-link {% if forloop.first and first_list %}data-desktop-active-first-item{% endif %} {% if forloop.last and last_list %}data-desktop-active-last-item{% endif %}>{{ childchildlink.title }}</a>
+                  <a href="{{ childchildlink.url }}" class="nav__link block pb1 pl1 text__header text__header--6 text__header--white text__header--faint hv-opacity--full" data-desktop-sub-link {% if forloop.first and first_list %}data-desktop-active-first-item{% endif %} {% if forloop.last and last_list %}data-desktop-active-last-item{% endif %}>{{ childchildlink.title }}</a>
                 </li>
                 {% endfor %}
               </ul>
             </div>
           {% endfor %}
-            </div>
+        </div>
 
         {% if link_all %}
           </div>
@@ -56,7 +49,16 @@
         {% endif %}
 
       {% else %}
-      <div class="site-nav__content md--up--px5">
+      <div class="inline-block">
+        <h4 class=" t--header-navigation mt1 mb2">
+          {% if link_all %}
+          <a href="{{ childlink.url }}" class="color--active-text hv--active-accent">
+          {% endif %}
+          <span class="inline-block">{{ menus[child_list_handle].title }}</span>
+          {% if link_all %}
+          </a>
+          {% endif %}
+        </h4>
         <ul class="navigation__second-level f--heading list--reset m0 font-size--xxl mxn1">
           {% for childlink in menus[child_list_handle].links %}
             {% if childlink.links != blank %}
@@ -79,7 +81,7 @@
               </li>
             {% else %}
               <li class="nav__item{% if childlink.active %} nav__item--active{% endif %}">
-                <a href="{{ childlink.url }}" class="text__header text__header--2 nav__link block p1 color--active-text hv--active-accent" {% if forloop.first %}data-desktop-active-first-item{% endif %} {% if forloop.last%}data-desktop-active-last-item{% endif %}>{{ childlink.title }}</a>
+                <a href="{{ childlink.url }}" class="nav__link block p1 line-height--6 color--active-text hv--active-accent" {% if forloop.first %}data-desktop-active-first-item{% endif %} {% if forloop.last%}data-desktop-active-last-item{% endif %}>{{ childlink.title }}</a>
               </li>
             {% endif %}
           {% endfor %}

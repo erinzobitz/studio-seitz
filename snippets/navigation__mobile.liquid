@@ -2,11 +2,9 @@
 <div id="MobileNav" class="mobile-navigation absolute top--0 left--0 full color--active-text overflow--hidden">
   <div class="mobile-navigation-container absolute full--h overflow--hidden left--0 top--0" data-mobile-navigation-container>
     <div class="mobile-navigation__pane full--h full--vw left overflow--scroll px2">
-      <div class="relative">
-        <a class="header__close fixed lg-up--full--w top--0 right--0 pr2 pointer color--active-text hv--active-accent" data-close-header tabindex="0">
-          {% include 'svg' | icon: 'icon-close' %}
-        </a>
-      </div>
+      <a class="header__close fixed top--0 right--0 pr2 pointer color--active-text hv--active-accent" data-close-header tabindex="0">
+        {% include 'svg' | icon: 'icon-close' %}
+      </a>
 
       <ul class="mobile-navigation f--heading list--reset m0 font-size--xxl">
         {% for link in linklists[section.settings.main_linklist].links %}
@@ -83,12 +81,9 @@
     </div>
 
     <div class="mobile-navigation__pane full--h full--vw left overflow--scroll relative pt4 px2">
-
-      <div class="relative">
-        <a class="mobile-navigation__previous hide header__close fixed lg-up--full--w top--0 left--0 pl2 pointer color--active-text hv--active-accent" data-mobile-nav-previous>
-          {% include 'svg' | icon: 'icon-previous' %}
-        </a>
-      </div>
+      <a class="mobile-navigation__previous hide header__close fixed top--0 left--0 pl2 pointer color--active-text hv--active-accent" data-mobile-nav-previous>
+        {% include 'svg' | icon: 'icon-previous' %}
+      </a>
 
       {% comment %}
       Second Level
@@ -140,7 +135,7 @@
                 <ul class="mobile-navigation__second-level f--heading list--reset m0 font-size--xxl mxn1 mb2">
                   {% for childchildlink in childlink.links %}
                   <li class="mobile-nav__item{% if childchildlink.active %} mobile-nav__item--active{% endif %}">
-                    <a href="{{ childchildlink.url }}" class="mobile-nav__link block pb1 pl1 text__header text__header--6 text__header--white text__header--faint"  {% if forloop.first and first_list %}data-mobile-active-first-item{% endif %} {% if forloop.last and last_list %}data-mobile-active-last-item{% endif %}>{{ childchildlink.title }}</a>
+                    <a href="{{ childchildlink.url }}" class="mobile-nav__link block pb1 pl1 text__header text__header--6 text__header--white text__header--faint hv-opacity--full" {% if forloop.first and first_list %}data-mobile-active-first-item{% endif %} {% if forloop.last and last_list %}data-mobile-active-last-item{% endif %}>{{ childchildlink.title }}</a>
                   </li>
                   {% endfor %}
                 </ul>
