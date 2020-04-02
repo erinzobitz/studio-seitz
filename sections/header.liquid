@@ -18,20 +18,21 @@
     <script>
       document.body.classList.add("banner-image");
     </script>
+
     {% if section.settings.banner %}
       {%- assign feature_image = section.settings.banner -%}
-      {%- assign padding = '100vh' -%}
+      {% assign headerPaddingClass = "header-padding--fill-screen" %}
       {%- if section.settings.banner_image_style == 'fit_content' %}
-        {%- capture padding -%}{{ 1 | divided_by: feature_image.aspect_ratio | times: 100 }}%{%- endcapture -%}
+        {% assign headerPaddingClass = "header-padding--fit-content" %}
       {%- endif -%}
     {% else %}
       {%- assign feature_image_placeholder = true -%}
-      {%- assign padding = '100vh' -%}
+      {% assign headerPaddingClass = "header-padding--fill-screen" %}
       {%- if section.settings.banner_image_style == 'fit_content' %}
-        {%- capture padding -%}38.55%{%- endcapture -%}
+        {% assign headerPaddingClass = "header-padding--fit-content" %}
       {%- endif -%}
     {% endif %}
-    <div style="padding-top:{{ padding }};"></div>
+    <div class="{{headerPaddingClass}}"></div>
   {%- endif -%}
 {% endif %}
 
@@ -167,7 +168,6 @@
     </div>
 
     {% include 'header-active' %}
-    <div class="header__active-overlay" data-header-overlay></div>
   </header>
 
   {% if section.settings.show_banner and template.name == 'index'  %}
@@ -188,18 +188,26 @@
               data-sizes="auto"
               data-parent-fit="cover"
               style="padding-top:{{ padding }}; background-image: url({{ feature_image | img_url: '300x300' }}); background-size: cover;">
-            <div class="absolute banner_image--sm--pb banner_image__logo">
-              {% include 'logo__large--white' %}
-              <div class="sm--hide pt3 text-align--center text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
-                Heritage brought to
-                <span class="text__highlight text__highlight--1 text__highlight--white">
-                  The modern home
-                </span>
+
+            <div class="px5">
+              <div class="header__text-container">
+                <div class="header__text">{{ section.settings.banner_text }} <span class="header__text--emphasized">{{ section.settings.emphasized_banner_text }}</span></div>
+              </div>
+              <div class="flex">
+                <div class="one-half"></div>
+                <div class="one-half flex justify--between">
+                  <a class="pointer" data-banner-scroll>
+                    <button class="btn hero-section__icon border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+                  </a>
+                  <div>
+                    <h2 class="label m0 color--tertiary-text">{{ section.settings.banner_product_title }}</h2>
+                    <p class="m0 sm--mb2 inline-block text__body text__body--4 text__body--white">
+                        {{ section.settings.banner_product_description }}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-            <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb30" data-banner-scroll>
-              <button class="btn banner_image--sm--pb border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
-            </a>
           </div>
         </div>
         <noscript>
@@ -212,29 +220,21 @@
         {% capture mobile_img_id %}FeatureImage-{{ mobile_feature_image.id }}{% endcapture %}
         {% capture mobile_wrapper_id %}FeatureImageWrapper-{{ mobile_feature_image.id }}{% endcapture %}
         {%- assign mobile_img_url = mobile_feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {%- assign mobile_padding = '100vh' -%}
 
-        {%- assign padding = '100vh' -%}
-        {% if section.settings.banner_image_style == 'fit_content' %}
-        {%- capture padding %}{{ 1 | divided_by: mobile_feature_image.aspect_ratio | times: 100 }}%{% endcapture %}
-        {% endif %}
         <div id="{{ mobile_wrapper_id }}" class="js banner_image absolute top--0 left--0 full--w">
           <div class="lazyload bg-cover"
               data-bgset="{% include 'bgset', image: mobile_feature_image %}"
               data-sizes="auto"
               data-parent-fit="cover"
-              style="padding-top:{{ padding }}; background-image: url({{ mobile_feature_image | img_url: '300x300' }}); background-size: cover;">
-            <div class="absolute banner_image--sm--pb banner_image__logo">
-              {% include 'logo__large--white' %}
-              <div class="sm--hide pt3 text-align--center text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
-                Heritage brought to
-                <span class="text__highlight text__highlight--1 text__highlight--white">
-                  The modern home
-                </span>
-              </div>
+              style="padding-top:{{ mobile_padding }}; background-image: url({{ mobile_feature_image | img_url: '300x300' }}); background-size: cover;">
+            <div class="header__text-container text-center px2">
+              <div class="header__text">{{ section.settings.mobile_banner_text }}<br><span class="header__text--emphasized">{{ section.settings.emphasized_banner_text }}</span></div>
+              <div class="py1 text__body text__body--2">{{ section.settings.mobile_banner_cta }}</div>
+              <a class="pointer" data-banner-scroll>
+                <button class="btn hero-section__icon svg-fill--dark border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+              </a>
             </div>
-            <a class="absolute pointer full top--0 left--0 flex items--end justify--center pb30" data-banner-scroll>
-              <button class="btn banner_image--sm--pb border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
-            </a>
           </div>
         </div>
         <noscript>
@@ -253,6 +253,7 @@
     {% endif %}
   {% endif %}
 </div>
+<div class="header__active-overlay" data-header-overlay></div>
 
 {% schema %}
   {
@@ -359,9 +360,45 @@
         "info": "1400x800px recommended"
       },
       {
+        "type": "text",
+        "id": "banner_text",
+        "label": "Banner Text",
+        "default": "Functional  heirloom furniture."
+      },
+      {
+        "type": "text",
+        "id": "emphasized_banner_text",
+        "label": "Emphazsized Banner Text",
+        "default": "Built to last."
+      },
+      {
+        "type": "text",
+        "id": "banner_product_title",
+        "label": "Banner Product Title",
+        "default": "Stabellenbank"
+      },
+      {
+        "type": "text",
+        "id": "banner_product_description",
+        "label": "Banner Title Description",
+        "default": "Made from solid European ash"
+      },
+      {
         "type": "image_picker",
         "id": "mobile_banner",
         "label": "Mobile Image"
+      },
+      {
+        "type": "text",
+        "id": "mobile_banner_text",
+        "label": "Mobile Banner Text",
+        "default": "Heirloom furniture."
+      },
+      {
+        "type": "text",
+        "id": "mobile_banner_cta",
+        "label": "Mobile Banner CTA",
+        "default": "Meet the collection"
       },
       {
         "type": "select",

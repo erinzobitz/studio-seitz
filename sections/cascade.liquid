@@ -4,7 +4,7 @@
 {%- assign font_size = 'font-size--sm md--up--font-size--m line-height--3' -%}
 {%- assign font_size = global__basic_font_size -%}
 
-<section class="cascade pb2 lg--up--pb4 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
+<section class="cascade pb3 lg--up--pb5 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
   <div class="max-site-width px2">
     <div class="cascading-content lg--up--ten-twelfths mx--auto">
       <div class="items overflow--hidden">
@@ -309,9 +309,6 @@
               {% if block.type == 'rich_text' or block.type == 'heading' or block.type == 'text' %}
               <div class="rich-text rich-text--{{ block.id }} {{ block.settings.text_align}}">
                 <div class="md--up--six-eighths md--up--mx--auto md--up--pm--three-quarters wd--three-fourths">
-                  {% if block.settings.is_first_heading == "true" %}
-                    {% assign first_heading_class = 'rich-text__header--first' %}
-                  {% endif %}
                   {% if block.settings.heading != blank   %}
                     {% if block_width_mobile == 'full' %}
                       {% assign heading_class = heading_fontsize__mobile_full %}
@@ -325,12 +322,12 @@
                         {% assign heading_class = 'f--heading font-size--xxl line-height--7 pm--font-size--xxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
                       {% endif %}
                     {% endif %}
-                    <h2 class="mx--auto rich-text__header line-length--medium text__header text__header--3 {{ first_heading_class }}">
+                    <h2 class="mx--auto sm--my0 rich-text__header line-length--medium text__header text__header--3">
                       {{ block.settings.heading }}
                     </h2>
                   {% endif %}
                   {% if block.settings.rich_text != blank  %}
-                  <div class="richtext text__body text__body--1">
+                  <div class="richtext sm--mt1 text__body text__body--1">
                     {{ block.settings.rich_text }}
                   </div>
                   {% endif %}
@@ -339,8 +336,13 @@
                     {{ block.settings.paragraph_rich_text }}
                   </div>
                   {% endif %}
+                  {% if block.settings.emphasized_paragraph_rich_text != blank  %}
+                  <div class="md--up--pt2 my0 richtext text__body text__body--3 font-weight--bold">
+                    {{ block.settings.emphasized_paragraph_rich_text }}
+                  </div>
+                  {% endif %}
                   {% if block.settings.cta_url != blank %}
-                  <a class="md--up--pt2 inline-block action-link action-link--large" href="{{ block.settings.cta_url }}" >
+                  <a class="inline-block action-link action-link--large {{ block.settings.show_cta }}" href="{{ block.settings.cta_url }}" >
                     {{ block.settings.cta_text }}
                   </a>
                   {% endif %}
@@ -813,6 +815,11 @@
           "label": "Paragraph"
         },
         {
+          "id": "emphasized_paragraph_rich_text",
+          "type": "richtext",
+          "label": "Emphasized Paragraph"
+        },
+        {
           "type": "header",
           "content": "Call to Action"
         },
@@ -827,6 +834,26 @@
           "label": "Call to action link text",
           "default": "Shop now"
         },
+        {
+           "type": "select",
+           "id": "show_cta",
+           "label": "Show CTA",
+           "options": [
+             {
+               "value": "md--up--hide",
+               "label": "Mobile only"
+             },
+             {
+               "value": "sm--hide",
+               "label": "Desktop only"
+             },
+             {
+               "value": "",
+               "label": "Both"
+             }
+           ],
+           "default": ""
+         },
         {
            "type": "select",
            "id": "text_align",

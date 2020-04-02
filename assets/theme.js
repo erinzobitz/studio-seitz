@@ -1578,7 +1578,7 @@ theme.Header = (function() {
       e.preventDefault();
       $("html, body").animate(
         {
-          scrollTop: $("#MainContent").offset().top + 1
+          scrollTop: $("#MainContent").offset().top + 10
         },
         400
       );

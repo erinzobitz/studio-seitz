@@ -305,10 +305,6 @@ $list-and-grid-align: {{ settings.list_and_grid_align }};
 
 $font-size-base: 16px;
 
-
-
-
-
 /*============================================================================
   Grid Breakpoints and Class Names
     - Do not change the variable names
@@ -373,10 +369,6 @@ $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
 /*================ SVG ================*/
 $svg-select-icon: #{'{{ "ico-select.svg" | asset_url }}'};
-
-
-
-
 
 /* Bass CSS Variables */
 
@@ -477,7 +469,6 @@ $color-seitz-gray: #ede9e6;
 $color-seitz-gray-hover: #dcd5cf;
 
 /* Primary combination */
-
 $color-primary-text: {{ settings.color_primary_text }};
 $color-primary-background: {{ settings.color_primary_background }};
 $color-primary-accent: {{ settings.color_primary_accent }};
@@ -2383,9 +2374,6 @@ Helper
   top: 0;
 }
 
-
-
-
 /* Table Cell Position
 ========================================================================== */
 
@@ -2485,8 +2473,6 @@ Helper
 .ready {
   @include opacity(1);
 }
-
-
 
 /* ================ Helper Classes ================ */
 .clearfix {
@@ -2603,6 +2589,7 @@ $limen-teapot-background: #606372;
 $napfstander-background: #9E8283;
 $pendant-light-background: #A9A192;
 $stabellenbank-background: #26425C;
+$stabellenstuhl-background: #475363;
 $table-light-background: #6F6861;
 
 // Page backgrounds
@@ -3429,6 +3416,22 @@ hr {
   width: 100%;
 }
 
+/* ================ SVGS ================ */
+.svg-fill--dark {
+  svg {
+    path {
+      fill: $black;
+    }
+  }
+}
+
+.svg-fill--light {
+  svg {
+    path {
+      fill: $white;
+    }
+  }
+}
 
 /* ================ VENDOR ================ */
 /*! Flickity v2.1.0
@@ -4435,7 +4438,7 @@ body#stabellenbank {
 }
 
 body#stabellenstuhl {
-  background-color: $stabellenbank-background;
+  background-color: $stabellenstuhl-background;
 }
 
 body#limen-teapot {
@@ -5125,6 +5128,18 @@ $color-blankstate-background: rgba(#000, 0.1);
 Header Active (Modal)
 ========================================================================== */
 
+.header-padding--fill-screen {
+  padding-top: 100vh;
+}
+
+.header-padding--fit-content {
+  padding-top: 86%;
+
+  @include media-query($small) {
+    padding-top: 100vh;
+  }
+}
+
 .header__active {
   display: none;
   opacity: 0;
@@ -5613,22 +5628,6 @@ Header
   }
 }
 
-.site-header--mobile {
-  display: block;
-
-  @include media-query($large-up) {
-    display: none;
-  }
-}
-
-.site-header--desktop {
-  display: none;
-
-  @include media-query($large-up) {
-    display: block;
-  }
-}
-
 .header-table__top {
   padding-top: 30px;
 
@@ -5647,6 +5646,46 @@ Header
   font-family: $seitz-font--semi-bold;
   font-size: 14px;
   letter-spacing: .25px;
+}
+
+.header__text-container {
+  position: absolute;
+  top: 85px;
+  width: 100%;
+
+  @include media-query($medium) {
+    top: 140px;
+    width: 570px;
+  }
+
+  @include media-query($large-up) {
+    top: 160px;
+    width: 700px;
+  }
+
+  .header__text {
+    font-family: $seitz-font--semi-bold;
+    font-size: 60px;
+    letter-spacing: -2px;
+    line-height: 60px;
+    text-align: center;
+
+    @include media-query($medium) {
+      font-size: 65px;
+      line-height: 70px;
+      text-align: left;
+    }
+
+    @include media-query($large-up) {
+      font-size: 80px;
+      line-height: 85px;
+      text-align: left;
+    }
+  }
+
+  .header__text--emphasized {
+    color: $color-primary-accent;
+  }
 }
 
 .header__link--focus {
@@ -5669,40 +5708,6 @@ Header
   svg {
     width: 100%;
     height: 100%;
-  }
-}
-
-.banner_image__logo {
-  bottom: 80px;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 600px;
-
-  @include media-query($medium) {
-    width: 450px;
-
-    svg {
-      height: 152px;
-      width: 450px;
-    }
-  }
-
-  @include media-query($small) {
-    bottom: 9%;
-    width: 250px;
-
-    svg {
-      height: 84px;
-      width: 250px;
-    }
-  }
-}
-
-.banner_image--sm--pb {
-  @include media-query($small) {
-    padding-bottom: 35%;
   }
 }
 
@@ -6480,7 +6485,6 @@ Custom Sections
   max-width: 230px;
   padding: 0 15px;
   width: 50%;
-
 }
 
 .materials-grid__swatch__image {
@@ -6858,12 +6862,6 @@ Custom Sections
 
   @include media-query($medium-up) {
     padding-top: 125px;
-  }
-}
-
-.rich-text__header--first {
-  @include media-query($medium-up) {
-    padding-top: 155px;
   }
 }
 
