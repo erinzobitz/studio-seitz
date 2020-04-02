@@ -2595,13 +2595,15 @@ Colors
 ========================================================================== */
 
 // Product colors
-$stabellenbank-background: #26425C;
-$limen-teapot-background: #606372;
+$bedside-table-background: #6B7F8A;
+$candleholder-background: #88897F;
+$desk-light-background: #6D6778;
 $kommode-background: #4D4D45;
-$bedside-table-background: #4D4D45;
+$limen-teapot-background: #606372;
 $napfstander-background: #9E8283;
 $pendant-light-background: #A9A192;
-$candleholder-background: #606372;
+$stabellenbank-background: #26425C;
+$table-light-background: #6F6861;
 
 // Page backgrounds
 $collection-background: #391A20;
@@ -2609,6 +2611,7 @@ $studio-background: #1D1D1D;
 
 $black: #1D1D1D;
 $white: #fff;
+$light-gray: #E8E8E8;
 $white-accent: $color-primary-accent;
 $placeholder-light: rgba(255, 255, 255, 0.1);
 $placeholder-dark: rgba(0, 0, 0, 0.1);
@@ -4456,11 +4459,11 @@ body#pendant-light {
 }
 
 body#desk-light {
-  background-color: $pendant-light-background;
+  background-color: $desk-light-background;
 }
 
 body#table-light {
-  background-color: $pendant-light-background;
+  background-color: $table-light-background;
 }
 
 body#candleholder {
@@ -6409,11 +6412,11 @@ Custom Sections
   position: absolute;
 
   @include media-query($medium) {
-    max-width: 545px;
+    max-width: 525px;
   }
 
   @include media-query($large-up) {
-    max-width: 780px;
+    max-width: 750px;
   }
 }
 
@@ -6449,7 +6452,15 @@ Custom Sections
   margin: -45px auto 0 auto;
 
   @include media-query($medium-up) {
-    margin-top: -90px;
+    margin-top: -91px;
+  }
+}
+
+.hero-section__icon {
+  padding-bottom: 40px;
+
+  @include media-query($medium-up) {
+    padding-bottom: 80px;
   }
 }
 
@@ -6574,7 +6585,7 @@ Custom Sections
 
 .product__select {
   background-color: $white;
-  border: 2px solid rgba($color-seitz-gray, 0.5);;
+  border: 2px solid $light-gray;
 }
 
 .product__heritage-section__region {
@@ -7167,7 +7178,7 @@ Seitz Patterns
     font-size: 125px;
     letter-spacing: -4px;
     line-height: 125px;
-    margin-top: -74px;
+    margin-top: -75px;
     text-align: center;
 
     @include media-query($medium) {
@@ -7328,11 +7339,11 @@ Seitz Patterns
       line-height: 34px;
     }
   }
-  
+
   &.text__body--3 a:link {
-    border-bottom: 1px solid #1d1d1d;
+    border-bottom: 1px solid $black;
   }
-  
+
   &.text__body--3 a:hover {
     border-bottom: none;
   }
