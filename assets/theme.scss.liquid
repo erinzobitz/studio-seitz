@@ -4143,6 +4143,18 @@ Responsive Images
   &.js {
     position: relative;
   }
+
+  &.resp-hero-img-wrapper {
+    @include media-query($medium-up) {
+      width: 80%;
+    }
+
+    &.resp-hero-img-wrapper--vertical {
+      @include media-query($medium-up) {
+        width: 60%;
+      }
+    }
+  }
 }
 
 .resp-img {
@@ -4895,7 +4907,7 @@ select::-ms-expand {
 }
 
 select {
-  background-size: 18px 18px;
+  background-size: 9px 9px;
 
   background: {
     image: url('{{ "ico-select.svg" | asset_url }}');
@@ -6358,10 +6370,14 @@ Custom Sections
 
 // Hero Section
 .hero-section {
-  padding-top: 50px;
+  padding-top: 65px;
 
-  @include media-query($small) {
-    padding-top: 25px;
+  @include media-query($medium) {
+    padding-top: 100px;
+  }
+
+  @include media-query($large-up) {
+    padding-top: 120px;
   }
 }
 
@@ -6385,10 +6401,19 @@ Custom Sections
 }
 
 .hero-section__title-container {
-  @include media-query($small) {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 335px;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 335px;
+  right: 0;
+  position: absolute;
+
+  @include media-query($medium) {
+    max-width: 545px;
+  }
+
+  @include media-query($large-up) {
+    max-width: 780px;
   }
 }
 
@@ -6421,21 +6446,10 @@ Custom Sections
 }
 
 .hero-section__text-container {
-  margin: 0 auto;
-  padding-bottom: 15px;
-  text-align: center;
+  margin: -45px auto 0 auto;
 
-  @include media-query($small) {
-    padding-top: 15px;
-  }
-}
-
-.hero-section__icon {
-  padding-top: 15px;
-  padding-bottom: 40px;
-
-  @include media-query($small) {
-    padding-bottom: 30px;
+  @include media-query($medium-up) {
+    margin-top: -90px;
   }
 }
 
@@ -6559,8 +6573,8 @@ Custom Sections
 }
 
 .product__select {
-  background-color: rgba($color-seitz-gray, 0.5);
-  border: none;
+  background-color: $white;
+  border: 2px solid rgba($color-seitz-gray, 0.5);;
 }
 
 .product__heritage-section__region {
@@ -7144,20 +7158,22 @@ Seitz Patterns
 }
 
 .text__header {
+  position: relative;
+  z-index: 2;
+
   &.text__header--1 {
     color: $white;
     font-family: $seitz-font--semi-bold;
     font-size: 125px;
     letter-spacing: -4px;
-    line-height: normal;
-    margin-top: -98px;
-    position: relative;
+    line-height: 125px;
+    margin-top: -74px;
     text-align: center;
-    z-index: 2;
 
     @include media-query($medium) {
       font-size: 90px;
-      margin-top: -71px;
+      line-height: 90px;
+      margin-top: -53px;
     }
 
     @include media-query($small) {
@@ -7199,6 +7215,14 @@ Seitz Patterns
     @include media-query($medium-up) {
       font-size: 50px;
       line-height: 55px;
+    }
+
+    &.text__header--3--x-small {
+      @include media-query($small) {
+        font-size: 18px;
+        letter-spacing: 0;
+        line-height: 28px;
+      }
     }
   }
 

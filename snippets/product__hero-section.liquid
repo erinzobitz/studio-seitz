@@ -1,10 +1,20 @@
-<div class="hero-section lg--up--ten-twelfths mx--auto px2 md--up--px0" data-fade-in="{{ fade_in }}">
+<div class="hero-section lg--up--ten-twelfths mx--auto" data-fade-in="{{ fade_in }}">
+  <div class="hero-section__title-container">
+    <div class="text__header text__header--1">{{ product.metafields.attributes.mobile_title }}</div>
+  </div>
+
   <div class="sm--hide">
+    {% if product.metafields.attributes.vertical_header_image == 1 %}
+      {% assign verticalHeroWrapperClass = "resp-hero-img-wrapper--vertical" %}
+    {% else %}
+      {% assign verticalHeroWrapperClass = "" %}
+    {% endif %}
+
     {% assign image = images[product.metafields.attributes.header_image] %}
     {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
     {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
     {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-    <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+    <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper {{verticalHeroWrapperClass}} js">
       <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
         <img id="{{ img_id }}"
              class="resp-img lazyload"
@@ -24,10 +34,6 @@
     <noscript>
       <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
     </noscript>
-  </div>
-
-  <div class="sm--hide hero-section__title-container">
-    <div class="text__header text__header--1">{{ product.title }}</div>
   </div>
 
   <div class="md--up--hide">
@@ -57,29 +63,22 @@
     </noscript>
   </div>
 
-  <div class="md--up--hide hero-section__title-container">
-    <div class="text__header text__header--1">{{ product.metafields.attributes.mobile_title }}</div>
-  </div>
-
-  <div class="hero-section__text-container line-length--large px1 md--up--px3">
-    <div class="text__body text__body--3 text__body--3--consistent text__body--white text-align--center">
+  <div class="hero-section__text-container sm--px2">
+    <div class="text__header text__header--3 text__header--3--x-small text__header--white">
       {{ product.description }}
     </div>
   </div>
 
-  <div class="text-align--center">
-    <span class="text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
-      Origin
-      <span class="text__highlight text__highlight--1 text__highlight--white">
-        {{ product.metafields.attributes.origin }}
-      </span>
+  <div class="text__body text__body--3 text__body--3--consistent text__body--slim text__body--white sm--px2 sm--py2 py3">
+    Origin
+    <span class="text__highlight text__highlight--1 text__highlight--white">
+      {{ product.metafields.attributes.origin }}
     </span>
+  </div>
 
-
-    <div class="hero-section__icon">
-      <a class="pointer" data-banner-scroll>
-        <button class="btn sm--pb2 border--none border--none bg--transparent">{% include 'icon-arrow-down' %}</button>
-      </a>
-    </div>
+  <div class="text-align--center pb2 md--up--pb5">
+    <a class="pointer" data-banner-scroll>
+      <button class="btn md--up--pb4 border--none border--none bg--transparent">{% include 'icon-arrow-down' %}</button>
+    </a>
   </div>
 </div>
