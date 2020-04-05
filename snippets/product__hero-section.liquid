@@ -1,6 +1,21 @@
 <div class="hero-section lg--up--ten-twelfths mx--auto" data-fade-in="{{ fade_in }}">
-  <div class="hero-section__title-container">
-    <div class="text__header text__header--1">{{ product.metafields.attributes.mobile_title }}</div>
+  {% if product.metafields.attributes.use_mobile_title_on_desktop == 1 %}
+    {% assign containerClass = '' %}
+    {% assign titleClass = 'display-none' %}
+    {% assign mobileTitleClass = '' %}
+  {% else %}
+    {% assign containerClass = 'hero-section__title-container--full' %}
+    {% assign titleClass = 'sm--hide' %}
+    {% assign mobileTitleClass = 'md--up--hide' %}
+  {% endif %}
+
+  <div class="hero-section__title-container {{ containerClass }}">
+    <div class="text__header text__header--1 {{ titleClass }}">
+      {{ product.title }}
+    </div>
+    <div class="text__header text__header--1 {{ mobileTitleClass }}">
+      {{ product.metafields.attributes.mobile_title }}
+    </div>
   </div>
 
   <div class="sm--hide">
