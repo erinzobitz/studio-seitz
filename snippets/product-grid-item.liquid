@@ -43,7 +43,7 @@
   {%- assign sold_out = false -%}
 {%- endif -%}
 
-<a href="{{ product.url | within: collection }}" class="sm--hide t--list-and-grid relative">
+<a href="{{ product.url | within: collection }}" class="sm--hide t--list-and-grid relative product-grid-item">
   {%- assign image = images[product.metafields.attributes.collection_image] %}
   {%- assign ratio = image.aspect_ratio -%}
   {%- assign force_crop = false -%}
@@ -85,16 +85,19 @@
             height="{{ image.height }}"
             alt="{{ image.alt | escape }}">
     </div>
+    <div class="product-grid-item--hover action-button action-button--white">Learn More</div>
   </div>
   <noscript>
     <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="product__img">
   </noscript>
 
   <div class="m0 mt1 md--up--mt2">
-    <p class="color--{{ section_color }}-text text__body text__body--1 text__body--1--dark inline-block">
+    <p class="my0 color--{{ section_color }}-text text__body text__body--4 text__body--semi-bold">
       {{ product.title }}
     </p>
-    <div class="product--arrow inline-block">{% include 'arrow-right' %}</div>
+    <p class="my0 color--{{ section_color }}-text text__body text__body--4 line-length--small">
+      {{ product.metafields.attributes.grid_description }}
+    </p>
   </div>
 </a>
 
@@ -146,9 +149,11 @@
   </noscript>
 
   <div class="m0 mt1 md--up--mt2">
-    <p class="color--{{ section_color }}-text text__body text__body--1 text__body--1--dark inline-block">
+    <p class="my0 color--{{ section_color }}-text text__body text__body--4 text__body--semi-bold">
       {{ product.title }}
     </p>
-    <div class="product--arrow inline-block">{% include 'arrow-right' %}</div>
+    <p class="my0 color--{{ section_color }}-text text__body text__body--4">
+      {{ product.metafields.attributes.grid_description }}
+    </p>
   </div>
 </a>

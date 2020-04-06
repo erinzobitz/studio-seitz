@@ -5702,6 +5702,16 @@ Header
   padding-bottom: 0.1rem;
 }
 
+.banner-image__text-container {
+  @include media-query($medium-up) {
+    margin-top: -130px;
+
+    button {
+      padding-top: 13px;
+    }
+  }
+}
+
 .banner__placeholder-svg {
   @include opacity(0.2);
   background-color: $placeholder-light;
@@ -5978,8 +5988,6 @@ $full_dt: percentage($full_dt / $container_dt);
   }
 }
 
-
-
 //Mobile block sizes
 @include media-query($medium-down) {
   .item--mobile--half {
@@ -6008,7 +6016,7 @@ $full_dt: percentage($full_dt / $container_dt);
 
   .item--desktop--full {
     width: $full_dt;
-    padding-bottom: 60px;
+    padding-bottom: 120px;
 
     &.item--large-gap {
       padding-bottom: 240px;
@@ -6233,6 +6241,25 @@ Product
   }
 }
 
+/* =======================================================================
+
+Product Grid
+========================================================================== */
+.product-grid-item {
+  &:hover {
+    .product-grid-item--hover {
+      visibility: visible;
+    }
+  }
+}
+
+.product-grid-item--hover {
+  margin-left: 30px;
+  margin-top:  -85px;
+  position: absolute;
+  visibility: hidden;
+  z-index: 1;
+}
 
 /* =======================================================================
 
@@ -6871,6 +6898,12 @@ Custom Sections
   }
 }
 
+.rich-text__header--desktop_half {
+  @include media-query($medium-up) {
+    margin-top: -8px;
+  }
+}
+
 .richtext {
   @include media-query($large-up) {
     p {
@@ -6939,6 +6972,18 @@ Seitz Patterns
 
     &:hover {
       background-color: $black;
+      color: $white;
+    }
+  }
+
+  &.action-button--white {
+    background-color: $white;
+    border: 2px solid $white;
+    color: $black;
+
+    &:hover {
+      background-color: $black;
+      border: 2px solid $black;
       color: $white;
     }
   }
@@ -7015,27 +7060,46 @@ Seitz Patterns
 
 
 .action-link {
-  border-bottom: 1px solid $black;
+  border-bottom: 2px solid $black;
   color: $black;
   font-size: 15px;
   line-height: 26px;
 
   &:hover {
-    border-bottom: 1px solid transparent;
+    border-bottom: 2px solid transparent;
   }
 
   &.action-link--white {
-    border-bottom: 1px solid $white;
+    border-bottom: 2px solid $white;
     color: $white;
 
     &:hover {
-      border-bottom: 1px solid transparent;
+      border-bottom: 2px solid transparent;
     }
   }
 
   &.action-link--large {
     @include media-query($medium-up) {
       font-size: 18px;
+      line-height: 28px;
+    }
+  }
+
+  &.action-link--x-large {
+    font-size: 18px;
+    line-height: 28px;
+
+    @include media-query($medium-up) {
+      font-size: 26px;
+      line-height: 36px;
+    }
+  }
+
+  &.action-link--inverse {
+    border-bottom: 2px solid transparent;
+
+    &:hover {
+      border-bottom: 2px solid $black;
     }
   }
 }
@@ -7132,6 +7196,10 @@ Seitz Patterns
 
 .line-length--medium {
   max-width: 700px;
+}
+
+.line-length--small {
+  max-width: 440px;
 }
 
 .pb50 {
@@ -7239,6 +7307,15 @@ Seitz Patterns
         line-height: 28px;
       }
     }
+
+    a {
+      color: $color-primary-accent;
+      border-bottom: none;
+
+      &:hover {
+        border-bottom: 2px solid $color-primary-accent;
+      }
+    }
   }
 
   &.text__header--4 {
@@ -7298,8 +7375,6 @@ Seitz Patterns
 }
 
 .text__body {
-  font-family: $seitz-font;
-
   &.text__body--1 {
     color: $color-primary-text;
     font-size: 18px;

@@ -67,7 +67,7 @@
             data-width="{{ block_width_desktop }}"
             data-block-id="{{ block.id }}"
             >
-            <div class="item__inner {% if block_width_mobile == 'full' %}md--up--five-sixths mx--auto{% endif %} {% if block_width_desktop == 'full' %}lg--up--five-sixths lg--up--mx--auto{% else %}lg--up--one-whole{% endif %}" {{ block.shopify_attributes }}>
+            <div class="item__inner {% if block_width_mobile == 'full' %}mx--auto{% endif %} {% if block_width_desktop == 'full' %}lg--up--mx--auto{% else %}lg--up--one-whole{% endif %}" {{ block.shopify_attributes }}>
 
               {% comment %}
               /* ============================================================================
@@ -308,26 +308,24 @@
               {% endcomment %}
               {% if block.type == 'rich_text' or block.type == 'heading' or block.type == 'text' %}
               <div class="rich-text rich-text--{{ block.id }} {{ block.settings.text_align}}">
-                <div class="md--up--six-eighths md--up--mx--auto md--up--pm--three-quarters wd--three-fourths">
+                <div class="md--up--mx--auto">
                   {% if block.settings.heading != blank   %}
-                    {% if block_width_mobile == 'full' %}
-                      {% assign heading_class = heading_fontsize__mobile_full %}
+                    {% if block_width_desktop == 'half' %}
+                      {% assign heading_class = 'rich-text__header--desktop_half' %}
                     {% else %}
-                      {% assign heading_class = heading_fontsize__mobile_half %}
+                      {% assign heading_class = '' %}
                     {% endif %}
-                    {% if block.type == 'heading' and block.settings.font_size == 'large' %}
-                      {% if block_width_mobile == 'full' %}
-                        {% assign heading_class = 'f--heading font-size--xxxl line-height--8 pm--font-size--xxxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
-                      {% else %}
-                        {% assign heading_class = 'f--heading font-size--xxl line-height--7 pm--font-size--xxxxl pm--line-height--11 wd--font-size--xxxxxxl wd--line-height--13' %}
-                      {% endif %}
-                    {% endif %}
-                    <h2 class="mx--auto sm--my0 rich-text__header line-length--medium text__header text__header--3">
+                    <h2 class="mx--auto sm--my0 rich-text__header text__header text__header--3 {{heading_class}}">
                       {{ block.settings.heading }}
                     </h2>
                   {% endif %}
-                  {% if block.settings.rich_text != blank  %}
-                  <div class="richtext sm--mt1 text__body text__body--1">
+                  {% if block.settings.rich_text != blank %}
+                    {% if block.settings.font_size != blank %}
+                      {% assign text_class = block.settings.font_size %}
+                    {% else %}
+                      {% assign text_class = 'text__body text__body--1' %}
+                    {% endif %}
+                  <div class="richtext sm--mt1 pb1 md--up--pb2 {{ text_class }}">
                     {{ block.settings.rich_text }}
                   </div>
                   {% endif %}
@@ -337,12 +335,12 @@
                   </div>
                   {% endif %}
                   {% if block.settings.emphasized_paragraph_rich_text != blank  %}
-                  <div class="md--up--pt2 my0 richtext text__body text__body--3 font-weight--bold">
+                  <div class="md--up--pt2 my0 richtext text__body text__body--3 text__body--semi-bold">
                     {{ block.settings.emphasized_paragraph_rich_text }}
                   </div>
                   {% endif %}
                   {% if block.settings.cta_url != blank %}
-                  <a class="inline-block action-link action-link--large {{ block.settings.show_cta }}" href="{{ block.settings.cta_url }}" >
+                  <a class="inline-block action-link action-link--inverse action-link--x-large {{ block.settings.show_cta }}" href="{{ block.settings.cta_url }}" >
                     {{ block.settings.cta_text }}
                   </a>
                   {% endif %}
@@ -908,6 +906,26 @@
           "label": "Text",
           "default": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>"
         },
+        {
+           "type": "select",
+           "id": "font_size",
+           "label": "Font Size",
+           "options": [
+             {
+               "value": "text__header text__header--3",
+               "label": "Large"
+             },
+             {
+               "value": "text__body text__body--1",
+               "label": "Medium"
+             },
+             {
+               "value": "text__body text__body--4",
+               "label": "Small"
+             }
+           ],
+           "default": "text__body text__body--1"
+         },
         {
           "type": "header",
           "content": "Call to Action"

@@ -18,25 +18,40 @@
     <script>
       document.body.classList.add("banner-image");
     </script>
-
     {% if section.settings.banner %}
       {%- assign feature_image = section.settings.banner -%}
-      {% assign headerPaddingClass = "header-padding--fill-screen" %}
+      {% assign mobile_feature_image = section.settings.mobile_banner %}
+      {%- assign padding = '100vh' -%}
+      {%- assign mobile_padding = '100vh' -%}
       {%- if section.settings.banner_image_style == 'fit_content' %}
-        {% assign headerPaddingClass = "header-padding--fit-content" %}
+        {%- capture padding -%}{{ 1 | divided_by: feature_image.aspect_ratio | times: 100 }}%{%- endcapture -%}
+        {%- capture mobile_padding -%}{{ 1 | divided_by: mobile_feature_image.aspect_ratio | times: 100 }}%{%- endcapture -%}
       {%- endif -%}
     {% else %}
       {%- assign feature_image_placeholder = true -%}
-      {% assign headerPaddingClass = "header-padding--fill-screen" %}
+      {%- assign padding = '100vh' -%}
       {%- if section.settings.banner_image_style == 'fit_content' %}
-        {% assign headerPaddingClass = "header-padding--fit-content" %}
+        {%- capture padding -%}38.55%{%- endcapture -%}
       {%- endif -%}
     {% endif %}
-    <div class="{{headerPaddingClass}}"></div>
+
+    <style>
+      .header-padding {
+        padding-top: {{ mobile_padding }};
+      }
+
+      @media (min-width: 750px) {
+        .header-padding {
+          padding-top: {{ padding }};
+        }
+      }
+    </style>
+
+    <div class="header-padding"></div>
   {%- endif -%}
 {% endif %}
 
-<div data-section-id="{{ section.id }}" data-section-type="header"  data-template="{{ template.name }}">
+<div data-section-id="{{ section.id }}" data-section-type="header" data-template="{{ template.name }}">
 
   {% unless section.settings.banner and template.name == 'index'  %}
   <div class="header-placeholder full--w hide" data-header-placeholder></div>
@@ -188,23 +203,22 @@
               data-sizes="auto"
               data-parent-fit="cover"
               style="padding-top:{{ padding }}; background-image: url({{ feature_image | img_url: '300x300' }}); background-size: cover;">
-
-            <div class="px5">
-              <div class="header__text-container">
-                <div class="header__text">{{ section.settings.banner_text }} <span class="header__text--emphasized">{{ section.settings.emphasized_banner_text }}</span></div>
-              </div>
-              <div class="flex">
-                <div class="one-half"></div>
-                <div class="one-half flex justify--between">
-                  <a class="pointer" data-banner-scroll>
-                    <button class="btn hero-section__icon border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
-                  </a>
-                  <div>
-                    <h2 class="label m0 color--tertiary-text">{{ section.settings.banner_product_title }}</h2>
-                    <p class="m0 sm--mb2 inline-block text__body text__body--4 text__body--white">
-                        {{ section.settings.banner_product_description }}
-                    </p>
-                  </div>
+          </div>
+          <div class="banner-image__text-container lg--up--ten-twelfths mx--auto">
+            <div class="header__text-container">
+              <div class="header__text">{{ section.settings.banner_text }} <span class="header__text--emphasized">{{ section.settings.emphasized_banner_text }}</span></div>
+            </div>
+            <div class="flex">
+              <div class="one-half"></div>
+              <div class="one-half flex justify--between">
+                <a class="pointer" data-banner-scroll>
+                  <button class="btn border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+                </a>
+                <div class="text-right">
+                  <h2 class="label m0 color--tertiary-text">{{ section.settings.banner_product_title }}</h2>
+                  <p class="m0 sm--mb2 text__body text__body--4 text__body--white">
+                      {{ section.settings.banner_product_description }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -220,21 +234,24 @@
         {% capture mobile_img_id %}FeatureImage-{{ mobile_feature_image.id }}{% endcapture %}
         {% capture mobile_wrapper_id %}FeatureImageWrapper-{{ mobile_feature_image.id }}{% endcapture %}
         {%- assign mobile_img_url = mobile_feature_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-        {%- assign mobile_padding = '100vh' -%}
+        {%- assign padding = '100vh' -%}
+        {% if section.settings.banner_image_style == 'fit_content' %}
+          {%- capture padding %}{{ 1 | divided_by: mobile_feature_image.aspect_ratio | times: 100 }}%{% endcapture %}
+        {% endif %}
 
         <div id="{{ mobile_wrapper_id }}" class="js banner_image absolute top--0 left--0 full--w">
           <div class="lazyload bg-cover"
               data-bgset="{% include 'bgset', image: mobile_feature_image %}"
               data-sizes="auto"
               data-parent-fit="cover"
-              style="padding-top:{{ mobile_padding }}; background-image: url({{ mobile_feature_image | img_url: '300x300' }}); background-size: cover;">
-            <div class="header__text-container text-center px2">
-              <div class="header__text">{{ section.settings.mobile_banner_text }}<br><span class="header__text--emphasized">{{ section.settings.emphasized_banner_text }}</span></div>
-              <div class="py1 text__body text__body--2">{{ section.settings.mobile_banner_cta }}</div>
-              <a class="pointer" data-banner-scroll>
-                <button class="btn hero-section__icon svg-fill--dark border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
-              </a>
-            </div>
+              style="padding-top:{{ padding }}; background-image: url({{ mobile_feature_image | img_url: '300x300' }}); background-size: cover;">
+          </div>
+          <div class="header__text-container text-center px2">
+            <div class="header__text">{{ section.settings.mobile_banner_text }}<br><span class="header__text--emphasized">{{ section.settings.emphasized_banner_text }}</span></div>
+            <div class="py1 text__body text__body--2">{{ section.settings.mobile_banner_cta }}</div>
+            <a class="pointer" data-banner-scroll>
+              <button class="btn svg-fill--dark border--none border--none bg--transparent color--primary-text hv--primary-accent font-size--l">{% include 'icon-arrow-down' %}</button>
+            </a>
           </div>
         </div>
         <noscript>
