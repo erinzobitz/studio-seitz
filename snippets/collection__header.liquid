@@ -1,11 +1,16 @@
 <header role="banner">
   <div class="hero-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
+    <div class="hero-section__title-container hero-section__title-container--full">
+      <div class="text__header text__header--1">
+        {{ collection.title }}
+      </div>
+    </div>
     <div class="sm--hide">
       {% assign image = collection.image  %}
       {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
       {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
       {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-      <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+      <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper resp-hero-img-wrapper--vertical js">
         <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
           <img id="{{ img_id }}"
                class="resp-img lazyload"
@@ -54,29 +59,23 @@
       </noscript>
     </div>
 
-    <div class="hero-section__title-container">
-      <div class="text__header text__header--1">{{ collection.title }}</div>
-    </div>
-
-    <div class="hero-section__text-container line-length--large px1 md--up--px3">
-      <div class="text__body text__body--3 text__body--3--consistent text__body--white text-align--center">
+    <div class="hero-section__text-container sm--px2">
+      <div class="text__header text__header--3 text__header--3--x-small text__header--white">
         {{ collection.description }}
       </div>
     </div>
 
-    <div class="text-align--center">
-      <span class="text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
-        Meet
-        <span class="text__highlight text__highlight--1 text__highlight--white">
-          The Collection
-        </span>
+    <div class="text__body text__body--3 text__body--3--consistent text__body--slim text__body--white sm--px2 sm--py2 py3">
+      The Heritage Collection is
+      <span class="text__highlight text__highlight--1 text__highlight--white">
+        Swiss Made
       </span>
+    </div>
 
-      <div class="hero-section__icon">
-        <a class="pointer" data-banner-scroll>
-          <button class="btn sm--pb2 border--none border--none bg--transparent">{% include 'icon-arrow-down' %}</button>
-        </a>
-      </div>
+    <div class="hero-section__icon text-align--center pb2">
+      <a class="pointer" data-banner-scroll>
+        <button class="btn border--none border--none bg--transparent">{% include 'icon-arrow-down' %}</button>
+      </a>
     </div>
   </div>
 </header>
