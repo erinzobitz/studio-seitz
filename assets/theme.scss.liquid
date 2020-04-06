@@ -7197,6 +7197,12 @@ Seitz Patterns
 
 .line-length--small {
   max-width: 440px;
+
+  &.line-length--small--mobile {
+    @include media-query($small) {
+      max-width: 200px;
+    }
+  }
 }
 
 .pb50 {
