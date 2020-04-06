@@ -5146,7 +5146,6 @@ Header Active (Modal)
   opacity: 0;
   padding-top: 75px;
   padding-bottom: 75px;
-  transition: opacity 0.1s cubic-bezier(0.46, 0.01, 0.32, 1);
 
   @include media-query($small) {
      padding-bottom: 60px;
@@ -5222,12 +5221,17 @@ Header Active (Modal)
   left: 0;
 
   @include media-query($large-up) {
+    background-color: transparent;
     max-height: 470px;
     overflow-y: hidden;
 
     .header__shifter {
       height: 43px;
     }
+  }
+
+  .header__background {
+    height: 470px;
   }
 
   .header__active {
@@ -5621,8 +5625,17 @@ Header
 
   @include media-query($large-up) {
     max-height: 65px;
-    transition: all .2s cubic-bezier(0.535, 0, 0, 1),visibility .2s linear;
+    transition: max-height 600ms cubic-bezier(0.535, 0, 0, 1),visibility 500ms linear;
   }
+}
+
+.header__background {
+  height: 0;
+  background-color: $active-background;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  transition: height 600ms cubic-bezier(0.535, 0, 0, 1),visibility 500ms linear;
 }
 
 .header-table__top {

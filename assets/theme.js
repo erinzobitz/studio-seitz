@@ -2055,7 +2055,6 @@ theme.Header = (function() {
           setTimeout(function() {
             $header.removeClass("full-height");
           }, 210);
-          $("html, body").removeClass("overflow--hidden");
         }
         if (method === "open") {
           $header.addClass("full-height absolute top--0 left--0");
@@ -2064,7 +2063,6 @@ theme.Header = (function() {
             $header.prepareHeaderTransition().addClass("active");
             $headerActive.prepareTransition().addClass("visible");
           }, 10);
-          $("html, body").addClass("overflow--hidden");
         }
       }
     },

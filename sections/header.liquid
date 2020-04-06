@@ -58,6 +58,7 @@
   {% endunless %}
 
   <header class="site-header {% if section.settings.show_banner and template.name == 'index'  %}absolute top--0 left--0{% endif %} full--w {% if section.settings.show_announcement %}{% if section.settings.home_page_only == false or template.name == 'index' %}has-announcement{% endif %}{% endif %}" data-site-header>
+    <div class="sm--hide header__background"></div>
     <div class="header__main">
       {% if section.settings.show_announcement %}
         {% capture class %}block full--w bg--{{ section.settings.announcement_color }}-background color--{{ section.settings.announcement_color }}-text px2 py1  font-size--sm text-align--center {% endcapture %}
