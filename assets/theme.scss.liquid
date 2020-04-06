@@ -2594,7 +2594,7 @@ $table-light-background: #6F6861;
 
 // Page backgrounds
 $collection-background: #391A20;
-$studio-background: #1D1D1D;
+$studio-background: #fff;
 
 $black: #1D1D1D;
 $white: #fff;
@@ -4485,7 +4485,8 @@ body#request-a-quote,
 body.template-blog,
 body.template-article,
 body.template-cart,
-body.template-404 {
+body.template-404,
+body.template-page {
   .site-header:not(.active) {
     .site-header--contrast-logo {
       display: inline-block;
@@ -5171,15 +5172,11 @@ Header Active (Modal)
 
 .site-header--studio {
   display: none;
-  color: $white;
+  color: $black;
   font-family: $seitz-font--semi-bold;
   font-size: 38px;
   letter-spacing: -1px;
   line-height: 30px;
-
-  &:hover {
-    color: $white;
-  }
 
   @include media-query($medium-up) {
     font-size: 44px;
@@ -6417,8 +6414,8 @@ Custom Sections
 }
 
 .hero-section__logo-container {
-  margin: -185px auto 71px auto;
-  position: relative;
+  margin: -53px auto 71px auto;
+  position: absolute;
   text-align: center;
   z-index: 1;
 
@@ -6442,6 +6439,7 @@ Custom Sections
   max-width: 335px;
   right: 0;
   position: absolute;
+  z-index: 2;
 
   @include media-query($medium) {
     max-width: 525px;
@@ -6456,32 +6454,18 @@ Custom Sections
       max-width: 100%;
     }
   }
-}
 
-.hero-section__title-container--logo {
-  margin-top: -138px;
-  position: relative;
-  text-align: center;
-  z-index: 1;
+  &.hero-section__title-container--logo {
+    margin-top: -51px;
+    width: 144px;
 
-  svg {
-    height: 200px;
-    width: 100%;
-  }
-
-  @include media-query($medium) {
-    margin-top: -103px;
-
-    svg {
-      height: 150px;
+    @include media-query($large-up) {
+      margin-top: -53px;
+      width: 100%;
     }
-  }
-
-  @include media-query($small) {
-    margin-top: -59px;
 
     svg {
-      height: 85px;
+      width: 100%;
     }
   }
 }
@@ -6778,8 +6762,8 @@ Custom Sections
   }
 
   @include media-query($large-up) {
-    padding-top: 85px;
-    padding-bottom: 115px;
+    padding-top: 130px;
+    padding-bottom: 190px;
   }
 }
 
@@ -6825,7 +6809,6 @@ Custom Sections
   h4 {
     font-size: 18px;
     line-height: 30px;
-    @include opacity(0.4);
 
     @include media-query($medium-up) {
       font-size: 26px;
@@ -7058,23 +7041,22 @@ Seitz Patterns
   }
 }
 
-
 .action-link {
-  border-bottom: 2px solid $black;
+  border-bottom: 1px solid $black;
   color: $black;
   font-size: 15px;
   line-height: 26px;
 
   &:hover {
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
   }
 
   &.action-link--white {
-    border-bottom: 2px solid $white;
+    border-bottom: 1px solid $white;
     color: $white;
 
     &:hover {
-      border-bottom: 2px solid transparent;
+      border-bottom: 1px solid transparent;
     }
   }
 
@@ -7096,11 +7078,17 @@ Seitz Patterns
   }
 
   &.action-link--inverse {
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
 
     &:hover {
-      border-bottom: 2px solid $black;
+      border-bottom: 1px solid $black;
     }
+  }
+}
+
+.bullet {
+  &::before {
+    content: "\2022";
   }
 }
 
@@ -7192,6 +7180,10 @@ Seitz Patterns
   @include media-query($small) {
     max-width: 100%;
   }
+}
+
+.line-length--x-medium {
+  max-width: 800px;
 }
 
 .line-length--medium {
@@ -7367,6 +7359,10 @@ Seitz Patterns
 
   &.text__header--white {
     color: $white;
+  }
+
+  &.text__header--dark {
+    color: $black;
   }
 
   &.text__header--faint {

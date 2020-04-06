@@ -1,12 +1,17 @@
 <section class="craftsmanship" data-section-type="carousel" data-section-id="{{ section.id }}" data-fade-in="true">
   <div class="max-site-width md--up--px2">
     <div class="hero-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
+      <div class="hero-section__title-container">
+        <div class="text__header text__header--1 text__header--dark line-length--small ml--auto mr--auto">
+          Swiss Made
+        </div>
+      </div>
       <div class="sm--hide">
-        {% assign image = images['hero-01_90a5b9fd-d570-4b12-bf92-afa994e77e85.jpg']  %}
+        {% assign image = images['swiss-made-portrait.jpg']  %}
         {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
         {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
         {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-        <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+        <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper resp-hero-img-wrapper--vertical js">
           <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
             <img id="{{ img_id }}"
                  class="resp-img lazyload"
@@ -28,16 +33,8 @@
         </noscript>
       </div>
 
-      <div class="sm--hide hero-section__logo-container">
-        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/swiss-made.svg?27598" alt="Swiss made logo"/>
-      </div>
-
-      <div class="sm--hide hero-section__title-container">
-        <div class="text__header text__header--1">Craftsmanship</div>
-      </div>
-
       <div class="md--up--hide">
-        {% assign mobile_image = images['hero-01-m_150c55fd-7903-4aa8-9ca1-7bb4aa6b1873.jpg']  %}
+        {% assign mobile_image = images['swiss-made-portrait-m.jpg']  %}
         {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
         {% capture wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
         {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
@@ -63,62 +60,23 @@
         </noscript>
       </div>
 
-      <div class="md--up--hide hero-section__logo-container">
-        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/swiss-made.svg?27598" alt="Swiss made logo"/>
-      </div>
-
-      <div class="md--up--hide hero-section__title-container">
-        <div class="text__header text__header--1">Craftsman-ship</div>
-      </div>
-
-      <div class="hero-section__text-container line-length--large px1 md--up--px3">
-        <div class="text__body text__body--3 text__body--3--consistent text__body--white text-align--center">
-          The Seitz collection is produced with our family of skilled craftsmen whose unparalleled passion is passed down from the generations before them—so that our furniture can be too.
+      <div class="hero-section__text-container sm--px2">
+        <div class="text__header text__header--3 text__header--3--x-small">
+          The Seitz collection is produced with our family of skilled craftsmen whose unparalleled passion is
+          passed down from the generations before them—so that our furniture can be too.
         </div>
       </div>
 
-      <div class="text-align--center">
-        <span class="text__body text__body--3 text__body--3--consistent text__body--slim text__body--white">
-          Meet
-          <span class="text__highlight text__highlight--1 text__highlight--white">
-            The Craftsmen
-          </span>
-        </span>
-
-        <div class="hero-section__icon">
-          <a class="pointer" data-banner-scroll>
-            <button class="btn sm--pb2 border--none border--none bg--transparent">{% include 'icon-arrow-down' %}</button>
-          </a>
-        </div>
-      </div>
+      <div class="pt1 md--up--pt3 sm--px2 text__body text__body--3 line-length--x-medium">
+        While Switzerland is one of the smallest countries in Europe, Swiss craftsmanship has a reknown reputation for quality.
+        The Swiss have a tradition of precision craftsmanship and demand reliability in everything they do. A synchronized timetable
+        and good connections keep trains in Switzerland punctual and reliable. In their train systems and products, the Swiss design
+        for function but never forget the importance of form.
     </div>
   </div>
 
   <div class="page-section--top-only bg--secondary-background" id="page-top">
-    <div class="max-site-width md--up--px2 page-sub-section">
-      <div class="page-style lg--up--ten-twelfths mx--auto px2 md--up--px0">
-        <div class="grid">
-          <div class="sm--hide grid__item md--up--four-twelfths lg--up--three-twelfths"><br></div>
-
-          <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
-            <div class="md--up--nine-tenths lg--up--eight-tenths rte">
-              <h4>
-                While Switzerland is one of the smallest countries in Europe,
-                Swiss craftsmanship has a huge international reputation for quality.
-              </h4>
-              <p>
-                The Swiss have a tradition of precision craftsmanship and demand reliability in everything they do.
-                A synchronized timetable and good connections keep trains in Switzerland punctual and reliable—even in
-                the beautiful and rugged terrain. In their train systems and products, the Swiss design for function but
-                never forget the importance of form.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="max-site-width md--up--px2 page-sub-section">
+    <div class="max-site-width">
       <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
         <div class="grid">
           <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
