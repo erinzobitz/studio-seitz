@@ -9,15 +9,15 @@
     "header_navigation_text_transform": "none",
     "color_primary_text": "#181b1e",
     "color_primary_background": "#ede9e6",
-    "color_primary_accent": "#ee3e33",
+    "color_primary_accent": "#d72e2e",
     "color_primary_meta": "#181b1e",
     "color_secondary_text": "#181b1e",
     "color_secondary_background": "#ffffff",
-    "color_secondary_accent": "#ee3e33",
+    "color_secondary_accent": "#d72e2e",
     "color_secondary_meta": "#181b1e",
     "color_tertiary_text": "#ffffff",
     "color_tertiary_background": "#1d1d1d",
-    "color_tertiary_accent": "#ee3e33",
+    "color_tertiary_accent": "#d72e2e",
     "color_tertiary_meta": "#666666",
     "color_quarternary_text": "#1d1d1d",
     "color_quarternary_background": "#2a4055",
@@ -118,9 +118,15 @@
           "announcement_color": "tertiary",
           "link": "http:\/\/www.icff.com",
           "show_banner": true,
-          "banner": "shopify:\/\/shop_images\/teapot.jpg",
-          "mobile_banner": "shopify:\/\/shop_images\/teapot-m.jpg",
-          "banner_image_style": "full_screen"
+          "banner": "shopify:\/\/shop_images\/home-hero.jpg",
+          "banner_text": "Functional  heirloom furniture.",
+          "emphasized_banner_text": "Built to last.",
+          "banner_product_title": "Stabellenbank",
+          "banner_product_description": "Made from solid European ash",
+          "mobile_banner": "shopify:\/\/shop_images\/home-hero-m.jpg",
+          "mobile_banner_text": "Heirloom furniture.",
+          "mobile_banner_cta": "Meet the collection",
+          "banner_image_style": "fit_content"
         }
       },
       "footer": {
@@ -156,23 +162,42 @@
           "1555975961020": {
             "type": "rich_text",
             "settings": {
-              "heading": "Heritage Brought to the Modern Home",
+              "heading": "Heritage brought to the modern home.",
               "is_first_heading": "true",
-              "rich_text": "<p>Seitz builds upon the traditions that precede us&mdash;upholding modernist principles with tactile simplicity. Through honest materials and distinct techniques, we can transform our perception of everyday objects.<\/p>",
+              "rich_text": "",
               "paragraph_rich_text": "",
-              "cta_url": "",
-              "cta_text": "Shop now",
-              "text_align": "text-align--center",
+              "emphasized_paragraph_rich_text": "",
+              "cta_url": "shopify:\/\/collections\/heritage",
+              "cta_text": "Meet the collection",
+              "show_cta": "sm--hide",
+              "text_align": "text-align--left",
               "block_width_mobile": "full",
-              "block_width": "full"
+              "block_width": "half"
+            }
+          },
+          "1585929977196": {
+            "type": "rich_text",
+            "settings": {
+              "heading": "",
+              "is_first_heading": "true",
+              "rich_text": "",
+              "paragraph_rich_text": "<p>The heritage of our family&rsquo;s past has greatly inspired the collection we have designed for today. The Seitz family is one of many early craftspeople whose work influenced the handicrafts industry across northern Switzerland&mdash;dating back to 1795. We strive to build upon these traditions that precede us&mdash;upholding modernist principles with tactile simplicity. Because of this strong history in craft, it&rsquo;s important for us to carry the tradition through the preservation and modern interpretation of local Swiss techniques.<\/p>",
+              "emphasized_paragraph_rich_text": "<p>This heritage now plays out across a timeless&mdash;yet distinctly modern&mdash;collection.<\/p>",
+              "cta_url": "",
+              "cta_text": "",
+              "show_cta": "",
+              "text_align": "text-align--left",
+              "block_width_mobile": "full",
+              "block_width": "half"
             }
           }
         },
         "block_order": [
-          "1555975961020"
+          "1555975961020",
+          "1585929977196"
         ],
         "settings": {
-          "first_item": "right",
+          "first_item": "left",
           "color_scheme": "secondary"
         }
       },
@@ -209,48 +234,10 @@
       "1528020026534": {
         "type": "cascade",
         "blocks": {
-          "1543985518501": {
-            "type": "rich_text",
-            "settings": {
-              "heading": "Meet the Collection",
-              "is_first_heading": "false",
-              "rich_text": "<p>The inaugural collection introduces five pieces into the modern home&mdash;partnering with our family of skilled craftsmen within the cantons of Appenzell and Sankt Gallen, Switzerland.<\/p>",
-              "paragraph_rich_text": "",
-              "cta_url": "",
-              "cta_text": "Shop now",
-              "text_align": "text-align--center",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          },
-          "1528020102540": {
+          "1586130699056": {
             "type": "product_simple",
             "settings": {
-              "product": "limen-teapot",
-              "block_width_mobile": "full",
-              "block_width": "half"
-            }
-          },
-          "1528020254775": {
-            "type": "product_simple",
-            "settings": {
-              "product": "stabellenbank",
-              "block_width_mobile": "full",
-              "block_width": "half"
-            }
-          },
-          "1543985504861": {
-            "type": "product_simple",
-            "settings": {
-              "product": "kommode",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          },
-          "1543985598120": {
-            "type": "product_simple",
-            "settings": {
-              "product": "napfstander",
+              "product": "stabellenstuhl",
               "block_width_mobile": "full",
               "block_width": "half"
             }
@@ -262,19 +249,113 @@
               "block_width_mobile": "full",
               "block_width": "half"
             }
+          },
+          "1586122354981": {
+            "type": "text",
+            "settings": {
+              "rich_text": "<p>Upholding the reputation of <a href=\"\/pages\/swiss-made\" title=\"Swiss Made\">Swiss craftsmanship<\/a>, Studio Seitz calls upon traditional techniques to introduce a collection of distinctive, modern simplicity.<\/p>",
+              "font_size": "text__header text__header--3",
+              "cta_url": "",
+              "cta_text": "Shop now",
+              "text_align": "text-align--left",
+              "block_width_mobile": "full",
+              "block_width": "full"
+            }
+          },
+          "1543985504861": {
+            "type": "product_simple",
+            "settings": {
+              "product": "kommode",
+              "block_width_mobile": "full",
+              "block_width": "full"
+            }
+          },
+          "1586130787449": {
+            "type": "product_simple",
+            "settings": {
+              "product": "bedside-table",
+              "block_width_mobile": "full",
+              "block_width": "half"
+            }
+          },
+          "1586130836174": {
+            "type": "product_simple",
+            "settings": {
+              "product": "desk-light",
+              "block_width_mobile": "full",
+              "block_width": "half"
+            }
+          },
+          "1528020254775": {
+            "type": "product_simple",
+            "settings": {
+              "product": "stabellenbank",
+              "block_width_mobile": "full",
+              "block_width": "full"
+            }
+          },
+          "1586124526380": {
+            "type": "text",
+            "settings": {
+              "rich_text": "<p>The studio partners with <a href=\"\/pages\/swiss-made\" title=\"Swiss Made\">master makers<\/a> from local Swiss cantons to breathe life into modernist-tinged creations.<\/p>",
+              "font_size": "text__header text__header--3",
+              "cta_url": "shopify:\/\/pages\/swiss-made",
+              "cta_text": "Meet the craftsmen",
+              "text_align": "text-align--left",
+              "block_width_mobile": "full",
+              "block_width": "full"
+            }
+          },
+          "1528020102540": {
+            "type": "product_simple",
+            "settings": {
+              "product": "limen-teapot",
+              "block_width_mobile": "full",
+              "block_width": "full"
+            }
+          },
+          "1586106017531": {
+            "type": "product_simple",
+            "settings": {
+              "product": "candleholder",
+              "block_width_mobile": "full",
+              "block_width": "half"
+            }
+          },
+          "1586130921057": {
+            "type": "product_simple",
+            "settings": {
+              "product": "table-light",
+              "block_width_mobile": "full",
+              "block_width": "half"
+            }
+          },
+          "1543985598120": {
+            "type": "product_simple",
+            "settings": {
+              "product": "napfstander",
+              "block_width_mobile": "full",
+              "block_width": "half"
+            }
           }
         },
         "block_order": [
-          "1543985518501",
-          "1528020102540",
-          "1528020254775",
+          "1586130699056",
+          "1543985602857",
+          "1586122354981",
           "1543985504861",
-          "1543985598120",
-          "1543985602857"
+          "1586130787449",
+          "1586130836174",
+          "1528020254775",
+          "1586124526380",
+          "1528020102540",
+          "1586106017531",
+          "1586130921057",
+          "1543985598120"
         ],
         "settings": {
           "first_item": "left",
-          "color_scheme": "primary"
+          "color_scheme": "secondary"
         }
       },
       "1543986422830": {
@@ -286,42 +367,6 @@
           "subheading": "",
           "show_blog_link": true,
           "color_scheme": "primary"
-        }
-      },
-      "1543986581641": {
-        "type": "cascade",
-        "blocks": {
-          "1543986605610": {
-            "type": "rich_text",
-            "settings": {
-              "heading": "Precise Workmanship",
-              "is_first_heading": "true",
-              "rich_text": "<p>Our family of makers are committed to uphold the&nbsp;traditions of their craft&mdash;passed down from the generations before them. This passion and care instills the honesty&nbsp;that cannot be replicated in mass manufacturing.<\/p>",
-              "paragraph_rich_text": "",
-              "cta_url": "shopify:\/\/pages\/craftsmanship",
-              "cta_text": "Learn about our commitment to craft",
-              "text_align": "text-align--center",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          },
-          "1543986581641-1": {
-            "type": "image",
-            "settings": {
-              "image": "shopify:\/\/shop_images\/workmanship.jpg",
-              "mobile_image": "shopify:\/\/shop_images\/workmanship-m.jpg",
-              "block_width_mobile": "full",
-              "block_width": "full"
-            }
-          }
-        },
-        "block_order": [
-          "1543986605610",
-          "1543986581641-1"
-        ],
-        "settings": {
-          "first_item": "left",
-          "color_scheme": "secondary"
         }
       },
       "blog-template": {
@@ -352,49 +397,6 @@
           "show_share_buttons": false
         }
       },
-      "1549675796123": {
-        "type": "slideshow",
-        "blocks": {
-          "1549675796123-0": {
-            "type": "slide",
-            "settings": {
-              "feature_image": "shopify:\/\/shop_images\/section-01-slide-01.jpg",
-              "mobile_feature_image": "shopify:\/\/shop_images\/section-01-slide-01-m.jpg",
-              "heading": "",
-              "text": "",
-              "cta_url": "",
-              "cta_text": "Shop Now",
-              "content_position": "text-align--left align--top",
-              "text_align": "text-align--left",
-              "color_overlay": "primary"
-            }
-          },
-          "1549675796123-1": {
-            "type": "slide",
-            "settings": {
-              "feature_image": "shopify:\/\/shop_images\/section-01-slide-02.jpg",
-              "mobile_feature_image": "shopify:\/\/shop_images\/section-01-slide-02-m.jpg",
-              "heading": "",
-              "text": "",
-              "cta_url": "",
-              "cta_text": "Shop Now",
-              "content_position": "text-align--left align--middle",
-              "text_align": "text-align--left",
-              "color_overlay": "primary"
-            }
-          }
-        },
-        "block_order": [
-          "1549675796123-0",
-          "1549675796123-1"
-        ],
-        "settings": {
-          "auto_rotate": false,
-          "text_below_slides": "Our craftsmen’s expertise in wood, simple connections and joinery enhance the architectural design.",
-          "slide_speed": "5000",
-          "color_scheme": "secondary"
-        }
-      },
       "article-template": {
         "type": "article-template",
         "settings": {
@@ -405,33 +407,11 @@
           "show_tags": false,
           "show_next_previous_links": true
         }
-      },
-      "1556927692023": {
-        "type": "image-left-with-text",
-        "settings": {
-          "image": "shopify:\/\/shop_images\/hero-01_4211f367-ffb9-428a-ab78-a8b977b717ee.jpg",
-          "mobile_image": "shopify:\/\/shop_images\/hero-01-m_1.jpg",
-          "heading": "Stabellenbank",
-          "cta_url": "",
-          "cta_text": "Made from solid European ash"
-        }
-      },
-      "1556938821864": {
-        "type": "heading-with-text-right",
-        "settings": {
-          "heading": "",
-          "rich_text": "<p>The Seitz name is no stranger to craft inside the municipality of Berneck, Switzerland&mdash;dating  back to 1795.<\/p>",
-          "paragraph_rich_text": "<p>This small, yet industrious town has been home to artisans for hundreds&nbsp;of years&mdash;most notably for its ceramics. The Seitz family were one of many early craftsmen whose work influenced the region&rsquo;s handicrafts industry. Today, this tradition continues through the preservation and modern interpretation of local Swiss techniques.<\/p>"
-        }
       }
     },
     "content_for_index": [
       "1527920766272",
-      "1556927692023",
-      "1556938821864",
-      "1549675796123",
       "1528020026534",
-      "1543986581641",
       "1543986422830"
     ]
   },
