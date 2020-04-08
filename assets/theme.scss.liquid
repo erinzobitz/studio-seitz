@@ -6414,7 +6414,8 @@ Custom Sections
 }
 
 // Hero Section
-.hero-section {
+.hero-section,
+.page {
   padding-top: 65px;
 
   @include media-query($medium) {
@@ -7196,7 +7197,7 @@ Seitz Patterns
 }
 
 .line-length--small {
-  max-width: 440px;
+  max-width: 490px;
 
   &.line-length--small--mobile {
     @include media-query($small) {
@@ -7318,30 +7319,6 @@ Seitz Patterns
       &:hover {
         border-bottom: 2px solid $color-primary-accent;
       }
-    }
-  }
-
-  &.text__header--4 {
-    font-family: $seitz-font--semi-bold;
-    font-size: 60px;
-    letter-spacing: -2px;
-    line-height: 60px;
-    text-align: center;
-
-    @include media-query($medium-up) {
-      font-size: 80px;
-      line-height: 85px;
-      max-width: 500px;
-      text-align: left;
-      margin-left:-8px;
-    }
-
-    @include media-query($large-up) {
-      font-size: 100px;
-      line-height: 110px;
-      max-width: 500px;
-      text-align: left;
-      margin-left:-8px;
     }
   }
 
