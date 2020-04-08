@@ -103,9 +103,15 @@
 
       <div class="grid {% if section.settings.show_payment_icons and shop.enabled_payment_types != empty %}grid--rev{% endif %} mt2 lg--up--mt5 lg--up--px0">
         <div class="grid__item md--up--one-whole">
+          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/swiss-made-footer.svg?v=1586384166" class="pb2" alt="Swiss made logo"/>
+
           {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
 
           <div class="md--up--hide">
+            <p class="footer__credit">&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br>
+              <i>Photos by <a class="footer__credit--link" href="http://stephenkentjohnson.com/" target="_blank">Stephen Kent Johnson</a>;</i><br>
+              <i>Site Development by <a class="footer__credit--link" href="https://twitter.com/erinzobitz" target="_blank">Erin Zobitz</a></i>
+            </p>
             <ul class="list--reset list--reset--no-margin">
               {% for social in social_accounts %}
                 {%- assign social_handle = social | handleize -%}
@@ -122,12 +128,6 @@
                 {% endif %}
               {% endfor %}
             </ul>
-            <p class="footer__credit">&copy; {{ 'now' | date: "%Y" }} Studio Seitz, LLC. All rights reserved.</br>
-              <i>Photos by <a class="footer__credit--link" href="http://stephenkentjohnson.com/" target="_blank">Stephen Kent Johnson</a>;</i><br>
-              <i>Styling by <a class="footer__credit--link" href="http://www.erinswift.com/" target="_blank">Erin Swift</a>;</i><br>
-              <i>Illustrations by <a class="footer__credit--link" href="https://www.malikafavre.com" target="_blank">Malika Favre</a>;</i><br>
-              <i>Site Development by <a class="footer__credit--link" href="https://twitter.com/erinzobitz" target="_blank">Erin Zobitz</a></i>
-            </p>
           </div>
 
           <div class="sm--hide">
@@ -150,9 +150,7 @@
             </ul>
             <br><i class="footer__credit">
               Photos by <a class="footer__credit--link" target="_blank" href="http://stephenkentjohnson.com/">Stephen Kent Johnson</a>;
-                Styling by <a class="footer__credit--link" target="_blank" href="http://www.erinswift.com/">Erin Swift</a>;
-                  Illustrations by <a class="footer__credit--link" target="_blank" href="https://www.malikafavre.com">Malika Favre</a>;
-                    Site Development by <a class="footer__credit--link" target="_blank" href="https://twitter.com/erinzobitz">Erin Zobitz</a>
+              Site Development by <a class="footer__credit--link" target="_blank" href="https://twitter.com/erinzobitz">Erin Zobitz</a>
              </i>
           </div>
         </div>
