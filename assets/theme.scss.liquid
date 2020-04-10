@@ -6763,6 +6763,21 @@ Custom Sections
   background-color: $color-seitz-gray;
 }
 
+.page-section--small {
+  padding-top: 30px;
+  padding-bottom: 45px;
+
+  @include media-query($medium-up) {
+    padding-top: 60px;
+    padding-bottom: 85px;
+  }
+
+  @include media-query($large-up) {
+    padding-top: 70px;
+    padding-bottom: 190px;
+  }
+}
+
 .page-section {
   padding-top: 43px;
   padding-bottom: 45px;
@@ -6867,18 +6882,6 @@ Custom Sections
 
       &:hover {
         border-bottom: 1px solid $black;
-      }
-    }
-  }
-
- &.page-style--image-top {
-    img:first-child {
-      padding-top: 0;
-      padding-bottom: 0;
-
-      @include media-query($medium-up) {
-        padding-top: 0;
-        padding-bottom: 0;
       }
     }
   }
