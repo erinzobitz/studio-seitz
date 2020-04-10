@@ -38,7 +38,7 @@
 
               {{ form.errors | default_errors }}
               <div class="grid--small">
-                <div class="grid__item--small mt2">
+                <div class="grid__item--small md--up--one-half mt2">
                   <label for="ContactFormName">{{ 'contact.form.name' | t }}</label>
                   <input type="text"
                     class="block mt1 full--w px2 py1"
@@ -49,9 +49,18 @@
                 </div>
 
                 <div class="grid__item--small md--up--one-half mt2">
+                  <label for="ContactFormCompany">{{ 'contact.form.company' | t }}</label>
+                  <input type="text"
+                    class="block mt1 full--w px2 py1"
+                    name="contact[company]"
+                    id="ContactFormCompany"
+                    required>
+                </div>
+
+                <div class="grid__item--small md--up--one-half mt2">
                   <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
                   <input type="email"
-                    class="block mt1 full--w  px2 py1"
+                    class="block mt1 full--w px2 py1"
                     name="contact[email]"
                     id="ContactFormEmail"
                     value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
@@ -62,7 +71,7 @@
                 </div>
 
                 <div class="grid__item--small md--up--one-half mt2">
-                  <label for="ContactFormPhone">Phone</label>
+                  <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
                   <input type="tel"
                     class="block mt1 full--w px2 py1"
                     name="contact[phone]"
@@ -72,10 +81,10 @@
                 </div>
 
                 <div class="grid__item--small mt2">
-                  <label for="ContactFormItems">Item(s) of Interest*</label>
+                  <label for="ContactFormItems">{{ 'contact.form.items' | t }}</label>
                   <input type="text"
                     class="block mt1 full--w px2 py1"
-                    name="contact[Items of Interest]"
+                    name="contact[items]"
                     id="ContactFormItems"
                     autocomplete="off"
                     autocapitalize="off"
@@ -83,10 +92,10 @@
                 </div>
 
               <div class="grid__item--small mt2">
-                <label for="ContactFormMessage">Message</label>
+                <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
                 <textarea rows="10"
                   class="block mt1 full--w  px2 py1"
-                  name="contact[Message]"
+                  name="contact[message]"
                   id="ContactFormMessage">
                   {% if form.body %}
                     {{ form.body }}

@@ -148,13 +148,11 @@
   "contact": {
     "form": {
       "name": "Name*",
-      "company": "Company",
+      "company": "Company*",
       "email": "Email*",
-      "phone": "Phone*",
-      "project_name": "Project Name",
-      "location": "Location",
-      "timeline": "Timeline",
-      "message": "Specification\/Notes*",
+      "phone": "Phone",
+      "items": "Item(s) of Interest*",
+      "message": "Message",
       "send": "Request A Quote",
       "post_success": "Thanks for contacting us. We'll get back to you as soon as possible."
     }

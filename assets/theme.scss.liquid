@@ -1785,12 +1785,6 @@ textarea {
   margin: 0; /* 3 */
 }
 
-input,
-textarea {
-  background-color: rgba($color-seitz-gray, 0.5);
-  border: none;
-}
-
 /**
  * Address `overflow` set to `hidden` in IE 8/9/10/11.
  */
@@ -4369,6 +4363,14 @@ form {
 }
 
 // Prevent zoom on touch devices in active inputs
+
+input,
+textarea,
+select {
+  background-color: $white;
+  border: 2px solid $light-gray;
+}
+
 @include media-query($medium-down) {
   input,
   textarea,
@@ -6616,11 +6618,6 @@ Custom Sections
     display: block;
     height: 100%;
   }
-}
-
-.product__select {
-  background-color: $white;
-  border: 2px solid $light-gray;
 }
 
 .product__heritage-section__region {
