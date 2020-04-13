@@ -83,7 +83,7 @@
     Documentation:
       - http://shopify.com/timber#ajax-cart
   {% endcomment %}
-  {% if settings.ajax_cart_method == "modal" %}
+  {% if settings.ajax_cart_method != "page" %}
     {% include 'ajax-cart-template' %}
   {% endif %}
 

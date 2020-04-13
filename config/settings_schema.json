@@ -602,6 +602,10 @@
           {
             "value": "page",
             "label": "Page"
+          },
+          {
+            "value": "ajax_without_modal",
+            "label": "Ajax without modal"
           }
         ]
       }

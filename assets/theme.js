@@ -1551,7 +1551,8 @@ theme.Header = (function() {
 
     // Enabled ajax cart if no products
     if (
-      theme.data.cartMethod === "modal" &&
+      (theme.data.cartMethod === "modal" ||
+      theme.data.cartMethod === "ajax_without_modal") &&
       this.template.indexOf('product') === -1
     ) {
       ajaxCart.init({
@@ -2225,7 +2226,8 @@ theme.Product = (function() {
     });
 
     // Ajax Cart
-    if (theme.data.cartMethod === "modal") {
+    if (theme.data.cartMethod === "modal" ||
+       theme.data.cartMethod === "ajax_without_modal") {
       ajaxCart.init({
         formSelector: "#AddToCartForm--" + sectionId,
         cartContainer: "#CartContainer",
@@ -2236,11 +2238,15 @@ theme.Product = (function() {
       });
 
       $(document.body).on("ajaxCart.afterAddItem", function(evt, cart) {
-        if (!$(".site-header").hasClass("active")) {
-          $("#CartContainer").empty();
-          var spinner = $("#spinner").html();
-          $("#CartContainer").html(spinner);
-          $("#CartLink").trigger("click");
+        if (theme.data.cartMethod === "modal") {
+          if (!$(".site-header").hasClass("active")) {
+            $("#CartContainer").empty();
+            var spinner = $("#spinner").html();
+            $("#CartContainer").html(spinner);
+            $("#CartLink").trigger("click");
+          }
+        } else if (theme.data.cartMethod === "ajax_without_modal") {
+          window.location.href = $("#CartLink").attr("href");
         }
       });
 
