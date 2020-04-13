@@ -365,6 +365,7 @@ $gutter: 30px;
 
 /*================ Z-Index ================*/
 $z-index-dropdown: 2;
+$z-index-sticky-header: 5;
 $z-index-skip-to-content: 10000; // really high to be safe of app markup
 
 /*================ SVG ================*/
@@ -4428,10 +4429,7 @@ html {
 
 body.template-collection {
   background-color: $collection-background;
-}
 
-body.template-page {
-  background-color: $studio-background;
 }
 
 body#stabellenbank {
@@ -4474,10 +4472,57 @@ body#candleholder {
   background-color: $candleholder-background;
 }
 
+body {
+  .site-header {
+    .header__main.header__main--sticky {
+      .site-header--white,
+      .site-header--standard-logo,
+      .site-header--studio {
+        display: none;
+      }
+
+      .site-header--contrast-logo {
+        display: inline-block;
+      }
+
+      .header__link {
+        color: $black;
+      }
+
+      .site-nav__svg {
+        svg {
+          path {
+            fill: $black;
+          }
+        }
+      }
+    }
+  }
+
+  @include media-query($medium-down) {
+    .site-header.active {
+      overflow: hidden;
+
+      .header__main.header__main--sticky {
+        .site-header--white,
+        .site-header--contrast-logo,
+        .site-header--studio {
+          display: none;
+        }
+
+        .site-header--standard-logo {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+
 body#frequently-asked-qs,
 body#request-a-quote,
 body.template-cart,
-body.template-404 {
+body.template-404,
+body.template-page {
   background-color: $white;
 }
 
@@ -4516,14 +4561,16 @@ body.template-page {
 body.template-collection,
 body.template-product {
   .site-header:not(.active) {
-    .site-header--white {
-      display: inline-block;
-    }
+    .header__main:not(.header__main--sticky) {
+      .site-header--white {
+        display: inline-block;
+      }
 
-    .site-header--standard-logo,
-    .site-header--studio,
-    .site-header--contrast-logo {
-      display: none;
+      .site-header--standard-logo,
+      .site-header--studio,
+      .site-header--contrast-logo {
+        display: none;
+      }
     }
   }
 }
@@ -5211,7 +5258,7 @@ Header Active (Modal)
   position: absolute;
   background-color: transparent;
   width: 100%;
-  height: 100%;
+  height: 1000%;
   top: 0;
   left: 0;
   z-index: -1;
@@ -5237,12 +5284,12 @@ Header Active (Modal)
     }
   }
 
-  .header__background {
-    height: 470px;
-  }
-
   .header__active {
     display: block;
+  }
+
+  .header__main {
+    position: static;
   }
 
   .header__active.visible {
@@ -5255,12 +5302,6 @@ Header Active (Modal)
 
   .border-bottom--header--active {
     border-bottom: 1px solid $active-text;
-  }
-
-  .announcement-bar,
-  .cart,
-  .site-nav__link, {
-    display: none;
   }
 
   .header-table__center {
@@ -5284,6 +5325,28 @@ Header Active (Modal)
 
   .site-nav {
     white-space: normal;
+  }
+
+  @include media-query($medium-down) {
+    .header__main--sticky {
+      background-color: $active-background !important;
+    }
+
+    .announcement-bar,
+    .cart,
+    .site-nav__link, {
+      display: none;
+    }
+  }
+
+  @include media-query($large-up) {
+    .header__main:not(.header__main--sticky) {
+      .announcement-bar,
+      .cart,
+      .site-nav__link, {
+        display: none;
+      }
+    }
   }
 }
 
@@ -5628,29 +5691,43 @@ Header
 
 .site-header {
   background-color: transparent;
+  min-height: 80px;
   z-index: 10;
 
   @include media-query($large-up) {
-    max-height: 65px;
-    transition: max-height 600ms cubic-bezier(0.535, 0, 0, 1),visibility 500ms linear;
+    min-height: 86px;
+    max-height: 86px;
+    // transition: max-height 600ms cubic-bezier(0.535, 0, 0, 1),visibility 500ms linear;
   }
+}
+
+.header__main {
+  height: 80px;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: all 200ms cubic-bezier(0.46, 0.01, 0.32, 1);
+  width: 100%;
+  z-index: $z-index-sticky-header;
+
+  @include media-query($large-up) {
+    height: 86px;
+  }
+}
+
+.header__main--sticky {
+  background-color: $white;
+  border-bottom: 1px solid $black;
 }
 
 .header__background {
-  height: 0;
+  height: 470px;
   background-color: $active-background;
+  display: none;
   width: 100%;
   z-index: -1;
   position: absolute;
-  transition: height 600ms cubic-bezier(0.535, 0, 0, 1),visibility 500ms linear;
-}
-
-.header-table__top {
-  padding-top: 30px;
-
-  @include media-query($small) {
-    padding-top: 25px;
-  }
+  // transition: height 600ms cubic-bezier(0.535, 0, 0, 1),visibility 500ms linear;
 }
 
 .header__link-wrapper {
