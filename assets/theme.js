@@ -1585,7 +1585,7 @@ theme.Header = (function() {
       e.preventDefault();
       $("html, body").animate(
         {
-          scrollTop: $("#MainContent").offset().top + 1
+          scrollTop: $(".banner-scroll-top")[0].scrollHeight - $(".site-header").height()
         },
         400
       );
@@ -2278,7 +2278,7 @@ theme.Product = (function() {
       e.preventDefault();
       $("html, body").animate(
         {
-          scrollTop: $("#product-top").offset().top + 1
+          scrollTop: $(".banner-scroll-top")[0].scrollHeight
         },
         400
       );
@@ -3078,7 +3078,7 @@ theme.Carousel = (function() {
       e.preventDefault();
       $("html, body").animate(
         {
-          scrollTop: $("#page-top").offset().top + 1
+          scrollTop: $(".banner-scroll-top")[0].scrollHeight
         },
         400
       );
@@ -3439,7 +3439,7 @@ theme.Collection = (function() {
       e.preventDefault();
       $("html, body").animate(
         {
-          scrollTop: $("#collection-top").offset().top + 1
+          scrollTop: $(".banner-scroll-top")[0].scrollHeight
         },
         400
       );
