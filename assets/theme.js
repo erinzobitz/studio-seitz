@@ -1978,12 +1978,14 @@ theme.Header = (function() {
           .find(".site-nav__chevron-down")
           .removeClass("hide");
         $activeHeaderTrigger.find(".site-nav__chevron-up").addClass("hide");
+        $(document).find("[data-header-overlay]").css('z-index', -1);
 
         if ($el !== "") {
           $el.addClass("isSelected");
           $el.attr("aria-expanded", "true");
           $el.find(".site-nav__chevron-down").addClass("hide");
           $el.find(".site-nav__chevron-up").removeClass("hide");
+          $(document).find("[data-header-overlay]").css('z-index', 4);
         }
       }
 
@@ -2047,7 +2049,7 @@ theme.Header = (function() {
       function closeHeader() {
         // disable header active class
         toggleHeaderClass("close");
-
+        $(document).find("[data-header-overlay]").css('z-index', -1);
         // remove selected class on active tab
         $activeHeaderTrigger.removeClass("isSelected");
         $activeHeaderTrigger
@@ -2088,10 +2090,8 @@ theme.Header = (function() {
           if (method === "open") {
             $header.addClass("full-height absolute top--0 left--0");
             $headerPlaceholder.removeClass("hide");
-            setTimeout(function() {
-              $header.prepareHeaderTransition().addClass("active");
-              $headerActive.prepareTransition().addClass("visible");
-            }, 10);
+            $header.prepareHeaderTransition().addClass("active");
+            $headerActive.prepareTransition().addClass("visible");
             $("html, body").addClass("overflow--hidden");
           }
         } else {
