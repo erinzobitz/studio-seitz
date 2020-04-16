@@ -2076,7 +2076,7 @@ theme.Header = (function() {
        * Toggle header class based on method
        */
       function toggleHeaderClass(method) {
-        var isMobileHeader = $(".mobile-navigation").is(":visible");
+        var isMobileHeader = $(".mobile-nav-container").is(":visible");
 
         if (isMobileHeader) {
           if (method === "close") {
@@ -2109,6 +2109,9 @@ theme.Header = (function() {
             });
           }
           if (method === "open") {
+            $header.addClass("full-height absolute top--0 left--0");
+            $headerPlaceholder.removeClass("hide");
+
             setTimeout(function() {
               $header.prepareHeaderTransition().addClass("active");
             }, 100);
@@ -2117,11 +2120,7 @@ theme.Header = (function() {
               $headerActive.prepareTransition().addClass("visible");
             }, 500);
 
-            $(".header__background").slideDown(600, function() {
-              $header.addClass("full-height absolute top--0 left--0");
-              $headerPlaceholder.removeClass("hide");
-
-            });
+            $(".header__background").slideDown(600);
           }
         }
       }
