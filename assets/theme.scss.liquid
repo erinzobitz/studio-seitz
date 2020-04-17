@@ -4473,7 +4473,9 @@ body#candleholder {
 }
 
 body {
-  .site-header {
+  background-color: $white;
+
+  .site-header:not(.active) {
     .header__main.header__main--sticky {
       .site-header--white,
       .site-header--standard-logo,
@@ -4498,34 +4500,13 @@ body {
       }
     }
   }
-
-  @include media-query($medium-down) {
-    .site-header.active {
-      .header__main.header__main--sticky {
-        .site-header--white,
-        .site-header--contrast-logo,
-        .site-header--studio {
-          display: none;
-        }
-
-        .site-header--standard-logo {
-          display: inline-block;
-        }
-      }
-    }
-  }
 }
 
-body#frequently-asked-qs,
-body#request-a-quote,
-body.template-cart,
-body.template-404,
-body.template-page {
-  background-color: $white;
+body.template-blog {
+  background-color: $color-primary-background;
 }
 
-body#frequently-asked-qs,
-body#request-a-quote,
+body.template-index,
 body.template-blog,
 body.template-article,
 body.template-cart,
@@ -4569,46 +4550,6 @@ body.template-product {
       .site-header--contrast-logo {
         display: none;
       }
-    }
-  }
-}
-
-body.template-index {
-  .site-header:not(.active) {
-    .site-header--white,
-    .site-header--standard-logo,
-    .site-header--studio {
-      display: none;
-    }
-
-    .site-header--contrast-logo {
-      display: inline-block;
-    }
-
-    .header__link {
-      color: $black;
-    }
-
-    .site-nav__svg {
-      svg {
-        path {
-          fill: $black;
-        }
-      }
-    }
-  }
-}
-
-body#about-seitz {
-  .site-header:not(.active) {
-    .site-header--contrast-logo,
-    .site-header--standard-logo,
-    .site-header--white {
-      display: none;
-    }
-
-    .site-header--studio {
-      display: inline-block;
     }
   }
 }
@@ -5716,7 +5657,6 @@ Header
   background-color: $active-background;
   display: none;
   width: 100%;
-  z-index: -1;
   position: absolute;
 }
 
