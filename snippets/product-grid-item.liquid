@@ -91,13 +91,15 @@
     <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="product__img">
   </noscript>
 
-  <div class="m0 mt1 md--up--mt2">
-    <p class="my0 color--{{ section_color }}-text text__body text__body--4 text__body--semi-bold">
-      {{ product.title }}
-    </p>
-    <p class="my0 color--{{ section_color }}-text text__body text__body--4 line-length--small">
-      {{ product.metafields.attributes.grid_description }}
-    </p>
+  <div class="product__grid-details-container">
+    <div class="product__grid-details m0 mt1 md--up--mt2">
+      <p class="my0 color--{{ section_color }}-text text__body text__body--4 text__body--semi-bold">
+        {{ product.title }}
+      </p>
+      <p class="my0 color--{{ section_color }}-text text__body text__body--4 line-length--small">
+        {{ product.metafields.attributes.grid_description }}
+      </p>
+    </div>
   </div>
 </a>
 

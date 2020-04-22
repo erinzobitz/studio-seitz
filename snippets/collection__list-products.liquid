@@ -4,19 +4,44 @@
     <div class="column-sizer"></div>
 
     {% assign col_count_desktop = 1 %}
+    {% assign padding = 'px3' %}
+    {% assign margin = '' %}
+
     {% for product in collection.products %}
       {% assign block_width_mobile = 'full' %}
       {% assign block_width_desktop = 'half' %}
       {% capture mobile_count %}{% cycle '1', '2' %}{% endcapture %}
 
-      {%- if forloop.index == 3 -%}
+      {%- if forloop.index == 5 or forloop.index == 9 or forloop.index == 10 -%}
+        {% assign padding = 'pr11' %}
+      {%- elsif forloop.index == 4 or forloop.index == 8 -%}
+        {% assign padding = 'pl11' %}
+      {%- elsif forloop.index == 2 -%}
+        {% assign padding = 'pr3' %}
+      {%- elsif forloop.index == 1 or forloop.index == 6 -%}
+        {% assign padding = 'px0' %}
+      {%- else -%}
+        {% assign padding = 'px3' %}
+      {%- endif -%}
+
+      {%- if forloop.index == 1 -%}
+        {%- assign block_width_desktop = 'five-sixths' -%}
+      {%- elsif forloop.index == 3 or forloop.index == 7 -%}
+        {%- assign block_width_desktop = 'three-fourths' -%}
+      {%- elsif forloop.index == 6 -%}
         {%- assign block_width_desktop = 'full' -%}
       {%- else -%}
         {%- assign block_width_desktop = 'half' -%}
       {%- endif -%}
 
-      <div class="item item--desktop--{{ block_width_desktop }} item--desktop--{{ block_width_desktop }}--no-padding item--mobile--full {% if forloop.first %}item--first{% endif %} {% if last_col %}item--last{% endif %} {% if fade_in %}fade-in{% endif %}">
-        <div class="item__inner {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+      {%- if forloop.index == 1 or forloop.index == 6 -%}
+        {%- assign indent = 'product--indent-details' -%}
+      {%- else -%}
+        {%- assign indent = '' -%}
+      {%- endif -%}
+
+      <div class="item item--desktop--{{ block_width_desktop }} item--desktop--{{ block_width_desktop }}--no-padding item--mobile--full {% if forloop.first %}item--first{% endif %} {% if last_col %}item--last{% endif %} {% if fade_in %}fade-in{% endif %} md--dn--px2 {{ padding }} {{ indent }}">
+        <div class="item__inner">
           {% include 'product-grid-item', text_color: section.settings.section_color %}
         </div>
       </div>

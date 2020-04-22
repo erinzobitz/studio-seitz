@@ -1,7 +1,7 @@
 <div class="page-section lg--up--ten-twelfths mx--auto md--up--px0" id="product-top">
   <div class="grid">
     <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
-      <div class="detail__container sm--px2">
+      <div class="detail__container">
         <h1 class="detail__title text__highlight text__highlight--2">
           {{ product.title }}
           <span class="md--up--hide">
@@ -136,7 +136,7 @@
     </div>
 
     <div class="grid__item md--up--eight-twelfths lg--up--nine-twelfths">
-      <div class="pt3 sm--px2 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
+      <div class="pt3 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
         <div class="detail__sibling-content text__header text__header--3 mb1 md--up--mb2">{{ product.metafields.attributes.detail_title }}</div>
         <div class="text__body text__body--1 text__body--1--dark mb1 md--up--mb2">{{ product.metafields.attributes.detail_sub_title }}</div>
         <div class="text__body text__body--3">{{ product.metafields.attributes.detail_description_1 }}</div>
@@ -159,7 +159,7 @@
                   {%- assign ratio = 1 -%}
                 {%- endif -%}
                 {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <div class="one-whole slideshow__slide px2">
+                <div class="one-whole slideshow__slide">
                   <div>
                     <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--secondary-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
                     {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
@@ -190,7 +190,7 @@
                 </div>
               {% endfor %}
             </div>
-            <div class='sm--px2 mobile-flickity__button-container flex bottom--0 right--0 pt1'>
+            <div class='mobile-flickity__button-container flex bottom--0 right--0 pt1'>
               <div class="text__block-quote text__block-quote--1">
                 {{ product.metafields.attributes.carousel_text }}
               </div>
@@ -281,7 +281,7 @@
         {% endif %}
       </div>
 
-      <div class="sm--px2 pt3 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
+      <div class="pt3 md--up--pt0 md--up--nine-tenths lg--up--eight-tenths">
         <div class="text__body text__body--3">{{ product.metafields.attributes.detail_description_2 }}</div>
       </div>
     </div>

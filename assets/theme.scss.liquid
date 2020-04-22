@@ -3060,6 +3060,9 @@ Spacing
     padding-right: $space-5;
   }
 
+  // Custom to support collections page
+  .#{$i}pr11 { padding-right: 11%; }
+  .#{$i}pl11 { padding-left: 11%; }
 }
 
 @include padding('');
@@ -4309,6 +4312,44 @@ Pagination
   border-bottom: 1px solid $color-primary-text;
 }
 
+
+.collection-cascade {
+  .item--desktop--full {
+    &.product--indent-details {
+      .product__grid-details-container {
+        @include media-query($large-up) {
+          padding-left: $space-3;
+          padding-right: $space-3;
+        }
+      }
+
+      .product__grid-details {
+        @include media-query($large-up) {
+          width: percentage(11 / 12);
+          float: right;
+        }
+      }
+    }
+  }
+
+  .item--desktop--five-sixths {
+    &.product--indent-details {
+      .product__grid-details-container {
+        @include media-query($large-up) {
+          padding-left: $space-3;
+          padding-right: 0;
+        }
+      }
+
+      .product__grid-details {
+        @include media-query($large-up) {
+          width: percentage(3.95 / 5);
+          float: right;
+        }
+      }
+    }
+  }
+}
 
 .collection-item__button {
   .collection-item__link.color--white-text:hover &,
@@ -6034,18 +6075,25 @@ $full_mb: percentage($full_mb / $container_mb);
 
 /* GRID WIDTHS FOR DESKTOP */
 $container_dt: 1280;
+$three_fourths_container_dt: 960;
 $columns_dt: 2;
 $gutter_dt: 80;
 $column-width_dt: 600;
+$five_sixths_container_dt: 535;
 
 //widths
 $half_dt: $column-width_dt;
+$five_sixths_dt: $five_sixths_container_dt;
+$three_fourths_dt: $three_fourths_container_dt;
 $full_dt: $container_dt;
 
 //percentage widths
 $gutter_dt: percentage($gutter_dt / $container_dt);
 $half_dt: percentage($half_dt / $container_dt);
 $full_dt: percentage($full_dt / $container_dt);
+$three_fourths_dt: percentage($three_fourths_container_dt / $container_dt);
+$five_sixths_dt: percentage($five_sixths_container_dt / $container_dt);
+
 
 .items {
   overflow: hidden;
@@ -6080,13 +6128,21 @@ $full_dt: percentage($full_dt / $container_dt);
   }
 }
 
+.item--margin--left--one-twelfth {
+  margin-left: percentage(1 / 12);
+}
+
+.item--margin--right--one-twelfth {
+  margin-right: percentage(1 / 12);
+}
+
 .item--large-gap {
   @include media-query($large-up) {
     padding-top: 240px;
   }
 }
 
-//Mobile block sizes
+// Mobile block sizes
 @include media-query($medium-down) {
   .item--mobile--half {
     width: $half_mb;
@@ -6108,8 +6164,23 @@ $full_dt: percentage($full_dt / $container_dt);
 
 //Desktop block sizes
 @include media-query($large-up) {
+  .item--desktop--five-sixths {
+    width: $five_sixths_dt;
+  }
+
   .item--desktop--half {
     width: $half_dt;
+  }
+
+  .item--desktop--three-fourths {
+    left: auto !important;
+    padding-bottom: 120px;
+    right: 0;
+    width: $three_fourths_dt;
+
+    &.item--desktop--three-fourths--no-padding {
+      padding-bottom: 0;
+    }
   }
 
   .item--desktop--full {
@@ -6399,18 +6470,57 @@ Custom Sections
   }
 }
 
+.item--first + .align-top {
+  @include media-query($medium-up) {
+    padding-top: 0 !important;
+  }
+}
+
 .item--first + .product--simple {
   @include media-query($medium-up) {
     padding-top: 35px;
   }
 }
 
-.items {
-  .product--simple:last-child {
-    padding-bottom: 10px;
+.item--first {
+  .product--indent-details {
+    .product__grid-details-container {
+      @include media-query($large-up) {
+        padding-left: $space-3;
+        padding-right: $space-3;
+      }
+    }
 
-    @include media-query($medium-up) {
-      padding-bottom: 50px;
+    .product__grid-details {
+      @include media-query($large-up) {
+        float: right;
+      }
+    }
+  }
+
+  &.item--desktop--five-sixths {
+    .product--indent-details {
+      .product__grid-details-container {
+        @include media-query($large-up) {
+          padding-right: 0;
+        }
+      }
+
+      .product__grid-details {
+        @include media-query($large-up) {
+          width: percentage(3.95 / 5);
+        }
+      }
+    }
+  }
+
+  &.item--desktop--full {
+    .product--indent-details {
+      .product__grid-details {
+        @include media-query($large-up) {
+          width: percentage(11 / 12);
+        }
+      }
     }
   }
 }

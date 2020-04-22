@@ -40,48 +40,20 @@
 {%- endif -%}
 
 <section class="article page-style page--primary-background" role="article" itemscope itemtype="http://schema.org/Article">
-  <div class="hero-section banner-scroll-top lg--up--ten-twelfths md--up--px2 mx--auto">
-    <div class="hero-section__title-container">
-      <div class="text__header text__header--1 text__header--dark line-length--small line-length--small--mobile ml--auto mr--auto">
-        Press
-      </div>
-    </div>
-
-    <div class="sm--hide">
-    {% unless article.image == blank %}
-      {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
-      {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
-      {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-      <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper js">
-        <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
-          <img id="{{ img_id }}"
-            class="resp-img lazyload"
-            src="{{ article.image | img_url: '100x' }}"
-            data-src="{{ img_url }}"
-            data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
-            data-aspectratio="{{ article.image.aspect_ratio }}"
-            data-sizes="auto"
-            alt="{{ article.image.alt | escape }}">
-          <img id="{{ img_id }}"
-            class="resp-img-placeholder"
-            src="{{ article.image | img_url: '1x1' }}"
-            width="{{ article.image.width }}"
-            height="{{ article.image.height }}"
-            alt="{{ article.image.alt | escape }}">
+  <div class="lg--up--px3">
+    <div class="hero-section banner-scroll-top lg--up--ten-twelfths mx--auto">
+      <div class="hero-section__title-container">
+        <div class="text__header text__header--1 text__header--dark line-length--small line-length--small--mobile ml--auto mr--auto">
+          Press
         </div>
       </div>
-      <noscript>
-        <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
-      </noscript>
-    {% endunless %}
-    </div>
 
-    <div class="md--up--hide">
+      <div class="sm--hide">
       {% unless article.image == blank %}
         {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
         {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
         {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-        <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+        <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper js">
           <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
             <img id="{{ img_id }}"
               class="resp-img lazyload"
@@ -103,20 +75,50 @@
           <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
         </noscript>
       {% endunless %}
-    </div>
-
-    <div class="hero-section__text-container sm--px2">
-      <div class="text__header text__header--3 text__header--3--x-small">
-        {{ article.title }}
       </div>
+
+      <div class="md--up--hide">
+        {% unless article.image == blank %}
+          {% capture img_id %}ProductImage-{{ article.image.id }}{% endcapture %}
+          {% capture wrapper_id %}ProductImageWrapper-{{ article.image.id }}{% endcapture %}
+          {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+            <div style="padding-top:{{ 1 | divided_by: article.image.aspect_ratio | times: 100}}%;">
+              <img id="{{ img_id }}"
+                class="resp-img lazyload"
+                src="{{ article.image | img_url: '100x' }}"
+                data-src="{{ img_url }}"
+                data-widths="[180, 360, 470, 600, 750, 940, 1080, 1296, 1512, 1728, 2048]"
+                data-aspectratio="{{ article.image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ article.image.alt | escape }}">
+              <img id="{{ img_id }}"
+                class="resp-img-placeholder"
+                src="{{ article.image | img_url: '1x1' }}"
+                width="{{ article.image.width }}"
+                height="{{ article.image.height }}"
+                alt="{{ article.image.alt | escape }}">
+            </div>
+          </div>
+          <noscript>
+            <img src="{{ article.image.src | img_url: 'large' }}" alt="{{ article.image.alt | escape }}" class="product__img">
+          </noscript>
+        {% endunless %}
+      </div>
+
+      <div class="hero-section__text-container md--dn--px2">
+        <div class="text__header text__header--3 text__header--3--x-small">
+          {{ article.title }}
+        </div>
+      </div>
+      <p class="pt2 text__body text__body--4 md--dn--px2 mb0">
+        {{ article.created_at | date: "%B %d, %Y" }}
+      </p>
     </div>
-    <p class="pt2 text__body text__body--4 sm--px2 mb0">
-      {{ article.created_at | date: "%B %d, %Y" }}
-    </p>
   </div>
 
   <div class="page-section--small">
-    <div class="lg--up--ten-twelfths mx--auto px2 lg--up--px0">
+    <div class="lg--up--ten-twelfths mx--auto px2 lg--up--px3">
       <div class="grid grid--full">
         <div class="grid__item lg--up--three-tenths md--dn--hide py1">
         </div>

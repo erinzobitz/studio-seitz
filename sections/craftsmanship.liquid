@@ -1,82 +1,84 @@
 <section class="craftsmanship" data-section-type="carousel" data-section-id="{{ section.id }}" data-fade-in="true">
-  <div class="hero-section banner-scroll-top lg--up--ten-twelfths md--up--px2 mx--auto">
-    <div class="hero-section__title-container">
-      <div class="text__header text__header--1 text__header--dark line-length--small line-length--small--mobile ml--auto mr--auto">
-        Swiss Made
-      </div>
-    </div>
-    <div class="sm--hide">
-      {% assign image = images['swiss-made-portrait.jpg']  %}
-      {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
-      {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
-      {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-      <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper resp-hero-img-wrapper--vertical js">
-        <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
-          <img id="{{ img_id }}"
-               class="resp-img lazyload"
-               data-src="{{ img_url }}"
-               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-               data-aspectratio="{{ image.aspect_ratio }}"
-               data-sizes="auto"
-               alt="Blacksmithing tools">
-           <img id="{{ img_id }}"
-                class="resp-img-placeholder"
-                src="{{ image | img_url: '1x1' }}"
-                width="{{ image.width }}"
-                height="{{ image.height }}"
-                alt="{{ image.alt | escape }}">
+  <div class="lg--up--px3">
+    <div class="hero-section banner-scroll-top lg--up--ten-twelfths mx--auto">
+      <div class="hero-section__title-container">
+        <div class="text__header text__header--1 text__header--dark line-length--small line-length--small--mobile ml--auto mr--auto">
+          Swiss Made
         </div>
       </div>
-      <noscript>
-        <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
-      </noscript>
-    </div>
+      <div class="sm--hide">
+        {% assign image = images['swiss-made-portrait.jpg']  %}
+        {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
+        {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
+        {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <div id="{{ wrapper_id }}" class="resp-img-wrapper resp-hero-img-wrapper resp-hero-img-wrapper--vertical js">
+          <div style="padding-top:{{ 1 | divided_by: image.aspect_ratio | times: 100}}%;">
+            <img id="{{ img_id }}"
+                 class="resp-img lazyload"
+                 data-src="{{ img_url }}"
+                 data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                 data-aspectratio="{{ image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="Blacksmithing tools">
+             <img id="{{ img_id }}"
+                  class="resp-img-placeholder"
+                  src="{{ image | img_url: '1x1' }}"
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                  alt="{{ image.alt | escape }}">
+          </div>
+        </div>
+        <noscript>
+          <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+        </noscript>
+      </div>
 
-    <div class="md--up--hide">
-      {% assign mobile_image = images['swiss-made-portrait-m.jpg']  %}
-      {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
-      {% capture wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
-      {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-      <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
-        <div style="padding-top:{{ 1 | divided_by: mobile_image.aspect_ratio | times: 100}}%;">
-          <img id="{{ mobile_img_id }}"
-               class="resp-img lazyload"
-               data-src="{{ mobile_img_url }}"
-               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-               data-aspectratio="{{ mobile_image.aspect_ratio }}"
-               data-sizes="auto"
-               alt="Blacksmithing tools">
-           <img id="{{ mobile_img_id }}"
-                class="resp-img-placeholder"
-                src="{{ mobile_image | img_url: '1x1' }}"
-                width="{{ mobile_image.width }}"
-                height="{{ mobile_image.height }}"
-                alt="{{ mobile_image.alt | escape }}">
+      <div class="md--up--hide">
+        {% assign mobile_image = images['swiss-made-portrait-m.jpg']  %}
+        {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
+        {% capture wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
+        {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        <div id="{{ wrapper_id }}" class="resp-img-wrapper js">
+          <div style="padding-top:{{ 1 | divided_by: mobile_image.aspect_ratio | times: 100}}%;">
+            <img id="{{ mobile_img_id }}"
+                 class="resp-img lazyload"
+                 data-src="{{ mobile_img_url }}"
+                 data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                 data-aspectratio="{{ mobile_image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="Blacksmithing tools">
+             <img id="{{ mobile_img_id }}"
+                  class="resp-img-placeholder"
+                  src="{{ mobile_image | img_url: '1x1' }}"
+                  width="{{ mobile_image.width }}"
+                  height="{{ mobile_image.height }}"
+                  alt="{{ mobile_image.alt | escape }}">
+          </div>
+        </div>
+        <noscript>
+          <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
+        </noscript>
+      </div>
+
+      <div class="hero-section__text-container sm--px2">
+        <div class="text__header text__header--3 text__header--3--x-small">
+          The Seitz collection is produced with our family of skilled craftsmen whose unparalleled passion is
+          passed down from the generations before them—so that our furniture can be too.
         </div>
       </div>
-      <noscript>
-        <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="item--image">
-      </noscript>
-    </div>
 
-    <div class="hero-section__text-container sm--px2">
-      <div class="text__header text__header--3 text__header--3--x-small">
-        The Seitz collection is produced with our family of skilled craftsmen whose unparalleled passion is
-        passed down from the generations before them—so that our furniture can be too.
-      </div>
+      <div class="pt1 md--up--pt3 sm--px2 text__body text__body--3 line-length--x-medium">
+        While Switzerland is one of the smallest countries in Europe, Swiss craftsmanship has a reknown reputation for quality.
+        The Swiss have a tradition of precision craftsmanship and demand reliability in everything they do. A synchronized timetable
+        and good connections keep trains in Switzerland punctual and reliable. In their train systems and products, the Swiss design
+        for function but never forget the importance of form.
     </div>
-
-    <div class="pt1 md--up--pt3 sm--px2 text__body text__body--3 line-length--x-medium">
-      While Switzerland is one of the smallest countries in Europe, Swiss craftsmanship has a reknown reputation for quality.
-      The Swiss have a tradition of precision craftsmanship and demand reliability in everything they do. A synchronized timetable
-      and good connections keep trains in Switzerland punctual and reliable. In their train systems and products, the Swiss design
-      for function but never forget the importance of form.
   </div>
 </div>
 
-<div class="page-section--top-only bg--secondary-background md--up--px2" id="page-top">
-  <div class="max-site-width">
-    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+<div class="page-section--top-only bg--secondary-background" id="page-top">
+  <div class="max-site-width px2 lg--up--px3">
+    <div class="lg--up--ten-twelfths mx--auto">
       <div class="grid">
         <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
           <div class="detail__container">
@@ -125,8 +127,8 @@
     </div>
   </div>
 
-  <div class="max-site-width md--up--px2 page-sub-section">
-    <div class="lg--up--ten-twelfths mx--auto md--up--px0">
+  <div class="max-site-width px2 lg--up--px3 page-sub-section">
+    <div class="lg--up--ten-twelfths mx--auto">
       <div class="grid grid--flex grid--flex--mobile">
         <div class="grid__item md--up--seven-twelfths">
           {%- assign image_1 = images['fassler-slide-01.jpg'] -%}
@@ -418,8 +420,8 @@
     </div>
   </div>
 
-  <div class="max-site-width md--up--px2 page-sub-section">
-    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+  <div class="max-site-width px2 lg--up--px3 page-sub-section">
+    <div class="lg--up--ten-twelfths mx--auto">
       <div class="grid">
         <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
           <div class="detail__container">
@@ -469,8 +471,8 @@
     </div>
   </div>
 
-  <div class="max-site-width md--up--px2 page-sub-section">
-    <div class="lg--up--ten-twelfths mx--auto md--up--px0">
+  <div class="max-site-width px2 lg--up--px3 page-sub-section">
+    <div class="lg--up--ten-twelfths mx--auto">
       <div class="grid grid--flex grid--flex--mobile">
         <div class="grid__item md--up--seven-twelfths">
           {%- assign two_image_1 = images['maetzler-slide-01.jpg'] -%}
@@ -725,8 +727,8 @@
     </div>
   </div>
 
-  <div class="max-site-width md--up--px2 page-sub-section">
-    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
+  <div class="max-site-width px2 lg--up--px3 page-sub-section">
+    <div class="lg--up--ten-twelfths mx--auto">
       <div class="grid">
         <div class="grid__item md--up--four-twelfths lg--up--three-twelfths">
           <div class="detail__container">
@@ -770,8 +772,8 @@
     </div>
   </div>
 
-  <div class="max-site-width md--up--px2 page-sub-section">
-    <div class="lg--up--ten-twelfths mx--auto md--up--px0">
+  <div class="max-site-width px2 lg--up--px3 page-sub-section">
+    <div class="lg--up--ten-twelfths mx--auto">
       <div class="grid grid--flex grid--flex--mobile">
         <div class="grid__item md--up--seven-twelfths">
           {%- assign three_image_1 = images['seitz-slide-01.jpg'] -%}
@@ -916,67 +918,65 @@
   </div>
 </div>
 
-<div class="page-section bg--primary-background">
-  <div class="max-site-width md--up--px2">
-    <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0">
-      <div class="text__header text__header--3">
-        Material Library
+<div class="max-site-width px2 lg--up--px3 page-section bg--primary-background">
+  <div class="lg--up--ten-twelfths mx--auto">
+    <div class="text__header text__header--3">
+      Material Library
+    </div>
+    <div class="materials-grid">
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-ash-natural.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>European Ash</strong>, Natural
+        </div>
       </div>
-      <div class="materials-grid">
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-ash-natural.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>European Ash</strong>, Natural
-          </div>
-        </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-ash-ebonized.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>European Ash</strong>, Ebonized
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-ash-ebonized.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>European Ash</strong>, Ebonized
         </div>
+      </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-cork-white-marble.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>Cork</strong>, White Marble
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-cork-white-marble.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>Cork</strong>, White Marble
         </div>
+      </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-glass-frosted.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>Glass</strong>, Clear Frosted
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-glass-frosted.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>Glass</strong>, Clear Frosted
         </div>
+      </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-stoneware-glazed.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>Stoneware</strong>, White Glazed
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-stoneware-glazed.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>Stoneware</strong>, White Glazed
         </div>
+      </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-aluminum-brushed.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>Aluminum</strong>, Brushed
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-aluminum-brushed.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>Aluminum</strong>, Brushed
         </div>
+      </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-aluminum-black-anodized.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>Aluminum</strong>, Black Anodized
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-aluminum-black-anodized.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>Aluminum</strong>, Black Anodized
         </div>
+      </div>
 
-        <div class="materials-grid__swatch">
-          <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-brass-polished.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
-          <div class="materials-grid__swatch__text pt1">
-            <strong>Brass</strong>, Polished
-          </div>
+      <div class="materials-grid__swatch">
+        <img src="https://cdn.shopify.com/s/files/1/0074/3859/8244/files/material-brass-polished.jpg?28095" alt="European Ash" class="materials-grid__swatch__image"/>
+        <div class="materials-grid__swatch__text pt1">
+          <strong>Brass</strong>, Polished
         </div>
       </div>
     </div>

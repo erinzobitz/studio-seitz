@@ -7,12 +7,12 @@
 {%- assign posts_per_row_desktop = section.settings.posts_per_row_desktop -%}
 
 <section class="collection color--{{ section_color }}-text" data-section-type="collection" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}">
-    <div class="md--up--px2">
+    <div class="md--up--px3">
       {% include 'collection__header' %}
     </div>
 
-    <div class="md--up--px2 bg--secondary-background" id="collection-top">
-      <div class="page-section lg--up--ten-twelfths mx--auto px2 md--up--px0">
+    <div class="bg--secondary-background" id="collection-top">
+      <div class="page-section">
         {% include 'collection__list-products' %}
       </div>
     </div>

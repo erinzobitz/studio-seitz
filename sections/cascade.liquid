@@ -1,12 +1,16 @@
 {%- assign section_color = section.settings.color_scheme -%}
+{%- assign margin = section.settings.margin -%}
+{%- assign padding = section.settings.padding -%}
+{%- assign align_top = section.settings.align_top -%}
+
 {%- include 'global-variables' -%}
 
 {%- assign font_size = 'font-size--sm md--up--font-size--m line-height--3' -%}
 {%- assign font_size = global__basic_font_size -%}
 
 <section class="cascade pb3 lg--up--pb5 color--{{ section_color }}-text bg--{{ section_color }}-background" data-section-type="cascade" data-section-id="{{ section.id }}" data-fade-in="{{ fade_in }}" data-first-item="{{ section.settings.first_item }}">
-  <div class="max-site-width px2">
-    <div class="cascading-content lg--up--ten-twelfths mx--auto">
+  <div class="max-site-width md--dn--px2 {{ padding }}">
+    <div class="cascading-content {{ margin }} mx--auto">
       <div class="items overflow--hidden">
         <div class="item-sizer"></div>
         <div class="column-sizer"></div>
@@ -63,10 +67,9 @@
           {%- endif -%}
 
           <div
-            class="item item--desktop--{{ block_width_desktop }} item--mobile--{{ block_width_mobile }} {% if block.type == 'product_simple' %}product--simple{% endif %} item--{{ block.id }} {% if forloop.first %}item--first{% endif %} {% if first_col_desktop %}first-col--desktop{% endif %} {% if first_col_mobile %}first-col--mobile{% endif %} {% if last_col %}item--last{% endif %} {% if fade_in%}fade-in{% endif %}"
+            class="item item--desktop--{{ block_width_desktop }} item--mobile--{{ block_width_mobile }} {% if block.type == 'product_simple' %}product--simple{% endif %} item--{{ block.id }} {% if forloop.first %}item--first{% endif %} {% if first_col_desktop %}first-col--desktop{% endif %} {% if first_col_mobile %}first-col--mobile{% endif %} {% if last_col %}item--last{% endif %} {% if fade_in%}fade-in{% endif %} {{ align_top }}"
             data-width="{{ block_width_desktop }}"
-            data-block-id="{{ block.id }}"
-            >
+            data-block-id="{{ block.id }}">
             <div class="item__inner {% if block_width_mobile == 'full' %}mx--auto{% endif %} {% if block_width_desktop == 'full' %}lg--up--mx--auto{% else %}lg--up--one-whole{% endif %}" {{ block.shopify_attributes }}>
 
               {% comment %}
@@ -83,7 +86,7 @@
                   {% assign mobile_image = block.settings.mobile_image %}
                   {% assign mobile_image_ratio = block.settings.mobile_image.aspect_ratio  | plus: 0 %}
 
-                  <div class="sm--hide pb70 pt30 image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                  <div class="sm--hide pb70 pt30 image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                     {% capture img_id %}ItemImage-{{ image.id }}{% endcapture %}
                     {% capture wrapper_id %}ItemImageWrapper-{{ image.id }}{% endcapture %}
                     {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
@@ -110,7 +113,7 @@
                     </noscript>
                   </div>
 
-                  <div class="md--up--hide pb70 image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                  <div class="md--up--hide pb70 image-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                     {% capture mobile_img_id %}ItemImage-{{ mobile_image.id }}{% endcapture %}
                     {% capture mobile_wrapper_id %}ItemImageWrapper-{{ mobile_image.id }}{% endcapture %}
                     {%- assign mobile_img_url = mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
@@ -158,7 +161,7 @@
                 {% assign cta_text = block.settings.cta_text %}
                 {% assign cta_url = block.settings.cta_url %}
                 {% assign local_color = block.settings.section_color %}
-                <div class="image-with-text__container relative  {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                <div class="image-with-text__container relative  {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                   <div class="image-with-text__image">
                     {% assign image = block.settings.image %}
                     {% if image %}
@@ -231,7 +234,7 @@
               ============================================================================== *
               {% endcomment %}
               {% if block.type == 'video' %}
-                <div class="video-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}md--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                <div class="video-holder {% if col_count_mobile == 2 or col_count_mobile == 3 %}lg--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                   {% if block.settings.video_url %}
                     {% if block.settings.video_url.type == 'youtube' %}
                       {% capture image_url_mq %}//img.youtube.com/vi/{{ block.settings.video_url.id }}/mqdefault.jpg{% endcapture %}
@@ -364,7 +367,7 @@
                       {% assign image = images[product.metafields.attributes.mobile_header_image].src  %}
                     {% endfor %}
                   {% endif %}
-                  <div class="image-with-text__container relative  {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+                  <div class="image-with-text__container relative  {% if col_count_mobile == 2 or col_count_mobile == 3 %}seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                     <div class="image-with-text__image">
                       {% assign image_ratio = block.settings.image.aspect_ratio  | plus: 0 %}
                       <div class="image-holder">
@@ -510,7 +513,7 @@
               ============================================================================== *
               {% endcomment %}
               {% if block.type == 'product_simple' %}
-              <div class="product product--{{ block.id }} {% if col_count_mobile == 2 or col_count_mobile == 3 %}md--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %}lg--up--five-sixths lg--up--mx--auto{% endif %}">
+              <div class="product product--{{ block.id }} {% if margin == '' and section.settings.first_item == 'left' %} product--indent-details {% endif %} {% if col_count_mobile == 2 or col_count_mobile == 3 %}lg--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                 {%- assign product = all_products[block.settings.product] -%}
                 {% if product == empty %}
                   {% include 'product-grid-item__onboarding' %}
@@ -588,6 +591,38 @@
           { "value": "left", "label": "Top left"},
           { "value": "right ", "label": "Top right"}
        ]
+    },
+    {
+       "type": "select",
+       "id": "margin",
+       "label": "Grid margin",
+       "options": [
+          { "value": "", "label": "No margin" },
+          { "value": "lg--up--ten-twelfths", "label": "Default margin" }
+       ],
+       "default": "lg--up--ten-twelfths"
+    },
+    {
+       "type": "select",
+       "id": "padding",
+       "label": "Horizontal padding",
+       "options": [
+          { "value": "pl3", "label": "Padding left" },
+          { "value": "pr3", "label": "Padding right" },
+          { "value": "px3", "label": "Padding both" },
+          { "value": "px0", "label": "Padding none" }
+       ],
+       "default": "px3"
+    },
+    {
+       "type": "select",
+       "id": "align_top",
+       "label": "Top Alignment",
+       "options": [
+          { "value": "", "label": "Staggered" },
+          { "value": "align-top", "label": "Aligned" }
+       ],
+       "default": ""
     },
     {
        "type": "select",
@@ -978,8 +1013,9 @@
            "type": "select",
            "id": "block_width",
            "options": [
-             { "value": "half", "label": "Half width"},
-             { "value": "full", "label": "Full width"}
+             { "value": "half", "label": "Half width" },
+             { "value": "full", "label": "Full width" },
+             { "value": "three-fourths", "label": "Three quarters" }
            ],
            "label": "Desktop"
          }
@@ -1077,7 +1113,9 @@
           "type": "select",
           "id": "block_width",
           "options": [
+            { "value": "five-sixths", "label": "Five sixths" },
             { "value": "half", "label": "Half width"},
+            { "value": "three-fourths", "label": "Three quarters"},
             { "value": "full", "label": "Full width"}
           ],
           "label": "Desktop"

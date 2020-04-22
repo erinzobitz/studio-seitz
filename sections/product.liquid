@@ -19,7 +19,7 @@
     <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
     <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
 
-    <div class="max-site-width md--up--px2">
+    <div class="max-site-width px0 md--px2 lg--up--px3">
       {% assign feature_product = false %}
       {% assign section_id = section.id %}
       {% include 'product__hero-section' %}
@@ -34,7 +34,7 @@
   </section>
 
   <div class="bg--secondary-background">
-    <div class="max-site-width md--up--px2" data-fade-in="{{ fade_in }}">
+    <div class="max-site-width px2 lg--up--px3" data-fade-in="{{ fade_in }}">
       {% assign section_id = section.id %}
       {% include 'product__top-section' %}
     </div>
@@ -45,22 +45,22 @@
   {% endif %}
 
   <div class="bg--secondary-background">
-    <div class="max-site-width md--up--px2">
+    <div class="max-site-width px2 lg--up--px3">
       {% include 'product__heritage-section' %}
     </div>
   </div>
 
   <div class="bg--secondary-background">
     {% include 'product__hero-3-section' %}
-    <div class="max-site-width md--up--px2">
+    <div class="max-site-width">
       {% include 'product__spec-section' %}
     </div>
   </div>
 
   <a href="/pages/craftsmanship">
     <div class="product__workmanship bg--primary-background">
-      <div class="max-site-width md--up--px2">
-        <div class="lg--up--ten-twelfths mx--auto px2 md--up--px0 pb2 pt3 md--up--py4">
+      <div class="max-site-width px2 lg--up--px3 pb2 pt3 md--up--py4">
+        <div class="lg--up--ten-twelfths mx--auto">
           <div class="text__header text__header--5">Precise Workmanship</div>
           <div class="flex flex--responsive justify--between pt1">
             <div class="line-length--large text__body text__body--1">
