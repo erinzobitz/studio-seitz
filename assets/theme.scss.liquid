@@ -4314,36 +4314,39 @@ Pagination
 
 
 .collection-cascade {
-  .item--desktop--full {
-    &.product--indent-details {
-      .product__grid-details-container {
-        @include media-query($large-up) {
+  @include media-query($large-up) {
+    .product--indent-details {
+      &.item--desktop--full {
+        .product__grid-details-container {
           padding-left: $space-3;
           padding-right: $space-3;
         }
-      }
 
-      .product__grid-details {
-        @include media-query($large-up) {
+        .product__grid-details {
           width: percentage(11 / 12);
           float: right;
         }
       }
-    }
-  }
 
-  .item--desktop--five-sixths {
-    &.product--indent-details {
-      .product__grid-details-container {
-        @include media-query($large-up) {
+      &.item--desktop--five-sixths {
+        .product__grid-details-container {
           padding-left: $space-3;
           padding-right: 0;
         }
+
+        .product__grid-details {
+          width: percentage(3.95 / 5);
+          float: right;
+        }
       }
 
-      .product__grid-details {
-        @include media-query($large-up) {
-          width: percentage(3.95 / 5);
+      &.item--desktop--half {
+        .product__grid-details-container {
+          padding: 0;
+        }
+
+        .product__grid-details {
+          width: percentage(4.95 / 6);
           float: right;
         }
       }
@@ -6082,6 +6085,7 @@ $column-width_dt: 600;
 $five_sixths_container_dt: 535;
 
 //widths
+$fourth_dt: $column-width_dt / 2;
 $half_dt: $column-width_dt;
 $five_sixths_dt: $five_sixths_container_dt;
 $three_fourths_dt: $three_fourths_container_dt;
@@ -6089,6 +6093,7 @@ $full_dt: $container_dt;
 
 //percentage widths
 $gutter_dt: percentage($gutter_dt / $container_dt);
+$fourth_dt: percentage($fourth_dt / $container_dt);
 $half_dt: percentage($half_dt / $container_dt);
 $full_dt: percentage($full_dt / $container_dt);
 $three_fourths_dt: percentage($three_fourths_container_dt / $container_dt);
@@ -6164,6 +6169,10 @@ $five_sixths_dt: percentage($five_sixths_container_dt / $container_dt);
 
 //Desktop block sizes
 @include media-query($large-up) {
+  .item--desktop--one-fourth {
+    width: $fourth_dt;
+  }
+
   .item--desktop--five-sixths {
     width: $five_sixths_dt;
   }
@@ -6483,41 +6492,52 @@ Custom Sections
 }
 
 .item--first {
-  .product--indent-details {
-    .product__grid-details-container {
-      @include media-query($large-up) {
-        padding-left: $space-3;
-        padding-right: $space-3;
-      }
-    }
-
-    .product__grid-details {
-      @include media-query($large-up) {
-        float: right;
-      }
-    }
-  }
-
-  &.item--desktop--five-sixths {
+  @include media-query($large-up) {
     .product--indent-details {
-      .product__grid-details-container {
-        @include media-query($large-up) {
-          padding-right: 0;
+      &.product--indent-details--px3,
+      &.product--indent-details--pl3 {
+        .product__grid-details-container {
+          padding: 0;
         }
       }
 
+      .product__grid-details-container {
+        padding-left: $space-3;
+        padding-right: $space-3;
+      }
+
       .product__grid-details {
-        @include media-query($large-up) {
+        float: right;
+      }
+    }
+
+    &.item--desktop--half {
+      .product--indent-details {
+        .product__grid-details-container {
+          padding-right: 0;
+        }
+
+        .product__grid-details {
+          width: percentage(4.95 / 6);
+        }
+      }
+    }
+
+    &.item--desktop--five-sixths {
+      .product--indent-details {
+        .product__grid-details-container {
+          padding-right: 0;
+        }
+
+        .product__grid-details {
           width: percentage(3.95 / 5);
         }
       }
     }
-  }
 
-  &.item--desktop--full {
-    .product--indent-details {
-      .product__grid-details {
-        @include media-query($large-up) {
+    &.item--desktop--full {
+      .product--indent-details {
+        .product__grid-details {
           width: percentage(11 / 12);
         }
       }

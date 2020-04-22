@@ -12,13 +12,15 @@
       {% assign block_width_desktop = 'half' %}
       {% capture mobile_count %}{% cycle '1', '2' %}{% endcapture %}
 
-      {%- if forloop.index == 5 or forloop.index == 9 or forloop.index == 10 -%}
+      {%- if forloop.index == 5 -%}
         {% assign padding = 'pr11' %}
-      {%- elsif forloop.index == 4 or forloop.index == 8 -%}
+      {%- elsif forloop.index == 4  -%}
         {% assign padding = 'pl11' %}
       {%- elsif forloop.index == 2 -%}
         {% assign padding = 'pr3' %}
-      {%- elsif forloop.index == 1 or forloop.index == 6 -%}
+      {%- elsif forloop.index == 8 -%}
+        {% assign padding = 'pl3' %}
+      {%- elsif forloop.index == 1 or forloop.index == 6 or forloop.index == 9 or forloop.index == 10 -%}
         {% assign padding = 'px0' %}
       {%- else -%}
         {% assign padding = 'px3' %}
@@ -28,13 +30,15 @@
         {%- assign block_width_desktop = 'five-sixths' -%}
       {%- elsif forloop.index == 3 or forloop.index == 7 -%}
         {%- assign block_width_desktop = 'three-fourths' -%}
+      {%- elsif forloop.index == 10 -%}
+        {%- assign block_width_desktop = 'one-fourth' -%}
       {%- elsif forloop.index == 6 -%}
         {%- assign block_width_desktop = 'full' -%}
       {%- else -%}
         {%- assign block_width_desktop = 'half' -%}
       {%- endif -%}
 
-      {%- if forloop.index == 1 or forloop.index == 6 -%}
+      {%- if forloop.index == 1 or forloop.index == 6 or forloop.index == 8 -%}
         {%- assign indent = 'product--indent-details' -%}
       {%- else -%}
         {%- assign indent = '' -%}
@@ -51,6 +55,6 @@
         {% assign col_count_desktop = 1 %}
       {% endif %}
     {% endfor %}
-    
+
   </div>
 </div>

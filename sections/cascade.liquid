@@ -513,7 +513,7 @@
               ============================================================================== *
               {% endcomment %}
               {% if block.type == 'product_simple' %}
-              <div class="product product--{{ block.id }} {% if margin == '' and section.settings.first_item == 'left' %} product--indent-details {% endif %} {% if col_count_mobile == 2 or col_count_mobile == 3 %}lg--up--seven-eighths mx--auto{% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
+              <div class="product product--{{ block.id }} {% if margin == '' and section.settings.first_item == 'left' %} product--indent-details product--indent-details--{{padding}} {% endif %} {% if col_count_desktop == 2 or col_count_desktop == 3 %} lg--up--mx--auto{% endif %}">
                 {%- assign product = all_products[block.settings.product] -%}
                 {% if product == empty %}
                   {% include 'product-grid-item__onboarding' %}
@@ -1113,6 +1113,7 @@
           "type": "select",
           "id": "block_width",
           "options": [
+            { "value": "one-fourth", "label": "One quarter" },
             { "value": "five-sixths", "label": "Five sixths" },
             { "value": "half", "label": "Half width"},
             { "value": "three-fourths", "label": "Three quarters"},
