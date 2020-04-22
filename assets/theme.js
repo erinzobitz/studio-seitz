@@ -1691,6 +1691,17 @@ theme.Header = (function() {
 
       $(window).scroll(function() {
         var scroll = $(window).scrollTop();
+        var $heroSection = $(".hero-section");
+
+        if ($heroSection.length > 0) {
+          var ht = $heroSection.outerHeight();
+
+          if (scroll > ht) {
+            $stickyHeader.addClass("header__main--sticky--white");
+          } else {
+            $stickyHeader.removeClass("header__main--sticky--white");
+          }
+        }
 
         if (scroll >= 1) {
           $stickyHeader.addClass("header__main--sticky");

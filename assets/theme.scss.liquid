@@ -4430,46 +4430,89 @@ html {
 body.template-collection {
   background-color: $collection-background;
 
+  .header__main--sticky {
+    background-color: $collection-background;
+  }
 }
 
 body#stabellenbank {
   background-color: $stabellenbank-background;
+
+  .header__main--sticky {
+    background-color: $stabellenbank-background;
+  }
 }
 
 body#stabellenstuhl {
   background-color: $stabellenstuhl-background;
+
+  .header__main--sticky {
+    background-color: $stabellenstuhl-background;
+  }
 }
 
 body#limen-teapot {
   background-color: $limen-teapot-background;
+
+  .header__main--sticky {
+    background-color: $limen-teapot-background;
+  }
 }
 
 body#kommode {
   background-color: $kommode-background;
+
+  .header__main--sticky {
+    background-color: $kommode-background;
+  }
 }
 
 body#bedside-table {
   background-color: $bedside-table-background;
+
+  .header__main--sticky {
+    background-color: $bedside-table-background;
+  }
 }
 
 body#napfstander {
   background-color: $napfstander-background;
+
+  .header__main--sticky {
+    background-color: $napfstander-background;
+  }
 }
 
 body#pendant-light {
   background-color: $pendant-light-background;
+
+  .header__main--sticky {
+    background-color: $pendant-light-background;
+  }
 }
 
 body#desk-light {
   background-color: $desk-light-background;
+
+  .header__main--sticky {
+    background-color: $desk-light-background;
+  }
 }
 
 body#table-light {
   background-color: $table-light-background;
+
+  .header__main--sticky {
+    background-color: $table-light-background;
+  }
 }
 
 body#candleholder {
   background-color: $candleholder-background;
+
+  .header__main--sticky {
+    background-color: $candleholder-background;
+  }
 }
 
 body {
@@ -4498,6 +4541,20 @@ body {
           }
         }
       }
+    }
+  }
+}
+
+body#about-seitz {
+  .site-header:not(.active) {
+    .site-header--contrast-logo,
+    .site-header--standard-logo,
+    .site-header--white {
+      display: none;
+    }
+
+    .site-header--studio {
+      display: inline-block;
     }
   }
 }
@@ -4540,7 +4597,7 @@ body.template-page {
 body.template-collection,
 body.template-product {
   .site-header:not(.active) {
-    .header__main:not(.header__main--sticky) {
+    .header__main:not(.header__main--sticky--white) {
       .site-header--white {
         display: inline-block;
       }
@@ -4549,6 +4606,18 @@ body.template-product {
       .site-header--studio,
       .site-header--contrast-logo {
         display: none;
+      }
+
+      .site-nav__svg {
+        svg {
+          path {
+            fill: $white;
+          }
+        }
+      }
+
+      .header__link {
+        color: $white;
       }
     }
   }
@@ -5650,6 +5719,10 @@ Header
 .header__main--sticky {
   background-color: $white;
   border-bottom: 1px solid $black;
+
+  &.header__main--sticky--white {
+    background-color: $white !important;
+  }
 }
 
 .header__background {
