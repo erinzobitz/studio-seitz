@@ -6085,7 +6085,7 @@ $column-width_dt: 600;
 $five_sixths_container_dt: 535;
 
 //widths
-$fourth_dt: $column-width_dt / 2;
+$third_dt: $container_dt / 3;
 $half_dt: $column-width_dt;
 $five_sixths_dt: $five_sixths_container_dt;
 $three_fourths_dt: $three_fourths_container_dt;
@@ -6093,7 +6093,7 @@ $full_dt: $container_dt;
 
 //percentage widths
 $gutter_dt: percentage($gutter_dt / $container_dt);
-$fourth_dt: percentage($fourth_dt / $container_dt);
+$third_dt: percentage($third_dt / $container_dt);
 $half_dt: percentage($half_dt / $container_dt);
 $full_dt: percentage($full_dt / $container_dt);
 $three_fourths_dt: percentage($three_fourths_container_dt / $container_dt);
@@ -6169,8 +6169,8 @@ $five_sixths_dt: percentage($five_sixths_container_dt / $container_dt);
 
 //Desktop block sizes
 @include media-query($large-up) {
-  .item--desktop--one-fourth {
-    width: $fourth_dt;
+  .item--desktop--one-third {
+    width: $third_dt;
   }
 
   .item--desktop--five-sixths {
@@ -6437,6 +6437,12 @@ Product Grid
   position: absolute;
   visibility: hidden;
   z-index: 1;
+}
+
+.product-grid-item--pl {
+  @include media-query($large-up) {
+    padding-left: 12px;
+  }
 }
 
 /* =======================================================================
