@@ -4603,7 +4603,8 @@ body#about-seitz {
   }
 }
 
-body.template-blog {
+body.template-blog,
+body.template-article {
   background-color: $color-primary-background;
 }
 
@@ -6713,6 +6714,12 @@ Custom Sections
 
   @include media-query($medium-up) {
     margin-top: -91px;
+  }
+
+  @include media-query($large-up) {
+    align-items: flex-end;
+    display: flex;
+    min-height: 110px;
   }
 }
 
