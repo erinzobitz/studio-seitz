@@ -112,7 +112,7 @@
             <!-- Mobile Header -->
             <div class="lg--up--hide">
               <nav role="navigation" class="mobile-nav-container">
-                <a class="site-nav__link color--{{ section_color }}-text color--header-active px1 inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0" aria-haspopup="true">
+                <a class="site-nav__link color--{{ section_color }}-text color--header-active inline-block header__link no-wrap pointer {% if forloop.last %}site-nav__link--last{% endif %}"  data-active-header-trigger data-active-target="navigation" data-key="{{ child_list_handle }}--{{ forloop.index }}" data-top-level-item tabindex="0" aria-haspopup="true">
                   <div class="header__link-wrapper">
                     <span class="site-nav__chevron-down flex items--center site-nav__svg">{% include 'icon-menu' %}</span>
                   </div>
@@ -146,38 +146,35 @@
             {% endif %}
           </div>
           <div class="header-table__bookend align--middle text-align--right lg--up--flex--1 md--dn--flex--1-basis-0 lg--up--justify--end no-wrap">
-            <div class="mxn1">
-
-              {% if shop.customer_accounts_enabled %}
-                {% if customer %}
-                <a href="/account" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active  font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-top-level-item>
-                  <div class="header__link-wrapper">
-                    {{ 'layout.customer.account' | t }}
-                  </div>
-                </a>
-                {% else %}
-                <a href="/account/login" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active  font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-top-level-item>
-                  <div class="header__link-wrapper">
-                    {{ 'layout.customer.log_in' | t }}
-                  </div>
-                </a>
-                {% endif %}
-              {% endif %}
-
-              {% if section.settings.show_search %}
-              <a href="/search"  class="t--header-navigation header__link color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-active-header-trigger data-active-target="search" data-search-button tabindex="0"  data-top-level-item  aria-haspopup="true" data-search-button>
+            {% if shop.customer_accounts_enabled %}
+              {% if customer %}
+              <a href="/account" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active  font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-top-level-item>
                 <div class="header__link-wrapper">
-                  {{ 'general.search.submit' | t }}
+                  {{ 'layout.customer.account' | t }}
+                </div>
+              </a>
+              {% else %}
+              <a href="/account/login" class="t--header-navigation header__link color--{{ section_color }}-text color--header-active  font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-top-level-item>
+                <div class="header__link-wrapper">
+                  {{ 'layout.customer.log_in' | t }}
                 </div>
               </a>
               {% endif %}
-              <a href="/cart" id="CartLink" class="cart t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 px1 flex justify--end items--center" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" aria-haspopup="true"{% endif %} tabindex="0" data-top-level-item>
-                <div class="header__link-wrapper site-nav__link">
-                  <span>Cart</span>
-                  <span>(</span><span id="CartCount">{{ cart.item_count }}</span><span>)</span>
-                </div>
-              </a>
-            </div>
+            {% endif %}
+
+            {% if section.settings.show_search %}
+            <a href="/search"  class="t--header-navigation header__link color--{{ section_color }}-text color--header-active font-size--m bg--transparent inline-block pointer align--middle px1 md--dn--hide" data-active-header-trigger data-active-target="search" data-search-button tabindex="0"  data-top-level-item  aria-haspopup="true" data-search-button>
+              <div class="header__link-wrapper">
+                {{ 'general.search.submit' | t }}
+              </div>
+            </a>
+            {% endif %}
+            <a href="/cart" id="CartLink" class="cart t--header-navigation header__link header__link--focus color--header-active font-size--m bg--transparent pointer m0 flex justify--end items--center" {% if settings.ajax_cart_method == "modal" %}data-active-header-trigger data-active-target="cart" aria-haspopup="true"{% endif %} tabindex="0" data-top-level-item>
+              <div class="header__link-wrapper site-nav__link">
+                <span>Cart</span>
+                <span>(</span><span id="CartCount">{{ cart.item_count }}</span><span>)</span>
+              </div>
+            </a>
           </div>
         </div>
     </div>
