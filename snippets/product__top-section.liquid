@@ -252,21 +252,23 @@
           <div class="product__thumbnails" data-product-thumbnails>
             <div class="product-flickity__slides pt2 flex">
               {%- for image in product.images -%}
-                {%- assign active_class = '' -%}
-                {%- if featured_image == image.src -%}
-                  {%- assign active_class = 'active' -%}
-                {%- endif -%}
-                {%- assign ratio = image.aspect_ratio -%}
-                {%- assign force_crop = false -%}
-                {%- if ratio < 0.2 -%}
-                  {%- assign force_crop = true -%}
-                  {%- assign ratio = 1 -%}
-                {%- endif -%}
-                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <a href="{{ img_url }}" class="product__thumbnail {% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }}" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
-                  <div class="product-flickity__indicator">
-                  </div>
-                </a>
+                {%- if image.alt != "variant" -%}
+                  {%- assign active_class = '' -%}
+                  {%- if featured_image == image.src -%}
+                    {%- assign active_class = 'active' -%}
+                  {%- endif -%}
+                  {%- assign ratio = image.aspect_ratio -%}
+                  {%- assign force_crop = false -%}
+                  {%- if ratio < 0.2 -%}
+                    {%- assign force_crop = true -%}
+                    {%- assign ratio = 1 -%}
+                  {%- endif -%}
+                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  <a href="{{ img_url }}" class="product__thumbnail {% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }}" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
+                    <div class="product-flickity__indicator">
+                    </div>
+                  </a>
+                {% endif %}
               {% endfor %}
             </div>
             <div class="md--up--nine-tenths lg--up--eight-tenths pt1">
