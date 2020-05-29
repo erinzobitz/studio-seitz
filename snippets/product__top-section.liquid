@@ -148,46 +148,48 @@
           <div class="product__thumbnails relative overflow--hidden {{ product_thumbnail_grid }} js" data-mobile-flickity data-product-thumbnails>
             <div class="product-flickity__slides">
               {%- for image in product.images -%}
-                {%- assign active_class = '' -%}
-                {%- if featured_image == image.src -%}
-                  {%- assign active_class = 'active' -%}
-                {%- endif -%}
-                {%- assign ratio = image.aspect_ratio -%}
-                {%- assign force_crop = false -%}
-                {%- if ratio < 0.2 -%}
-                  {%- assign force_crop = true -%}
-                  {%- assign ratio = 1 -%}
-                {%- endif -%}
-                {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-                <div class="one-whole slideshow__slide">
-                  <div>
-                    <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--secondary-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
-                    {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
-                    {% capture wrapper_id %}FeatureImageWrapper-{{ image.id }}{% endcapture %}
-                    <div id="{{ wrapper_id }}" class="resp-img-wrapper js overflow--hidden">
-                      <div style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;">
-                        <img id="{{ img_id }}"
-                             class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
-                             src="{{ image | img_url: '300x' }}"
-                             data-src="{{ img_url }}"
-                             data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
-                             data-aspectratio="{{ ratio }}"
-                             data-sizes="auto"
-                             alt="{{ image.alt | escape }}">
-                         <img id="{{ img_id }}"
-                              class="resp-img-placeholder"
-                              src="{{ product.featured_image | img_url: '1x1' }}"
-                              width="1px"
-                              height="1px"
-                              alt="{{ product.featured_image.alt | escape }}">
+                {%- if image.alt != "variant" -%}
+                  {%- assign active_class = '' -%}
+                  {%- if featured_image == image.src -%}
+                    {%- assign active_class = 'active' -%}
+                  {%- endif -%}
+                  {%- assign ratio = image.aspect_ratio -%}
+                  {%- assign force_crop = false -%}
+                  {%- if ratio < 0.2 -%}
+                    {%- assign force_crop = true -%}
+                    {%- assign ratio = 1 -%}
+                  {%- endif -%}
+                  {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  <div class="one-whole slideshow__slide">
+                    <div>
+                      <a href="{{ img_url }}" class="{% for variant in image.variants %}product-variant--{{ variant.id }} {% endfor %} block cursor--default md--up--pointer {{ active_class }} md--up--active-border--secondary-text" data-product-single-thumbnail data-aspectratio="{{ 1 | divided_by: image.aspect_ratio | times: 100}}">
+                      {% capture img_id %}FeatureImage-{{ image.id }}{% endcapture %}
+                      {% capture wrapper_id %}FeatureImageWrapper-{{ image.id }}{% endcapture %}
+                      <div id="{{ wrapper_id }}" class="resp-img-wrapper js overflow--hidden">
+                        <div style="padding-top:{{ 1 | divided_by: ratio | times: 100}}%;">
+                          <img id="{{ img_id }}"
+                               class="resp-img lazyload {% if force_crop %}resp-img--autoheight{% endif %}"
+                               src="{{ image | img_url: '300x' }}"
+                               data-src="{{ img_url }}"
+                               data-widths="[540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048, 4472]"
+                               data-aspectratio="{{ ratio }}"
+                               data-sizes="auto"
+                               alt="{{ image.alt | escape }}">
+                           <img id="{{ img_id }}"
+                                class="resp-img-placeholder"
+                                src="{{ product.featured_image | img_url: '1x1' }}"
+                                width="1px"
+                                height="1px"
+                                alt="{{ product.featured_image.alt | escape }}">
+                        </div>
                       </div>
+                      <noscript>
+                        <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="product__image">
+                      </noscript>
+                      </a>
                     </div>
-                    <noscript>
-                      <img src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" class="product__image">
-                    </noscript>
-                    </a>
                   </div>
-                </div>
+                {% endif %}
               {% endfor %}
             </div>
             <div class='mobile-flickity__button-container flex bottom--0 right--0 pt1'>
@@ -201,6 +203,7 @@
       </div>
 
       <div class="sm--hide product__images relative font-size--0 mb3 mt3">
+        {% assign featured_image = product.images.first %}
         {% if featured_image != blank %}
           {% assign feature_image_class = 'sm--hide md--up--nine-tenths lg--up--eight-tenths' %}
           {% if product.images.size == 1 or feature_product == true %}
